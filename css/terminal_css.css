@@ -5,9 +5,10 @@
 .term {
 	font-family: "Courier New",courier,fixed,monospace;
 	font-size: 12px;
-	color: #94aad6;
+	color: #CCD8F1;
 	background: none;
 	letter-spacing: 1px;
+	border-style: solid;
 }
 .term .termReverse {
 	color: #232e45;
@@ -31,6 +32,7 @@ a:active {
 	text-decoration: none;
 	color: #77dd11;
 	background: none;
+	border-style: solid;
 }
 .termopen:hover {
 	text-decoration: none;

@@ -1,11 +1,19 @@
 var term;
 
 var help = [
-  ' * type "colors"    to see the default internal colors.',
-  ' * type "webcolors" to see the standard VGA and web safe colors.',
-  ' * type "nscolors"  to see the VGA and netscape colors by name.',
+  ' * type "clear"    Clear terminal.',
   ' * type "help"      to see this page.',
   ' * type "exit"      to quit.',
+  ' '
+];
+
+var aboutme = [
+  '   Hi, I\'m Vikas Thamizharasan and this is my personal website.',
+  '   I\'m a third year undergraduate student in IIIT - Hyderabad studying in CSE branch.',
+  ' ',
+  '  * type "clear"    Clear terminal.',
+  '  * type "help"      to see this page.',
+  '  * type "exit"      to quit.',
   ' '
 ];
 
@@ -81,14 +89,17 @@ function termOpen() {
   if ((!term) || (term.closed)) {
     term = new Terminal(
       {
-        rows: 19,
+        x: 210,
+        y: 120,
+        rows: 22,
         cols: 100,
-        // crsrBlinkMode: true,
-         handler: termHandler,
-         ps: '>',
+        crsrBlinkMode: false,
+         ps: '[vikas@termial.js] > ',
          text: null,
         termDiv: 'termDiv',
         bgColor: '#232e45',
+        frameColor:'#555555',
+        frameWidth:1,
         initHandler: termInitHandler,
         handler: termHandler,
         exitHandler: termExitHandler
@@ -113,15 +124,21 @@ function termInitHandler() {
   // output a start up screen
   this.write(
     [
-      '                         Terminal          ',
-      '            ----- type "colors" for color table, "exit" to quit. -----',
+      '                                               Welcome',
       '%c()%n'
     ]
   );
-  this.write(help);
-  // and leave with prompt
-  this.prompt();
+  this.StartCoroutine(aboutme);
 }
+
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
+
 
 function termHandler() {
   // default handler + exit
@@ -132,27 +149,24 @@ function termHandler() {
 
   if (this.lineBuffer.search(/^\s*exit\s*$/i) == 0) {
     this.close();
+    this.prompt();
     return;
-  }
-  else if (this.lineBuffer.search(/^\s*colors\s*$/i) == 0) {
-    this.clear();
-    this.write(colorTable);
-  }
-  else if (this.lineBuffer.search(/^\s*nscolors\s*$/i) == 0) {
-    this.clear();
-    this.write(listNetsacpeColors());
   }
   else if (this.lineBuffer.search(/^\s*clear\s*$/i) == 0) {
     this.clear();
-    // this.write(listWebColors());
+    this.prompt();
+  }
+  else if (this.lineBuffer.search(/^\s*vikas\s*$/i) == 0) {    
+    this.StartCoroutine(help);
   }
   else if (this.lineBuffer.search(/^\s*help\s*$/i) == 0) {
     this.clear();
     this.write(help);
+    this.prompt();
   }
   else if (this.lineBuffer != '') {
     this.type('You typed: '+this.lineBuffer);
     this.newLine();
+    this.prompt();
   }
-  this.prompt();
 }

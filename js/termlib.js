@@ -177,6 +177,7 @@ var Terminal = function(conf) {
 	this.setInitValues();
 }
 
+var indext,indexh, myVar;
 
 Terminal.prototype = {
 // prototype definitions (save some 2k on indentation)
@@ -219,6 +220,7 @@ Defaults: {
 	ctrlHandler:null,
 	initHandler:null,
 	exitHandler:null,
+	typetimer:null,
 	wrapping:false,
 	mapANSI:false,
 	ANSItrueBlack:false,
@@ -274,6 +276,7 @@ setInitValues: function() {
 	this.ctrlHandler=this.conf.ctrlHandler;
 	this.initHandler=this.conf.initHandler;
 	this.exitHandler=this.conf.exitHandler;
+	this.typetimer=this.conf.typetimer;
 	this.fieldMode=false;
 	this.fieldStart=this.fieldEnd=this.fieldC=0;
 	if (typeof this.conf.textBlur === 'object' && this.conf.textBlur.length) {
@@ -505,6 +508,26 @@ write: function(text,usemore) {
 		}
 	}
 	this._sbOut();
+},
+
+
+myTimer: function(help){
+	var temp = help[indexh];
+	if(indexh > help.length-1) {
+		clearInterval(myVar); this.prompt();}	
+
+	else if(indext <= temp.length-1) {
+		this.write(temp[indext]);indext++;}
+
+	else {
+		this.write("\n");indext=0;indexh++;}
+},
+
+StartCoroutine: function (help) {
+	indexh=0;
+	indext=0;
+	var self = this;
+	myVar = setInterval(function(){ self.myTimer(help) }, 100);
 },
 
 // parse a color markup
