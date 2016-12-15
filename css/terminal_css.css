@@ -1,0 +1,48 @@
+.lh15 {
+	line-height: 5px;
+}
+
+.term {
+	font-family: "Courier New",courier,fixed,monospace;
+	font-size: 12px;
+	color: #94aad6;
+	background: none;
+	letter-spacing: 1px;
+}
+.term .termReverse {
+	color: #232e45;
+	/*background: #95a9d5;*/
+}
+
+a,a:link,a:visited {
+	text-decoration: none;
+	color: #77dd11;
+}
+a:hover {
+	text-decoration: underline;
+	color: #77dd11;
+}
+a:active {
+	text-decoration: underline;
+	color: #eeeeee;
+}
+
+.termopen,.termopen:link,.termopen:visited {
+	text-decoration: none;
+	color: #77dd11;
+	background: none;
+}
+.termopen:hover {
+	text-decoration: none;
+	color: #222222;
+	background: #77dd11;
+}
+.termopen:active {
+	text-decoration: none;
+	color: #222222;
+	background: #eeeeee;
+}
+
+table.inventory td {
+	padding-bottom: 20px !important;
+}
