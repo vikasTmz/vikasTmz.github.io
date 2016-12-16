@@ -192,7 +192,7 @@ Defaults: {
 	x:100,
 	y:100,
 	termDiv:'termDiv',
-	bgColor:'#181818',
+	bgColor:'rgba(254, 255, 255, .0)',
 	frameColor:'#555555',
 	frameWidth:1,
 	rowHeight:15,

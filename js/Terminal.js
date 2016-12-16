@@ -89,15 +89,15 @@ function termOpen() {
   if ((!term) || (term.closed)) {
     term = new Terminal(
       {
-        x: 210,
+        x: 100,
         y: 120,
         rows: 22,
-        cols: 100,
+        cols: 80,
         crsrBlinkMode: false,
          ps: '[vikas@termial.js] > ',
          text: null,
         termDiv: 'termDiv',
-        bgColor: '#232e45',
+        bgColor: 'rgba(5, 0, 0, 1)',
         frameColor:'#555555',
         frameWidth:1,
         initHandler: termInitHandler,
