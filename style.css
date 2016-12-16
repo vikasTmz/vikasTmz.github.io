@@ -64,7 +64,7 @@ a{
 NAVIGATION
 **************************************************************/
 .header{
-    background: url(image/banner.jpg) no-repeat;
+    background: url(image/banner2.png) no-repeat;
     background-size: cover;
     min-height: 650px;
 }
@@ -85,13 +85,14 @@ NAVIGATION
     color: #fff;
     text-transform: uppercase;
 }
-.navbar-brand {
-    font-family: 'Caesar Dressing', cursive;
-    font-size: 35px;
-}
+
 .navbar-inverse .navbar-brand {
     color: #fff;
 }
+
+.navbar-header {
+}
+
 .navbar {
     margin-bottom: 0px;
     border: 0px;
@@ -169,7 +170,8 @@ CTA 1
     color: #fff;
 }
 .dec-tec {
-    font-size: 34px;
+    font-size: 20px;
+    font-style: italic;
 }
 /**************************************************************
 FEATURE
