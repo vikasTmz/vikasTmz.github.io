@@ -7,12 +7,23 @@ var help = [
   ' '
 ];
 
+var colortest = [
+      '%c(@green) ',
+      '%c()%n'
+    ];
+
+var man  = [
+  ' %+i%+ucommand               flags                  info%-i              %-u',
+  ' %c(green)"about"           -a,-n,-i           displays my age, nationality,interests%c()',
+];
+
 var aboutme = [
   '   Hi, I\'m Vikas Thamizharasan and this is my personal website.',
-  '   I\'m a third year undergraduate student in IIIT - Hyderabad studying in CSE branch.',
+  '   I\'m a third year undergraduate student studying in the CSE branch at IIIT - Hyderabad.',
   ' ',
-  '  * type "clear"    Clear terminal.',
+  '  * type "man"      to see list of commands to know more about me.',
   '  * type "help"      to see this page.',
+  '  * type "clear"    Clear terminal.',
   '  * type "exit"      to quit.',
   ' '
 ];
@@ -92,7 +103,7 @@ function termOpen() {
         x: 100,
         y: 120,
         rows: 22,
-        cols: 80,
+        cols: 90,
         crsrBlinkMode: false,
          ps: '[vikas@termial.js] > ',
          text: null,
@@ -154,6 +165,10 @@ function termHandler() {
   }
   else if (this.lineBuffer.search(/^\s*clear\s*$/i) == 0) {
     this.clear();
+    this.prompt();
+  }
+  else if (this.lineBuffer.search(/^\s*man\s*$/i) == 0) {
+    this.write(man);
     this.prompt();
   }
   else if (this.lineBuffer.search(/^\s*vikas\s*$/i) == 0) {    

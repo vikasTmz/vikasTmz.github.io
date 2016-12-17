@@ -527,7 +527,7 @@ StartCoroutine: function (help) {
 	indexh=0;
 	indext=0;
 	var self = this;
-	myVar = setInterval(function(){ self.myTimer(help) }, 100);
+	myVar = setInterval(function(){ self.myTimer(help) }, 10);
 },
 
 // parse a color markup
