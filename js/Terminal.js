@@ -14,7 +14,8 @@ var colortest = [
 
 var man  = [
   ' %+i%+ucommand               flags                  info%-i              %-u',
-  ' %c(green)"about"           -a,-n,-i           displays my age, nationality,interests%c()',
+  '',
+  ' "about"           -a,-n,-i           displays my age, nationality,interests',
 ];
 
 var aboutme = [
@@ -150,13 +151,21 @@ function wait(ms){
   }
 }
 
+function cleanArray(actual) {
+  var newArray = new Array();
+  for (var i = 0; i < actual.length; i++) {
+    if (actual[i]) {
+      newArray.push(actual[i]);
+    }
+  }
+  return newArray;
+}
 
 function termHandler() {
-  // default handler + exit
+
   this.newLine();
   var args = this.lineBuffer.split(' ');
-  var cmd = args[0];
-
+  args = cleanArray(args);
 
   if (this.lineBuffer.search(/^\s*exit\s*$/i) == 0) {
     this.close();
@@ -177,6 +186,23 @@ function termHandler() {
   else if (this.lineBuffer.search(/^\s*help\s*$/i) == 0) {
     this.clear();
     this.write(help);
+    this.prompt();
+  }
+  else if (args[0] == "about") { //-a,-n,-i           displays my age, nationality,interests
+    if (args[1] == "-a")
+    {
+      this.write("20    DOB: 13 | 12 | 1996");      
+    }
+    else if (args[1] == "-n")
+    {
+      this.write("Indian");
+    }
+    else if (args[1] == "-i")
+    {
+      this.write("Art.Music.Drums.Sculpting.Programming.CV.Gaming.ImageProcessing.AR.VR");
+    }
+    else{
+      this.write("USAGE: \"about\"           -a,-n,-i           displays my age, nationality,interests ");}
     this.prompt();
   }
   else if (this.lineBuffer != '') {
