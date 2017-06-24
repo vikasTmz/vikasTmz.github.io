@@ -7,12 +7,14 @@
  */
 var skinRegions = [],
 skinMap = [],
-canvas = {};
+canvas = {},
+var imageData = [];
 
 onmessage = function(event){
 	canvas.width = event.data[1];
 	canvas.height = event.data[2];
-	scanImage(event.data[0]);
+	imageData = event.data[0];
+	scanImage();
 };
 
 
@@ -23,7 +25,7 @@ Array.prototype.remove = function(index) {
 	  return this.push.apply(this, rest);
 };
 
-function scanImage(imageData){
+function scanImage(){
 
 var detectedRegions = [],
 mergeRegions = [],
@@ -208,7 +210,7 @@ totalSkin = 0;
 
 // if there are less than 3 regions
 if(length < 3){
-	postMessage(false);
+	postMessage([false, imageData]);
 	return;
 }
 
@@ -237,7 +239,7 @@ while(length--){
 if((totalSkin/totalPixels)*100 < 15){
 	// if the percentage lower than 15, it's not nude!
 	//console.log("it's not nude :) - total skin percent is "+((totalSkin/totalPixels)*100)+"% ");
-	postMessage(false);
+	postMessage([false, imageData]);
 	return;				
 }
 
@@ -250,7 +252,7 @@ if((skinRegions[0].length/totalSkin)*100 < 35
 		&& (skinRegions[2].length/totalSkin)*100 < 30){
 	// the image is not nude.
 	//console.log("it's not nude :) - less than 35%,30%,30% skin in the biggest areas :" + ((skinRegions[0].length/totalSkin)*100) + "%, " + ((skinRegions[1].length/totalSkin)*100)+"%, "+((skinRegions[2].length/totalSkin)*100)+"%");
-	postMessage(false);
+	postMessage([false, imageData]);
 	return;
 	
 }
@@ -259,7 +261,7 @@ if((skinRegions[0].length/totalSkin)*100 < 35
 if((skinRegions[0].length/totalSkin)*100 < 45){
 	// it's not nude
 	//console.log("it's not nude :) - the biggest region contains less than 45%: "+((skinRegions[0].length/totalSkin)*100)+"%");
-	postMessage(false);
+	postMessage([false, imageData]);
 	return;
 }
 
@@ -278,13 +280,13 @@ if((skinRegions[0].length/totalSkin)*100 < 45){
 // the image is not nude
 if(skinRegions.length > 60){
 	//console.log("it's not nude :) - more than 60 skin regions");
-	postMessage(false);
+	postMessage([false, imageData]);
 	return;
 }
 
 
 // otherwise it is nude
-postMessage(true);
+postMessage([true, imageData]);
 			
 };
 function classifySkin(r, g, b){
