@@ -8,7 +8,7 @@
 var skinRegions = [],
 skinMap = [],
 canvas = {},
-var imageData = [];
+imageData = [];
 
 onmessage = function(event){
 	canvas.width = event.data[1];
