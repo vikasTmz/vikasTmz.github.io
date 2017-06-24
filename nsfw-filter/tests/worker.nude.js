@@ -133,7 +133,10 @@ for(var i = 0, u = 1; i < length; i+=4, u++){
 
 			}
 		}
-		
+
+		imageData[i] = 0;
+		imageData[i+1] = 0;
+		imageData[i+2] = 0;	
 	}else{
 		skinMap.push({"id": u, "skin": false, "region": 0, "x": x, "y": y, "checked": false});
 	}
