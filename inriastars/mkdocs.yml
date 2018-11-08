@@ -1,0 +1,5 @@
+site_name: Project Report - Internship
+nav:
+    - Home: index.md
+    - About: datasets.md
+theme: readthedocs
