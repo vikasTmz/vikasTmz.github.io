@@ -1,7 +1,5 @@
 # <span style="color:blue"> Project Report - Internship </span>.
-[[Codes]]()   [[Datasets]]( vikasTmz.github.io/inriastars/Datasets.md
-)
-[[Project Report]]() [[References]]()
+[[Codes]]()   [[Datasets]](Datasets.md) [[Project Report]]() [[References]]()
 
 
 Problem Statement
