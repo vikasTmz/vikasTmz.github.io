@@ -116,6 +116,33 @@
 <ul>
 <li>Requested datasets</li>
 <li>Evaluation metrics</li>
+<li>
+<p>ActiveStereoNet: End-to-End Seld-supervised Learning for Active Stereo Systems</p>
+<ul>
+<li>precise depth with subpixel precision of 1/30th of a pixel.</li>
+<li>does not suffer from over-smoothing issues</li>
+<li>preserves edges</li>
+<li>handles occlusions</li>
+<li>robust to noise and texture-less patches</li>
+<li>invariant to illumination changes.</li>
+<li>
+<p>IR stereo camera pair is used, pseudorandom pattern projected, captures active illumination and passive light.</p>
+</li>
+<li>
+<p>Avoid matching occluded pixels (causes oversmoothing, edge fattening)</p>
+</li>
+<li>New reconstruction loss based on LCN (local constrast normalization):<ul>
+<li>removes low frequency components from passive IR</li>
+<li>re-calibrates the strength of active pattern locally to account for fading of patterns with distance.</li>
+</ul>
+</li>
+<li>Window-based loss aggregation with adaptive weights for each pixel<ul>
+<li>increase discriminability and reduce the effect of local minima in the stereo cost function.</li>
+</ul>
+</li>
+<li>Detect and omit occluded pixels in the images during loss computations.</li>
+</ul>
+</li>
 </ul>
 <h2 id="project-layout">Project layout</h2>
 <pre><code>mkdocs.yml    # The configuration file.
@@ -171,5 +198,5 @@ docs/
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2018-11-08 15:29:39
+Build Date UTC : 2018-11-08 17:36:00
 -->
