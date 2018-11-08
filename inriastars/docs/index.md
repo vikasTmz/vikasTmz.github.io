@@ -7,7 +7,11 @@
 ## November
 
 - Requested datasets
+- Retrained on binarized IR images,
+	Puts pics of previous and new images
 - Evaluation metrics
+	RANSAC, Manhatan distance .. some from active stereo nets?
+
 - ActiveStereoNet: End-to-End Seld-supervised Learning for Active Stereo Systems
 
 	- precise depth with subpixel precision of 1/30th of a pixel.
@@ -26,7 +30,8 @@
 		- increase discriminability and reduce the effect of local minima in the stereo cost function.
 	- Detect and omit occluded pixels in the images during loss computations.
 
-
+- LS-Net?
+- Fab-net and face metrics from IJB
 
 ## Project layout
 
