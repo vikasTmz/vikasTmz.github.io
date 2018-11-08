@@ -30,6 +30,13 @@
 		- increase discriminability and reduce the effect of local minima in the stereo cost function.
 	- Detect and omit occluded pixels in the images during loss computations.
 
+	- Self-supervised vs supervised passive stereo:
+		Read how selff-supervised passive work.
+
+	- Build-in stereo algorithms in cameras (Intel D400) uses a handcrafted binary descriptor (CENSUS) in combination with a semi-global matching scheme.
+			- suffers  from common stereo matching issues (edge fattening, quadratic error, occlusions, holes)
+
+
 - LS-Net?
 - Fab-net and face metrics from IJB
 
