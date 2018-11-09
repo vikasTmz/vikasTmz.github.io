@@ -112,24 +112,60 @@
 <p><Description></p>
 <h2 id="november">November</h2>
 <h3 id="week-1">Week 1</h3>
-<p>Two tracks for the project</p>
+<h4 id="two-tracks-for-the-project">Two tracks for the project</h4>
+<ol>
+<li>Generating Face Depth Images given RGB and IR image:</li>
+</ol>
+<p>Improving depth estimation of faces by providing both RGB and IR image to the GAN.
+[Results]
+This could be a Siamese network , with two channels to the generator.
+Experiment with different loss function.
+Introduce labels (gender, age etc.) to Discriminator in-order to <em>improve</em> results.
+Experiment with different IR-patterns.
+Evaluating Depth output (from RGB-DEPTH paper)
+Test ir2depth, binarized IR images, varied internsity and varied depth
+ Use IR-GAN as training weights for Gender_CNN : Train Generator with discriminator using only labels and not depth.
+[ WISG’18  [1] [2] ]</p>
+<ol>
+<li>Face analysis from raw data:</li>
+</ol>
+<p>Add more layers to the CNN architecture / Transfer learning.
+Fab-net [learn more]
+Teacher student network.</p>
+<p><br></p>
 <ul>
 <li>
 <p>Retrained on binarized IR images</p>
-<p><pre>Non-binarized IR input             Training loss</pre></p>
+<p><strong><pre>Non-binarized IR input               Training loss</pre></strong></p>
 <p><pre><img src="img/old_ir.png" alt="drawing" width="250"/>      <img src="img/old_loss.png" alt="drawing" width="300"/></pre></p>
 <p><a href="results/v1/">[Test output results (link)]</a></p>
-<p><pre>Binarized IR input             Training loss</pre></p>
+<p><strong><pre>Binarized IR input               Training loss</pre></strong></p>
 <p><pre><img src="img/new_ir.png" alt="drawing" width="250"/>      <img src="img/new_loss.png" alt="drawing" width="400"/></pre></p>
 <p><a href="results/v3/">[Test output results (link)]</a></p>
-<p><pre>Trained on binarized IR images with varying distance from camera</pre></p>
+<p><strong><pre>Trained on binarized IR images with varying distance from camera</pre></strong></p>
 <p><pre><img src="results/v2/images/100_real_A.png" alt="drawing" width="200"/> <img src="results/v2/images/101_real_A.png" alt="drawing" width="200"/> <img src="results/v2/images/102_real_A.png" alt="drawing" width="200"/></pre></p>
 <p><a href="results/v2/">[Test output results (link)]</a></p>
+<p><strong><pre>Tested on unseen pose and orientation </pre></strong></p>
+<p><pre><img src="img/new_ir_new.png" alt="drawing" width="500"/></pre></p>
 </li>
+</ul>
+<p><br></p>
+<ul>
 <li>
-<p>Evaluation metrics
-    RANSAC, Manhatan distance .. some from active stereo nets?</p>
+<p>Evaluation metrics</p>
+<p>RANSAC, Manhatan distance, RMSE .. some from active stereo nets?</p>
 </li>
+</ul>
+<p><br></p>
+<ul>
+<li>
+<p><a href="http://delivery.acm.org/10.1145/2610000/2601223/a86-fanello.pdf?ip=138.96.200.116&amp;id=2601223&amp;acc=ACTIVE%20SERVICE&amp;key=7EBF6E77E86B478F%2EC083A567C83E14C8%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&amp;__acm__=1541768143_4cc7e69e959933f30c3480cf0ac37ef3">"Learning to be a Depth Camera for Close-Range Human Capture and Interaction", Microsoft Research</a></p>
+<p><pre><img src="img/paper1_1.png" alt="drawing" width="400"/><img src="img/paper1_2.png" alt="drawing" width="300"/></pre></p>
+<p><em>We present a machine learning technique for estimating absolute, per-pixel depth using any conventional monocular 2D camera, with minor hardware modifications.  Our approach targets close-range human capture and interaction where dense 3D estimation of hands and faces is desired. We use hybrid classification-regression forests to learn how to map from near infrared intensity images to absolute, metric  depth  in  real-time.   We  demonstrate  a  variety  of  human-computer interaction and capture scenarios. Experiments show an accuracy that outperforms a conventional light fall-off baseline, and is comparable to high-quality consumer depth cameras, but with a dramatically reduced cost, power consumption, and form-factor.</em></p>
+</li>
+</ul>
+<p><br></p>
+<ul>
 <li>
 <p>ActiveStereoNet: End-to-End Seld-supervised Learning for Active Stereo Systems</p>
 <ul>
@@ -165,8 +201,12 @@
 <p>Build-in stereo algorithms in cameras (Intel D400) uses a handcrafted binary descriptor (CENSUS) in combination with a semi-global matching scheme.
         - suffers from common stereo matching issues (edge fattening, quadratic error, occlusions, holes)</p>
 </li>
+<li></li>
 </ul>
 </li>
+</ul>
+<p><br></p>
+<ul>
 <li>
 <p>Received two datasets</p>
 </li>
@@ -223,5 +263,5 @@
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2018-11-09 10:42:50
+Build Date UTC : 2018-11-09 16:55:06
 -->
