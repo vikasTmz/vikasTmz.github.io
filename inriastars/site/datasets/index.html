@@ -64,18 +64,6 @@
     <li class="toctree-l2"><a href="#data-generation">Data Generation</a></li>
     
 
-    <li class="toctree-l2"><a href="#synthetic">Synthetic :</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#papers-that-use-synthetic-data-for-face-research">Papers that use synthetic data for Face research</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l2"><a href="#real">Real :</a></li>
-    
-
     </ul>
 	    </li>
           
@@ -118,52 +106,6 @@
               
                 <h1 id="datasets">Datasets</h1>
 <h1 id="data-generation">Data Generation</h1>
-<h1 id="synthetic">Synthetic :</h1>
-<ul>
-<li>[✓] Collect as many 3d face images (from 3d datasets) as possible maintaining annotations (gender, ethinicity, name?) along with them.</li>
-<li>[✓] Downloaded 2 face datasets with age, ethinicity, gender.</li>
-<li>[✓] pix2vertex : <em>Issues: model needs to be smoothened, not robust to ethnicity</em>.</li>
-<li>[✓] create image dataset with naming conventions and in separate directories</li>
-<li>[✓] For importance of IR patterns : <a href="https://azttm.wordpress.com/2011/04/03/kinect-pattern-uncovered/">Article</a> and <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7328728">Paper</a></li>
-<li>[✓] Some pix2vertex output are not correct: filter them out by size (&lt; 5MB), and store them to re-run. Also, track missing plys.</li>
-<li>[✓] Start blender scene on Saturday. </li>
-</ul>
-<p><strong>Host dataset on website (rgb-d, ir dot pattern and 3d model)</strong></p>
-<ul>
-<li>
-<p>[ ] <strong>Request other 3d face datasets</strong> and apply Multilinear Model Learning on them.</p>
-<p>Read Later : <a href="https://drive.google.com/file/d/12gR2pu8lZ7DCsBr4GV3hyh_qQdSFv6iC/view?usp=sharing">3D reconstruction with glasses</a> and <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7780824">Adaptive 3D Face Reconstruction from Unconstrained Photo Collections</a></p>
-</li>
-<li>
-<p>[ ] Use Diff. IR patterns</p>
-</li>
-<li>[ ] Crop image using open CV. CromaKey for rgb images. (to be done when images are read for testing).</li>
-</ul>
-<p><strong>FaceGen:</strong>
-- [✓] Not to be used, as there are better, automated techniques. :)</p>
-<h4 id="papers-that-use-synthetic-data-for-face-research">Papers that use synthetic data for Face research</h4>
-<ol>
-<li>
-<p><a href="http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w41/Kortylewski_Empirically_Analyzing_the_CVPR_2018_paper.pdf">Empirically Analyzing the Effect of Dataset Biases on Deep Face Recognition Systems</a></p>
-</li>
-<li>
-<p><a href="https://arxiv.org/pdf/1802.05891.pdf">Training Deep Face Recognition Systems with Synthetic Data</a></p>
-</li>
-</ol>
-<p>Section III and IV, contains experiments using synthetic data for training and testing on in-the-wild face dataset.
-   Use some of these points for Tuesdayś presentation.</p>
-<ol>
-<li>
-<p><a href="https://arxiv.org/pdf/1703.10131.pdf">Unrestricted Facial Geometry Reconstruction Using Image-to-Image Translation</a></p>
-</li>
-<li>
-<p><a href="https://arxiv.org/pdf/1609.04387.pdf">3D Face Reconstruction by Learning from Synthetic Data</a></p>
-</li>
-</ol>
-<h1 id="real">Real :</h1>
-<ol>
-<li>Organise and plan data collection</li>
-</ol>
               
             </div>
           </div>
