@@ -1,14 +1,37 @@
 # Porject Report - Internship
 
-[[Datasets]](datasets.md)  [[Codes]](codes.md)
+[[Datasets]](datasets.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[Codes]](codes.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[ToDo]]()
 
 <Description>
 
 ## November
 
-- Requested datasets
-- Retrained on binarized IR images,
-	Puts pics of previous and new images
+### Week 1
+
+Two tracks for the project
+
+- Retrained on binarized IR images
+	
+	<pre>Non-binarized IR input		 		Training loss</pre>
+
+	<pre><img src="img/old_ir.png" alt="drawing" width="250"/>		<img src="img/old_loss.png" alt="drawing" width="300"/></pre>
+
+	[[Test output results (link)]](results/v1/index.html)
+
+	<pre>Binarized IR input		 		Training loss</pre>
+
+	<pre><img src="img/new_ir.png" alt="drawing" width="250"/>		<img src="img/new_loss.png" alt="drawing" width="400"/></pre>
+
+	[[Test output results (link)]](results/v3/index.html)
+
+	<pre>Trained on binarized IR images with varying distance from camera</pre>
+
+	<pre><img src="results/v2/images/100_real_A.png" alt="drawing" width="200"/> <img src="results/v2/images/101_real_A.png" alt="drawing" width="200"/> <img src="results/v2/images/102_real_A.png" alt="drawing" width="200"/></pre>
+
+	[[Test output results (link)]](results/v2/index.html)
+
+
+
 - Evaluation metrics
 	RANSAC, Manhatan distance .. some from active stereo nets?
 
@@ -31,11 +54,13 @@
 	- Detect and omit occluded pixels in the images during loss computations.
 
 	- Self-supervised vs supervised passive stereo:
-		Read how selff-supervised passive work.
+		Read how self-supervised passive work.
 
 	- Build-in stereo algorithms in cameras (Intel D400) uses a handcrafted binary descriptor (CENSUS) in combination with a semi-global matching scheme.
-			- suffers  from common stereo matching issues (edge fattening, quadratic error, occlusions, holes)
+			- suffers from common stereo matching issues (edge fattening, quadratic error, occlusions, holes)
 
+
+- Received two datasets
 
 - LS-Net?
 - Fab-net and face metrics from IJB

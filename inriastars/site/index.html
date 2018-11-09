@@ -110,12 +110,28 @@
             <div class="section">
               
                 <h1 id="porject-report-internship">Porject Report - Internship</h1>
-<p><a href="datasets/">[Datasets]</a>  <a href="codes/">[Codes]</a></p>
+<p><a href="datasets/">[Datasets]</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="codes/">[Codes]</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">[ToDo]</a></p>
 <p><Description></p>
 <h2 id="november">November</h2>
+<h3 id="week-1">Week 1</h3>
+<p>Two tracks for the project</p>
 <ul>
-<li>Requested datasets</li>
-<li>Evaluation metrics</li>
+<li>
+<p>Retrained on binarized IR images</p>
+<p><pre>Non-binarized IR input             Training loss</pre></p>
+<p><pre><img src="img/old_ir.png" alt="drawing" width="250"/>      <img src="img/old_loss.png" alt="drawing" width="300"/></pre></p>
+<p><a href="results/v1/">[Test output results (link)]</a></p>
+<p><pre>Binarized IR input             Training loss</pre></p>
+<p><pre><img src="img/new_ir.png" alt="drawing" width="250"/>      <img src="img/new_loss.png" alt="drawing" width="400"/></pre></p>
+<p><a href="results/v3/">[Test output results (link)]</a></p>
+<p><pre>Trained on binarized IR images with varying distance from camera</pre></p>
+<p><pre><img src="results/v2/images/100_real_A.png" alt="drawing" width="200"/> <img src="results/v2/images/101_real_A.png" alt="drawing" width="200"/> <img src="results/v2/images/102_real_A.png" alt="drawing" width="200"/></pre></p>
+<p><a href="results/v2/">[Test output results (link)]</a></p>
+</li>
+<li>
+<p>Evaluation metrics
+    RANSAC, Manhatan distance .. some from active stereo nets?</p>
+</li>
 <li>
 <p>ActiveStereoNet: End-to-End Seld-supervised Learning for Active Stereo Systems</p>
 <ul>
@@ -140,9 +156,26 @@
 <li>increase discriminability and reduce the effect of local minima in the stereo cost function.</li>
 </ul>
 </li>
-<li>Detect and omit occluded pixels in the images during loss computations.</li>
+<li>
+<p>Detect and omit occluded pixels in the images during loss computations.</p>
+</li>
+<li>
+<p>Self-supervised vs supervised passive stereo:
+    Read how self-supervised passive work.</p>
+</li>
+<li>
+<p>Build-in stereo algorithms in cameras (Intel D400) uses a handcrafted binary descriptor (CENSUS) in combination with a semi-global matching scheme.
+        - suffers from common stereo matching issues (edge fattening, quadratic error, occlusions, holes)</p>
+</li>
 </ul>
 </li>
+<li>
+<p>Received two datasets</p>
+</li>
+<li>
+<p>LS-Net?</p>
+</li>
+<li>Fab-net and face metrics from IJB</li>
 </ul>
 <h2 id="project-layout">Project layout</h2>
 <pre><code>mkdocs.yml    # The configuration file.
@@ -198,5 +231,5 @@ docs/
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2018-11-08 17:36:00
+Build Date UTC : 2018-11-09 10:37:11
 -->
