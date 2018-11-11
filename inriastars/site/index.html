@@ -53,13 +53,16 @@
     <a class="current" href=".">Home</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#porject-report-internship">Porject Report - Internship</a></li>
+    <li class="toctree-l2"><a href="#project-report-internship">Project Report - Internship</a></li>
     
         <ul>
         
             <li><a class="toctree-l3" href="#november">November</a></li>
         
         </ul>
+    
+
+    <li class="toctree-l2"><a href="#references">References</a></li>
     
 
     </ul>
@@ -107,7 +110,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="porject-report-internship">Porject Report - Internship</h1>
+                <h1 id="project-report-internship">Project Report - Internship</h1>
 <p><a href="datasets/">[Datasets]</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="codes/">[Codes]</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">[ToDo]</a></p>
 <p><Description></p>
 <h2 id="november">November</h2>
@@ -140,20 +143,113 @@ Teacher student network.</p>
 <p><pre><img src="img/old_ir.png" alt="drawing" width="250"/>      <img src="img/old_loss.png" alt="drawing" width="300"/></pre></p>
 <p><a href="results/v1/">[Test output results (link)]</a></p>
 <p><strong><pre>Binarized IR input               Training loss</pre></strong></p>
-<p><pre><img src="img/new_ir.png" alt="drawing" width="250"/>      <img src="img/new_loss.png" alt="drawing" width="400"/></pre></p>
+<p><pre><img src="img/new_ir.png" alt="drawing" width="250"/>  <img src="img/new_loss.png" alt="drawing" width="400"/></pre></p>
 <p><a href="results/v3/">[Test output results (link)]</a></p>
 <p><strong><pre>Trained on binarized IR images with varying distance from camera</pre></strong></p>
 <p><pre><img src="results/v2/images/100_real_A.png" alt="drawing" width="200"/> <img src="results/v2/images/101_real_A.png" alt="drawing" width="200"/> <img src="results/v2/images/102_real_A.png" alt="drawing" width="200"/></pre></p>
 <p><a href="results/v2/">[Test output results (link)]</a></p>
 <p><strong><pre>Tested on unseen pose and orientation </pre></strong></p>
-<p><pre><img src="img/new_ir_new.png" alt="drawing" width="500"/></pre></p>
+<p><pre><img src="img/new_ir_new.png" alt="drawing" width="550"/></pre></p>
 </li>
 </ul>
 <p><br></p>
 <ul>
 <li>
 <p>Evaluation metrics</p>
-<p>RANSAC, Manhatan distance, RMSE .. some from active stereo nets?</p>
+<ul>
+<li>
+<p><strong>RMSE</strong>:</p>
+</li>
+<li>
+<p><strong>log<sub>10</sub>error</strong>:</p>
+</li>
+<li>
+<p><strong>Structural similarity index (SSIM)</strong> <sup><a href="#references">[10]</a></sup>: <em>While metrics such as MSE estimate absolute errors, SSIM is a perceptionbased metric that considers image degradation as perceived change in structural information, while also incorporating important perceptual phenomena, including both luminance masking and contrast masking terms. Structural information is the idea that the pixels have strong inter-dependencies especially when they are spatially close. These dependencies carry important information about the structure of the objects in a visual rendering of a scene. Using this metric, we retain the original 2D structure of the image (as opposed to using a vector notation) since SSIM is computed on windows of images.</em><sup><a href="#references">[9]</a></sup></p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Real</th>
+<th align="center">Fake</th>
+<th align="right">SSIM error</th>
+<th align="right">Error Visualized</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="img/irv2/1_real_B.png" alt="drawing" width="110"/></td>
+<td align="center"><img src="img/irv2/1_fake_B.png" alt="drawing" width="110"/></td>
+<td align="right">0.98</td>
+<td align="right"><img src="img/irv2/1_error.png" alt="drawing" width="110"/></td>
+</tr>
+<tr>
+<td><img src="img/irv2/110_real_B.png" alt="drawing" width="110"/></td>
+<td align="center"><img src="img/irv2/110_fake_B.png" alt="drawing" width="110"/></td>
+<td align="right">0.973</td>
+<td align="right"><img src="img/irv2/110_error.png" alt="drawing" width="110"/></td>
+</tr>
+<tr>
+<td><img src="img/irv3/1_real_B.png" alt="drawing" width="110"/></td>
+<td align="center"><img src="img/irv3/1_fake_B.png" alt="drawing" width="110"/></td>
+<td align="right">0.978</td>
+<td align="right"><img src="img/irv3/1_error.png" alt="drawing" width="110"/></td>
+</tr>
+<tr>
+<td><img src="img/irv3/101_real_B.png" alt="drawing" width="110"/></td>
+<td align="center"><img src="img/irv3/101_fake_B.png" alt="drawing" width="110"/></td>
+<td align="right">0.983</td>
+<td align="right"><img src="img/irv3/101_error.png" alt="drawing" width="110"/></td>
+</tr>
+<tr>
+<td><img src="img/irv3/110_real_B.png" alt="drawing" width="110"/></td>
+<td align="center"><img src="img/irv3/110_fake_B.png" alt="drawing" width="110"/></td>
+<td align="right">0.986</td>
+<td align="right"><img src="img/irv3/110_error.png" alt="drawing" width="110"/></td>
+</tr>
+<tr>
+<td><img src="img/irv3/141_real_B.png" alt="drawing" width="110"/></td>
+<td align="center"><img src="img/irv3/141_fake_B.png" alt="drawing" width="110"/></td>
+<td align="right">0.991</td>
+<td align="right"><img src="img/irv3/141_error.png" alt="drawing" width="110"/></td>
+</tr>
+<tr>
+<td><img src="img/irv4/1_real_B.png" alt="drawing" width="110"/></td>
+<td align="center"><img src="img/irv4/1_fake_B.png" alt="drawing" width="110"/></td>
+<td align="right">0.972</td>
+<td align="right"><img src="img/irv4/1_error.png" alt="drawing" width="110"/></td>
+</tr>
+<tr>
+<td><img src="img/irv4/110_real_B.png" alt="drawing" width="110"/></td>
+<td align="center"><img src="img/irv4/110_fake_B.png" alt="drawing" width="110"/></td>
+<td align="right">0.968</td>
+<td align="right"><img src="img/irv4/110_error.png" alt="drawing" width="110"/></td>
+</tr>
+<tr>
+<td><img src="img/irv4/133_real_B.png" alt="drawing" width="110"/></td>
+<td align="center"><img src="img/irv4/133_fake_B.png" alt="drawing" width="110"/></td>
+<td align="right">0.906</td>
+<td align="right"><img src="img/irv4/133_error.png" alt="drawing" width="110"/></td>
+</tr>
+<tr>
+<td><img src="img/irv4/134_real_B.png" alt="drawing" width="110"/></td>
+<td align="center"><img src="img/irv4/134_fake_B.png" alt="drawing" width="110"/></td>
+<td align="right">0.854</td>
+<td align="right"><img src="img/irv4/134_error.png" alt="drawing" width="110"/></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p><strong>RANSAC</strong>:</p>
+</li>
+<li>
+<p><strong>Manhatan distance</strong>:</p>
+</li>
+<li>
+<p><strong>L2</strong></p>
+</li>
+</ul>
 </li>
 </ul>
 <p><br></p>
@@ -164,6 +260,7 @@ Teacher student network.</p>
 <p><em>We present a machine learning technique for estimating absolute, per-pixel depth using any conventional monocular 2D camera, with minor hardware modifications.  Our approach targets close-range human capture and interaction where dense 3D estimation of hands and faces is desired. We use hybrid classification-regression forests to learn how to map from near infrared intensity images to absolute, metric  depth  in  real-time.   We  demonstrate  a  variety  of  human-computer interaction and capture scenarios. Experiments show an accuracy that outperforms a conventional light fall-off baseline, and is comparable to high-quality consumer depth cameras, but with a dramatically reduced cost, power consumption, and form-factor.</em></p>
 </li>
 </ul>
+<p><br></p>
 <p><br></p>
 <ul>
 <li>
@@ -215,6 +312,9 @@ Teacher student network.</p>
 </li>
 <li>Fab-net and face metrics from IJB</li>
 </ul>
+<h1 id="references">References</h1>
+<p>[9] <a href="http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w21/Lore_Generative_Adversarial_Networks_CVPR_2018_paper.pdf">Generative adversarial networks for depth map estimation from RGB video, Kin Gwn Lore et al.</a>
+[10] <a href="http://www.cns.nyu.edu/pub/lcv/wang03-preprint.pdf">Image Quality Assessment: From Error Visibility to Structural Similarity, Zhou Wang et al.</a></p>
               
             </div>
           </div>
@@ -263,5 +363,5 @@ Teacher student network.</p>
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2018-11-09 16:55:06
+Build Date UTC : 2018-11-11 21:55:09
 -->

@@ -1,4 +1,4 @@
-# Porject Report - Internship
+# Project Report - Internship
 
 [[Datasets]](datasets.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[Codes]](codes.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[ToDo]]()
 
@@ -41,7 +41,7 @@ Teacher student network.
 
 	**<pre>Binarized IR input		 		Training loss</pre>**
 
-	<pre><img src="img/new_ir.png" alt="drawing" width="250"/>		<img src="img/new_loss.png" alt="drawing" width="400"/></pre>
+	<pre><img src="img/new_ir.png" alt="drawing" width="250"/>	<img src="img/new_loss.png" alt="drawing" width="400"/></pre>
 
 	[[Test output results (link)]](results/v3/index.html)
 
@@ -53,13 +53,36 @@ Teacher student network.
 
 	**<pre>Tested on unseen pose and orientation </pre>**
 
-	<pre><img src="img/new_ir_new.png" alt="drawing" width="500"/></pre>
+	<pre><img src="img/new_ir_new.png" alt="drawing" width="550"/></pre>
 
 <br>
 
 - Evaluation metrics
 
-	RANSAC, Manhatan distance, RMSE .. some from active stereo nets?
+	- **RMSE**:
+
+	- **log<sub>10</sub>error**:
+
+	- **Structural similarity index (SSIM)** <sup>[[10]](#references)</sup>: *While metrics such as MSE estimate absolute errors, SSIM is a perceptionbased metric that considers image degradation as perceived change in structural information, while also incorporating important perceptual phenomena, including both luminance masking and contrast masking terms. Structural information is the idea that the pixels have strong inter-dependencies especially when they are spatially close. These dependencies carry important information about the structure of the objects in a visual rendering of a scene. Using this metric, we retain the original 2D structure of the image (as opposed to using a vector notation) since SSIM is computed on windows of images.*<sup>[[9]](#references)</sup>
+
+	| Real| Fake|SSIM error|Error Visualized|
+	| ------------- |:-------------:| -----:|-----:|
+	|<img src="img/irv2/1_real_B.png" alt="drawing" width="110"/>|<img src="img/irv2/1_fake_B.png" alt="drawing" width="110"/>|0.98|<img src="img/irv2/1_error.png" alt="drawing" width="110"/>|
+	|<img src="img/irv2/110_real_B.png" alt="drawing" width="110"/>|<img src="img/irv2/110_fake_B.png" alt="drawing" width="110"/>|0.973|<img src="img/irv2/110_error.png" alt="drawing" width="110"/>|
+	|<img src="img/irv3/1_real_B.png" alt="drawing" width="110"/>|<img src="img/irv3/1_fake_B.png" alt="drawing" width="110"/>|0.978|<img src="img/irv3/1_error.png" alt="drawing" width="110"/>|
+	|<img src="img/irv3/101_real_B.png" alt="drawing" width="110"/>|<img src="img/irv3/101_fake_B.png" alt="drawing" width="110"/>|0.983|<img src="img/irv3/101_error.png" alt="drawing" width="110"/>|
+	|<img src="img/irv3/110_real_B.png" alt="drawing" width="110"/>|<img src="img/irv3/110_fake_B.png" alt="drawing" width="110"/>|0.986|<img src="img/irv3/110_error.png" alt="drawing" width="110"/>|
+	|<img src="img/irv3/141_real_B.png" alt="drawing" width="110"/>|<img src="img/irv3/141_fake_B.png" alt="drawing" width="110"/>|0.991|<img src="img/irv3/141_error.png" alt="drawing" width="110"/>|
+	|<img src="img/irv4/1_real_B.png" alt="drawing" width="110"/>|<img src="img/irv4/1_fake_B.png" alt="drawing" width="110"/>|0.972|<img src="img/irv4/1_error.png" alt="drawing" width="110"/>|
+	|<img src="img/irv4/110_real_B.png" alt="drawing" width="110"/>|<img src="img/irv4/110_fake_B.png" alt="drawing" width="110"/>|0.968|<img src="img/irv4/110_error.png" alt="drawing" width="110"/>|
+	|<img src="img/irv4/133_real_B.png" alt="drawing" width="110"/>|<img src="img/irv4/133_fake_B.png" alt="drawing" width="110"/>|0.906|<img src="img/irv4/133_error.png" alt="drawing" width="110"/>|
+	|<img src="img/irv4/134_real_B.png" alt="drawing" width="110"/>|<img src="img/irv4/134_fake_B.png" alt="drawing" width="110"/>|0.854|<img src="img/irv4/134_error.png" alt="drawing" width="110"/>|
+
+	- **RANSAC**:
+
+	- **Manhatan distance**:
+
+	- **L2**
 
 <br>
 
@@ -68,6 +91,9 @@ Teacher student network.
 	<pre><img src="img/paper1_1.png" alt="drawing" width="400"/><img src="img/paper1_2.png" alt="drawing" width="300"/></pre>
 
 	*We present a machine learning technique for estimating absolute, per-pixel depth using any conventional monocular 2D camera, with minor hardware modifications.  Our approach targets close-range human capture and interaction where dense 3D estimation of hands and faces is desired. We use hybrid classification-regression forests to learn how to map from near infrared intensity images to absolute, metric  depth  in  real-time.   We  demonstrate  a  variety  of  human-computer interaction and capture scenarios. Experiments show an accuracy that outperforms a conventional light fall-off baseline, and is comparable to high-quality consumer depth cameras, but with a dramatically reduced cost, power consumption, and form-factor.*
+
+<br>
+
 
 <br>
 
@@ -103,3 +129,10 @@ Teacher student network.
 
 - LS-Net?
 - Fab-net and face metrics from IJB
+
+
+# References
+
+[9] [Generative adversarial networks for depth map estimation from RGB video, Kin Gwn Lore et al.](http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w21/Lore_Generative_Adversarial_Networks_CVPR_2018_paper.pdf)
+[10] [Image Quality Assessment: From Error Visibility to Structural Similarity, Zhou Wang et al.](http://www.cns.nyu.edu/pub/lcv/wang03-preprint.pdf)
+
