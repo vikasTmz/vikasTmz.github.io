@@ -10,7 +10,6 @@
 - [✓] create image dataset with naming conventions and in separate directories
 - [✓] For importance of IR patterns : [Article](https://azttm.wordpress.com/2011/04/03/kinect-pattern-uncovered/) and [Paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7328728)
 - [✓] Some pix2vertex output are not correct: filter them out by size (< 5MB), and store them to re-run. Also, track missing plys.
-- [✓] Start blender scene on Saturday. 
 
 
 **Host dataset on website (rgb-d, ir dot pattern and 3d model)**
@@ -25,7 +24,7 @@
 
 
 **FaceGen:**
-- [✓] Not to be used, as there are better, automated techniques. :)
+- [✓] Not to be used
 
 #### Papers that use synthetic data for Face research
 1. [Empirically Analyzing the Effect of Dataset Biases on Deep Face Recognition Systems](http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w41/Kortylewski_Empirically_Analyzing_the_CVPR_2018_paper.pdf)

@@ -31,7 +31,7 @@ Teacher student network.
 
 <br>
 
-- Retrained on binarized IR images
+- <span style="color: #00000; font-family: Babas; font-size: 1.5em;">Retrained on binarized IR images</span>
 	
 	**<pre>Non-binarized IR input		 		Training loss</pre>**
 
@@ -57,32 +57,38 @@ Teacher student network.
 
 <br>
 
-- Evaluation metrics
+- <span style="color: #00000; font-family: Babas; font-size: 1.5em;">Evaluation metrics</span>
 
-	- **RMSE**:
+	- **RMSE**:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/rmse.png" alt="drawing" width="250"/>
 
-	- **log<sub>10</sub>error**:
+	- **log<sub>10</sub>error**:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/log10.png" alt="drawing" width="330"/>
 
 	- **Structural similarity index (SSIM)** <sup>[[10]](#references)</sup>: *While metrics such as MSE estimate absolute errors, SSIM is a perceptionbased metric that considers image degradation as perceived change in structural information, while also incorporating important perceptual phenomena, including both luminance masking and contrast masking terms. Structural information is the idea that the pixels have strong inter-dependencies especially when they are spatially close. These dependencies carry important information about the structure of the objects in a visual rendering of a scene. Using this metric, we retain the original 2D structure of the image (as opposed to using a vector notation) since SSIM is computed on windows of images.*<sup>[[9]](#references)</sup>
 
-	| Real| Fake|SSIM error|Error Visualized|
-	| ------------- |:-------------:| -----:|-----:|
-	|<img src="img/irv2/1_real_B.png" alt="drawing" width="110"/>|<img src="img/irv2/1_fake_B.png" alt="drawing" width="110"/>|0.98|<img src="img/irv2/1_error.png" alt="drawing" width="110"/>|
-	|<img src="img/irv2/110_real_B.png" alt="drawing" width="110"/>|<img src="img/irv2/110_fake_B.png" alt="drawing" width="110"/>|0.973|<img src="img/irv2/110_error.png" alt="drawing" width="110"/>|
-	|<img src="img/irv3/1_real_B.png" alt="drawing" width="110"/>|<img src="img/irv3/1_fake_B.png" alt="drawing" width="110"/>|0.978|<img src="img/irv3/1_error.png" alt="drawing" width="110"/>|
-	|<img src="img/irv3/101_real_B.png" alt="drawing" width="110"/>|<img src="img/irv3/101_fake_B.png" alt="drawing" width="110"/>|0.983|<img src="img/irv3/101_error.png" alt="drawing" width="110"/>|
-	|<img src="img/irv3/110_real_B.png" alt="drawing" width="110"/>|<img src="img/irv3/110_fake_B.png" alt="drawing" width="110"/>|0.986|<img src="img/irv3/110_error.png" alt="drawing" width="110"/>|
-	|<img src="img/irv3/141_real_B.png" alt="drawing" width="110"/>|<img src="img/irv3/141_fake_B.png" alt="drawing" width="110"/>|0.991|<img src="img/irv3/141_error.png" alt="drawing" width="110"/>|
-	|<img src="img/irv4/1_real_B.png" alt="drawing" width="110"/>|<img src="img/irv4/1_fake_B.png" alt="drawing" width="110"/>|0.972|<img src="img/irv4/1_error.png" alt="drawing" width="110"/>|
-	|<img src="img/irv4/110_real_B.png" alt="drawing" width="110"/>|<img src="img/irv4/110_fake_B.png" alt="drawing" width="110"/>|0.968|<img src="img/irv4/110_error.png" alt="drawing" width="110"/>|
-	|<img src="img/irv4/133_real_B.png" alt="drawing" width="110"/>|<img src="img/irv4/133_fake_B.png" alt="drawing" width="110"/>|0.906|<img src="img/irv4/133_error.png" alt="drawing" width="110"/>|
-	|<img src="img/irv4/134_real_B.png" alt="drawing" width="110"/>|<img src="img/irv4/134_fake_B.png" alt="drawing" width="110"/>|0.854|<img src="img/irv4/134_error.png" alt="drawing" width="110"/>|
+	| Real| Fake|SSIM error|log<sub>10</sub>error|RMSE|
+	| ------------- |:-------------:| -----:|-----:|-----:|
+	|<img src="img/irv2/1_real_B.png" alt="drawing" width="110"/>|<img src="img/irv2/1_fake_B.png" alt="drawing" width="110"/>|0.98 <br> <img src="img/irv2/1_error.png" alt="drawing" width="110"/>|0.0174|9.0051|
+	|<img src="img/irv2/110_real_B.png" alt="drawing" width="110"/>|<img src="img/irv2/110_fake_B.png" alt="drawing" width="110"/>|0.973 <br> <img src="img/irv2/110_error.png" alt="drawing" width="110"/>|0.0205|9.5557|
+	|<img src="img/irv3/1_real_B.png" alt="drawing" width="110"/>|<img src="img/irv3/1_fake_B.png" alt="drawing" width="110"/>|0.978 <br> <img src="img/irv3/1_error.png" alt="drawing" width="110"/>|0.0103|5.1186|
+	|<img src="img/irv3/101_real_B.png" alt="drawing" width="110"/>|<img src="img/irv3/101_fake_B.png" alt="drawing" width="110"/>|0.983 <br> <img src="img/irv3/101_error.png" alt="drawing" width="110"/>|0.0122|3.9700|
+	|<img src="img/irv3/110_real_B.png" alt="drawing" width="110"/>|<img src="img/irv3/110_fake_B.png" alt="drawing" width="110"/>|0.986 <br> <img src="img/irv3/110_error.png" alt="drawing" width="110"/>|0.0100|3.0364|
+	|<img src="img/irv3/141_real_B.png" alt="drawing" width="110"/>|<img src="img/irv3/141_fake_B.png" alt="drawing" width="110"/>|0.991 <br> <img src="img/irv3/141_error.png" alt="drawing" width="110"/>|0.0043|5.7457|
+	|<img src="img/irv4/1_real_B.png" alt="drawing" width="110"/>|<img src="img/irv4/1_fake_B.png" alt="drawing" width="110"/>|0.972 <br> <img src="img/irv4/1_error.png" alt="drawing" width="110"/>|0.0152|8.3283|
+	|<img src="img/irv4/110_real_B.png" alt="drawing" width="110"/>|<img src="img/irv4/110_fake_B.png" alt="drawing" width="110"/>|0.968 <br> <img src="img/irv4/110_error.png" alt="drawing" width="110"/>|0.0181|9.3406|
+	|<img src="img/irv4/133_real_B.png" alt="drawing" width="110"/>|<img src="img/irv4/133_fake_B.png" alt="drawing" width="110"/>|0.906 <br> <img src="img/irv4/133_error.png" alt="drawing" width="110"/>|0.0856|30.3137|
+	|<img src="img/irv4/134_real_B.png" alt="drawing" width="110"/>|<img src="img/irv4/134_fake_B.png" alt="drawing" width="110"/>|0.854 <br> <img src="img/irv4/134_error.png" alt="drawing" width="110"/>|0.1186|30.8789|
 
-	- **RANSAC**:
+	- **RANSAC**: *For a quantitative comparison, we used the first 200 subjects from the BU-3DFE dataset, which contains facial images aligned with ground truth depth images. Each method provides its own estimation for the depth image alongside a binary mask, representing the valid pixels to be taken into account in the evaluation. Obviously, since the problem of reconstructing depth from a single image is ill-posed, the estimation needs to be judged up to global scaling and transition along the depth axis. Thus, we compute these paramters using the Random Sample Concensus (RANSAC) approach, for normalizing the estimation according to the ground truth depth. This significantly reduces the absolute error of each method as the global parameter estimation is robust to outliers. The parameters of the RANSAC were identical for all the methods and samples.*<sup>[[2]](#references)</sup>
+	<img src="img/ransac.png" alt="drawing" width="500"/>
 
-	- **Manhatan distance**:
+<br>
 
-	- **L2**
+- <span style="color: #00000; font-family: Babas; font-size: 1.25em;">Cascaded model refinement</span><sup>[[9]](#references)</sup>:
+
+*Additional GANs can be further utilized to refine the outputs in a staged manner. Using the single RGB frame formulation as an example, a GAN is trained to map an RGB frame to a depth map. Next, we introduce a secondary GAN that maps the concatenation of the RGB frame and depth map estimate to a more refined depth map. In other words, the secondary GAN is trained on the concatenation of the inputs and the outputs from the primary GAN.*
+<img src="img/cmr_gan.png" alt="drawing" width="400"/>
+
+*Issues: Paper does not demonstrate effectiveness of the above architecture*.
 
 <br>
 
@@ -91,9 +97,6 @@ Teacher student network.
 	<pre><img src="img/paper1_1.png" alt="drawing" width="400"/><img src="img/paper1_2.png" alt="drawing" width="300"/></pre>
 
 	*We present a machine learning technique for estimating absolute, per-pixel depth using any conventional monocular 2D camera, with minor hardware modifications.  Our approach targets close-range human capture and interaction where dense 3D estimation of hands and faces is desired. We use hybrid classification-regression forests to learn how to map from near infrared intensity images to absolute, metric  depth  in  real-time.   We  demonstrate  a  variety  of  human-computer interaction and capture scenarios. Experiments show an accuracy that outperforms a conventional light fall-off baseline, and is comparable to high-quality consumer depth cameras, but with a dramatically reduced cost, power consumption, and form-factor.*
-
-<br>
-
 
 <br>
 
@@ -133,6 +136,9 @@ Teacher student network.
 
 # References
 
+[2] [Unrestricted Facial Geometry Reconstruction Using Image-to-Image Translation, Sela et al.](https://arxiv.org/pdf/1703.10131.pdf)
+
 [9] [Generative adversarial networks for depth map estimation from RGB video, Kin Gwn Lore et al.](http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w21/Lore_Generative_Adversarial_Networks_CVPR_2018_paper.pdf)
+
 [10] [Image Quality Assessment: From Error Visibility to Structural Similarity, Zhou Wang et al.](http://www.cns.nyu.edu/pub/lcv/wang03-preprint.pdf)
 
