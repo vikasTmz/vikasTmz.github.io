@@ -87,7 +87,7 @@
 
 <br>
 
-- <span style="color: #00000; font-family: Babas; font-size: 1.25em;">"Structured Attention Guided Convolutional Neural Fields for Monocular Depth Estimation"</span><sup>[[13]](#references)</sup>:
+- <span style="color: #00000; font-family: Babas; font-size: 1.25em;">"Structured Attention Guided Convolutional Neural Fields for Monocular Depth Estimation"</span><sup>[[13]](#references)</sup>[[code]](https://github.com/danxuhk/StructuredAttentionDepthEstimation):
 
 	*Recent works have shown the benefit of integrating Conditional Random Fields (CRFs) models into deep architectures for improving pixel-level prediction tasks. Following this line of research, in this paper we introduce a novel approach for monocular depth estimation. Similarly to previous works, our method employs a continuous CRF to fuse multi-scale information derived from different layers of a front-end Convolutional Neural Network (CNN). Differently from past works, our approach benefits from a structured attention model which automatically regulates the amount of information transferred between corresponding features at different scales. Importantly, the proposed attention model is seamlessly integrated into the CRF, allowing end-to-end training of the entire architecture.*
 
@@ -146,6 +146,9 @@
 - LS-Net?
 - Fab-net and face metrics from IJB
 
+## October
+## September
+## August
 
 # References
 
