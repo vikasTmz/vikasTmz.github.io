@@ -3,4 +3,4 @@ nav:
     - Home: index.md
     - Datasets: datasets.md
     - Codes: codes.md
-theme: readthedocs
+theme: cinder

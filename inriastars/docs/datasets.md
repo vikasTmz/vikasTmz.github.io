@@ -1,18 +1,22 @@
 # Datasets
 
-# Data Generation
+There is currently no dataset available containing IR Dot Patterns (IDP) of human faces and their corresponding depth images.
+There are several datasets containing RGB images and their corresponding depth images:
+<add list>
 
-# Synthetic : 
+There are also 3D face datasets:
+<add list>
 
-- [✓] Collect as many 3d face images (from 3d datasets) as possible maintaining annotations (gender, ethinicity, name?) along with them.
-- [✓] Downloaded 2 face datasets with age, ethinicity, gender.
-- [✓] pix2vertex : *Issues: model needs to be smoothened, not robust to ethnicity*.
-- [✓] create image dataset with naming conventions and in separate directories
+Therefore a dataset of IR dot pattern face images has to be created.
+<add points from presentation>
+
+## Synthetic Datasets: 
+
+<Motivation for synthetic dataset>
+
 - [✓] For importance of IR patterns : [Article](https://azttm.wordpress.com/2011/04/03/kinect-pattern-uncovered/) and [Paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7328728)
-- [✓] Some pix2vertex output are not correct: filter them out by size (< 5MB), and store them to re-run. Also, track missing plys.
 
 
-**Host dataset on website (rgb-d, ir dot pattern and 3d model)**
 
 - [ ] **Request other 3d face datasets** and apply Multilinear Model Learning on them.
 
@@ -23,8 +27,6 @@
 - [ ] Crop image using open CV. CromaKey for rgb images. (to be done when images are read for testing).
 
 
-**FaceGen:**
-- [✓] Not to be used
 
 #### Papers that use synthetic data for Face research
 1. [Empirically Analyzing the Effect of Dataset Biases on Deep Face Recognition Systems](http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w41/Kortylewski_Empirically_Analyzing_the_CVPR_2018_paper.pdf)
