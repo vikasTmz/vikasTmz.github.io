@@ -1,6 +1,0 @@
-site_name: Project Report - Internship
-nav:
-    - Home: index.md
-    - Datasets: datasets.md
-    - Codes: codes.md
-theme: cinder
