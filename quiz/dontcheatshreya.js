@@ -186,6 +186,13 @@ function myFunction4() {
   location.href = "http://vikastmz.github.io/quiz/final_007.html";
 }
 
+function myFunction5() {
+  var x, text;
+
+  x = document.getElementById("answer").value;
+  location.href = "http://vikastmz.github.io/quiz/.html";
+}
+
 var stickyadstatus = "";
 function fix_stickyad() {
   document.getElementById("stickypos").style.position = "sticky";
