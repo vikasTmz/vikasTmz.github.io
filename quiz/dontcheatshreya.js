@@ -149,6 +149,43 @@ function myFunction() {
   }
 }
 
+function myFunction2() {
+  var x, text;
+
+  x = document.getElementById("answer").value;
+
+  if (x==158) {
+    // document.getElementById("demo").innerHTML = text;
+   location.href = "http://vikastmz.github.io/quiz/stage_8837483.html";
+  } else {
+    var randomNumber = Math.floor(Math.random()*error_msg.length);
+    text = error_msg[randomNumber];
+   document.getElementById("demo").innerHTML = text;
+  }
+}
+
+function myFunction3() {
+  var x, text;
+
+  x = document.getElementById("answer").value;
+
+  if (x==40) {
+    // document.getElementById("demo").innerHTML = text;
+   location.href = "http://vikastmz.github.io/quiz/stage_272482.html";
+  } else {
+    var randomNumber = Math.floor(Math.random()*error_msg.length);
+    text = error_msg[randomNumber];
+   document.getElementById("demo").innerHTML = text;
+  }
+}
+
+function myFunction4() {
+  var x, text;
+
+  x = document.getElementById("answer").value;
+  location.href = "http://vikastmz.github.io/quiz/final_007.html";
+}
+
 var stickyadstatus = "";
 function fix_stickyad() {
   document.getElementById("stickypos").style.position = "sticky";
