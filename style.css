@@ -64,17 +64,17 @@ a{
 NAVIGATION
 **************************************************************/
 .header{
-    background: url(image/banner2.png) no-repeat;
+    /*background: url(image/banner2.png) no-repeat;*/
     background-size: cover;
     min-height: 200px;
 }
 .bg-color {
-    background-color: RGBA(0, 0, 0, 0.42);
+    background-color: RGBA(0, 0, 0, 100);
     min-height: 650px;
 }
 .navbar-inverse {
     background-color: transparent;
-    border-color: #080808;
+    border-color: #000;
 }
 .navbar{
     border: 0px;
