@@ -20,6 +20,8 @@ var man  = [
 
 var aboutme = [
   '   Hi, I\'m Vikas Thamizharasan and this is my personal website.',
+  '   I am currently pursuing Masters in Computer Science @ Brown University.',
+  '   My research interests lie in the intersection of Computer Vision, Computer Graphics and Deep Learning.',
   ' ',
   '  * type "man"      to see list of commands to know more about me.',
   '  * type "help"      to see this page.',
