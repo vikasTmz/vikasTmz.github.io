@@ -15,13 +15,13 @@ var colortest = [
 var man  = [
   ' %+i%+ucommand               flags                  info%-i              %-u',
   '',
-  ' "about"           -a,-n,-i           displays my age, nationality,interests',
+  ' "about"                    -i                      <null>',
 ];
 
 var aboutme = [
   '   Hi, I\'m Vikas Thamizharasan and this is my personal website.',
   '   I am currently pursuing a Masters in Computer Science @ Brown University.',
-  '   My research interests lie in the intersection of Computer Vision, Computer Graphics and Deep Learning.',
+  '   My research interests lie in the intersection of Computer Vision, Computer Graphics',
   '   and Deep Learning.',
   ' ',
   '  * type "man"      to see list of commands to know more about me.',
@@ -193,18 +193,18 @@ function termHandler() {
   else if (args[0] == "about") { //-a,-n,-i           displays my age, nationality,interests
     if (args[1] == "-a")
     {
-      this.write("20    DOB: 13 | 12 | 1996");      
+      this.write("01/01/1026");      
     }
-    else if (args[1] == "-n")
-    {
-      this.write("Indian");
-    }
-    else if (args[1] == "-i")
-    {
-      this.write("Art.Music.Drums.Sculpting.Programming.CV.Gaming.ImageProcessing.AR.VR");
-    }
+    // else if (args[1] == "-n")
+    // {
+    //   this.write("Indian");
+    // }
+    // else if (args[1] == "-i")
+    // {
+    //   this.write("Art.Music.Drums.Sculpting.Climbing.Programming.CV.Gaming.ImageProcessing.AR.VR");
+    // }
     else{
-      this.write("USAGE: \"about\"           -a,-n,-i           displays my age, nationality,interests ");}
+      this.write("USAGE: \"about\"           -i           <null>");}
     this.prompt();
   }
   else if (this.lineBuffer != '') {
