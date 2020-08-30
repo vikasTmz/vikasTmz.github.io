@@ -1,0 +1,206 @@
+{
+	"items": [
+
+		{
+			"startdate": "2016-12-03",
+			"enddate": "2016-12-11",
+			"event": "NIPS",
+			"location": "Barcelona, ES"
+		},
+
+		{
+			"startdate": "2017-01-24",
+			"enddate": "2017-01-27",
+			"event": "DARPA PI Meeting",
+			"location": "Arlington, VA"
+		},
+
+		{
+			"startdate": "2017-03-19",
+			"enddate": "2017-03-22",
+			"event": "Brown CS PhD Recruiting",
+			"location": "Providence, RI"
+		},
+
+		{
+			"startdate": "2017-07-30",
+			"enddate": "2017-08-03",
+			"event": "SIGGRAPH",
+			"location": "Los Angeles, CA"
+		},
+
+		{
+			"startdate": "2017-08-06",
+			"enddate": "2017-08-08",
+			"event": "ACM New Faculty Teaching Workshop",
+			"location": "San Diego, CA"
+		},
+
+		{
+			"startdate": "2017-09-26",
+			"enddate": "2017-09-26",
+			"event": "MIT",
+			"location": "Cambridge, MA"
+		},
+
+		{
+			"startdate": "2017-09-12",
+			"enddate": "2017-09-12",
+			"event": "NSF Day",
+			"location": "Hartford, CT"
+		},
+
+		{
+			"startdate": "2017-12-07",
+			"enddate": "2017-12-09",
+			"event": "NIPS",
+			"location": "Long Beach, CA"
+		},
+
+		{
+			"startdate": "2018-02-08",
+			"enddate": "2018-02-09",
+			"event": "ML + PL Workshop at UW",
+			"location": "Seattle, WA"
+		},
+
+		{
+			"startdate": "2018-02-26",
+			"enddate": "2018-02-27",
+			"event": "CRA Career Mentoring Workshop",
+			"location": "Arlington, VA"
+		},
+
+		{
+			"startdate": "2018-04-16",
+			"enddate": "2018-04-20",
+			"event": "Eurographics",
+			"location": "Delft, NL"
+		},
+
+		{
+			"startdate": "2018-04-29",
+			"enddate": "2018-04-29",
+			"event": "New England Symposium on Graphics",
+			"location": "Cambridge, MA"
+		},
+
+		{
+			"startdate": "2018-05-07",
+			"enddate": "2018-05-07",
+			"event": "New England Machine Learning Day",
+			"location": "Cambridge, MA"
+		},
+
+		{
+			"startdate": "2018-06-19",
+			"enddate": "2018-06-21",
+			"event": "CVPR",
+			"location": "Salt Lake City, UT"
+		},
+
+		{
+			"startdate": "2018-08-10",
+			"enddate": "2018-08-11",
+			"event": "SIGGRAPH Asia PC Meeting",
+			"location": "Vancouver, BC"
+		},
+
+		{
+			"startdate": "2018-08-12",
+			"enddate": "2018-08-16",
+			"event": "SIGGRAPH",
+			"location": "Vancouver, BC"
+		},
+
+		{
+			"startdate": "2018-10-03",
+			"enddate": "2018-10-03",
+			"event": "IBM AI Systems Day",
+			"location": "Cambridge, MA"
+		},
+
+		{
+			"startdate": "2018-10-04",
+			"enddate": "2018-10-06",
+			"event": "PROBPROG 2018",
+			"location": "Boston, MA"
+		},
+
+		{
+			"startdate": "2019-04-14",
+			"enddate": "2019-04-14",
+			"event": "New England Symposium on Graphics",
+			"location": "Cambridge, MA"
+		},
+
+		{
+			"startdate": "2019-05-06",
+			"enddate": "2019-05-10",
+			"event": "Eurographics 2019",
+			"location": "Genoa, Italy"
+		},
+
+		{
+			"startdate": "2019-06-16",
+			"enddate": "2019-06-21",
+			"event": "CVPR 2019",
+			"location": "Long Beach, CA"
+		},
+
+		{
+			"startdate": "2019-06-23",
+			"enddate": "2019-07-06",
+			"event": "Vacation"
+		},
+
+		{
+			"startdate": "2019-07-13",
+			"enddate": "2019-07-19",
+			"event": "Visual Computing Summer School",
+			"location": "Shenzhen, China"
+		},
+
+		{
+			"startdate": "2019-07-25",
+			"enddate": "2019-07-27",
+			"event": "SIGGRAPH Asia PC Meeting",
+			"location": "Los Angeles, CA"
+		},
+
+		{
+			"startdate": "2019-07-28",
+			"enddate": "2019-08-02",
+			"event": "SIGGRAPH",
+			"location": "Los Angeles, CA"
+		},
+
+		{
+			"startdate": "2019-10-16",
+			"enddate": "2019-10-17",
+			"event": "Pacific Graphics",
+			"location": "Seoul, South Korea"
+		},
+
+		{
+			"startdate": "2019-12-07",
+			"enddate": "2019-12-11",
+			"event": "NeurIPS",
+			"location": "Vancouver, BC"
+		},
+
+		{
+			"startdate": "2020-06-14",
+			"enddate": "2020-06-19",
+			"event": "CVPR",
+			"location": "Seattle, WA"
+		},
+
+		{
+			"startdate": "2020-07-19",
+			"enddate": "2020-07-23",
+			"event": "SIGGRAPH",
+			"location": "Washington, D.C."
+		}
+	]
+}
