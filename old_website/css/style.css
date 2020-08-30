@@ -1,0 +1,708 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+/* Global */
+
+
+h1, h2, h4, h5, h6 {
+  /*font-family: "Brandon Grotesque Bold", sans-serif;*/
+  font-weight: 300;
+  /*font-style: normal;*/
+}
+h3.sub{
+ /*font-family: "Brandon Grotesque Light", sans-serif;*/
+  font-weight: 300;
+   
+}
+
+.section {
+  background-attachment: scroll;
+  background-position: center top;
+  margin-left: -50px;
+  position: relative;
+  padding: 150px 0 170px;
+}
+
+.section h2 {
+  display: inline-block;
+  font-size: 58px;
+  font-size: 5.8rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 72px;
+}
+
+.section h4 {
+  font-size: 23px;
+  font-size: 2.3rem;
+  font-weight: 500;
+  line-height: 28px;
+  margin: 0 0 20px;
+  padding-bottom: 5px;
+}
+
+.section h5 {
+  font-size: 19px;
+  font-size: 1.9rem;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 0 0 20px;
+  padding-bottom: 5px;
+}
+
+.section .title hr {
+  border-color: #151515;
+  border-width: 1px 0 0;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.section .title .alt hr {
+  border-color: #F1F1F1;
+}
+
+.section .desc {
+  margin-top: 20px;
+}
+
+.section .vikas {
+  margin-top: 75px;
+}
+
+.graph-fluid {
+  margin: 0 auto;
+  padding-right: 80px;
+  padding-left: 80px;
+}
+
+.control-group .controls input, .control-group .controls textarea {
+  background: url(../img/form-bg.jpg) 0 0 repeat #f1f1f1;
+  border-radius: 0px;
+  min-height: 36px;
+}
+
+.control-group .controls input:focus, .control-group .controls textarea:focus {
+  border-color: rgba(144, 144, 144, 0.9);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(144, 144, 144, 0.9);
+}
+
+.alert, .alert-error {
+  border-radius: 0px;
+}
+
+.btn-default {
+  background: none #F1F1F1;
+  color: #151515;
+  margin-top: 75px;
+}
+
+.btn-inverse {
+  background: none #151515;
+  color: #F1F1F1;
+  margin-top: 25px;
+}
+
+.btn-default, .btn-inverse {
+  border: medium none;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Brandon Grotesque Light",sans-serif;
+  font-size: 14px;
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 20px;
+  padding: 8px 14px;
+  text-align: left;
+  text-transform: uppercase;
+  width: 190px;
+}
+
+.btn-inverse span, .btn-default span {
+  font-weight: 700;
+}
+
+.btn-inverse.alt, .btn-default.alt {
+  text-align: right;
+}
+
+.btn-inverse i, .btn-default i {
+  float: right;
+  line-height: 20px;
+}
+
+.btn-inverse.alt i, .btn-default.alt i {
+  float: left;
+}
+
+.read-more {
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 20px;
+  padding-right: 10px;
+}
+
+.table th, .table td {
+  border-top: 1px solid #151515;
+  line-height: 20px;
+  padding: 10px 2px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.table-striped tbody tr:nth-child(odd) td,
+.table-striped tbody tr:nth-child(odd) th {
+  background-color: rgba(60, 60, 60, 0.4);
+}
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+  background-color: rgba(75, 75, 75, 0.4);
+}
+
+/* Section 1 */
+#section1 {
+  /*position: absolute;*/
+  /*width: 6500px;*/
+  /*height: 100%;*/
+  /*background: #f8f7f5 url('../img/bg.jpg') repeat top left;*/
+  background: #f8f7f5 url('../img/bg_02_repeated.png') !important;
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+  background-size: 100% auto;
+  background-repeat: repeat-x !important;
+  background-position: bottom !important;
+}
+
+#pohon{
+
+position: fixed;
+right: 0;
+bottom: 60px;
+background: url('../img/pohon.png') no-repeat top right;
+width: 733px;
+height: 503px;
+}
+@media (max-width:767px){
+#section1{
+  /*position:absolute;*/
+  /*width:6500px;*/
+  /*height:100%;*/
+  background:#fdfcfc url('../img/bg_02_mobile.png') repeat-x bottom left
+  }
+#pohon{
+    display: none !important;
+
+    position:fixed;
+    right:0;
+    bottom:51px;
+    background:url('../img/pohon25pct.png') no-repeat top right;
+    width:344px;
+    height:220px
+  }
+  }
+/*@media (min-width:768px) and (max-width:1139px){#pohon{display:none !important; position:fixed;right:0;bottom:130px;background:url('../img/pohon75pct.png?alwaysNEW') no-repeat top right; width:575px; height:330px}*/*/
+#section1 .intro {
+  margin: 130px 0;
+}
+
+#section1 .thumb {
+  display: none;
+}
+
+#section1 .intro h1 {
+  color: #151515;
+  font-size: 85px;
+  font-size: 8.5rem;
+  font-weight: 500;
+  letter-spacing: -2px;
+  line-height: 85px;
+  margin-left: -5px;
+}
+
+#section1 .intro h3 {
+  color: #151515;
+  font-size: 26px;
+  font-size: 2.6rem;
+  font-weight: 100;
+  line-height: 28px;
+  margin: 0px;
+  width: 80%;
+}
+
+/* Section 2 */
+.toolbox-header {
+  font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: -5px;
+}
+
+.toolbox-item {
+  height: 20px;
+}
+
+#pie-chart {
+  height: 300px;
+  position: relative;
+  width: 322px;
+}
+
+#pie-chart svg#arcmain {
+  left: 40px;
+  position: absolute;
+  top: 32px;
+}
+
+#pie-chart .chart-label {
+  display: none;
+  font-size: 14px;
+  font-size: 1.4rem;
+  height: 40px;
+  line-height: 18px;
+  position: absolute;
+  width: 100px;
+}
+
+#pie-chart .chart-line {
+  display: none;
+  height: 40px;
+  position: absolute;
+  width: 100px;
+}
+
+#pie-chart #label1 {
+  left: 0;
+  top: 30px;
+}
+
+#pie-chart svg#line1 {
+  left: 40px;
+  top: 70px;
+}
+
+#pie-chart #label2 {
+  right: 0;
+  top: 30px;
+}
+
+#pie-chart svg#line2 {
+  right: 30px;
+  top: 40px;
+}
+
+#pie-chart #label3 {
+  right: -8px;
+  top: 188px;
+}
+
+#pie-chart svg#line3 {
+  right: -10px;
+  top: 160px;
+}
+
+#pie-chart #label4 {
+  left: 40px;
+  top: 246px;
+  width: 140px;
+}
+
+#pie-chart svg#line4 {
+  right: -10px;
+  top: 220px;
+  left: 100px;
+}
+
+/* Section 3 */
+#section3 {
+  background-image: url(../img/device-lab-bg.jpg);
+  color: #F1F1F1;
+}
+
+#section3 h2 {
+  margin-left: -5px;
+}
+
+#section3 #slide2 {
+  display: none;
+  margin-top: 37px;
+}
+
+#section3 .vikas img {
+  max-width: 96%;
+  padding: 2%;
+  background-color: #F1F1F1;
+}
+
+#section3 .read-more.alt {
+  margin: -20px 0 20px;
+  padding-right: 0;
+}
+
+#section3 .table th {
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  /* font-size: 16px; font-size: 1.6rem; */
+  font-weight: 700;
+  height: 30px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* Section 4 */
+#section4 h2 {
+  margin-left: -4px;
+}
+
+#section4 .read-more a, #section4 .read-more a:hover {
+  color: #151515;
+}
+
+#section4 .vikas .span4, #section4 .vikas .span6 {
+  padding-right: 20px;
+}
+
+#section4 .vikas {
+  min-height: 300px;
+}
+
+#section4 .vikas .span8 {
+  display: none;
+}
+
+#section4 .vikas .span8.current {
+  display: block;
+}
+
+#section4 ul.article-tags {
+  border-top: 1px solid #151515;
+  margin: 40px 0 0;
+}
+
+#section4 ul.article-tags li {
+  border-bottom: 1px solid #151515;
+  cursor: pointer;
+  display: block;
+  font-size: 17px;
+  font-size: 1.7rem;
+  height: 36px;
+  line-height: 36px;
+  overflow: hidden;
+  padding-left: 45px;
+  position: relative;
+}
+
+#section4 ul.article-tags li:hover, #section4 ul.article-tags li.current {
+  background-color: rgba(21, 21, 21, 0.2);
+}
+
+#section4 ul.article-tags i {
+  left: 15px;
+  font-size: 16px;
+  font-size: 1.6rem;
+  position: absolute;
+  top: 10px;
+}
+
+#section4 h4 {
+  border-bottom: 1px solid #151515;
+  height: 35px;
+  margin-bottom: 18px;
+}
+
+/* Section 5 */
+#section5 {
+  background-image: url(../img/contact-bg.jpg);
+  color: #F1F1F1;
+  padding-bottom: 0px;
+}
+
+#section5 h4.intro {
+  border-bottom: 1px solid #F1F1F1;
+  height: 35px;
+  margin-bottom: 18px;
+}
+
+#section5 .vikas {
+  position: relative;
+}
+
+#section5 .vikas .alt {
+  margin-top: 20px;
+}
+
+#section5 .vikas .alt h4 {
+  line-height: 24px;
+  margin: 0;
+  padding-right: 20px;
+}
+
+#section5 .vikas .alt h4, #section6 .vikas .alt span {
+  display: inline-block;
+}
+
+#section5 .vikas .alt h5 {
+  display: inline;
+  line-height: 20px;
+  margin: 0;
+  padding-right: 10px;
+}
+
+#section5 .vikas .span4 {
+  padding-right: 25px;
+}
+
+#section5 .btn-default {
+  margin-top: 15px;
+}
+
+#section5 #footer {
+  margin: 200px 0 40px;
+}
+
+#section5 #footer p {
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+
+#form-result {
+  display: none;
+}
+
+#form-result h4 {
+  margin: 100px 0 0;
+}
+
+#form-result h4, #form-result p {
+  text-align: center;
+}
+
+/* Media Queries */
+@media screen and (min-width: 1800px) {
+  #section1 {
+    padding: 300px 0 !important;
+  }
+}
+@media screen and (max-width: 1320px) {
+  #section1 {
+    background-size: 1320px auto;
+  }
+}
+@media screen and (min-width: 1200px) {
+  #section1 {
+    padding: 170px 0;
+  }
+
+  #section1 .intro h1 {
+    font-size: 100px;
+    font-size: 10rem;
+    line-height: 110px;
+    letter-spacing: -4px;
+  }
+
+  #section1 .intro h3 {
+    font-size: 28px;
+    font-size: 2.8rem;
+    line-height: 34px;
+    width: 90%;
+  }
+
+  .section h2 {
+    font-size: 67px;
+    font-size: 6.7rem;
+  }
+
+  .graph-fluid {
+    width: 1024px;
+  }
+}
+@media screen and (max-width: 1199px) {
+  .section {
+    margin-left: -50px;
+    padding: 135px 0;
+  }
+
+  #section1 {
+    background-size: 1200px auto;
+  }
+
+  #section1 .intro {
+    margin: 100px 0;
+  }
+
+  #section1 .intro h3 {
+    font-size: 24px;
+    font-size: 2.4rem;
+    line-height: 24px;
+  }
+
+  .section .vikas {
+    margin-top: 50px;
+  }
+
+  .graph-fluid {
+    padding-left: 105px;
+    padding-right: 105px;
+  }
+}
+@media screen and (max-width: 979px) {
+  .section h2 {
+    font-size: 48px;
+    font-size: 4.8rem;
+    line-height: 58px;
+  }
+
+  .section .title hr {
+    margin-top: 20px;
+  }
+
+  .section .desc .span8 {
+    width: 100%;
+  }
+
+  #section1 .intro h1 {
+    font-size: 70px;
+    font-size: 7.0rem;
+    line-height: 70px;
+  }
+
+  #section1 .intro h3 {
+    font-size: 22px;
+    font-size: 2.2rem;
+    line-height: 22px;
+  }
+
+  #section5 .vikas .span4 {
+    padding-right: 0px;
+  }
+
+  .graph-fluid {
+    padding-left: 75px;
+    padding-right: 75px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 979px) {
+  #section1 .intro h3 {
+    width: 85%;
+  }
+
+  #section2 .vikas .expand {
+    width: 48.6188%;
+  }
+
+  #section4 .vikas .expand {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  body {
+    padding: 0px;
+  }
+
+  .section {
+    padding: 100px 0;
+  }
+
+  .section .vikas {
+    margin-top: 0;
+  }
+
+  .section .vikas .pull-right {
+    float: left;
+  }
+
+  .section h4 {
+    margin-top: 30px;
+  }
+
+  .section .title hr {
+    margin-left: 0px;
+  }
+
+  #section1 {
+    background-size: 920px auto;
+  }
+
+  #section1 .intro {
+    margin: 120px 0;
+  }
+
+  #section1 .intro h3 {
+    width: 55%;
+  }
+
+  #section3 .vikas img {
+    margin-top: 30px;
+    padding: 1.5%;
+  }
+
+  #section3 .table th, #section3 .table td {
+    font-size: 13px;
+    font-size: 1.3rem;
+  }
+
+  #section3 .table {
+    margin-top: 30px;
+  }
+
+  #section5 .span8 {
+    margin-top: 30px;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 649px) {
+  #section1 .intro h1 {
+    font-size: 60px;
+    font-size: 6rem;
+    line-height: 60px;
+  }
+
+  #section1 .intro h3 {
+    font-size: 20px;
+    font-size: 2rem;
+  }
+}
+@media screen and (min-width: 481px) {
+  #section1 {
+    background-image: url(../img/intro-bg.jpg);
+  }
+}
+@media screen and (max-width: 480px) {
+  .section {
+    padding: 80px 0;
+  }
+
+  #section1 {
+    background-size: 1024px auto;
+    padding: 60px 0;
+  }
+
+  #section1 .intro {
+    margin: 50px 0;
+  }
+
+  #section1 .intro h1 {
+    font-size: 50px;
+    font-size: 5rem;
+    line-height: 50px;
+  }
+
+  #section1 .intro h3 {
+    font-size: 22px;
+    font-size: 2.2rem;
+    line-height: 24px;
+    width: 100%;
+  }
+
+  #section1 .thumb {
+    background-color: rgba(3, 3, 3, 0.7);
+    display: block;
+    margin-left: 3%;
+    max-width: 80%;
+    padding: 1%;
+  }
+
+  #section3 .table th, #section3 .table td {
+    font-size: 11px;
+    font-size: 1.1rem;
+  }
+
+  #section4 h4 {
+    height: auto;
+  }
+}
