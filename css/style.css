@@ -149,3 +149,19 @@ a, a:hover {
 }
 
 /*---------------------------------------------------------------*/
+
+.tg  {border-collapse:collapse;border-spacing:0;}
+
+.tg td{border-color:transparent;border-style:none;border-width:1px;font-size:14px;
+  overflow:hidden;padding:5px 5px;word-break:normal;}
+
+.tg th{border-color:transparent;border-style:none;border-width:1px;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}
+
+.tg .tg-oe15{border-color:transparent;text-align:left;vertical-align:top}
+
+.tg .tg-8pbb{border-color:transparent;font-size:17px;text-align:left;vertical-align:top}
+
+.tg .tg-ny72{border-color:transparent;font-size:19px;text-align:left;vertical-align:top}
+
+.tg .tg-9ouc{border-color:transparent;font-size:14px;text-align:left;vertical-align:top}

@@ -1,0 +1,48 @@
+.lh15 {
+	line-height: 0px;
+}
+
+.term {
+	font-family: "Courier New",courier,fixed,monospace;
+	font-size: 14px;
+	color: #14C814;
+	letter-spacing: 1px;
+	border-style: none;
+}
+
+.term .termReverse {
+	color: #232e45;
+}
+
+/*
+a,a:link,a:visited {
+	text-decoration: none;
+	color: #77dd11;
+}
+a:hover {
+	text-decoration: underline;
+	color: #77dd11;
+}
+a:active {
+	text-decoration: underline;
+	color: #eeeeee;
+}*/
+
+.termopen,.termopen:link,.termopen:visited {
+	text-decoration: none;
+	color: #77dd11;
+	border-style: solid;
+}
+.termopen:hover {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+.termopen:active {
+	text-decoration: none;
+	color: #FFFFFF;
+
+}
+
+table.inventory td {
+	padding-bottom: 20px !important;
+}
