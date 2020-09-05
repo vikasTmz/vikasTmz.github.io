@@ -1,0 +1,15 @@
+[
+	{
+		"id": "stylelit",
+		"title": "Illumination-guided example-based stylization of 3D renderings",
+		"authors": [""],
+		"venue": "GPU implementation of StyLit by Jakub Fiser et al. SIGGRAPH ’16.",
+		"date": "2020-05-014",
+		"links" : [
+			{"type": "link", "name": "code", "target": "https://github.com/dcharata/StyLit"},
+			{"type": "link", "name": "video", "target": "https://youtu.be/4gsjpk9nDbg"},
+			{"type": "link", "name": "presentation", "target": "https://docs.google.com/presentation/d/1gga9FxRm0Sq73Pqfpx4WlOIm1h3vRMqti0-B8NzUido/edit?usp=sharing"}
+		]
+	}
+
+]

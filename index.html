@@ -3,12 +3,14 @@ layout: default
 ---
 
 <div class='mainitem' id='about'>
-	<div class='hidden-md hidden-lg mainheader'>About</div>
+	<div class='hidden-md hidden-lg mainheader'></div>
 	<div id="termDiv"> </div>
 	</br>
 	<p>
-
+<!-- 
 		 I wish to tackle problems on the theoretical realm specifically Generative models, Unsupervised learning, Geometric DeepLearning, Neural Architecture Search (NAS), Explainability in neural nets, Adversarial training, graph classification and the applied realm specifically 3D shape and pose estimation, Depth estimation, Style transfer, Image-based modelling and rendering, Vision as Inverse Graphics, AI for Creative Content.
+
+		 Outside academics and work, I Art, Sculpting, Drumming, Cooking, Bouldering, Anthropology, Football, MMA. -->
 
 	</p>
 
@@ -72,12 +74,12 @@ layout: default
 	{% endfor %} -->
 
 </div>
-<!-- 
-<div class='mainitem' id='publications'> 
 
-	<div class='mainheader'>Publications</div>
+<div class='mainitem' id='projects'> 
 
-	{% assign sorted_pubs = site.data.publications | sort: 'date' | reverse %}
+	<div class='mainheader'>projects</div>
+
+	{% assign sorted_pubs = site.data.projects | sort: 'date' | reverse %}
 
 	{% for pub in sorted_pubs %}
 
@@ -95,7 +97,7 @@ layout: default
 			{% endcapture %}
 
 			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='{{ mainlink }}'><img class='pubimage img img-responsive' src='img/pubthumbs/{{ pub.id }}.png' width='200'/></a>
+				<a target='_blank' href='{{ mainlink }}'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/{{ pub.id }}.png'/></a>
 			</div>
 
 			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
@@ -152,5 +154,5 @@ layout: default
 	{% endfor %}
 
 	</div>
- -->
+
 </div>
