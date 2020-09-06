@@ -30,7 +30,9 @@ var aboutme = [
   '   top of state of the art techniques (for some people this may be indistinguishable ',
   '   from magic) and aids artists and novice users in their creative endevaours (primarily ',
   '   in the visual domain).',
-  ' '
+  ' ',
+  // ' '
+  // '   Outside academics, I Art, Sculpting, Drumming, Cooking, Bouldering, Anthropology, Football, MMA'
 ];
 
   // ' ',

@@ -69,6 +69,27 @@
 		"date": "2019-02-01",
 		"links" : [
 		]
+	},
+
+	{
+		"id": "3sweep",
+		"title": "3D Object Reconstruction and Manipulation with a single image",
+		"authors": ["2017"],
+		"venue": "Reconstruct 3D models from a single image using geometric primitives to infer geosemantic constraints and model-to-image alignment using constrained optimization.",
+		"date": "2017-02-01",
+		"links" : [
+			{"type": "link", "name": "code", "target": "https://github.com/mukulhase/3-Sweep-Library/"}
+		]
+	},
+
+	{
+		"id": "wiki",
+		"title": "Search Engine for Wikipedia",
+		"authors": ["2017"],
+		"venue": "",
+		"date": "2017-01-01",
+		"links" : [
+		]
 	}
 
 ]
