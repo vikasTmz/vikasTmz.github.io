@@ -1,14 +1,73 @@
 [
 	{
+		"id": "relight-faces",
+		"title": "Estimating 3D geometry and reflectance profile of faces from an image",
+		"authors": ["2020"],
+		"venue": "Ongoing summer project.",
+		"date": "2020-08-01",
+		"links" : []
+	},
+	{
+		"id": "texturesynth",
+		"title": "Learning texture and shape representations of 3d meshes for texture synthesis",
+		"authors": ["2020"],
+		"venue": "Ongoing summer project.",
+		"date": "2020-07-01",
+		"links" : []
+	},
+
+	{
 		"id": "stylelit",
 		"title": "Illumination-guided example-based stylization of 3D renderings",
-		"authors": [""],
+		"authors": ["2020"],
 		"venue": "GPU implementation of StyLit by Jakub Fiser et al. SIGGRAPH ’16.",
-		"date": "2020-05-014",
+		"date": "2020-05-14",
 		"links" : [
 			{"type": "link", "name": "code", "target": "https://github.com/dcharata/StyLit"},
 			{"type": "link", "name": "video", "target": "https://youtu.be/4gsjpk9nDbg"},
 			{"type": "link", "name": "presentation", "target": "https://docs.google.com/presentation/d/1gga9FxRm0Sq73Pqfpx4WlOIm1h3vRMqti0-B8NzUido/edit?usp=sharing"}
+		]
+	},
+
+	{
+		"id": "path-tracer",
+		"title": "Monte Carlo Path Tracer in C++",
+		"authors": ["2020"],
+		"venue": "",
+		"date": "2020-04-01",
+		"links" : [
+			{"type": "link", "name": "code", "target": "https://github.com/vikasTmz/Path_Tracer"}
+		]
+	},
+
+	{
+		"id": "geom-process",
+		"title": "Geometry Processing in C++",
+		"authors": ["2020"],
+		"venue": "Mesh operations like​ Subdivisions, Simplification and Remeshing ​written in C++.",
+		"date": "2020-03-01",
+		"links" : [
+			{"type": "link", "name": "code", "target": "https://github.com/vikasTmz/Geometry_Processing"}
+		]
+	},
+
+	{
+		"id": "fem",
+		"title": "Animating deformable solid objects using the Finite Element Method",
+		"authors": ["2020"],
+		"venue": "",
+		"date": "2020-02-01",
+		"links" : [
+		]
+	},
+
+	{
+		"id": "depth",
+		"title": "Generative models for depth estimation from structured light data",
+		"authors": ["2019"],
+		"venue": "",
+		"date": "2019-02-01",
+		"links" : [
 		]
 	}
 
