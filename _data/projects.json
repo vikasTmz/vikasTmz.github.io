@@ -3,17 +3,17 @@
 		"id": "relight-faces",
 		"title": "Estimating 3D geometry and reflectance profile of faces from an image",
 		"authors": ["2020"],
-		"venue": "Ongoing summer project.",
+		"venue": "Ongoing project.",
 		"date": "2020-08-01",
-		"links" : []
+		"links" : [{"type": "link", "name": "Illustration", "target": "https://vikastmz.github.io/img/pubthumbs/relight-faces.png"}]
 	},
 	{
 		"id": "texturesynth",
-		"title": "Learning texture and shape representations of 3d meshes for texture synthesis",
+		"title": "Learning continuous texture representations of 3D meshes for texture synthesis",
 		"authors": ["2020"],
-		"venue": "Ongoing summer project.",
+		"venue": "Ongoing project.",
 		"date": "2020-07-01",
-		"links" : []
+		"links" : [{"type": "link", "name": "Illustration", "target": "https://vikastmz.github.io/img/pubthumbs/texturesynth.png"}]
 	},
 
 	{
