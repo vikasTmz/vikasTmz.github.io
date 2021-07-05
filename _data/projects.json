@@ -1,19 +1,27 @@
 [
 	{
 		"id": "relight-faces",
-		"title": "Estimating 3D geometry and reflectance profile of faces from an image",
-		"authors": ["2020"],
-		"venue": "Ongoing project.",
-		"date": "2020-08-01",
-		"links" : [{"type": "link", "name": "Illustration", "target": "https://vikastmz.github.io/img/pubthumbs/relight-faces.png"}]
+		"title": "Learning Physically-based Material and Lighting Decompositions for Face Editing",
+		"authors": ["2021"],
+		"venue": "AICC @ CVPR 2021",
+		"date": "2021-06-01",
+		"links" : [{"type": "link", "name": "Paper", "target": "https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view"}]
 	},
 	{
 		"id": "texturesynth",
-		"title": "Learning continuous texture representations of 3D meshes for texture synthesis",
-		"authors": ["2020"],
+		"title": "Neural Texture Generation : Learning continuous texture representations of 3D meshes for texture synthesis",
+		"authors": ["2021"],
 		"venue": "Ongoing project.",
-		"date": "2020-07-01",
+		"date": "2021-01-01",
 		"links" : [{"type": "link", "name": "Illustration", "target": "https://vikastmz.github.io/img/pubthumbs/texturesynth.png"}]
+	},
+	{
+		"id": "shapefromtracing",
+		"title": "Shape from Tracing: Towards Reconstructing 3D Object Geometry and SVBRDF Material from Images via Differentiable Path Tracing",
+		"authors": ["2020"],
+		"venue": "3DV 2020",
+		"date": "2020-08-01",
+		"links" : [{"type": "link", "name": "Website", "target": "http://visual.cs.brown.edu/projects/shapefromtracing-webpage/"}]
 	},
 
 	{
