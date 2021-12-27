@@ -20,16 +20,14 @@ var man  = [
 
 var aboutme = [
   '   Hi, I\'m Vikas Thamizharasan and this is my personal website.',
-  '   I am currently pursuing a Masters degree in Computer Science at Brown University.',
+  '   I am currently a Master\'s student at Brown University where I perform research',
+  '   in the area of visual computing.',
   ' ',
-  '   My research interests lie in the intersection of Computer Vision, Computer Graphics',
-  '   and Deep Learning.',
-  ' ',
-  '   I am passionate about building intelligent machines that can reason and understand ',
-  '   the natural world and create products that work, introduces novelty, are built on ',
-  '   top of state of the art techniques (for some people this may be indistinguishable ',
-  '   from magic) and aids artists and novice users in their creative endevaours (primarily ',
-  '   in the visual domain).',
+  '   My research vision is to build intelligent machines that aid artists and novice',
+  '   users in their creative endeavors. To achieve this my work intertwines established',
+  '   approaches from computer vision and graphics with deep learning machinery to solve',
+  '   problems in image-based 3D reconstruction and editing, 3D shape and texture synthesis,',
+  '   and artistic control of generative models.',
   ' ',
   // ' '
   // '   Outside academics, I Art, Sculpting, Drumming, Cooking, Bouldering, Anthropology, Football, MMA'

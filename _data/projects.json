@@ -3,17 +3,20 @@
 		"id": "relight-faces",
 		"title": "Learning Physically-based Material and Lighting Decompositions for Face Editing",
 		"authors": ["2021"],
-		"venue": "AICC @ CVPR 2021",
+		"venue": "AICC @ CVPR 2021 & CVMJ'22",
 		"date": "2021-06-01",
-		"links" : [{"type": "link", "name": "Paper", "target": "https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view"}]
+		"links" : [
+				{"type": "link", "name": "Short Paper", "target": "https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view"},
+				{"type": "link", "name": "Full Paper", "target": "https://vikastmz.github.io/papers/relight.pdf"},
+			]
 	},
 	{
 		"id": "texturesynth",
-		"title": "Neural Texture Generation : Learning continuous texture representations of 3D meshes for texture synthesis",
+		"title": "Improving Image-based Generation of Implicit Texture Fields for 3D Objects",
 		"authors": ["2021"],
-		"venue": "Ongoing project.",
-		"date": "2021-01-01",
-		"links" : [{"type": "link", "name": "Illustration", "target": "https://vikastmz.github.io/img/pubthumbs/texturesynth.png"}]
+		"venue": "Under review",
+		"date": "2021-11-15",
+		"links" : [{"type": "link", "name": "Paper", "target": "https://vikastmz.github.io/papers/texturefields.pdf"}]
 	},
 	{
 		"id": "shapefromtracing",
@@ -71,9 +74,9 @@
 
 	{
 		"id": "depth",
-		"title": "Generative models for depth estimation from structured light data",
+		"title": "Face Attribute Analysis from Structured Light: An End-to-End Approach",
 		"authors": ["2019"],
-		"venue": "",
+		"venue": "Multimedia Tools and Applications",
 		"date": "2019-02-01",
 		"links" : [
 		]
