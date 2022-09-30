@@ -20,14 +20,20 @@ var man  = [
 
 var aboutme = [
   '   Hi, I\'m Vikas Thamizharasan and this is my personal website.',
-  '   I am currently a Master\'s student at Brown University where I perform research',
-  '   in the area of visual computing.',
+  ' ',
+  '   I am currently a first year Ph.D. student in the Visual Computing lab',
+  '   at UMass Amherst currently advised by Prof. Evangelos Kalogerakis.',
+  ' ',
+  '   I completed my Master\'s at Brown University where I performed research in the',
+  '   areas of differentiable rendering, physically-based intrinsic decomposition,',
+  '   and neural texture representations.',
+  '   I was fortunate to be advised by Prof. Daniel Ritchie and Prof. James Tompkin.',
   ' ',
   '   My research vision is to build intelligent machines that aid artists and novice',
   '   users in their creative endeavors. To achieve this my work intertwines established',
   '   approaches from computer vision and graphics with deep learning machinery to solve',
-  '   problems in image-based 3D reconstruction and editing, 3D shape and texture synthesis,',
-  '   and artistic control of generative models.',
+  '   problems in image-based 3D reconstruction and editing, 3D shape and texture ',
+  '   synthesis, and artistic control of generative models.',
   ' ',
   // ' '
   // '   Outside academics, I Art, Sculpting, Drumming, Cooking, Bouldering, Anthropology, Football, MMA'
