@@ -4,7 +4,7 @@
 		"title": "Learning Physically-based Material and Lighting Decompositions for Face Editing",
 		"authors": ["2021"],
 		"venue": "AICC @ CVPR 2021 & CVMJ'22",
-		"date": "2021-06-01",
+		"date": "2021-10-01",
 		"links" : [
 				{"type": "link", "name": "Short Paper", "target": "https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view"},
 				{"type": "link", "name": "Full Paper", "target": "https://vikastmz.github.io/papers/relight.pdf"},
@@ -25,6 +25,17 @@
 		"venue": "3DV 2020",
 		"date": "2020-08-01",
 		"links" : [{"type": "link", "name": "Website", "target": "http://visual.cs.brown.edu/projects/shapefromtracing-webpage/"}]
+	},
+
+	{
+		"id": "nonlinear3dmm",
+		"title": "Non-Linear 3D Morphable Models",
+		"authors": ["2021"],
+		"venue": "Deep Learning powered non-linear 3D Morphable Models",
+		"date": "2021-07-13",
+		"links" : [
+			{"type": "link", "name": "code", "target": "https://github.com/vikasTmz/Non-Linear_3DMM"}
+		]
 	},
 
 	{
