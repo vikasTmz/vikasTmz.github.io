@@ -1,10 +1,20 @@
 [
 	{
+		"id": "fontsynth",
+		"title": "VecFusion: Vector Font Generation with Diffusion",
+		"authors": ["2023"],
+		"venue": "under review",
+		"date": "2023-12-16",
+		"links" : [
+				{"type": "link", "name": "Paper", "target": "https://arxiv.org/abs/2312.10540"},
+			]
+	},
+	{
 		"id": "relight-faces",
 		"title": "Learning Physically-based Material and Lighting Decompositions for Face Editing",
 		"authors": ["2021"],
 		"venue": "AICC @ CVPR 2021 & CVMJ'22",
-		"date": "2021-10-01",
+		"date": "2022-3-01",
 		"links" : [
 				{"type": "link", "name": "Short Paper", "target": "https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view"},
 				{"type": "link", "name": "Full Paper", "target": "https://vikastmz.github.io/papers/relight.pdf"},
@@ -14,7 +24,7 @@
 		"id": "texturesynth",
 		"title": "Improving Image-based Generation of Implicit Texture Fields for 3D Objects",
 		"authors": ["2021"],
-		"venue": "Under review",
+		"venue": "",
 		"date": "2021-11-15",
 		"links" : [{"type": "link", "name": "Paper", "target": "https://vikastmz.github.io/papers/texturefields.pdf"}]
 	},
