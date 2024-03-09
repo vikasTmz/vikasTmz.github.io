@@ -19,12 +19,12 @@ var man  = [
 ];
 
 var aboutme = [
-  '   Hi, I\'m Vikas Thamizharasan and this is my personal website.',
+  '   Hi, I\'m Vikas Thamizharasan.',
   ' ',
-  '   I am currently a first year Ph.D. student in the Visual Computing lab',
-  '   at UMass Amherst currently advised by Prof. Evangelos Kalogerakis.',
+  '   I am a Ph.D. student in the Visual Computing lab at',
+  '   UMass Amherst, advised by Prof. Evangelos Kalogerakis.',
   ' ',
-  '   I completed my Master\'s at Brown University where I performed research in the',
+  '   I completed my Master\'s at Brown University, where I performed research in the',
   '   areas of differentiable rendering, physically-based intrinsic decomposition,',
   '   and neural texture representations.',
   '   I was fortunate to be advised by Prof. Daniel Ritchie and Prof. James Tompkin.',

@@ -1,9 +1,17 @@
 [
 	{
+		"id": "nivel",
+		"title": "NIVeL: Neural Implicit Vector Layers for Text-to-Vector Generation",
+		"authors": ["Vikas Thamizharasan, Difan Liu, Matthew Fisher, Nanxuan Zhao, Evangelos Kalogerakis, Michal Lukáč"],
+		"venue": "CVPR 2024",
+		"date": "2024-02-02",
+		"links" : []
+	},
+	{
 		"id": "fontsynth",
 		"title": "VecFusion: Vector Font Generation with Diffusion",
-		"authors": ["2023"],
-		"venue": "arxiv",
+		"authors": ["Vikas Thamizharasan*, Difan Liu*, Shantanu Agarwal, Matthew Fisher, Michael Gharbi, Oliver Wang, Alec Jacobson, Evangelos Kalogerakis"],
+		"venue": "CVPR 2024",
 		"date": "2023-12-16",
 		"links" : [
 				{"type": "link", "name": "Paper", "target": "https://arxiv.org/abs/2312.10540"},
@@ -12,18 +20,18 @@
 	{
 		"id": "relight-faces",
 		"title": "Learning Physically-based Material and Lighting Decompositions for Face Editing",
-		"authors": ["2021"],
+		"authors": ["Qian Zhang, Vikas Thamizharasan, James Tompkin"],
 		"venue": "AICC @ CVPR 2021 & CVMJ'22",
 		"date": "2022-3-01",
 		"links" : [
 				{"type": "link", "name": "Short Paper", "target": "https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view"},
-				{"type": "link", "name": "Full Paper", "target": "https://vikastmz.github.io/papers/relight.pdf"},
+				{"type": "link", "name": "Full Paper", "target": "https://link.springer.com/article/10.1007/s41095-022-0309-1"},
 			]
 	},
 	{
 		"id": "texturesynth",
 		"title": "Improving Image-based Generation of Implicit Texture Fields for 3D Objects",
-		"authors": ["2021"],
+		"authors": ["Vikas Thamizharasan, Joshua Pierce, Daniel Ritchie"],
 		"venue": "",
 		"date": "2021-11-15",
 		"links" : [{"type": "link", "name": "Paper", "target": "https://vikastmz.github.io/papers/texturefields.pdf"}]
@@ -31,7 +39,7 @@
 	{
 		"id": "shapefromtracing",
 		"title": "Shape from Tracing: Towards Reconstructing 3D Object Geometry and SVBRDF Material from Images via Differentiable Path Tracing",
-		"authors": ["2020"],
+		"authors": ["Purvi Goel, Loudon Cohen, James Guesman, Vikas Thamizharasan, James Tompkin, Daniel Ritchie"],
 		"venue": "3DV 2020",
 		"date": "2020-08-01",
 		"links" : [{"type": "link", "name": "Website", "target": "http://visual.cs.brown.edu/projects/shapefromtracing-webpage/"}]
@@ -40,11 +48,11 @@
 	{
 		"id": "nonlinear3dmm",
 		"title": "Non-Linear 3D Morphable Models",
-		"authors": ["2021"],
+		"authors": ["Vikas Thamizharasan"],
 		"venue": "Deep Learning powered non-linear 3D Morphable Models",
 		"date": "2021-07-13",
 		"links" : [
-			{"type": "link", "name": "code", "target": "https://github.com/vikasTmz/Non-Linear_3DMM"}
+			{"type": "link", "name": "Website", "target": "https://github.com/vikasTmz/Non-Linear_3DMM"}
 		]
 	},
 
@@ -96,10 +104,11 @@
 	{
 		"id": "depth",
 		"title": "Face Attribute Analysis from Structured Light: An End-to-End Approach",
-		"authors": ["2019"],
+		"authors": ["Vikas Thamizharasan, Abhijit Das, Daniele Battaglino, Francois Bremond, Antitza Dantcheva "],
 		"venue": "Multimedia Tools and Applications",
 		"date": "2019-02-01",
 		"links" : [
+			{"type": "link", "name": "Paper", "target": "https://link.springer.com/article/10.1007/s11042-022-13224-0"}
 		]
 	},
 
