@@ -21,8 +21,8 @@ var man  = [
 var aboutme = [
   '   Hi, I\'m Vikas Thamizharasan.',
   ' ',
-  '   I am a Ph.D. student in the Visual Computing lab at',
-  '   UMass Amherst, advised by Prof. Evangelos Kalogerakis.',
+  '   I am a Ph.D. student in the Visual Computing lab at UMass Amherst,',
+  '   advised by Prof. Evangelos Kalogerakis.',
   ' ',
   '   I completed my Master\'s at Brown University, where I performed research in the',
   '   areas of differentiable rendering, physically-based intrinsic decomposition,',
