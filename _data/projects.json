@@ -1,5 +1,16 @@
 [
 	{
+		"id": "gem3d",
+		"title": "GEM3D: GEnerative Medial Abstractions for 3D Shape Synthesis",
+		"authors": ["Dmitry Petrov, Pradyumn Goyal, Vikas Thamizharasan, Vladimir G. Kim, Matheus Gadelha, Melinos Averkiou, Siddhartha Chaudhuri, Evangelos Kalogerakis"],
+		"venue": "SIGGRAPH 2024",
+		"date": "2023-12-01",
+		"links" : [
+				{"type": "link", "name": "Paper", "target": "https://arxiv.org/abs/2402.16994"},
+				{"type": "link", "name": "Website", "target": "https://lodurality.github.io/GEM3D/"},
+		]
+	},
+	{
 		"id": "nivel",
 		"title": "NIVeL: Neural Implicit Vector Layers for Text-to-Vector Generation",
 		"authors": ["Vikas Thamizharasan, Difan Liu, Matthew Fisher, Nanxuan Zhao, Evangelos Kalogerakis, Michal Lukáč"],
@@ -11,7 +22,7 @@
 		"id": "fontsynth",
 		"title": "VecFusion: Vector Font Generation with Diffusion",
 		"authors": ["Vikas Thamizharasan*, Difan Liu*, Shantanu Agarwal, Matthew Fisher, Michael Gharbi, Oliver Wang, Alec Jacobson, Evangelos Kalogerakis"],
-		"venue": "CVPR 2024",
+		"venue": "CVPR 2024 (highlight)",
 		"date": "2023-12-16",
 		"links" : [
 				{"type": "link", "name": "Paper", "target": "https://arxiv.org/abs/2312.10540"},
@@ -116,7 +127,7 @@
 		"id": "3sweep",
 		"title": "3D Object Reconstruction and Manipulation with a single image",
 		"authors": ["2017"],
-		"venue": "Reconstruct 3D models from a single image using geometric primitives to infer geosemantic constraints and model-to-image alignment using constrained optimization.",
+		"venue": "",
 		"date": "2017-02-01",
 		"links" : [
 			{"type": "link", "name": "code", "target": "https://github.com/mukulhase/3-Sweep-Library/"}
