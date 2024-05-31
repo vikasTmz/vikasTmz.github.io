@@ -1,7 +1,7 @@
-body {
+/*body {
   font-family: 'Noto Sans', sans-serif;
 }
-
+*/
 
 .footer .icon-link {
     font-size: 25px;
@@ -157,3 +157,7 @@ body {
 }
 
 */
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}

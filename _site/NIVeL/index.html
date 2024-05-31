@@ -1,198 +1,141 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<title>NIVeL</title>
-<style>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-p {
-  width: 960px;
-}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-.curve, .line {
-  fill: none;
-  stroke-width: 0.1px;
-}
-.curve {
-  stroke: red;
-  stroke-width: 10px;
-}
-.control {
-  fill: #ccc;
-  stroke: #000;
-  stroke-width: .5px;
-	cursor: move;
-}
-.control.drag, .control:hover {
-	fill: #fe0;
-}
-.t, .controltext {
-  font-size: .6em;
-}
-svg {
-  display: inline-block;
-}
-</style>
+	<title>NIVeL (CVPR 2024)</title>
 
-<h1>Coming Soon...</h1>
-<div id="vis"></div>
-<script src="d3.min.js"></script>
-<script>
+	<link rel="stylesheet" href="css/fonts.css" type="text/css" charset="utf-8">
+	<link rel="stylesheet" href="css/normalize.css" type="text/css" charset="utf-8">
+	<link rel="stylesheet" href="css/main.css" type="text/css" charset="utf-8">
+	<link rel="stylesheet" href="css/jht.css" type="text/css" charset="utf-8">
+	<link rel="stylesheet" href="static/index.css">
 
-var w = 1000,
-    h = 400,
-    t = .5,
-    delta = .01,
-    padding = 10,
-    gap=0,
-    char_w = 300,
-    char_h = 400,
-    bezier = {},
-    n = 7,
-    stroke = d3.scale.category20(),
-	line = d3.svg.line().x(x).y(y),
-    orders = d3.range(n + 1,n + 2);
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-23628422-1']);
+		_gaq.push(['_trackPageview']);
 
-var points = [
-  {x: char_w, y: char_h}, // p0
-  {x: 0, y: char_h},   // p1
-  {x: 0,y: 0},  // p2
-  {x: char_w, y: 0},  // p3
-  {x: 1 * gap + 1 * char_w,y: 0},  // p2
-  {x: 1 * gap + 2 * char_w, y: 0}, 
-  {x: 1 * gap + 2 * char_w, y: char_h}, // p0
-  {x: 1 * gap + 1 * char_w, y: char_h},   // p1
-];
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
 
-var vis = d3.select("#vis").selectAll("svg")
-    .data(orders)
-  .enter().append("svg")
-    .attr("width", w + 2 * padding)
-    .attr("height", h + 2 * padding)
-  .append("g")
-    .attr("transform", "translate(" + padding + "," + padding + ")");
+<body style="max-width: none;">
+	<div class="right-column" style="max-width: 45em; margin: auto;; margin-top: 3em">
 
-update();
+		<h1><b>NIVeL</b>: Neural Implicit Vector Layers for Text-to-Vector Generation</h1>
+		<table class="authors">
+			<tr>
+			  <td><a href="https://vikastmz.github.io/">Vikas Thamizharasan</a><sup>1,2</sup></td>
+			  <td><a href="https://difanliu.github.io/">Difan Liu</a><sup>2</sup></td>
+			  <td><a href="https://techmatt.github.io/">Matthew Fisher</a><sup>2</sup></td>
+			</tr>
+			<tr>
+				<td><a href="http://nxzhao.com/">Nanxuan Zhao</a><sup>2</sup></td>
+				<td><a href="https://kalo-ai.github.io/">Evangelos Kalogerakis</a><sup>1</sup> </td>
+				<td><a href="https://research.adobe.com/person/michal-lukac/">Michal Lukáč</a><sup>2</sup></td>
+			  </tr>
+		  </table>
+        <!-- <p class="phototext" style="max-width: 45em;"> -->
+		<!-- </p> -->
+		<table class="affiliations">
+			<tr>
+				<td>
+					<sup>1</sup>University of Massachusetts Amherst
+				</td>
+				<td>
+					<sup>2</sup>Adobe Research
+				</td>
+			</tr>	
+		</table>
+		
+		<table style="min-width: 625px;	margin-top: 3em; text-align: center;">
+		<tbody>
+		<tr>
+			<td>
+				<a href="https://arxiv.org/abs/2405.15217"><img class="teaser_small" src="logos/arxiv-logo.svg" width="80px"> <br> Paper</a>
+			</td>
+			<td>
+				<a href="./"><img class="teaser_small" src="logos/github-mark-todo.svg" width="60px"> <br> Code</a>
+			</td>
+		</tr>
+		</tbody>
+		</table>
 
-vis.selectAll("circle.control")
-    .data(function(d) { return points.slice(0, d) })
-  .enter().append("circle")
-    .attr("class", "control")
-    .attr("r", 7)
-    .attr("cx", x)
-    .attr("cy", y)
-    .call(d3.behavior.drag()
-      .on("dragstart", function(d) {
-        this.__origin__ = [d.x, d.y];
-				d3.select(this).classed("drag", true);
-      })
-      .on("drag", function(d) {
-        d.x = Math.min(w, Math.max(0, this.__origin__[0] += d3.event.dx));
-        d.y = Math.min(h, Math.max(0, this.__origin__[1] += d3.event.dy));
-        bezier = {};
-        update();
-        vis.selectAll("circle.control")
-          .attr("cx", x)
-          .attr("cy", y);
-      })
-      .on("dragend", function() {
-        delete this.__origin__;
-				d3.select(this).classed("drag", false);
-      }));
+		<!-- <p>
+		<img src="teaser_small.png" class="teaser-image" width="480px">
+		</p> -->
+		
+		<h2>Presentation</h2>
+		<!-- <p>
+			image-
+			space supervision provides no accurate regularization signal
+			on the geometry, and these optimization approaches thus
+			often result in degenerate geometries that are difficult for
+			users to interpret or edit
 
-vis.append("text")
-  .attr("class", "t")
-  .attr("x", w / 2)
-  .attr("y", h)
-  .attr("text-anchor", "middle");
+			Vector graphics representations like Bézier curves are 
+			The success of denoising diffusion models in representing rich data distributions over 2D raster images has prompted research on extending
+			 them to other data representations, such as vector graphics. Unfortunately due to their variable structure and scarcity of vector
+			  training data, directly applying diffusion models on this domain remains a challenging problem. Using workarounds like optimization 
+			  via Score Distillation Sampling (SDS) is also fraught with difficulty, as vector representations are non trivial to directly optimize 
+			  and tend to result in implausible geometries such as redundant or self-intersecting shapes. NIVeL addresses these challenges by reinterpreting
+			   the problem on an alternative, intermediate domain which preserves the desirable properties of vector graphics -- mainly sparsity of 
+			   representation and resolution-independence. This alternative domain is based on neural implicit fields expressed in a set of decomposable,
+			    editable layers. Based on our experiments, NIVeL produces text-to-vector graphics results of significantly better quality than the state-of-the-art. 
+		</p> -->
 
-vis.selectAll("text.controltext")
-    .data(function(d) { return points.slice(0, d); })
-  .enter().append("text")
-    .attr("class", "controltext")
-    .attr("dx", "10px")
-    .attr("dy", ".4em")
-    .text(function(d, i) { return "P" + i });
+        		
+		<video class="teaser-image" width="720px" controls poster="data/video_thumbnail.png">
+			<source src="data/5_min_video.mp4" type="video/mp4">
+		</video>
+		
+		<!-- <iframe width="420" height="315"
+		src="https://youtu.be/bQWsQNl4U8g">
+		</iframe>  -->
 
-var last = 0;
-d3.timer(function(elapsed) {
-  t = (t + (elapsed - last) / 5000) % 1;
-  last = elapsed;
-  update();
-});
-
-function update() {
-  var interpolation = vis.selectAll("g")
-      .data(function(d) { return getLevels(d, t); });
-  interpolation.enter().append("g")
-      .style("fill", colour)
-      .style("stroke", colour);
-
-  var circle = interpolation.selectAll("circle")
-      .data(Object);
-  circle.enter().append("circle")
-      .attr("r", 4);
-  circle
-      .attr("cx", x)
-      .attr("cy", y);
-
-  var path = interpolation.selectAll("path")
-      .data(function(d) { return [d]; });
-  path.enter().append("path")
-      .attr("class", "line")
-      .attr("d", line);
-  path.attr("d", line);
-
-  var curve = vis.selectAll("path.curve")
-      .data(getCurve);
-  curve.enter().append("path")
-      .attr("class", "curve");
-  curve.attr("d", line);
-
-  vis.selectAll("text.controltext")
-      .attr("x", x)
-      .attr("y", y);
-  vis.selectAll("text.t")
-      .text("t=" + t.toFixed(2));
-}
-
-function interpolate(d, p) {
-  if (arguments.length < 2) p = t;
-  var r = [];
-  for (var i=1; i<d.length; i++) {
-    var d0 = d[i-1], d1 = d[i];
-    r.push({x: d0.x + (d1.x - d0.x) * p, y: d0.y + (d1.y - d0.y) * p});
-  }
-  return r;
-}
-
-function getLevels(d, t_) {
-  if (arguments.length < 2) t_ = t;
-  var x = [points.slice(0, d)];
-  for (var i=1; i<d; i++) {
-    x.push(interpolate(x[x.length-1], t_));
-  }
-  return x;
-}
-
-function getCurve(d) {
-  var curve = bezier[d];
-  if (!curve) {
-    curve = bezier[d] = [];
-    for (var t_=0; t_<=1; t_+=delta) {
-      var x = getLevels(d, t_);
-      curve.push(x[x.length-1][0]);
-    }
-  }
-  return [curve.slice(0, t / delta + 1)];
-}
-
-function colour(d, i) {
-  stroke(-i);
-  return d.length > 1 ? stroke(i) : "red";
-}
-
-function x(d) { return d.x; }
-function y(d) { return d.y; }
-</script>
+		<p>
+		<a href="data/5_min_video.mp4">[Download Video - 5 mins (MP4)]</a> &nbsp; &nbsp; | &nbsp; &nbsp;<a href="https://youtu.be/bQWsQNl4U8g">[Watch on Youtube]</a>
+        </p>
 
 
-<p>Source <a href="https://www.jasondavies.com/">Jason Davies</a>.
+        
+        
+		<h2>Bibtex</h2>
+		<pre style="max-width: 700px; margin: auto;">@inproceedings{thamizharasan2024nivel,<br>    author    = "Vikas Thamizharasan and Difan Liu and Matthew Fisher and Nanxuan Zhao and Evangelos Kalogerakis and Michal Lukac",<br>    title     = "NIVeL: Neural Implicit Vector Layers for Text-to-Vector Generation",<br>    booktitle = "Conference on Computer Vision and Pattern Recognition (CVPR)",<br>    year      = "2024",<br>}</pre>
+
+		</br>
+		<table style="min-width: 625px; margin: auto; text-align: center;">
+			<tbody>
+				<tr>
+					<td>
+						<img src="logos/UMass_Seal_Medium_PMS_202.png" width=120px>
+                    </td>
+                    <td>
+						<img src="logos/Adobe_Corporate_logo.svg" width=150px>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<!-- Little bit of space -->
+		<p></p>
+		
+		<!-- <script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-36966695-10', 'auto');
+		ga('send', 'pageview');
+
+		</script> -->
+	</div>
+</body>

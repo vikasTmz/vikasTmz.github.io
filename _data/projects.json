@@ -16,7 +16,10 @@
 		"authors": ["Vikas Thamizharasan, Difan Liu, Matthew Fisher, Nanxuan Zhao, Evangelos Kalogerakis, Michal Lukáč"],
 		"venue": "CVPR 2024",
 		"date": "2024-02-02",
-		"links" : []
+		"links" : [
+				{"type": "link", "name": "Paper", "target": "https://arxiv.org/abs/2405.15217"},
+				{"type": "link", "name": "Website", "target": "https://vikastmz.github.io/NIVeL/"},
+		]
 	},
 	{
 		"id": "fontsynth",
@@ -26,6 +29,7 @@
 		"date": "2023-12-16",
 		"links" : [
 				{"type": "link", "name": "Paper", "target": "https://arxiv.org/abs/2312.10540"},
+				{"type": "link", "name": "Website", "target": "https://vikastmz.github.io/VecFusion/"},
 			]
 	},
 	{
