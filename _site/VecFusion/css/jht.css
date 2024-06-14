@@ -52,7 +52,7 @@ th, td {
 }
 
 .authors {
-    font-size: 1.5em;
+    font-size: 1.15em;
 	text-align: justify;
 	-webkit-hyphens: auto;
     -moz-hyphens: auto;
@@ -61,7 +61,7 @@ th, td {
 }
 
 .affiliations {
-    font-size: 1em;
+    font-size: 0.96em;
 	text-align: justify;
 	-webkit-hyphens: auto;
     -moz-hyphens: auto;
