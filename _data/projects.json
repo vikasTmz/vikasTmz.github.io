@@ -1,151 +1,265 @@
 [
 	{
+		"id": "msd",
+		"title": "Mean-Shift Distillation for Diffusion Mode Seeking",
+		"authors": [
+			"Vikas Thamizharasan, Nikitas Chatzis, Iliyan Georgiev, Matthew Fisher, Difan Liu, Nanxuan Zhao, Evangelos Kalogerakis, Michal Lukáč"
+		],
+		"venue": "under review",
+		"date": "2025-01-30",
+		"links": [
+			{
+				"type": "link",
+				"name": "Paper",
+				"target": "https://vikastmz.github.io/MSD/paper.pdf"
+			},
+			{
+				"type": "link",
+				"name": "Website",
+				"target": "https://vikastmz.github.io/MSD/"
+			},
+		]
+	},
+	{
 		"id": "gem3d",
 		"title": "GEM3D: GEnerative Medial Abstractions for 3D Shape Synthesis",
-		"authors": ["Dmitry Petrov, Pradyumn Goyal, Vikas Thamizharasan, Vladimir G. Kim, Matheus Gadelha, Melinos Averkiou, Siddhartha Chaudhuri, Evangelos Kalogerakis"],
+		"authors": [
+			"Dmitry Petrov, Pradyumn Goyal, Vikas Thamizharasan, Vladimir G. Kim, Matheus Gadelha, Melinos Averkiou, Siddhartha Chaudhuri, Evangelos Kalogerakis"
+		],
 		"venue": "SIGGRAPH 2024",
 		"date": "2023-12-01",
-		"links" : [
-				{"type": "link", "name": "Paper", "target": "https://arxiv.org/abs/2402.16994"},
-				{"type": "link", "name": "Website", "target": "https://lodurality.github.io/GEM3D/"},
+		"links": [
+			{
+				"type": "link",
+				"name": "Paper",
+				"target": "https://arxiv.org/abs/2402.16994"
+			},
+			{
+				"type": "link",
+				"name": "Website",
+				"target": "https://lodurality.github.io/GEM3D/"
+			},
 		]
 	},
 	{
 		"id": "nivel",
 		"title": "NIVeL: Neural Implicit Vector Layers for Text-to-Vector Generation",
-		"authors": ["Vikas Thamizharasan, Difan Liu, Matthew Fisher, Nanxuan Zhao, Evangelos Kalogerakis, Michal Lukáč"],
+		"authors": [
+			"Vikas Thamizharasan, Difan Liu, Matthew Fisher, Nanxuan Zhao, Evangelos Kalogerakis, Michal Lukáč"
+		],
 		"venue": "CVPR 2024",
 		"date": "2024-02-02",
-		"links" : [
-				{"type": "link", "name": "Paper", "target": "https://arxiv.org/abs/2405.15217"},
-				{"type": "link", "name": "Website", "target": "https://vikastmz.github.io/NIVeL/"},
+		"links": [
+			{
+				"type": "link",
+				"name": "Paper",
+				"target": "https://arxiv.org/abs/2405.15217"
+			},
+			{
+				"type": "link",
+				"name": "Website",
+				"target": "https://vikastmz.github.io/NIVeL/"
+			},
 		]
 	},
 	{
 		"id": "fontsynth",
 		"title": "VecFusion: Vector Font Generation with Diffusion",
-		"authors": ["Vikas Thamizharasan*, Difan Liu*, Shantanu Agarwal, Matthew Fisher, Michael Gharbi, Oliver Wang, Alec Jacobson, Evangelos Kalogerakis"],
+		"authors": [
+			"Vikas Thamizharasan*, Difan Liu*, Shantanu Agarwal, Matthew Fisher, Michael Gharbi, Oliver Wang, Alec Jacobson, Evangelos Kalogerakis"
+		],
 		"venue": "CVPR 2024 (highlight)",
 		"date": "2023-12-16",
-		"links" : [
-				{"type": "link", "name": "Paper", "target": "https://arxiv.org/abs/2312.10540"},
-				{"type": "link", "name": "Website", "target": "https://vikastmz.github.io/VecFusion/"},
-			]
+		"links": [
+			{
+				"type": "link",
+				"name": "Paper",
+				"target": "https://arxiv.org/abs/2312.10540"
+			},
+			{
+				"type": "link",
+				"name": "Website",
+				"target": "https://vikastmz.github.io/VecFusion/"
+			},
+		]
 	},
 	{
 		"id": "relight-faces",
 		"title": "Learning Physically-based Material and Lighting Decompositions for Face Editing",
-		"authors": ["Qian Zhang, Vikas Thamizharasan, James Tompkin"],
+		"authors": [
+			"Qian Zhang, Vikas Thamizharasan, James Tompkin"
+		],
 		"venue": "AICC @ CVPR 2021 & CVMJ'22",
 		"date": "2022-3-01",
-		"links" : [
-				{"type": "link", "name": "Short Paper", "target": "https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view"},
-				{"type": "link", "name": "Full Paper", "target": "https://link.springer.com/article/10.1007/s41095-022-0309-1"},
-			]
+		"links": [
+			{
+				"type": "link",
+				"name": "Short Paper",
+				"target": "https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view"
+			},
+			{
+				"type": "link",
+				"name": "Full Paper",
+				"target": "https://link.springer.com/article/10.1007/s41095-022-0309-1"
+			},
+		]
 	},
 	{
 		"id": "texturesynth",
 		"title": "Improving Image-based Generation of Implicit Texture Fields for 3D Objects",
-		"authors": ["Vikas Thamizharasan, Joshua Pierce, Daniel Ritchie"],
+		"authors": [
+			"Vikas Thamizharasan, Joshua Pierce, Daniel Ritchie"
+		],
 		"venue": "",
 		"date": "2021-11-15",
-		"links" : [{"type": "link", "name": "Paper", "target": "https://vikastmz.github.io/papers/texturefields.pdf"}]
+		"links": [
+			{
+				"type": "link",
+				"name": "Paper",
+				"target": "https://vikastmz.github.io/papers/texturefields.pdf"
+			}
+		]
 	},
 	{
 		"id": "shapefromtracing",
 		"title": "Shape from Tracing: Towards Reconstructing 3D Object Geometry and SVBRDF Material from Images via Differentiable Path Tracing",
-		"authors": ["Purvi Goel, Loudon Cohen, James Guesman, Vikas Thamizharasan, James Tompkin, Daniel Ritchie"],
+		"authors": [
+			"Purvi Goel, Loudon Cohen, James Guesman, Vikas Thamizharasan, James Tompkin, Daniel Ritchie"
+		],
 		"venue": "3DV 2020",
 		"date": "2020-08-01",
-		"links" : [{"type": "link", "name": "Website", "target": "http://visual.cs.brown.edu/projects/shapefromtracing-webpage/"}]
+		"links": [
+			{
+				"type": "link",
+				"name": "Website",
+				"target": "http://visual.cs.brown.edu/projects/shapefromtracing-webpage/"
+			}
+		]
 	},
-
 	{
 		"id": "nonlinear3dmm",
 		"title": "Non-Linear 3D Morphable Models",
-		"authors": ["Vikas Thamizharasan"],
+		"authors": [
+			"Vikas Thamizharasan"
+		],
 		"venue": "Deep Learning powered non-linear 3D Morphable Models",
 		"date": "2021-07-13",
-		"links" : [
-			{"type": "link", "name": "Website", "target": "https://github.com/vikasTmz/Non-Linear_3DMM"}
+		"links": [
+			{
+				"type": "link",
+				"name": "Website",
+				"target": "https://github.com/vikasTmz/Non-Linear_3DMM"
+			}
 		]
 	},
-
 	{
 		"id": "stylelit",
 		"title": "Illumination-guided example-based stylization of 3D renderings",
-		"authors": ["2020"],
+		"authors": [
+			"2020"
+		],
 		"venue": "GPU implementation of StyLit by Jakub Fiser et al. SIGGRAPH ’16.",
 		"date": "2020-05-14",
-		"links" : [
-			{"type": "link", "name": "code", "target": "https://github.com/dcharata/StyLit"},
-			{"type": "link", "name": "video", "target": "https://youtu.be/4gsjpk9nDbg"},
-			{"type": "link", "name": "presentation", "target": "https://docs.google.com/presentation/d/1gga9FxRm0Sq73Pqfpx4WlOIm1h3vRMqti0-B8NzUido/edit?usp=sharing"}
+		"links": [
+			{
+				"type": "link",
+				"name": "code",
+				"target": "https://github.com/dcharata/StyLit"
+			},
+			{
+				"type": "link",
+				"name": "video",
+				"target": "https://youtu.be/4gsjpk9nDbg"
+			},
+			{
+				"type": "link",
+				"name": "presentation",
+				"target": "https://docs.google.com/presentation/d/1gga9FxRm0Sq73Pqfpx4WlOIm1h3vRMqti0-B8NzUido/edit?usp=sharing"
+			}
 		]
 	},
-
 	{
 		"id": "path-tracer",
 		"title": "Monte Carlo Path Tracer in C++",
-		"authors": ["2020"],
+		"authors": [
+			"2020"
+		],
 		"venue": "",
 		"date": "2020-04-01",
-		"links" : [
-			{"type": "link", "name": "code", "target": "https://github.com/vikasTmz/Path_Tracer"}
+		"links": [
+			{
+				"type": "link",
+				"name": "code",
+				"target": "https://github.com/vikasTmz/Path_Tracer"
+			}
 		]
 	},
-
 	{
 		"id": "geom-process",
 		"title": "Geometry Processing in C++",
-		"authors": ["2020"],
+		"authors": [
+			"2020"
+		],
 		"venue": "Mesh operations like​ Subdivisions, Simplification and Remeshing ​written in C++.",
 		"date": "2020-03-01",
-		"links" : [
-			{"type": "link", "name": "code", "target": "https://github.com/vikasTmz/Geometry_Processing"}
+		"links": [
+			{
+				"type": "link",
+				"name": "code",
+				"target": "https://github.com/vikasTmz/Geometry_Processing"
+			}
 		]
 	},
-
 	{
 		"id": "fem",
 		"title": "Animating deformable solid objects using the Finite Element Method",
-		"authors": ["2020"],
+		"authors": [
+			"2020"
+		],
 		"venue": "",
 		"date": "2020-02-01",
-		"links" : [
-		]
+		"links": []
 	},
-
 	{
 		"id": "depth",
 		"title": "Face Attribute Analysis from Structured Light: An End-to-End Approach",
-		"authors": ["Vikas Thamizharasan, Abhijit Das, Daniele Battaglino, Francois Bremond, Antitza Dantcheva "],
+		"authors": [
+			"Vikas Thamizharasan, Abhijit Das, Daniele Battaglino, Francois Bremond, Antitza Dantcheva "
+		],
 		"venue": "Multimedia Tools and Applications",
 		"date": "2019-02-01",
-		"links" : [
-			{"type": "link", "name": "Paper", "target": "https://link.springer.com/article/10.1007/s11042-022-13224-0"}
+		"links": [
+			{
+				"type": "link",
+				"name": "Paper",
+				"target": "https://link.springer.com/article/10.1007/s11042-022-13224-0"
+			}
 		]
 	},
-
 	{
 		"id": "3sweep",
 		"title": "3D Object Reconstruction and Manipulation with a single image",
-		"authors": ["2017"],
+		"authors": [
+			"2017"
+		],
 		"venue": "",
 		"date": "2017-02-01",
-		"links" : [
-			{"type": "link", "name": "code", "target": "https://github.com/mukulhase/3-Sweep-Library/"}
+		"links": [
+			{
+				"type": "link",
+				"name": "code",
+				"target": "https://github.com/mukulhase/3-Sweep-Library/"
+			}
 		]
 	},
-
 	{
 		"id": "wiki",
 		"title": "Search Engine for Wikipedia",
-		"authors": ["2017"],
+		"authors": [
+			"2017"
+		],
 		"venue": "",
 		"date": "2017-01-01",
-		"links" : [
-		]
+		"links": []
 	}
-
 ]

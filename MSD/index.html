@@ -1,0 +1,171 @@
+---
+redirect_from: MSD/
+---
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>MeanShiftDistillation</title>
+
+	<link rel="stylesheet" href="css/fonts.css" type="text/css" charset="utf-8">
+	<link rel="stylesheet" href="css/normalize.css" type="text/css" charset="utf-8">
+	<link rel="stylesheet" href="css/main.css" type="text/css" charset="utf-8">
+	<link rel="stylesheet" href="css/jht.css" type="text/css" charset="utf-8">
+	<link rel="stylesheet" href="static/index.css">
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-23628422-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function () {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+
+<body style="max-width: none;">
+	<div class="right-column" style="max-width: 45em; margin: auto;; margin-top: 3em">
+
+		<h1 style="text-align: center;"><b>Mean-Shift Distillation</b> for Diffusion Mode Seeking</h1>
+		<table class="authors">
+			<tr>
+				<td><a href="https://vikastmz.github.io/">Vikas Thamizharasan</a><sup>1,2</sup></td>
+				<td><a href="https://www.linkedin.com/in/nikitas-chatzis-795561274">Nikitas Chatzis</a><sup>3</sup></td>
+				<td><a href="https://iliyan.com/">Iliyan Georgiev</a><sup>2</sup></td>
+				<td><a href="https://techmatt.github.io/">Matthew Fisher</a><sup>2</sup></td>
+			</tr>
+			<tr>
+				<td><a href="https://difanliu.github.io/">Difan Liu</a><sup>2</sup></td>
+				<td><a href="http://nxzhao.com/">Nanxuan Zhao</a><sup>2</sup></td>
+				<td><a href="https://kalo-ai.github.io/">Evangelos Kalogerakis</a><sup>1,4</sup> </td>
+				<td><a href="https://research.adobe.com/person/michal-lukac/">Michal Lukáč</a><sup>2</sup></td>
+
+			</tr>
+		</table>
+		<!-- <p class="phototext" style="max-width: 45em;"> -->
+		<!-- </p> -->
+		<table class="affiliations">
+			<tr>
+				<td>
+					<sup>1</sup> University of Massachusetts Amherst
+				</td>
+				<td>
+					<sup>2</sup> Adobe Research
+				</td>
+				<!-- </tr>
+			<tr> -->
+				<td>
+					<sup>3</sup> NTUA
+				</td>
+				<td>
+					<sup>4</sup> TU Crete
+				</td>
+			</tr>
+		</table>
+
+		<table style="min-width: 625px;	margin-top: 3em; text-align: center;">
+			<tbody>
+				<tr>
+					<td>
+						<a href="https://vikastmz.github.io/MSD/paper.pdf"><img class="teaser_small"
+								src="logos/arxiv-logo.svg" width="80px"> <br> Paper</a>
+					</td>
+					<td>
+						<a href="./"><img class="teaser_small" src="logos/github-mark-todo.svg" width="60px"> <br>
+							Code</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h2>Summary</h2>
+
+		<p>
+			Score distillation sampling (SDS) (Poole et al., 2022; Wang et al., 2022) has emerged as a useful technique
+			for leveraging the priors learned by large-scale image models beyond 2D raster images. SDS provides an
+			optimization procedure to estimate the parameters of a differentiable image generator, such that the
+			rendered image is pushed towards a higher-probability region of a pre-trained prompt-conditioned image
+			diffusion model.
+
+			In this paper, we propose mean-shift distillation, a distribution-gradient proxy based on a well-known
+			mode-seeking technique. Furthermore, we show that:
+			(1) This proxy can be implemented easily, with minimal changes to the diffusion sampling procedure;
+			(2) It evaluates with less variance than SDS with improved mode alignment;
+			(3) It has superior behavior, converging to modes of the trained distribution with a clear termination
+			criterion.
+		</p>
+
+		<h3>Distillation in 2D; visualizing the pitfalls of SDS</h3>
+
+		<p>
+			To illustrate the pitfalls of SDS, we simulate it in 2D using a small denoising diffusion network. This
+			allows us to set ϑ = x ∈ R2 (where g becomes an identity map). We construct a fractal-like dataset as shown
+			by Karras et al. (2024), with analytic ground-truth probability density and score. This data distribution is
+			a mixture of highly anisotropic Gaussians, where most of the probability mass resides in narrow regions,
+			emulating the low intrinsic dimensionality of natural images (Roweis & Saul, 2000; Belkin & Niyogi, 2003).
+			For a baseline, we compare it with DDIM (Song et al., 2021a), a popular first-order sampling algorithm, with
+			classifier-free guidance (CFG) (Ho & Salimans, 2021).
+		</p>
+
+		<!-- <video class="teaser-image" width="720px" controls poster="data/video_thumbnail.png">
+			<source src="data/5_min_video.mp4" type="video/mp4">
+		</video> -->
+
+		<!-- <p>
+			<a href="data/">[Download Video - 5 mins (MP4)]</a> &nbsp; &nbsp; | &nbsp; &nbsp;<a href="">[Watch on
+				Youtube]</a>
+		</p> -->
+
+
+		<h2>Bibtex</h2>
+		<pre style="max-width: 700px; margin: auto;">
+			<!-- @InProceedings{,<br> author   
+				 = {Thamizharasan, Vikas, Kalogerakis, Evangelos},
+				 <br> title     = {},
+				 <br> booktitle = {},
+			<br> month     = {June},<br> year      = {2024},<br> pages     = {7943-7952}<br>} -->
+				</pre>
+		</br>
+		<table style="min-width: 625px; margin: auto; text-align: center;">
+			<tbody>
+				<tr>
+					<td>
+						<img src="logos/UMass_Seal_Medium_PMS_202.png" width=70px>
+					</td>
+					<td>
+						<img src="logos/Adobe_Corporate_logo.svg" width=100px>
+					</td>
+					<td>
+						<img src="logos/NTUA.png" width=100px>
+					</td>
+					<td>
+						<img src="logos/TUC_logo_color1.png" width=70px>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- Little bit of space -->
+		<h2></h2>
+		<p>The code of this website is heavily based on the template from <a
+				href="https://visual.cs.brown.edu/projects/shapefromtracing-webpage/">visual.cs.brown.edu</a>.</p>
+
+		<!-- <script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-36966695-10', 'auto');
+		ga('send', 'pageview');
+
+		</script> -->
+	</div>
+</body>
