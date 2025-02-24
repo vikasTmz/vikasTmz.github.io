@@ -81,53 +81,45 @@
 			</tbody>
 		</table>
 
-		<h2>Summary</h2>
+		<h2>Illustrating the shortcomings of SDS and how we fix it</h2>
 
 		<p>
 			Score distillation sampling (SDS) (Poole et al., 2022; Wang et al., 2022) has emerged as a useful technique
 			for leveraging the priors learned by large-scale image models beyond 2D raster images. SDS provides an
 			optimization procedure to estimate the parameters of a differentiable image generator, such that the
 			rendered image is pushed towards a higher-probability region of a pre-trained prompt-conditioned image
-			diffusion model.
+			diffusion model. </br> </br>
 
-			In this paper, we propose mean-shift distillation, a distribution-gradient proxy based on a well-known
-			mode-seeking technique. Furthermore, we show that:
-			(1) This proxy can be implemented easily, with minimal changes to the diffusion sampling procedure;
-			(2) It evaluates with less variance than SDS with improved mode alignment;
-			(3) It has superior behavior, converging to modes of the trained distribution with a clear termination
-			criterion.
+			SDS suffers from significant bias as well as variance, yielding inaccurate gradients. This manifests as
+			over-smoothened results when optimizing with text-to-image diffusion models.
 		</p>
 
-		<h3>Distillation in 2D; visualizing the pitfalls of SDS</h3>
 
-		<p>
-			To illustrate the pitfalls of SDS, we simulate it in 2D using a small denoising diffusion network. This
-			allows us to set ϑ = x ∈ R2 (where g becomes an identity map). We construct a fractal-like dataset as shown
-			by Karras et al. (2024), with analytic ground-truth probability density and score. This data distribution is
-			a mixture of highly anisotropic Gaussians, where most of the probability mass resides in narrow regions,
-			emulating the low intrinsic dimensionality of natural images (Roweis & Saul, 2000; Belkin & Niyogi, 2003).
-			For a baseline, we compare it with DDIM (Song et al., 2021a), a popular first-order sampling algorithm, with
-			classifier-free guidance (CFG) (Ho & Salimans, 2021).
-		</p>
+		<!-- <b></b> -->
 
-		<!-- <video class="teaser-image" width="720px" controls poster="data/video_thumbnail.png">
-			<source src="data/5_min_video.mp4" type="video/mp4">
-		</video> -->
+		</br>
+		<video class="teaser-image" width="720px" controls poster="data/video_thumbnail.png">
+			<source src="data/2d_toydataset_overview.mp4" type="video/mp4">
+		</video>
 
 		<!-- <p>
 			<a href="data/">[Download Video - 5 mins (MP4)]</a> &nbsp; &nbsp; | &nbsp; &nbsp;<a href="">[Watch on
 				Youtube]</a>
 		</p> -->
 
+		<h2>Results with Stable Diffusion</h2>
+
+		<p>Coming soon...</p>
 
 		<h2>Bibtex</h2>
 		<pre style="max-width: 700px; margin: auto;">
+			TBD
 			<!-- @InProceedings{,<br> author   
 				 = {Thamizharasan, Vikas, Kalogerakis, Evangelos},
 				 <br> title     = {},
 				 <br> booktitle = {},
 			<br> month     = {June},<br> year      = {2024},<br> pages     = {7943-7952}<br>} -->
-				</pre>
+		</pre>
 		</br>
 		<table style="min-width: 625px; margin: auto; text-align: center;">
 			<tbody>
