@@ -10,14 +10,14 @@
 		"links": [
 			{
 				"type": "link",
-				"name": "Paper",
-				"target": "https://vikastmz.github.io/MSD/paper.pdf"
-			},
-			{
-				"type": "link",
 				"name": "Website",
 				"target": "https://vikastmz.github.io/MSD/"
 			},
+			{
+				"type": "link",
+				"name": "Paper",
+				"target": "https://arxiv.org/abs/2502.15989"
+			}
 		]
 	},
 	{
