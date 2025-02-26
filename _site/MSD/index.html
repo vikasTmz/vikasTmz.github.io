@@ -27,6 +27,10 @@
 </head>
 
 <body style="max-width: none;">
+	<script type="text/javascript" async
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+		</script>
+
 	<div class="right-column" style="max-width: 45em; margin: auto;; margin-top: 3em">
 
 		<h1 style="text-align: center;"><b>Mean-Shift Distillation</b> for Diffusion Mode Seeking</h1>
@@ -81,28 +85,68 @@
 			</tbody>
 		</table>
 
-		<h2>Illustrating the shortcomings of SDS and how we fix it</h2>
+		<h2>Illustrating the shortcomings of SDS and how we fix it.</h2>
 
 		<p>
-			Score distillation sampling (SDS) (Poole et al., 2022; Wang et al., 2022) has emerged as a useful technique
-			for leveraging the priors learned by large-scale image models beyond 2D raster images. SDS provides an
+			Score distillation sampling (SDS) (Poole et al., 2022; Wang et al., 2022) has emerged as
+			a useful technique for leveraging the priors learned by large-scale image models beyond 2D raster images.
+			SDS provides an
 			optimization procedure to estimate the parameters of a differentiable image generator, such that the
 			rendered image is pushed towards a higher-probability region of a pre-trained prompt-conditioned image
 			diffusion model. </br> </br>
 
 			SDS suffers from significant bias as well as variance, yielding inaccurate gradients. This manifests as
-			over-smoothened results when optimizing with text-to-image diffusion models.
+			over-smoothened results when optimizing with text-to-image diffusion models. </br> </br>
+
+			To illustrate the pitfalls of SDS, we simulate it in 2D using a small denoising diffusion network.</br>
+
+			<a href="data/2d_toydataset_overview.mp4">[Watch blog as video - 3 mins (MP4)]</a>
 		</p>
 
-		</br>
-		<video class="teaser-image" width="720px" controls poster="data/video_thumbnail.png">
-			<source src="data/2d_toydataset_overview.mp4" type="video/mp4">
-		</video>
+		<img src="data/fractal2d_1.gif" alt="GIF" width="720px">
 
-		<!-- <p>
-			<a href="data/">[Download Video - 5 mins (MP4)]</a> &nbsp; &nbsp; | &nbsp; &nbsp;<a href="">[Watch on
-				Youtube]</a>
-		</p> -->
+		<!-- <hr style="border: 1px dashed gray;"> -->
+		<p> We begin my training a simple score model: \(\epsilon_{\theta} \approx -\sigma_t \nabla_{z_t} \log p(z_t|c)
+			\). Then, at inference time, we draw samples via DDIM (Song et al., 2021a), a popular first-order sampling
+			algorithm, without and with guidance (CFG; Ho & Salimans, 2021).
+		</p>
+
+		<img src="data/fractal2d_2.png" alt="GIF" width="720px">
+
+		<img src="data/fractal2d_3.gif" alt="GIF" width="720px">
+
+		<h3>What does this look like with SDS?</h3>
+
+		<img src="data/fractal2d_4.gif" alt="GIF" width="720px">
+
+		<p> Let's simulate this with multiple points densely initialized along a grid, across the canvas. After several
+			optimization steps, we observe, samples optimized with SDS fail to fit the distribution.
+			<img src="data/sds_optimization.gif" alt="GIF" width="350px" style="display: block; margin: auto;">
+		</p>
+
+		<!-- <img src="data/sds_optimization.gif" alt="GIF" width="420px"> -->
+
+		<img src="data/fractal2d_6.png" alt="GIF" width="720px">
+
+		<h3>Our fix.</h3>
+
+		<p>We propose mean-shift distillation, a distribution-gradient proxy based on a well-known mode-seeking
+			technique.
+			<img src="data/msd_optimization.gif" alt="GIF" width="350px" style="display: block; margin: auto;">
+		</p>
+
+
+		<img src="data/fractal2d_7.png" alt="GIF" width="720px">
+
+		</br>
+		<p>Putting it all together...</p>
+
+		<img src="data/fractal2d_8.png" alt="GIF" width="720px">
+
+		<!-- <video class="teaser-image" width="720px" controls poster="data/video_thumbnail.png">
+			<source src="data/2d_toydataset_overview.mp4" type="video/mp4">
+		</video> -->
+
 
 		<h2>Results with Stable Diffusion</h2>
 
