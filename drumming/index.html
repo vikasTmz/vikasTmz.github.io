@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Waveform Audio Player</title>
+    <style>
+        :root {
+            --bg: #0f1115;
+            --bg-2: #141821;
+            --text: #e6e6e6;
+            --muted: #9aa3b2;
+            --accent: #ff5500;
+            /* soundcloud-ish */
+            --bar: #3b4254;
+            --bar-active: var(--accent);
+            --card: rgba(17, 20, 26, 0.55);
+            --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+        }
+
+        .light {
+            --bg: #f3f5f9;
+            --bg-2: #ffffff;
+            --text: #0e1116;
+            --muted: #5b6472;
+            --accent: #e5541f;
+            --bar: #d8dce6;
+            --bar-active: #e5541f;
+            --card: rgba(255, 255, 255, .65);
+            --shadow: 0 10px 30px rgba(0, 0, 0, .12);
+        }
+
+        /* Background image with subtle fade */
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--text);
+            background: var(--bg);
+            min-height: 100svh;
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url('cover.png');
+            /* ← replace with your picture */
+            background-size: contain;
+            /* background-repeat: no-repeat; */
+            background-position: center;
+            filter: saturate(.95) contrast(1.05) brightness(.8);
+            opacity: .35;
+            /* the fade */
+            z-index: -4;
+        }
+
+        body::after {
+            /* soft vignette to help readability */
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(1200px 600px at 50% 50%, transparent, rgba(0, 0, 0, .35));
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .player-wrap {
+            width: min(900px, 92vw);
+            background: var(--card);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 20px 18px 16px;
+        }
+
+        .top-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, .12);
+            background: var(--bg-2);
+            color: var(--text);
+            cursor: pointer;
+            transition: transform .15s ease, background .2s ease, opacity .2s ease;
+            user-select: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            opacity: .85;
+        }
+
+        .play {
+            width: 56px;
+            height: 56px;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+        }
+
+        .title {
+            font-weight: 600;
+            letter-spacing: .2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .spacer {
+            flex: 1;
+        }
+
+        .theme-toggle {
+            width: auto;
+            height: 36px;
+            padding: 0 12px;
+            border-radius: 999px;
+            font-size: 14px;
+        }
+
+        .wave-ctr {
+            position: relative;
+            width: 100%;
+            height: 110px;
+            margin: 10px 0 6px;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+        }
+
+        canvas#wave {
+            width: 100%;
+            height: 90px;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .time-row {
+            font-variant-numeric: tabular-nums;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="player-wrap" role="region" aria-label="Audio player">
+        <div class="top-row">
+            <div class="controls">
+                <button class="btn" id="prev" title="Previous" aria-label="Previous track">⟨⟨</button>
+                <button class="btn play" id="play" title="Play/Pause" aria-label="Play">▶</button>
+                <button class="btn" id="next" title="Next" aria-label="Next track">⟩⟩</button>
+            </div>
+            <div class="title" id="trackTitle" title="Track title">—</div>
+            <div class="spacer"></div>
+            <button id="theme" class="btn theme-toggle" aria-pressed="false" title="Toggle light / dark">🌙 /
+                ☀️</button>
+        </div>
+
+        <div class="wave-ctr" id="waveCtr" title="Click to seek">
+            <canvas id="wave" width="1800" height="180"></canvas>
+            <span class="visually-hidden" id="progressLabel" aria-live="polite"></span>
+        </div>
+
+        <div class="time-row">
+            <div><span id="cur">0:00</span></div>
+            <div><span id="dur">0:00</span></div>
+        </div>
+
+        <audio id="audio" preload="metadata"></audio>
+    </div>
+
+    <script>
+        // === Configuration ===
+        // Put your audio files in /audio and list them below.
+        // You can use any formats your browser supports (mp3, wav, m4a, ogg).
+        const PLAYLIST = [
+            // example files — replace with your own paths
+            'tracks/track_1.m4a',
+            'tracks/track_2.m4a',
+            'tracks/track_3.m4a',
+            'tracks/track_4.m4a',
+            'tracks/track_5.m4a',
+            'tracks/track_6.m4a',
+            'tracks/track_7.m4a'
+        ];
+
+        // Optional: friendlier titles for the files above (same order)
+        const TITLES = [
+            'Track 1',
+            'Track 2',
+            'Track 3',
+            'Track 4',
+            'Track 5',
+            'Track 6',
+            'Track 7'
+        ];
+
+        const NUM_BARS = 240; // number of mini-bars in the waveform
+        const PEAK_CACHE = new Map(); // cache peaks per URL
+
+        const $ = sel => document.querySelector(sel);
+        const audio = $('#audio');
+        const playBtn = $('#play');
+        const nextBtn = $('#next');
+        const prevBtn = $('#prev');
+        const curEl = $('#cur');
+        const durEl = $('#dur');
+        const titleEl = $('#trackTitle');
+        const themeBtn = $('#theme');
+
+        const canvas = document.getElementById('wave');
+        const ctx = canvas.getContext('2d');
+
+        let currentIndex = -1;  // unknown yet — first play picks random
+        let isPlaying = false;
+
+        // === Theme ===
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') document.body.classList.add('light');
+        themeBtn.setAttribute('aria-pressed', document.body.classList.contains('light'));
+
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light');
+            const light = document.body.classList.contains('light');
+            localStorage.setItem('theme', light ? 'light' : 'dark');
+            themeBtn.setAttribute('aria-pressed', light);
+            drawWave();
+        });
+
+        // === Helpers ===
+        function fmtTime(sec) {
+            if (!isFinite(sec)) return '0:00';
+            const m = Math.floor(sec / 60);
+            const s = Math.floor(sec % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        function pickRandomIndex() {
+            if (!PLAYLIST.length) return -1;
+            let i = Math.floor(Math.random() * PLAYLIST.length);
+            // avoid repeating the same track if possible
+            if (PLAYLIST.length > 1 && i === currentIndex) i = (i + 1) % PLAYLIST.length;
+            return i;
+        }
+
+        function setTrack(i) {
+            currentIndex = (i + PLAYLIST.length) % PLAYLIST.length;
+            const src = PLAYLIST[currentIndex];
+            audio.src = src;
+            titleEl.textContent = TITLES[currentIndex] || src.split('/').pop();
+            audio.load();
+            computePeaksFor(src).then(() => drawWave());
+        }
+
+        // === Waveform computation (peaks) ===
+        async function computePeaksFor(url) {
+            if (PEAK_CACHE.has(url)) return PEAK_CACHE.get(url);
+            try {
+                const res = await fetch(url);
+                const arr = await res.arrayBuffer();
+                const ac = new (window.AudioContext || window.webkitAudioContext)();
+                const buffer = await ac.decodeAudioData(arr);
+                const raw = buffer.getChannelData(0); // first channel
+                const blockSize = Math.floor(raw.length / NUM_BARS);
+                const peaks = new Float32Array(NUM_BARS);
+                for (let i = 0; i < NUM_BARS; i++) {
+                    let start = i * blockSize;
+                    let sum = 0;
+                    for (let j = 0; j < blockSize; j++) sum += Math.abs(raw[start + j] || 0);
+                    peaks[i] = sum / blockSize; // average magnitude
+                }
+                // normalize
+                const max = Math.max(...peaks);
+                for (let i = 0; i < peaks.length; i++) peaks[i] = peaks[i] / (max || 1);
+                PEAK_CACHE.set(url, peaks);
+                try { ac.close(); } catch { }
+                return peaks;
+            } catch (e) {
+                console.error('Waveform decode failed:', e);
+                // fallback to flat bars if decoding fails
+                const peaks = new Float32Array(NUM_BARS).map(() => Math.random() * .6 + .2);
+                PEAK_CACHE.set(url, peaks);
+                return peaks;
+            }
+        }
+
+        // === Drawing ===
+        function drawWave() {
+            const w = canvas.width, h = canvas.height;
+            ctx.clearRect(0, 0, w, h);
+
+            const peaks = PEAK_CACHE.get(PLAYLIST[currentIndex]) || new Float32Array(NUM_BARS).fill(.25);
+            const padX = 14;           // side padding
+            const padY = 10;           // top/bottom padding
+            const gap = 2;             // gap between bars
+            const usableW = w - padX * 2;
+            const barW = (usableW - gap * (NUM_BARS - 1)) / NUM_BARS;
+
+            const progress = (audio.currentTime || 0) / (audio.duration || 1);
+            const activeBars = Math.floor(NUM_BARS * progress);
+
+            // colors
+            const styles = getComputedStyle(document.body);
+            const barColor = styles.getPropertyValue('--bar').trim();
+            const activeColor = styles.getPropertyValue('--bar-active').trim();
+
+            for (let i = 0; i < NUM_BARS; i++) {
+                const x = padX + i * (barW + gap);
+                const bh = Math.max(2, (h - padY * 2) * peaks[i]);
+                const y = h / 2 - bh / 2;
+                ctx.fillStyle = i <= activeBars ? activeColor : barColor;
+                ctx.fillRect(x, y, barW, bh);
+                // rounded caps
+                ctx.fillRect(x, y - 1, barW, 2);
+                ctx.fillRect(x, y + bh - 1, barW, 2);
+            }
+        }
+
+        // click-to-seek
+        document.getElementById('waveCtr').addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const ratio = (e.clientX - rect.left) / rect.width;
+            if (isFinite(audio.duration)) audio.currentTime = ratio * audio.duration;
+        });
+
+        // resize handling (for crisp canvas on HiDPI)
+        function resizeCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            const cssW = canvas.clientWidth;
+            const cssH = canvas.clientHeight;
+            canvas.width = Math.round(cssW * dpr);
+            canvas.height = Math.round(cssH * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // scale drawing back to CSS pixels
+            drawWave();
+        }
+        new ResizeObserver(resizeCanvas).observe(canvas);
+
+        // === Controls ===
+        playBtn.addEventListener('click', async () => {
+            if (!audio.src) {
+                // first time: pick a random track
+                const idx = pickRandomIndex();
+                if (idx === -1) return;
+                setTrack(idx);
+                await audio.play();
+                isPlaying = true;
+                playBtn.textContent = '⏸';
+                playBtn.setAttribute('aria-label', 'Pause');
+                return;
+            }
+            if (audio.paused) {
+                await audio.play(); isPlaying = true; playBtn.textContent = '⏸'; playBtn.setAttribute('aria-label', 'Pause');
+            } else {
+                audio.pause(); isPlaying = false; playBtn.textContent = '▶'; playBtn.setAttribute('aria-label', 'Play');
+            }
+        });
+
+        nextBtn.addEventListener('click', async () => {
+            if (!PLAYLIST.length) return;
+            if (currentIndex === -1) currentIndex = pickRandomIndex();
+            setTrack(currentIndex + 1);
+            await audio.play(); isPlaying = true; playBtn.textContent = '⏸';
+        });
+
+        prevBtn.addEventListener('click', async () => {
+            if (!PLAYLIST.length) return;
+            if (currentIndex === -1) currentIndex = pickRandomIndex();
+            setTrack(currentIndex - 1);
+            await audio.play(); isPlaying = true; playBtn.textContent = '⏸';
+        });
+
+        // when a track ends, go to the next one automatically
+        audio.addEventListener('ended', () => {
+            nextBtn.click();
+        });
+
+        // metadata & time updates
+        audio.addEventListener('loadedmetadata', () => {
+            durEl.textContent = fmtTime(audio.duration);
+            drawWave();
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            curEl.textContent = fmtTime(audio.currentTime);
+            drawWave();
+            document.getElementById('progressLabel').textContent = `Progress ${Math.round((audio.currentTime / (audio.duration || 1)) * 100)}%`;
+        });
+
+        // keyboard shortcuts
+        window.addEventListener('keydown', (e) => {
+            if (['Space', 'ArrowRight', 'ArrowLeft'].includes(e.code)) e.preventDefault();
+            if (e.code === 'Space') playBtn.click();
+            if (e.code === 'ArrowRight') nextBtn.click();
+            if (e.code === 'ArrowLeft') prevBtn.click();
+        });
+
+        // initial sizing
+        resizeCanvas();
+    </script>
+</body>
+
+</html>

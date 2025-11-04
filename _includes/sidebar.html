@@ -1,5 +1,5 @@
 <div class='sidebaritem' id='headshot'>
-	<img class='img img-responsive' src='/img/me.jpg' width='350'/>
+	<img class='img img-responsive' src='/img/me.jpg' width='350' />
 </div>
 
 <div class='sidebaritem' id='contactinfo'>
@@ -8,24 +8,32 @@
 	<div>
 		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 		<a href='mailto:vthamizharas@umass.edu' style='text-decoration:none'>
-		  <img src='/img/icons/email.svg' type='image/svg+xml'
-		       width=32px style='vertical-align:middle'>
+			<img src='/img/icons/email.svg' type='image/svg+xml' width=32px style='vertical-align:middle'>
 		</a>
 		&nbsp;
 		<a target='_blank' href='https://github.com/vikasTmz' style='text-decoration:none'>
-		  <img src='/img/icons/github.svg' type='image/svg+xml'
-		       width=36px style='vertical-align:middle'>
+			<img src='/img/icons/github.svg' type='image/svg+xml' width=36px style='vertical-align:middle'>
 		</a>
 		&nbsp;
- 		<a target='_blank' href='resume/resume_vikas_thamizharasan.pdf' style='text-decoration:none'>
-		  <img src='/img/icons/cv.png'
-		       width=32px style='vertical-align:middle'>
+		<a target='_blank' href='resume/resume_vikas_thamizharasan.pdf' style='text-decoration:none'>
+			<img src='/img/icons/cv.png' width=32px style='vertical-align:middle'>
 		</a>
 		&nbsp;
- 		<a target='_blank' href='https://www.linkedin.com/in/vikas-thamizharasan/' style='text-decoration:none'>
-		  <img src='/img/icons/linkedin.png'
-		       width=32px style='vertical-align:middle'>
+		<a target='_blank' href='https://www.linkedin.com/in/vikas-thamizharasan/' style='text-decoration:none'>
+			<img src='/img/icons/linkedin.png' width=32px style='vertical-align:middle'>
 		</a>
 		&nbsp;
 	</div>
+</div>
+
+<div class='sidebaritem' id='hobbies'>
+	<div class='sidebarheader'>Miscellaneous</div>
+	{% for hobby in site.data.hobbies %}
+
+	<div class='hobby'>
+		<a class='hobbylink' href='{{ hobby.link }}' target='_blank'>{{ hobby.name }}</a>
+		<p>{{ hobby.description }}</p>
+	</div>
+
+	{% endfor %}
 </div>
