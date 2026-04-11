@@ -225,14 +225,32 @@
                 <div class="video-actions">
                     <button class="video-nav video-prev" type="button"
                         aria-label="Previous video">&#8592;</button>
-
                     <button class="video-reset"
                         type="button">⟳</button>
 
                     <button class="video-nav video-next" type="button"
                         aria-label="Next video">&#8594;</button>
                 </div>
+                <p class="video-caption"></p>
+            </div>
 
+            <h2>Part III. Our Final Denoising Tensor and Improved
+                Architecture.</h2>
+            <div class="video-slider-section" data-slider="slider3">
+                <div class="video-shell">
+                    <div class="video-panel">
+                        <video class="feature-video" muted playsinline
+                            preload="metadata"></video>
+                    </div>
+                </div>
+                <div class="video-actions">
+                    <button class="video-nav video-prev" type="button"
+                        aria-label="Previous video">&#8592;</button>
+                    <button class="video-reset"
+                        type="button">⟳</button>
+                    <button class="video-nav video-next" type="button"
+                        aria-label="Next video">&#8594;</button>
+                </div>
                 <p class="video-caption"></p>
             </div>
 
@@ -256,11 +274,21 @@
                         slider2: [
                             {
                                 src: "static/videos/part2_1.mp4",
-                                caption: "Video ( 1 / 2 ): Forming the denoising tensor."
+                                caption: "Video ( 1 / 2 ): Forming the denoising tensor. Our input tensor consist of continuous variables –like the 2D coordinates of control points – and discrete variables – like path attribute and curve type. We wish to model these mixed random variables jointly. "
                             },
                             {
                                 src: "static/videos/part2_2.mp4",
                                 caption: "Video ( 2 / 2 ): Denoising diffusion model architecture for this vector curve tensor. And, preliminary results."
+                            }
+                        ],
+                        slider3: [
+                            {
+                                src: "static/videos/part3_1.mp4",
+                                caption: "Video ( 1 / 2 ): We improve our results by performing cascaded diffusion; a raster diffusion model followed by the vector diffusion model."
+                            },
+                            {
+                                src: "static/videos/part3_2.mp4",
+                                caption: "Video ( 2 / 2 ): We additionally found that representing control points as a displacement vector from a grid point, worked better in practice. Why? We suspect it is because this introduces redundancy akin to pixel-domain and the typical noise schedulers used in pixel domain work better with this new representation."
                             }
                         ]
                     };
