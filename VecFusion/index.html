@@ -212,29 +212,33 @@ redirect_from: VecFusion/
                 <p class="video-caption"></p>
             </div>
 
-            <!-- <h2>Part II. The Input Tensor and Preliminary
+            <h2>Part II. What are we denoising? And, Preliminary
                 Architecture.</h2>
             <div class="video-slider-section" data-slider="slider2">
                 <div class="video-shell">
-                    <button class="video-nav video-prev" type="button"
-                        aria-label="Previous video">&#8592;</button>
+
 
                     <div class="video-panel">
                         <video class="feature-video" muted playsinline
                             preload="metadata"></video>
                     </div>
 
+
+                </div>
+
+                <div class="video-actions">
+                    <button class="video-nav video-prev" type="button"
+                        aria-label="Previous video">&#8592;</button>
+
+                    <button class="video-reset"
+                        type="button">⟳</button>
+
                     <button class="video-nav video-next" type="button"
                         aria-label="Next video">&#8594;</button>
                 </div>
 
-                <div class="video-actions">
-                    <button class="video-reset"
-                        type="button">Reset</button>
-                </div>
-
                 <p class="video-caption"></p>
-            </div> -->
+            </div>
 
             <script>
                 (function () {
@@ -255,12 +259,12 @@ redirect_from: VecFusion/
                         ],
                         slider2: [
                             {
-                                src: "static/videos/interp1.mp4",
-                                caption: "Interpolation example 1."
+                                src: "static/videos/part2_1.mp4",
+                                caption: "Video ( 1 / 2 ): Forming the denoising tensor."
                             },
                             {
-                                src: "static/videos/interp2.mp4",
-                                caption: "Interpolation example 2."
+                                src: "static/videos/part2_2.mp4",
+                                caption: "Video ( 2 / 2 ): Denoising diffusion model architecture for this vector curve tensor. And, preliminary results."
                             }
                         ]
                     };
@@ -273,7 +277,9 @@ redirect_from: VecFusion/
 
                         var currentIndex = 0;
                         var player = section.querySelector(".feature-video");
+                        player.controls = true;
                         var caption = section.querySelector(".video-caption");
+                        var reset = section.querySelector(".video-reset");
                         var prevBtn = section.querySelector(".video-prev");
                         var nextBtn = section.querySelector(".video-next");
                         var resetBtn = section.querySelector(".video-reset");
@@ -291,7 +297,9 @@ redirect_from: VecFusion/
                             player.src = videos[currentIndex].src;
                             player.load();
                             caption.textContent = videos[currentIndex].caption;
-                            playCurrentVideo();
+                            // reset.textContent = `${currentIndex + 1} / ${videos.length} ⟳`;
+                            // "Video (" + (currentIndex + 1) + " ";
+                            // playCurrentVideo();
                         }
 
                         function resetVideo() {
