@@ -1,5 +1,26 @@
 [
 	{
+		"id": "brepfacet",
+		"title": "BRepFacetGen: Reverse Engineering B-Reps By Generative Face Segmentation",
+		"authors": [
+			"Ka-Hei Hui, Vikas Thamizharasan, Pradeep Kumar Jayaraman, Xiang Xu"
+		],
+		"venue": "ECCV 2026",
+		"date": "2026-06-01",
+		"links": [
+			{
+				"type": "link",
+				"name": "Website",
+				"target": ""
+			},
+			{
+				"type": "link",
+				"name": "Paper",
+				"target": ""
+			}
+		]
+	},
+	{
 		"id": "msd",
 		"title": "Mean-Shift Distillation for Diffusion Mode Seeking",
 		"authors": [
