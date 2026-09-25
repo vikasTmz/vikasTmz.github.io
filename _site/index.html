@@ -20,7 +20,7 @@
 	<link rel="stylesheet" href="css/terminal_css.css">
 </head>
 
-	<body onload="termOpen()">
+	<body>
 
 		<div id="mainnav" class="navbar navbar-inverse navbar-static-top" role="navigation">
 	        <div class="container">
@@ -93,10 +93,63 @@
 	    		<div class='col-md-9 maincontent'>
 					<div class='mainitem' id='about'>
 	<div class='hidden-md hidden-lg mainheader'></div>
-	<div id="termDiv"> </div>
+	<section id="termDiv" class="term"
+		aria-label="About Vikas and interactive terminal">
+		<div class="term-bio">
+			<p class="term-greeting">Hi, I'm Vikas (Vicky)
+				Thamizharasan.<br><br>
+				I am a Ph.D. student in the Visual Computing lab at
+				UMass Amherst, advised by Prof. Evangelos
+				Kalogerakis. My research vision is to build
+				intelligent machines that aid artists and novice users
+				in their creative endeavors.<br><br>
+				I completed my Master's at Brown University. I was
+				fortunate to be advised by Prof. Daniel Ritchie and
+				Prof. James Tompkin. I obtained my Bachelor's degree
+				in Computer Science from the IIIT-Hyderabad.<br><br>
+				Outside academics, I love climbing (indoors and
+				outdoors), hiking, and playing the drums. In a
+				previous life, I loved painting and dancing.
+			</p>
+			<!-- <p>My research vision is to build intelligent machines
+				that aid artists and novice users in their creative
+				endeavors.</p> -->
+			<!-- <p class="term-interests">Outside academics, I love
+				climbing (indoors and outdoors), hiking, and playing
+				the drums. In a previous life, I loved painting and
+				dancing.</p> -->
+		</div>
+		<div class="term-controls" hidden>
+			<!-- <button type="button" class="term-activate">Open
+				terminal</button> -->
+			<button type="button" class="term-skip"
+				hidden>Skip</button>
+		</div>
+		<div class="term-session" hidden>
+			<p id="term-hint" class="term-hint">Type "help" for
+				commands. Tab leaves the input; Escape closes the
+				terminal.</p>
+			<div class="term-output" role="log"
+				aria-label="Terminal responses" aria-live="polite"
+				aria-relevant="additions" tabindex="0"></div>
+			<form class="term-form" autocomplete="off">
+				<label for="term-command" class="term-prompt"><span
+						aria-hidden="true">[vikas@terminal.js]
+						&gt;</span><span class="term-sr">Terminal
+						command</span></label>
+				<input id="term-command" name="command" type="text"
+					aria-describedby="term-hint" autocapitalize="none"
+					spellcheck="false" enterkeyhint="send"
+					maxlength="500">
+				<button type="submit">Run</button>
+			</form>
+			<button type="button" class="term-close">Close
+				terminal</button>
+		</div>
+	</section>
 	</br>
 	<p>
-<!-- 
+		<!-- 
 		 I wish to tackle problems on the theoretical realm specifically Generative models, Unsupervised learning, Geometric DeepLearning, Neural Architecture Search (NAS), Explainability in neural nets, Adversarial training, graph classification and the applied realm specifically 3D shape and pose estimation, Depth estimation, Style transfer, Image-based modelling and rendering, Vision as Inverse Graphics, AI for Creative Content.
 
 		 Outside academics and work, I Art, Sculpting, Drumming, Cooking, Bouldering, Anthropology, Football, MMA. -->
@@ -156,7 +209,7 @@
 
 </div> -->
 
-<div class='mainitem' id='projects'> 
+<div class='mainitem' id='projects'>
 
 	<div class='mainheader'>projects and Publications</div>
 
@@ -164,1079 +217,1149 @@
 
 	
 
-		<div class='row pub'>
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/brepfacet.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		
+		
+		'>BRepFacetGen: Reverse Engineering B-Reps By Generative Face Segmentation</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				Ka-Hei Hui, Vikas Thamizharasan, Pradeep Kumar Jayaraman, Xiang Xu
+				
+				
+			</div>
+
+
+			<div class='pubvenue'>ECCV 2026</div>
+
+			
+			
 
 			
 
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/brepfacet.png'/></a>
-			</div>
+			
 
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					
-				
-			'>BRepFacetGen: Reverse Engineering B-Reps By Generative Face Segmentation</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							Ka-Hei Hui, Vikas Thamizharasan, Pradeep Kumar Jayaraman, Xiang Xu
-						
-					
-				</div>
-
-
-				<div class='pubvenue'>ECCV 2026</div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							
-						
-					'>
-						
-							Website
-						
-					</a>
-				
-					 | 
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							
-						
-					'>
-						
-							Paper
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
+			<a class='publink' target='_blank'
+				href='
+			
+			
+			
+			'>
+			
+			Website
+			
+			</a>
+			
+			 | 
 
 			
 
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					https://vikastmz.github.io/MSD/
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/msd.png'/></a>
-			</div>
+			
 
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					https://vikastmz.github.io/MSD/
-				
-			'>Mean-Shift Distillation for Diffusion Mode Seeking</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							Vikas Thamizharasan, Nikitas Chatzis, Iliyan Georgiev, Matthew Fisher, Difan Liu, Nanxuan Zhao, Evangelos Kalogerakis, Michal Lukáč
-						
-					
-				</div>
-
-
-				<div class='pubvenue'>WACV 2026</div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://vikastmz.github.io/MSD/
-						
-					'>
-						
-							Website
-						
-					</a>
-				
-					 | 
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://arxiv.org/abs/2502.15989
-						
-					'>
-						
-							Paper
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
+			<a class='publink' target='_blank'
+				href='
+			
+			
+			
+			'>
+			
+			Paper
+			
+			</a>
+			
 
 			
 
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					https://arxiv.org/abs/2405.15217
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/nivel.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					https://arxiv.org/abs/2405.15217
-				
-			'>NIVeL: Neural Implicit Vector Layers for Text-to-Vector Generation</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							Vikas Thamizharasan, Difan Liu, Matthew Fisher, Nanxuan Zhao, Evangelos Kalogerakis, Michal Lukáč
-						
-					
-				</div>
-
-
-				<div class='pubvenue'>CVPR 2024</div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://arxiv.org/abs/2405.15217
-						
-					'>
-						
-							Paper
-						
-					</a>
-				
-					 | 
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://vikastmz.github.io/NIVeL/
-						
-					'>
-						
-							Website
-						
-					</a>
-				
-
-				
-
-			</div>
-
 		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					https://arxiv.org/abs/2312.10540
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/fontsynth.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					https://arxiv.org/abs/2312.10540
-				
-			'>VecFusion: Vector Font Generation with Diffusion</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							Vikas Thamizharasan*, Difan Liu*, Shantanu Agarwal, Matthew Fisher, Michael Gharbi, Oliver Wang, Alec Jacobson, Evangelos Kalogerakis
-						
-					
-				</div>
-
-
-				<div class='pubvenue'>CVPR 2024 (highlight)</div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://arxiv.org/abs/2312.10540
-						
-					'>
-						
-							Paper
-						
-					</a>
-				
-					 | 
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://vikastmz.github.io/VecFusion/
-						
-					'>
-						
-							Website
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					https://arxiv.org/abs/2402.16994
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/gem3d.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					https://arxiv.org/abs/2402.16994
-				
-			'>GEM3D: GEnerative Medial Abstractions for 3D Shape Synthesis</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							Dmitry Petrov, Pradyumn Goyal, Vikas Thamizharasan, Vladimir G. Kim, Matheus Gadelha, Melinos Averkiou, Siddhartha Chaudhuri, Evangelos Kalogerakis
-						
-					
-				</div>
-
-
-				<div class='pubvenue'>SIGGRAPH 2024</div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://arxiv.org/abs/2402.16994
-						
-					'>
-						
-							Paper
-						
-					</a>
-				
-					 | 
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://lodurality.github.io/GEM3D/
-						
-					'>
-						
-							Website
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/relight-faces.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view
-				
-			'>Learning Physically-based Material and Lighting Decompositions for Face Editing</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							Qian Zhang, Vikas Thamizharasan, James Tompkin
-						
-					
-				</div>
-
-
-				<div class='pubvenue'>AICC @ CVPR 2021 & CVMJ'22</div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view
-						
-					'>
-						
-							Short Paper
-						
-					</a>
-				
-					 | 
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://link.springer.com/article/10.1007/s41095-022-0309-1
-						
-					'>
-						
-							Full Paper
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					https://vikastmz.github.io/papers/texturefields.pdf
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/texturesynth.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					https://vikastmz.github.io/papers/texturefields.pdf
-				
-			'>Improving Image-based Generation of Implicit Texture Fields for 3D Objects</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							Vikas Thamizharasan, Joshua Pierce, Daniel Ritchie
-						
-					
-				</div>
-
-
-				<div class='pubvenue'></div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://vikastmz.github.io/papers/texturefields.pdf
-						
-					'>
-						
-							Paper
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					https://github.com/vikasTmz/Non-Linear_3DMM
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/nonlinear3dmm.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					https://github.com/vikasTmz/Non-Linear_3DMM
-				
-			'>Non-Linear 3D Morphable Models</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							Vikas Thamizharasan
-						
-					
-				</div>
-
-
-				<div class='pubvenue'>Deep Learning powered non-linear 3D Morphable Models</div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://github.com/vikasTmz/Non-Linear_3DMM
-						
-					'>
-						
-							Website
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					http://visual.cs.brown.edu/projects/shapefromtracing-webpage/
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/shapefromtracing.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					http://visual.cs.brown.edu/projects/shapefromtracing-webpage/
-				
-			'>Shape from Tracing: Towards Reconstructing 3D Object Geometry and SVBRDF Material from Images via Differentiable Path Tracing</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							Purvi Goel, Loudon Cohen, James Guesman, Vikas Thamizharasan, James Tompkin, Daniel Ritchie
-						
-					
-				</div>
-
-
-				<div class='pubvenue'>3DV 2020</div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							http://visual.cs.brown.edu/projects/shapefromtracing-webpage/
-						
-					'>
-						
-							Website
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					https://github.com/dcharata/StyLit
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/stylelit.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					https://github.com/dcharata/StyLit
-				
-			'>Illumination-guided example-based stylization of 3D renderings</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							2020
-						
-					
-				</div>
-
-
-				<div class='pubvenue'>GPU implementation of StyLit by Jakub Fiser et al. SIGGRAPH ’16.</div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://github.com/dcharata/StyLit
-						
-					'>
-						
-							code
-						
-					</a>
-				
-					 | 
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://youtu.be/4gsjpk9nDbg
-						
-					'>
-						
-							video
-						
-					</a>
-				
-					 | 
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://docs.google.com/presentation/d/1gga9FxRm0Sq73Pqfpx4WlOIm1h3vRMqti0-B8NzUido/edit?usp=sharing
-						
-					'>
-						
-							presentation
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					https://github.com/vikasTmz/Path_Tracer
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/path-tracer.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					https://github.com/vikasTmz/Path_Tracer
-				
-			'>Monte Carlo Path Tracer in C++</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							2020
-						
-					
-				</div>
-
-
-				<div class='pubvenue'></div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://github.com/vikasTmz/Path_Tracer
-						
-					'>
-						
-							code
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					https://github.com/vikasTmz/Geometry_Processing
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/geom-process.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					https://github.com/vikasTmz/Geometry_Processing
-				
-			'>Geometry Processing in C++</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							2020
-						
-					
-				</div>
-
-
-				<div class='pubvenue'>Mesh operations like​ Subdivisions, Simplification and Remeshing ​written in C++.</div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://github.com/vikasTmz/Geometry_Processing
-						
-					'>
-						
-							code
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					/
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/fem.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					/
-				
-			'>Animating deformable solid objects using the Finite Element Method</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							2020
-						
-					
-				</div>
-
-
-				<div class='pubvenue'></div>
-
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					https://link.springer.com/article/10.1007/s11042-022-13224-0
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/depth.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					https://link.springer.com/article/10.1007/s11042-022-13224-0
-				
-			'>Face Attribute Analysis from Structured Light: An End-to-End Approach</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							Vikas Thamizharasan, Abhijit Das, Daniele Battaglino, Francois Bremond, Antitza Dantcheva 
-						
-					
-				</div>
-
-
-				<div class='pubvenue'>Multimedia Tools and Applications</div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://link.springer.com/article/10.1007/s11042-022-13224-0
-						
-					'>
-						
-							Paper
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					https://github.com/mukulhase/3-Sweep-Library/
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/3sweep.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					https://github.com/mukulhase/3-Sweep-Library/
-				
-			'>3D Object Reconstruction and Manipulation with a single image</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							2017
-						
-					
-				</div>
-
-
-				<div class='pubvenue'></div>
-
-				
-					
-
-					
-
-					
-
-					<a class='publink' target='_blank' href='
-						
-							https://github.com/mukulhase/3-Sweep-Library/
-						
-					'>
-						
-							code
-						
-					</a>
-				
-
-				
-
-			</div>
-
-		</div>
-	
-
-		<div class='row pub'>
-
-			
-
-			<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
-				<a target='_blank' href='
-				
-				
-					/
-				
-			'><img class='pubimage img img-responsive' width='200' src='img/pubthumbs/wiki.png'/></a>
-			</div>
-
-			<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
-
-				<div class='pubtitle'>
-					<a target='_blank' href='
-				
-				
-					/
-				
-			'>Search Engine for Wikipedia</a>
-				</div>
-
-				<div class='pubauthors'>
-					
-						
-						
-							2017
-						
-					
-				</div>
-
-
-				<div class='pubvenue'></div>
-
-				
-
-				
-
-			</div>
-
-		</div>
-	
 
 	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		https://vikastmz.github.io/MSD/
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/msd.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		https://vikastmz.github.io/MSD/
+		
+		'>Mean-Shift Distillation for Diffusion Mode Seeking</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				Vikas Thamizharasan, Nikitas Chatzis, Iliyan Georgiev, Matthew Fisher, Difan Liu, Nanxuan Zhao, Evangelos Kalogerakis, Michal Lukáč
+				
+				
+			</div>
+
+
+			<div class='pubvenue'>WACV 2026</div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://vikastmz.github.io/MSD/
+			
+			'>
+			
+			Website
+			
+			</a>
+			
+			 | 
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://arxiv.org/abs/2502.15989
+			
+			'>
+			
+			Paper
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		https://arxiv.org/abs/2405.15217
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/nivel.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		https://arxiv.org/abs/2405.15217
+		
+		'>NIVeL: Neural Implicit Vector Layers for Text-to-Vector Generation</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				Vikas Thamizharasan, Difan Liu, Matthew Fisher, Nanxuan Zhao, Evangelos Kalogerakis, Michal Lukáč
+				
+				
+			</div>
+
+
+			<div class='pubvenue'>CVPR 2024</div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://arxiv.org/abs/2405.15217
+			
+			'>
+			
+			Paper
+			
+			</a>
+			
+			 | 
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://vikastmz.github.io/NIVeL/
+			
+			'>
+			
+			Website
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		https://arxiv.org/abs/2312.10540
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/fontsynth.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		https://arxiv.org/abs/2312.10540
+		
+		'>VecFusion: Vector Font Generation with Diffusion</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				Vikas Thamizharasan*, Difan Liu*, Shantanu Agarwal, Matthew Fisher, Michael Gharbi, Oliver Wang, Alec Jacobson, Evangelos Kalogerakis
+				
+				
+			</div>
+
+
+			<div class='pubvenue'>CVPR 2024 (highlight)</div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://arxiv.org/abs/2312.10540
+			
+			'>
+			
+			Paper
+			
+			</a>
+			
+			 | 
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://vikastmz.github.io/VecFusion/
+			
+			'>
+			
+			Website
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		https://arxiv.org/abs/2402.16994
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/gem3d.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		https://arxiv.org/abs/2402.16994
+		
+		'>GEM3D: GEnerative Medial Abstractions for 3D Shape Synthesis</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				Dmitry Petrov, Pradyumn Goyal, Vikas Thamizharasan, Vladimir G. Kim, Matheus Gadelha, Melinos Averkiou, Siddhartha Chaudhuri, Evangelos Kalogerakis
+				
+				
+			</div>
+
+
+			<div class='pubvenue'>SIGGRAPH 2024</div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://arxiv.org/abs/2402.16994
+			
+			'>
+			
+			Paper
+			
+			</a>
+			
+			 | 
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://lodurality.github.io/GEM3D/
+			
+			'>
+			
+			Website
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/relight-faces.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view
+		
+		'>Learning Physically-based Material and Lighting Decompositions for Face Editing</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				Qian Zhang, Vikas Thamizharasan, James Tompkin
+				
+				
+			</div>
+
+
+			<div class='pubvenue'>AICC @ CVPR 2021 & CVMJ'22</div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://drive.google.com/file/d/1oie_epsUj0Eygm5pKz4DNg7mx99ETgAo/view
+			
+			'>
+			
+			Short Paper
+			
+			</a>
+			
+			 | 
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://link.springer.com/article/10.1007/s41095-022-0309-1
+			
+			'>
+			
+			Full Paper
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		https://vikastmz.github.io/papers/texturefields.pdf
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/texturesynth.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		https://vikastmz.github.io/papers/texturefields.pdf
+		
+		'>Improving Image-based Generation of Implicit Texture Fields for 3D Objects</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				Vikas Thamizharasan, Joshua Pierce, Daniel Ritchie
+				
+				
+			</div>
+
+
+			<div class='pubvenue'></div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://vikastmz.github.io/papers/texturefields.pdf
+			
+			'>
+			
+			Paper
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		https://github.com/vikasTmz/Non-Linear_3DMM
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/nonlinear3dmm.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		https://github.com/vikasTmz/Non-Linear_3DMM
+		
+		'>Non-Linear 3D Morphable Models</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				Vikas Thamizharasan
+				
+				
+			</div>
+
+
+			<div class='pubvenue'>Deep Learning powered non-linear 3D Morphable Models</div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://github.com/vikasTmz/Non-Linear_3DMM
+			
+			'>
+			
+			Website
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		http://visual.cs.brown.edu/projects/shapefromtracing-webpage/
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/shapefromtracing.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		http://visual.cs.brown.edu/projects/shapefromtracing-webpage/
+		
+		'>Shape from Tracing: Towards Reconstructing 3D Object Geometry and SVBRDF Material from Images via Differentiable Path Tracing</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				Purvi Goel, Loudon Cohen, James Guesman, Vikas Thamizharasan, James Tompkin, Daniel Ritchie
+				
+				
+			</div>
+
+
+			<div class='pubvenue'>3DV 2020</div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			http://visual.cs.brown.edu/projects/shapefromtracing-webpage/
+			
+			'>
+			
+			Website
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		https://github.com/dcharata/StyLit
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/stylelit.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		https://github.com/dcharata/StyLit
+		
+		'>Illumination-guided example-based stylization of 3D renderings</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				2020
+				
+				
+			</div>
+
+
+			<div class='pubvenue'>GPU implementation of StyLit by Jakub Fiser et al. SIGGRAPH ’16.</div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://github.com/dcharata/StyLit
+			
+			'>
+			
+			code
+			
+			</a>
+			
+			 | 
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://youtu.be/4gsjpk9nDbg
+			
+			'>
+			
+			video
+			
+			</a>
+			
+			 | 
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://docs.google.com/presentation/d/1gga9FxRm0Sq73Pqfpx4WlOIm1h3vRMqti0-B8NzUido/edit?usp=sharing
+			
+			'>
+			
+			presentation
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		https://github.com/vikasTmz/Path_Tracer
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/path-tracer.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		https://github.com/vikasTmz/Path_Tracer
+		
+		'>Monte Carlo Path Tracer in C++</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				2020
+				
+				
+			</div>
+
+
+			<div class='pubvenue'></div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://github.com/vikasTmz/Path_Tracer
+			
+			'>
+			
+			code
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		https://github.com/vikasTmz/Geometry_Processing
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/geom-process.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		https://github.com/vikasTmz/Geometry_Processing
+		
+		'>Geometry Processing in C++</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				2020
+				
+				
+			</div>
+
+
+			<div class='pubvenue'>Mesh operations like​ Subdivisions, Simplification and Remeshing ​written in C++.</div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://github.com/vikasTmz/Geometry_Processing
+			
+			'>
+			
+			code
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		/
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/fem.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		/
+		
+		'>Animating deformable solid objects using the Finite Element Method</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				2020
+				
+				
+			</div>
+
+
+			<div class='pubvenue'></div>
+
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		https://link.springer.com/article/10.1007/s11042-022-13224-0
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/depth.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		https://link.springer.com/article/10.1007/s11042-022-13224-0
+		
+		'>Face Attribute Analysis from Structured Light: An End-to-End Approach</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				Vikas Thamizharasan, Abhijit Das, Daniele Battaglino, Francois Bremond, Antitza Dantcheva 
+				
+				
+			</div>
+
+
+			<div class='pubvenue'>Multimedia Tools and Applications</div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://link.springer.com/article/10.1007/s11042-022-13224-0
+			
+			'>
+			
+			Paper
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		https://github.com/mukulhase/3-Sweep-Library/
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/3sweep.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		https://github.com/mukulhase/3-Sweep-Library/
+		
+		'>3D Object Reconstruction and Manipulation with a single image</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				2017
+				
+				
+			</div>
+
+
+			<div class='pubvenue'></div>
+
+			
+			
+
+			
+
+			
+
+			<a class='publink' target='_blank'
+				href='
+			
+			https://github.com/mukulhase/3-Sweep-Library/
+			
+			'>
+			
+			code
+			
+			</a>
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+	<div class='row pub'>
+
+		
+
+		<div class='col-lg-3 col-md-4 col-xs-4 pubimagesection'>
+			<a target='_blank' href='
+		
+		
+		/
+		
+		'><img
+					class='pubimage img img-responsive' width='200'
+					src='img/pubthumbs/wiki.png' /></a>
+		</div>
+
+		<div class='col-lg-9 col-md-8 col-xs-8 pubtextsection'>
+
+			<div class='pubtitle'>
+				<a target='_blank'
+					href='
+		
+		
+		/
+		
+		'>Search Engine for Wikipedia</a>
+			</div>
+
+			<div class='pubauthors'>
+				
+				
+				
+				2017
+				
+				
+			</div>
+
+
+			<div class='pubvenue'></div>
+
+			
+
+			
+
+		</div>
+
+	</div>
+	
+
+</div>
 
 </div>
 				</div>
@@ -1249,7 +1372,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/Terminal.js"></script>
-<script type="text/javascript" src="/js/termlib.js"></script>
+<script src="/js/Terminal.js" defer></script>
+
 	</body>
 </html>

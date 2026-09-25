@@ -20,11 +20,24 @@ a:hover {
 	text-align: center;
 }
 
-.navbar-brand {
-	font-size: 3em;
-	line-height: 0.6em;
+#mainnav > .container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#mainnav .navbar-brand {
+	float: none;
+	height: auto;
+	min-width: 0;
+	max-width: 100%;
+	margin: 0;
+	padding: 12px 0;
+	font-size: clamp(26px, 5vw, 45px);
+	line-height: 1.15;
 	font-variant: small-caps;
 	text-align: center;
+	overflow-wrap: anywhere;
 }
 
 .navbar-brand a {
