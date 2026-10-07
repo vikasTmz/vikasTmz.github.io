@@ -1,0 +1,191 @@
+# Editing this page
+
+You can edit all project copy and section order without changing `index.html`.
+The page reads these files on load; text/layout edits require no build command.
+
+| File | What to edit |
+| --- | --- |
+| `content/introduction.md` | Main title and project description. |
+| `content/notes.md` | Notes title and body. |
+| `page.json` | Section order, layout styles, author/date, browser title, and header/footer. |
+| `scenes.json` | Each viewer pair: IDs, titles, prompts, labels, SVG/layer paths, and videos. |
+| `styles.css` | Appearance and animation styles. |
+| `app.js` | Page rendering and viewer behavior. |
+| `theme.js` | Saved theme, applied before the first paint. |
+
+## Writing text
+
+The first Markdown heading becomes the section title. Everything below it is
+rendered as the body. For example, `content/introduction.md` can contain:
+
+```markdown
+# Lifting SVGs to *3D*
+
+Write your project description here. Use **bold**, *italic*, and
+[links](https://example.com) when needed.
+
+- A first point
+- A second point
+```
+
+Headings, paragraphs, lists, links, images, code, blockquotes, and tables work.
+Image and link paths are relative to the Markdown file; for example, an image
+in `assets/` is `![Caption](../assets/image.jpg)` from `content/notes.md`.
+A link starting with `#` refers to a section on this page.
+
+## Reordering or hiding sections
+
+Move objects in the `sections` array in `page.json`. Their array order is their
+page order. For viewers first, followed by the introduction and notes:
+
+```json
+"sections": [
+  { "id": "bird-example", "type": "viewer", "scene": "bird_flying" },
+  { "id": "introduction", "type": "hero", "content": "content/introduction.md" },
+  { "id": "about", "type": "note", "eyebrow": "Behind the scenes", "content": "content/notes.md" }
+]
+```
+
+Use `"enabled": false` on a section to hide it, or remove its object. Each
+section needs a unique `id` (letters, numbers and hyphens are a good choice).
+Keep JSON strings in double quotes and avoid trailing commas.
+
+The available section types are:
+
+- `hero`: large centered title, author/date, and description. Set `"byline": false` to hide author/date.
+- `viewer`: one side-by-side SVG/video pair, selected by its `scene` ID.
+- `viewers`: optional group using a `scenes` list; older configurations still work.
+- `note`: title at left, body at right; stacks on small screens.
+- `text`: a single column for longer text.
+
+To add a text section, create `content/method.md` with a heading and body, then
+add this object anywhere in `sections`:
+
+```json
+{ "id": "method", "type": "text", "content": "content/method.md" }
+```
+
+An optional `eyebrow` supplies a small label above a text section's title.
+
+## Calling individual viewers
+
+Each scene in `scenes.json` describes one complete SVG/video viewer pair.
+Use its `id` in a `viewer` section in `page.json`. Move that section object to
+place the viewer anywhere among your Markdown sections:
+
+```json
+"sections": [
+  { "id": "bird-example", "type": "viewer", "scene": "bird_flying" },
+  { "id": "about", "type": "text", "content": "content/notes.md" },
+  { "id": "splash-example", "type": "viewer", "scene": "pingpong_ball_cup_splash" }
+]
+```
+
+Viewer text and assets belong to the scene. Placement and layout options
+belong to its section in `page.json`:
+
+```json
+{
+  "id": "bird_flying",
+  "title": "Flying bird",
+  "svgSource": "inputs/bird_flying.svg",
+  "videoTitle": "Video viewer",
+  "prompt": "What does this SVG look like from another angle?",
+  "wandLabel": "Generate 3D",
+  "aside": "Animated example",
+  "numbering": true,
+  "svg": "inputs/bird_flying.svg",
+  "layers": "inputs/bird_flying",
+  "videos": [
+    { "src": "outputs/bird_flying_turntable.mp4", "title": "Novel View Synthesis", "subtitle": "Full Render" }
+  ]
+}
+```
+
+- `title`: heading above this viewer pair.
+- `svgSource`: URL of the original SVG source, displayed as an “SVG source” link below the SVG viewer at the bottom right. Use an external URL or a path relative to this page; an empty string hides the link.
+- `videoTitle`: label above the video canvas.
+- `prompt`: question displayed inside this scene's video canvas before playback.
+- `wandLabel`: the wand button's tooltip and accessible label.
+- `aside`: small caption at the right of the scene heading; use `""` to hide it.
+- `numbering`: use `false` to hide this scene's sequence number.
+
+These properties are independent for every scene. Missing properties use
+built-in defaults; an empty text string intentionally leaves that label blank.
+Video entry titles/subtitles and optional playback rate/poster stay in `videos`.
+
+Scene headings (`title`) and the video canvas label (`videoTitle`) support
+inline Markdown and basic HTML formatting. For example, either of these works:
+
+```json
+"title": "On the left is a flying bird. *What if we view it from another angle?*"
+```
+
+```json
+"title": "On the left is a flying bird. <i>What if we view it from another angle?</i>"
+```
+
+Use `**bold**` or `<strong>bold</strong>` for bold text. Formatting is sanitized;
+scripts, event handlers, and inline CSS are removed. Prompts and other labels
+remain plain text.
+
+Use a unique scene `id` so references remain stable when you change an SVG
+filename. If omitted, the ID defaults to the SVG filename without `.svg`;
+repeated filenames automatically receive `-2`, `-3`, etc.
+
+List a scene only once in the page. A grouped `viewers` section can still use
+`"scenes": ["bird_flying", "pingpong_ball_cup_splash"]`, or omit `scenes` to
+include all configured scenes. The group's viewers each use their own scene
+properties; there is no shared `page.json.viewers` settings block.
+
+## Swapping the SVG and video viewers
+
+Set `"swapViewers": true` on a viewer section in `page.json`:
+
+```json
+{
+  "id": "leaking-wine-animated-example",
+  "type": "viewer",
+  "scene": "leaking_wine_animated",
+  "swapViewers": true
+}
+```
+
+The video appears on the left and the SVG on the right. The first video loads
+paused when the example approaches the viewport, with its title and previews
+visible. The SVG and its layers load only after clicking the wand: the glow
+sweeps across the SVG viewer for two seconds, then the artwork appears. The
+scene's `prompt` appears in the waiting SVG viewer. The default `Generate 3D`
+wand label becomes `View SVG`; a custom `wandLabel` is kept.
+
+Video previews stay below the video, and the source link stays below the SVG. On small screens,
+the video comes first, followed by the wand and SVG viewer. Set it to `false`
+or omit it to keep the usual SVG-first layout. It also works on grouped
+`viewers` sections, applying to each scene in that group.
+
+## Changing assets and previewing
+
+After changing `scenes.json` paths or re-exporting layers, run:
+
+```sh
+python3 prepare_viewer_assets.py
+```
+
+This reads `scenes.json`, indexes existing layer IDs/variants, and generates
+video thumbnails/durations if ffmpeg/ffprobe are installed. Export filenames
+remain `<stem>_layer<ID>[_normalized][variant suffix].svg`.
+
+Preview through a web server rather than opening `index.html` as a `file://` URL:
+
+```sh
+python3 -m http.server 8765 --bind 127.0.0.1
+```
+
+Open `http://127.0.0.1:8765/`. If that server is already running, just refresh.
+Publish the HTML, CSS, JavaScript, JSON, Markdown, `assets/`, and media files
+together to GitHub Pages. Text/layout changes need only a refresh locally and
+publishing the edited files for the live site.
+
+Markdown rendering uses locally bundled [Marked](https://github.com/markedjs/marked)
+and [DOMPurify](https://github.com/cure53/DOMPurify); visitors need no CDN access.
+Versions and license notices are retained in `assets/vendor/`.
