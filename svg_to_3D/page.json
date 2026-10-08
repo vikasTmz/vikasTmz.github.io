@@ -35,10 +35,16 @@
       "scene": "character_running_dribbling_throwing"
     },
     {
-      "id": "about-me",
+      "id": "past-efforts",
       "type": "note",
       "eyebrow": "",
       "content": "content/notes.md"
+    },
+    {
+      "id": "The Inverse Mapping",
+      "type": "note",
+      "eyebrow": "",
+      "content": "content/vectorization.md"
     },
     {
       "id": "leaking-wine-animated-example",

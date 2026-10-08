@@ -666,6 +666,8 @@ async function initializePage() {
   skip.href = `#${firstViewer?.id || 'page-sections'}`;
   skip.textContent = firstViewer ? 'Skip to interactive viewer' : 'Skip to page content';
   $('page-status').hidden = true;
+  // Math is a separate async pass so equations cannot delay viewer setup.
+  typesetPageMath().catch(error => console.warn('Equations could not be typeset:', error));
 }
 
 initializePage().catch(error => {

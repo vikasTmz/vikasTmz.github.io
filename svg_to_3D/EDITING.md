@@ -33,6 +33,40 @@ Image and link paths are relative to the Markdown file; for example, an image
 in `assets/` is `![Caption](../assets/image.jpg)` from `content/notes.md`.
 A link starting with `#` refers to a section on this page.
 
+## Writing LaTeX equations
+
+All Markdown sections support MathJax equations. No HTML or build command is
+needed. Use `\( ... \)` for inline math, and `\[ ... \]` for centered display
+equations. `$ ... $` (inline) and `$$ ... $$` (display) also work. Put display
+delimiters on their own lines with a blank line before and after the block.
+
+```markdown
+The observed curve is \(c(t)\in\mathbb R^2\).
+
+\[
+\begin{aligned}
+c(t) &= \pi_\theta(C(t)) + \delta(t) \\
+\delta(t) &= 0
+\end{aligned}
+\]
+```
+
+In multiline equations, `&` marks the alignment point and `\\` starts the
+next row. `aligned`, `cases`, matrices, fractions, sums, Greek letters and
+`\boxed{...}` are supported. Standard display environments such as
+`\begin{align*} ... \end{align*}` can also appear without delimiters.
+Equations that are wider than a mobile screen scroll within their own block.
+
+Use Markdown `**bold**` and `-` lists for prose instead of LaTeX `\textbf`
+or `itemize`. MathJax renders mathematical expressions, not full LaTeX
+documents. Inside code spans or fenced code blocks, equations stay literal.
+Escape ordinary dollar signs as `\$`, or use the unambiguous `\( ... \)`
+syntax when writing about prices.
+
+Equations can also be written directly in HTML inside `<main>` using the
+same delimiters. `math.js` protects TeX from Markdown parsing and configures
+the locally hosted MathJax 4.1.3 library in `assets/vendor/mathjax/`.
+
 ## Reordering or hiding sections
 
 Move objects in the `sections` array in `page.json`. Their array order is their

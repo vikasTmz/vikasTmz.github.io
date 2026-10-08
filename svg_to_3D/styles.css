@@ -1934,3 +1934,16 @@ h1 em {
 .markdown-body table { border-collapse: collapse; width: 100%; }
 .markdown-body th, .markdown-body td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; }
 .markdown-body hr { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
+
+/* TeX stays centered and scrolls within its own block if a line is too wide. */
+.math-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 1.4em 0;
+  padding: .25em 0;
+  color: var(--ink);
+}
+
+.math-display mjx-container[display="true"] { margin: 0 !important; }
+.math-inline { color: inherit; }

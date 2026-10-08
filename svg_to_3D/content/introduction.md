@@ -1,5 +1,5 @@
 # Lifting SVGs to *3D*
 
-Vector graphics are a class of image representations that are compact, resolution independent, and human editable. Composed via piecewise combinations of parametric curves and geometric primitives, they are ideal for modeling smooth and continuous geometric shapes. Because of these properties, they are the defacto choice on web browsers and for shape editing and animation in design softwares.
+Vector graphics represent images using parametric curves and geometric primitives. They are compact, resolution independent, and easy to edit, making them well suited to model smooth, continuous shapes. These properties make them widely used on the web and in design software for shape editing and animation.
 
-While one can perform a whole range of edits on SVGs, certain manipulations like changing camera viewpoint, changing light direction, and casting shadows are natively impossible ... or are they?
+SVGs support a wide range of edits, but what if we want to change the camera viewpoint, adjust the lighting and cast shadows, or reveal hidden structures? These are natively impossible *... or are they?*. In this blog post, we experiment with GPT-6 Astra to lift SVGs into 3D in a principled manner and exlpore the new possibilities this opens up.

@@ -96,7 +96,7 @@
     "svgSource": "https://lottiefiles.com/free-animation/happy-character-throwing-ball-JgemFv5Qaq"
   },
   {
-    "title": "*What about the inverse mapping?* Vectorizing complex 3D scenes into SVGs.",
+    "title": "",
     "prompt": "Click the magic wand to vectorize the 3D scene",
     "svg": "inputs/leaking_wine_animated.svg",
     "layers": "inputs/leaking_wine_animated",
