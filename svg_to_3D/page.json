@@ -12,45 +12,60 @@
     {
       "id": "introduction",
       "type": "hero",
-      "content": "content/introduction.md"
+      "content": "content/introduction.md",
+      "navLabel": "Introduction"
     },
     {
       "id": "examples",
       "type": "viewer",
-      "scene": "bird_flying"
+      "scene": "bird_flying",
+      "navLabel": "Task: novel niew synthesis"
     },
     {
       "id": "other-examples",
       "type": "viewer",
-      "scene": "pingpong_ball_cup_splash"
+      "scene": "pingpong_ball_cup_splash",
+      "navLabel": "Task: bullet time effect"
     },
     {
       "id": "road-bike-desert-editable-example",
       "type": "viewer",
-      "scene": "road_bike_desert_editable"
+      "scene": "road_bike_desert_editable",
+      "navLabel": "Task: hidden geometry"
     },
     {
       "id": "character-running-dribbling-throwing-example",
       "type": "viewer",
-      "scene": "character_running_dribbling_throwing"
+      "scene": "character_running_dribbling_throwing",
+      "navLabel": "Task: shadows & camera authoring"
+    },
+    {
+      "id": "formulation",
+      "type": "note",
+      "eyebrow": "",
+      "content": "content/problem_formulation.md",
+      "navLabel": "Formulation"
     },
     {
       "id": "past-efforts",
       "type": "note",
       "eyebrow": "",
-      "content": "content/notes.md"
+      "content": "content/past_efforts.md",
+      "navLabel": "Past efforts"
     },
     {
       "id": "The Inverse Mapping",
       "type": "note",
       "eyebrow": "",
-      "content": "content/vectorization.md"
+      "content": "content/vectorization.md",
+      "navLabel": "Inverse mapping"
     },
     {
       "id": "leaking-wine-animated-example",
       "type": "viewer",
       "scene": "leaking_wine_animated",
-      "swapViewers": true
+      "swapViewers": true,
+      "navLabel": "3D to SVG"
     }
   ]
 }

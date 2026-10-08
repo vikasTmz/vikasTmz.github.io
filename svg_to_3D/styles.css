@@ -1947,3 +1947,90 @@ h1 em {
 
 .math-display mjx-container[display="true"] { margin: 0 !important; }
 .math-inline { color: inherit; }
+
+/* A quiet section rail in the desktop margin; labels appear on interaction. */
+.pnav { display: none; }
+
+@media (min-width: 1360px) {
+  .pnav:not([hidden]) {
+    --nav-row: 38px;
+    --nav-label-width: clamp(88px, calc((100vw - 1060px) / 2 - 72px), 168px);
+    position: fixed;
+    z-index: 30;
+    left: clamp(14px, 1.25vw, 24px);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    width: 32px;
+    max-height: calc(100dvh - 48px);
+  }
+}
+
+.pnav-track {
+  position: absolute;
+  pointer-events: none;
+  left: 15px;
+  width: 2px;
+  top: calc(var(--nav-row) / 2);
+  bottom: calc(var(--nav-row) / 2);
+  border-radius: 2px;
+  background: var(--line);
+}
+
+.pnav-fill {
+  display: block;
+  width: 100%;
+  height: 0;
+  border-radius: inherit;
+  background: linear-gradient(var(--accent), #91b4c2);
+}
+
+.pnav a {
+  position: relative;
+  display: flex;
+  flex: 0 1 var(--nav-row);
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  height: var(--nav-row);
+  border-radius: 6px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.pnav-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--line);
+  transition: transform .2s ease, background .2s ease;
+}
+
+.pnav .is-read .pnav-dot { background: var(--accent); box-shadow: none; }
+.pnav [aria-current="location"] .pnav-dot { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); transform: scale(1.3); }
+.pnav a:hover .pnav-dot { transform: scale(1.3); }
+
+.pnav-label {
+  position: absolute;
+  left: 34px;
+  width: max-content;
+  max-width: var(--nav-label-width);
+  padding: 4px 7px;
+  border-radius: 5px;
+  background: var(--paper);
+  font-size: 12px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  opacity: 0;
+  transform: translateX(-4px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.pnav:hover .pnav-label,
+.pnav:focus-within .pnav-label { opacity: 1; transform: none; pointer-events: auto; }
+.pnav [aria-current="location"] .pnav-label,
+.pnav a:hover .pnav-label { color: var(--ink); }
+.pnav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

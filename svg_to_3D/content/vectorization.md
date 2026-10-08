@@ -1,4 +1,4 @@
-# What about the inverse mapping?
+# The Inverse Mapping
 
 <br>
 

@@ -115,6 +115,68 @@ async function renderPageSections(page, examples) {
   return orderedExamples;
 }
 
+function createSectionNavigation(page, examples) {
+  const nav = document.getElementById('pnav');
+  const entries = page.sections.filter(item => item.enabled !== false).flatMap(item => {
+    const section = document.getElementById(item.id);
+    if (!section || section.hidden) return [];
+    const scene = examples.find(example => example.sceneId === item.scene);
+    if (item.type == 'viewer') return [];
+    const label = item.navLabel || (['viewer', 'viewers'].includes(item.type)
+      ? scene?.svg.name || item.title || 'Examples'
+      : section.querySelector('h1, h2')?.textContent.trim()) || item.id;
+    return [{ section, label }];
+  });
+  if (!entries.length) return { refresh() {} };
+  const track = document.createElement('span'); track.className = 'pnav-track';
+  track.setAttribute('aria-hidden', 'true');
+  const fill = document.createElement('span'); fill.className = 'pnav-fill'; track.append(fill);
+  nav.append(track);
+  entries.forEach(entry => {
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(entry.section.id)}`;
+    link.setAttribute('aria-label', entry.label);
+    const dot = document.createElement('span'); dot.className = 'pnav-dot'; dot.setAttribute('aria-hidden', 'true');
+    const label = document.createElement('span'); label.className = 'pnav-label'; label.textContent = entry.label;
+    link.append(dot, label); nav.append(link); entry.link = link;
+    // Keep native fragment/history behavior, and place keyboard focus at the destination.
+    entry.section.tabIndex = -1;
+    link.addEventListener('click', event => {
+      if (event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+        entry.section.focus({ preventScroll: true });
+      }
+    });
+  });
+  nav.hidden = false;
+  let scheduled = false;
+  function update() {
+    scheduled = false;
+    const anchor = Math.min(160, innerHeight * .25);
+    let current = 0;
+    entries.forEach((entry, index) => { if (entry.section.getBoundingClientRect().top <= anchor) current = index; });
+    const maximum = document.documentElement.scrollHeight - innerHeight;
+    if (maximum > 0 && scrollY >= maximum - 2) current = entries.length - 1;
+    fill.style.height = `${maximum > 0 ? Math.min(100, Math.max(0, scrollY / maximum * 100)) : 0}%`;
+    entries.forEach((entry, index) => {
+      entry.link.classList.toggle('is-read', index < current);
+      if (index === current) entry.link.setAttribute('aria-current', 'location');
+      else entry.link.removeAttribute('aria-current');
+    });
+  }
+  function refresh() {
+    if (!scheduled) { scheduled = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', refresh, { passive: true });
+  window.addEventListener('resize', refresh, { passive: true });
+  const observer = new ResizeObserver(refresh);
+  observer.observe(document.getElementById('page-sections'));
+  window.addEventListener('pagehide', () => {
+    observer.disconnect(); window.removeEventListener('scroll', refresh); window.removeEventListener('resize', refresh);
+  }, { once: true });
+  refresh();
+  return { refresh };
+}
+
 async function initializePage() {
   const filenameStem = path => decodeURIComponent(new URL(path, document.baseURI).pathname.split('/').pop()).replace(/\.[^.]+$/, '');
   const readableName = value => value.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim().replace(/\b\w/g, c => c.toUpperCase());
@@ -665,9 +727,15 @@ async function initializePage() {
   const skip = document.querySelector('.skip-link');
   skip.href = `#${firstViewer?.id || 'page-sections'}`;
   skip.textContent = firstViewer ? 'Skip to interactive viewer' : 'Skip to page content';
+  const navigation = createSectionNavigation(page, EXAMPLES);
   $('page-status').hidden = true;
   // Math is a separate async pass so equations cannot delay viewer setup.
-  typesetPageMath().catch(error => console.warn('Equations could not be typeset:', error));
+  typesetPageMath().then(() => {
+    // A bookmarked section only exists after fetched Markdown has been inserted.
+    const target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target && target.parentElement === $('page-sections')) target.scrollIntoView();
+    navigation.refresh();
+  }).catch(error => console.warn('Equations could not be typeset:', error));
 }
 
 initializePage().catch(error => {

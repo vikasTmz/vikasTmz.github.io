@@ -69,6 +69,23 @@ the locally hosted MathJax 4.1.3 library in `assets/vendor/mathjax/`.
 
 ## Reordering or hiding sections
 
+The left-margin navigation is generated from the enabled sections in
+`page.json`, in their page order. It appears on desktop screens at least
+1360 pixels wide; smaller screens keep the full content width. Hover over
+the dots, or focus a link with the keyboard, to reveal the section names.
+The highlighted dot tracks the current section as you scroll.
+
+Use an optional `navLabel` on each section to give it a short navigation name:
+
+```json
+{ "id": "formulation", "type": "note", "content": "content/problem_formulation.md", "navLabel": "Formulation" }
+```
+
+Without `navLabel`, text sections use their Markdown heading and individual
+viewer sections use the scene's readable SVG name. Disabled or empty sections
+do not appear in the navigation. Links use the section ID, so they can also be
+bookmarked or shared.
+
 Move objects in the `sections` array in `page.json`. Their array order is their
 page order. For viewers first, followed by the introduction and notes:
 

@@ -1,6 +1,6 @@
 [
   {
-    "title": "On the left is an SVG of a motion animation of a bird flying. *But what if we want to view this from a different angle?*",
+    "title": "On the left is an SVG of a bird flying. *But what if we want to view this from a different angle?*",
     "prompt": "Click the magic wand to change the camera angle",
     "svg": "inputs/bird_flying.svg",
     "layers": "inputs/bird_flying",
@@ -72,7 +72,7 @@
     "svgSource": "https://as2.ftcdn.net/jpg/20/10/98/59/1000_F_2010985950_FJR9X2Ohnc0PFo4WQqaNiUpSxCGRtfcV.webp"
   },
   {
-    "title": "*Adding shadows* and *Camera Pose Authoring.*",
+    "title": "*Adding shadows* and *camera pose authoring.*",
     "prompt": "Click the magic wand to add shadows and author camera poses",
     "svg": "inputs/character_running_dribbling_throwing.svg",
     "layers": "inputs/character_running_dribbling_throwing",
