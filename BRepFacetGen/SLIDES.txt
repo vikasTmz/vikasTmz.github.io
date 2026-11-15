@@ -1,0 +1,42 @@
+Website slide sections
+======================
+
+Edit slide-sections.json to choose the section headings and DeckWerk slides.
+Each sections entry has a title string and a slide number (the DeckWerk rail
+position). Array order controls website order. The current first entry is
+slide 4 with a placeholder title. No section copy is hard-coded in HTML.
+
+After changing slide selections or saving slides in DeckWerk, run:
+
+  node scripts/sync-slides.mjs
+
+Or watch both the configuration and DeckWerk saves:
+
+  node scripts/sync-slides.mjs --watch
+
+Wait for "Updated slides/", then refresh the browser. Heading-only edits
+need just a browser refresh. Stop the watcher with Ctrl+C.
+
+The default DeckWerk checkout is ~/Downloads/deckwerk, with npm dependencies
+installed. Override it with --deckwerk /path/to/deckwerk or DECKWERK_SOURCE.
+The script uses DeckWerk's supported inspect CLI and official HTML exporter.
+It never reads or edits the source project's deck.json directly.
+
+Each configured slide has its own generated slides/slide-N.html, using the
+native player and shared assets. Layouts, videos and animation timelines come
+from DeckWerk. Presenter notes are stripped. The previous website playback
+bar and explanatory copy have been removed; native click builds still work.
+
+To preview (with byte-range support for trimmed video):
+
+  node scripts/serve.mjs
+
+Open the printed URL. The page loads JSON over HTTP; do not open index.html
+via file://. Published changes require publishing the configuration and
+regenerated slides/ alongside the website. Hidden selected slides must be
+unhidden before export. Reordering DeckWerk changes the rail selections.
+
+Do not edit generated slides/ files. Website section rendering is in
+js/slides.js, styling in css/main.css, and native startup in
+web/slides/embed.js. Earlier playback adapters remain in web/slides/ for
+future player design work but are not loaded by the website.

@@ -90,3 +90,8 @@ code { font: inherit; }
   .project-page { width: 100%; margin: 0; }
   pre { background: none; }
 }
+
+/* Sections are populated from slide-sections.json. */
+.slide-section { margin: 42px 0 48px; }
+.slide-section h2 { font-size: 1.5rem; border-top: 2px solid #ddd; padding-top: 8px; margin: 0 0 18px; }
+.slide-section iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #fff; }

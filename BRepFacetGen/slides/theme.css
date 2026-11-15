@@ -1,0 +1,96 @@
+/*
+ * Imported from PowerPoint. Layout-critical text face, size and paint are kept
+ * as inline values; remove them from an element to style it entirely from here.
+ *
+ * Imported text carries the class .pp-text and an inline font-size matching
+ * the point size it had in PowerPoint. Delete those inline sizes once you have
+ * styled .pp-text the way you want. Objects that came from the slide master or
+ * layout carry .pp-layout as well.
+ */
+
+.slide {
+  background: #ffffff;
+  color: #111111;
+  font-family: Calibri, "Carlito", "Helvetica Neue", Inter, system-ui, sans-serif;
+}
+
+.pp-text {
+  line-height: 1.2;
+}
+
+/* Semantic defaults for text boxes created after import. Imported PowerPoint
+ * text keeps its own inline size, so these do not disturb the source slides. */
+.role-title {
+  font-size: 92px;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.role-heading {
+  font-size: 58px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.role-body {
+  font-size: 44px;
+  line-height: 1.3;
+}
+
+.role-caption {
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+/* PowerPoint fidelity restoration */
+@font-face {font-family:"PPT Palatino Fallback";src:url("assets/ppt-palatino-fallback-bold-italic.ttf") format("truetype");font-weight:700;font-style:italic;}
+@font-face {font-family:"PPT Palatino Fallback";src:url("assets/ppt-palatino-fallback-bold.ttf") format("truetype");font-weight:700;font-style:normal;}
+@font-face {font-family:"PPT Palatino Fallback";src:url("assets/ppt-palatino-fallback-italic.ttf") format("truetype");font-weight:400;font-style:italic;}
+@font-face {font-family:"PPT Palatino Fallback";src:url("assets/ppt-palatino-fallback-regular.ttf") format("truetype");font-weight:400;font-style:normal;}
+@font-face {font-family:"Palatino Linotype";src:url("assets/ppt-palatino-roman.ttf") format("truetype");font-weight:400;font-style:normal;unicode-range:U+20,U+21,U+22,U+23,U+26,U+27,U+28,U+29,U+2C,U+2D,U+2E,U+2F,U+30,U+31,U+32,U+33,U+34,U+35,U+3A,U+3D,U+41,U+42,U+43,U+44,U+45,U+46,U+47,U+48,U+49,U+4A,U+4B,U+4C,U+4D,U+50,U+51,U+52,U+53,U+54,U+55,U+56,U+57,U+58,U+59,U+5A,U+5B,U+5D,U+61,U+62,U+63,U+64,U+65,U+66,U+67,U+68,U+69,U+6B,U+6C,U+6D,U+6E,U+6F,U+70,U+72,U+73,U+74,U+75,U+76,U+77,U+79,U+7A,U+7E,U+A0,U+AD,U+B2,U+B3,U+B9,U+132,U+17F,U+2B9,U+2BA,U+1D43,U+1D47,U+1D48,U+1D49,U+1D4D,U+1D4F,U+1D50,U+1D52,U+1D56,U+1D57,U+1D58,U+1D5B,U+2010,U+2011,U+2018,U+2019,U+201C,U+201D,U+203C,U+2044,U+2070,U+2074,U+2075,U+207B,U+207C,U+207D,U+207E,U+2080,U+2081,U+2082,U+2083,U+2084,U+2085,U+208C,U+208D,U+208E,U+2105,U+FB00,U+FB01,U+FB02,U+FB03,U+FB04,U+FB05,U+FB06;}
+@font-face {font-family:"Palatino Linotype";src:url("assets/ppt-palatino-bold.ttf") format("truetype");font-weight:700;font-style:normal;unicode-range:U+20,U+21,U+22,U+2D,U+41,U+42,U+43,U+44,U+45,U+46,U+47,U+48,U+4C,U+4D,U+4E,U+50,U+52,U+53,U+54,U+56,U+5A,U+61,U+64,U+65,U+68,U+69,U+6B,U+6C,U+6D,U+6E,U+6F,U+70,U+72,U+73,U+74,U+75,U+78,U+7A,U+A0,U+AD,U+17F,U+2BA,U+1D43,U+1D48,U+1D49,U+1D4F,U+1D50,U+1D52,U+1D56,U+1D57,U+1D58,U+2010,U+2011,U+203C,U+207B,U+FB05,U+FB06;}
+@font-face {font-family:"Palatino Linotype";src:url("assets/ppt-palatino-italic.ttf") format("truetype");font-weight:400;font-style:italic;unicode-range:U+20,U+21,U+22,U+28,U+29,U+2C,U+2D,U+2E,U+2F,U+30,U+31,U+32,U+33,U+3A,U+41,U+42,U+43,U+44,U+45,U+46,U+47,U+48,U+49,U+4A,U+4B,U+4C,U+4D,U+4F,U+50,U+51,U+52,U+53,U+54,U+56,U+57,U+58,U+59,U+5A,U+61,U+62,U+63,U+64,U+65,U+66,U+67,U+68,U+69,U+6A,U+6B,U+6C,U+6D,U+6E,U+6F,U+70,U+71,U+72,U+73,U+74,U+75,U+76,U+77,U+78,U+79,U+7A,U+A0,U+AD,U+B2,U+B3,U+B9,U+132,U+133,U+17F,U+2BA,U+1D43,U+1D47,U+1D48,U+1D49,U+1D4D,U+1D4F,U+1D50,U+1D52,U+1D56,U+1D57,U+1D58,U+1D5B,U+2010,U+2011,U+203C,U+2044,U+2070,U+207B,U+207D,U+207E,U+2080,U+2081,U+2082,U+2083,U+208D,U+208E,U+2105,U+FB00,U+FB01,U+FB02,U+FB03,U+FB04,U+FB05,U+FB06;}
+@font-face {font-family:"Palatino Linotype";src:url("assets/ppt-palatino-bolditalic.ttf") format("truetype");font-weight:700;font-style:italic;unicode-range:U+21,U+22,U+42,U+46,U+47,U+4D,U+52,U+61,U+63,U+64,U+65,U+6E,U+70,U+72,U+74,U+2BA,U+1D43,U+1D48,U+1D49,U+1D56,U+1D57,U+203C;}
+@font-face {font-family:"Aptos";src:url("assets/ppt-aptos.ttf") format("truetype");}
+@font-face {font-family:"Cambria Math";src:url("assets/ppt-cambria-math.ttf") format("truetype");}
+
+/* PowerPoint uses ordinary tracking, not the theme's negative title tracking. */
+.slide .pp-text {letter-spacing:normal;line-height:1.2;}
+.slide .pp-text sup,.slide .pp-text sub {font-size:65%;}
+/* The effects below are activated by the editable DeckWerk timeline. */
+@keyframes ppt-fade {from {opacity:0;} to {opacity:1;}}
+@keyframes ppt-rise {0% {translate:0 1080px;animation-timing-function:cubic-bezier(0.3333333333,0.6666666667,0.6666666667,1);} 90% {translate:0 -32.4px;animation-timing-function:cubic-bezier(0.3333333333,0,0.6666666667,0.3333333333);} 100% {translate:0 0;}}
+
+@keyframes ppt-pixel-dissolve {
+0% {mask-image:url("assets/ppt-dissolve-00.svg");}
+5% {mask-image:url("assets/ppt-dissolve-01.svg");}
+10% {mask-image:url("assets/ppt-dissolve-02.svg");}
+15% {mask-image:url("assets/ppt-dissolve-03.svg");}
+20% {mask-image:url("assets/ppt-dissolve-04.svg");}
+25% {mask-image:url("assets/ppt-dissolve-05.svg");}
+30% {mask-image:url("assets/ppt-dissolve-06.svg");}
+35% {mask-image:url("assets/ppt-dissolve-07.svg");}
+40% {mask-image:url("assets/ppt-dissolve-08.svg");}
+45% {mask-image:url("assets/ppt-dissolve-09.svg");}
+50% {mask-image:url("assets/ppt-dissolve-10.svg");}
+55% {mask-image:url("assets/ppt-dissolve-11.svg");}
+60% {mask-image:url("assets/ppt-dissolve-12.svg");}
+65% {mask-image:url("assets/ppt-dissolve-13.svg");}
+70% {mask-image:url("assets/ppt-dissolve-14.svg");}
+75% {mask-image:url("assets/ppt-dissolve-15.svg");}
+80% {mask-image:url("assets/ppt-dissolve-16.svg");}
+85% {mask-image:url("assets/ppt-dissolve-17.svg");}
+90% {mask-image:url("assets/ppt-dissolve-18.svg");}
+95% {mask-image:url("assets/ppt-dissolve-19.svg");}
+100% {mask-image:url("assets/ppt-dissolve-20.svg");}
+}
+.slide .ppt-fade-500 {animation:ppt-fade 500ms linear both;}
+.slide .ppt-pixel-dissolve-500 {animation:ppt-pixel-dissolve 500ms steps(1,end) both;mask-size:100% 100%;mask-repeat:no-repeat;}
+.slide .ppt-rise-1000 {animation:ppt-fade 1000ms linear both,ppt-rise 1000ms linear both;}
+
+/* Full Palatino Linotype for the moka pot slide. */
+@font-face {font-family:"Palatino Linotype (embedded)";src:url("assets/moka-palatino-linotype-regular.ttf") format("truetype");font-weight:400;font-style:normal;}
+@font-face {font-family:"Palatino Linotype (embedded)";src:url("assets/moka-palatino-linotype-bold.ttf") format("truetype");font-weight:700;font-style:normal;}
+@font-face {font-family:"Palatino Linotype (embedded)";src:url("assets/moka-palatino-linotype-italic.ttf") format("truetype");font-weight:400;font-style:italic;}
+@font-face {font-family:"Palatino Linotype (embedded)";src:url("assets/moka-palatino-linotype-bold-italic.ttf") format("truetype");font-weight:700;font-style:italic;}
