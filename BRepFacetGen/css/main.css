@@ -1,0 +1,92 @@
+/* VecFusion's EB Garamond, ivory background, burgundy links, and ruled headings.
+   Layout simplified to responsive HTML for this initial project page. */
+@font-face {
+  font-family: "EB Garamond";
+  src: url("ebgaramond12-regular-webfont.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  color-scheme: light;
+  font-family: "EB Garamond", Constantia, Georgia, serif;
+  color: #343434;
+  background: #fefefa;
+  font-synthesis: weight;
+}
+* { box-sizing: border-box; }
+body { margin: 0; line-height: 1.4; }
+.project-page {
+  width: min(100% - 40px, 900px);
+  margin: 48px auto 64px;
+  border-top: 2px solid #ddd;
+  padding-top: 20px;
+}
+h1 {
+  margin: 0 0 28px;
+  font-size: clamp(1.8rem, 3.5vw, 2.25rem);
+  line-height: 1.2;
+  font-weight: 400;
+  text-align: center;
+  text-wrap: balance;
+}
+h1 strong { font-weight: 700; }
+.authors, .affiliations {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+.authors { gap: 12px 30px; margin: 0 0 16px; font-size: 1.18rem; }
+.authors li { white-space: nowrap; }
+sup { font-size: 0.68em; vertical-align: super; line-height: 0; margin-left: 2px; }
+.affiliations { gap: 8px 36px; margin: 0; font-size: 1.05rem; }
+.affiliations sup { margin: 0 4px 0 0; }
+a { color: #900020; text-decoration: none; }
+a[href]:hover { text-decoration: underline; }
+a:focus-visible, pre:focus-visible { outline: 2px solid #900020; outline-offset: 6px; }
+.project-resources {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  align-items: end;
+  max-width: 620px;
+  margin: 42px auto 36px;
+  gap: 12px;
+  text-align: center;
+}
+.resource-link { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 1.2rem; }
+.resource-image { height: 100px; display: flex; align-items: center; justify-content: center; width: 100%; }
+.resource-image img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.resource-link[aria-disabled="true"] { color: #686868; cursor: default; }
+.resource-link[aria-disabled="true"] img { opacity: 0.6; }
+.affiliation-logos { display: flex; align-items: center; justify-content: center; gap: 80px; margin: 36px 0 44px; }
+.affiliation-logos img { object-fit: contain; max-width: 100%; height: auto; }
+.citation h2 { border-top: 2px solid #ddd; margin: 0 0 14px; padding-top: 8px; font-size: 1.5rem; }
+pre {
+  margin: 0;
+  padding: 20px;
+  background: #f3f3ef;
+  font: 0.82rem/1.7 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+code { font: inherit; }
+@media (max-width: 600px) {
+  .project-page { width: calc(100% - 32px); margin-top: 24px; }
+  .title-break { display: none; }
+  .authors { gap: 10px 20px; }
+  .affiliations { flex-direction: column; gap: 6px; }
+  .project-resources { margin: 28px auto; gap: 8px; }
+  .resource-image { height: 80px; }
+  .resource-image img { max-width: 90%; }
+  .affiliation-logos { gap: 36px; margin: 30px 0 36px; }
+  .umass-logo { width: 68px; }
+  .autodesk-logo { width: min(190px, 52%); }
+  pre { padding: 14px; font-size: 0.75rem; }
+}
+@media print {
+  .project-page { width: 100%; margin: 0; }
+  pre { background: none; }
+}
