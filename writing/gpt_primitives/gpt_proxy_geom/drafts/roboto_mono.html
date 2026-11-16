@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Describe the intent of this save for DeckWerk History; leave empty for an automatic change summary. -->
+<meta name="deckwerk-change-label" content="Use bundled Roboto Mono for all text, including the animated Length label">
+<!-- slide-editor-scope:%5B%22slide-8qx4ipie%22%5D -->
+<!--
+  This file governs exactly the slides listed in the marker above, and saving
+  it is what changes them:
+
+    * editing inside a section that has a data-slide-id - REPLACES that slide
+    * adding a section with class "slide" and no data-slide-id - ADDS a slide
+    * removing a section that was exported here - DELETES that slide
+    * reordering exported sections - MOVES those slides in the deck, among
+      the places they hold now (slides exported from far apart stay apart)
+    * a new section lands right after the slide of the section before it
+
+  Each section also carries what is not drawn on the slide: data-skipped,
+  its speaker notes in an aside of class "notes", and - when the objects'
+  data-build attributes cannot say it all - its timeline as JSON in a
+  script of type application/deckwerk-timeline.
+
+  This section list is the structural editing API. Do not search for delete,
+  move or reorder commands or transaction operations; edit this file and save
+  it (or apply this same file with slide-agent apply).
+
+  To add slides, do not copy this file: the copy inherits the scope above and
+  saving it would delete these slides. Run `slide-agent new` for a blank
+  authoring page, which appends whatever sections you put in it.
+-->
+<title>slide-8qx4ipie</title>
+<base href="../">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { width: 1920px; }
+  section.slide, [data-slide-id] {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  /* A section's speaker notes ride inside it but are not on the slide. */
+  section.slide > aside.notes, [data-slide-id] > aside.notes { display: none; }
+  /* Compiled geometry is measured from each object's border box, and the
+     player uses the same model. Keep exported native objects on that model so
+     preserving padding or borders does not make them grow on the next render. */
+  [data-element-id] { box-sizing: border-box; }
+  /* A deck object's box is its geometry: a margin a theme class gives it
+     would place it somewhere its numbers do not say, and the next save would
+     store that place and the player add the margin again — drifting the
+     object by the margin on every round trip. The player resets it too. */
+  [data-element-id] { margin: 0 !important; }
+  /* Sensible defaults so bare markup does not arrive with browser margins
+     baked into its measured geometry. */
+  h1, h2, h3, h4, h5, h6, p, ul, ol, figure, blockquote { margin: 0; }
+  /* No max-width: a picture that bleeds past the canvas edge is a real design,
+     and clamping it to the slide silently resizes the object. The slide clips
+     what overflows, which is what the player does too. */
+  img, video { display: block; }
+
+  pre[data-element="code"] {
+    margin: 0; box-sizing: border-box; overflow: hidden; white-space: pre;
+    font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 28px;
+    line-height: 1.5; tab-size: 4;
+    padding: 0.75em 1em;
+  }
+  pre[data-element="code"] > code { font: inherit; }
+</style>
+<style>/*
+ * The semantic type fallback, split out from the structural styles.
+ *
+ * A deck's own theme.css loads after this and overrides it. Imported decks
+ * often only style `.kn-text`; without these defaults, title and body content
+ * added later would render at the browser default 16px.
+ *
+ * This lives in its own file because two things need it and only one of them
+ * wants the rest of player.css: the player, and the HTML slide compiler, which
+ * must reproduce the deck's typography exactly while *not* inheriting the
+ * absolute positioning the player applies. If these rules were duplicated, a
+ * compiled slide would measure one size and render at another.
+ */
+
+.element-text { font-size: 48px; line-height: 1.28; }
+.role-title { font-size: 92px; font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; }
+.role-heading { font-size: 58px; font-weight: 600; line-height: 1.15; }
+.role-body { font-size: 48px; line-height: 1.3; }
+.role-caption { font-size: 30px; line-height: 1.3; }
+
+/*
+ * Text rules that are presentation, not positioning.
+ *
+ * They live here rather than in player.css because two DOMs need them: the
+ * player's (`.text-body` inside an element wrapper) and the HTML export's,
+ * where the element *is* the text box and carries `data-valign`. A rule that
+ * only knew about the first is why an exported file showed the literal word
+ * "Text" for every empty imported Keynote box, and broke lines where the
+ * player would not.
+ */
+.text-body {
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Auto-fit has a 6px readability floor. Pathologically long unbroken content
+   is clipped at that floor rather than painting over neighbouring objects. */
+.element-text[data-auto-fit="true"] .text-body,
+.element-text[data-autofit="true"] .text-body,
+.element-text[data-no-wrap="true"] .text-body,
+.element-text[data-nowrap="true"] .text-body { overflow: hidden; }
+
+/* No-wrap boxes break lines only where the author wrote a break; the auto-fit
+   shrink (which no-wrap implies) compresses overlong lines instead. */
+.element-text[data-no-wrap="true"] .text-body,
+.element-text[data-nowrap="true"] .text-body {
+  white-space: pre;
+  word-break: normal;
+}
+
+/* A box sized to its text never soft-wraps: its width is the widest line.
+   Nothing clips either, so a renderer whose metrics differ by a hair spills a
+   sliver past the edge instead of hiding the last glyph. */
+.element-text[data-auto-size="true"] .text-body {
+  white-space: pre;
+  word-break: normal;
+  overflow: visible;
+}
+
+/* Empty imported Keynote text boxes are authoring affordances, not slide
+   content. The editor makes them faintly visible again; presentations, web
+   exports and authoring files must never show a literal "Text" placeholder. */
+.element.placeholder .text-body {
+  visibility: hidden;
+}
+
+/* Import gaps are meant to be conspicuous: a placeholder you can see is a
+   placeholder you will fix. */
+.element-unsupported,
+[data-element="unsupported"] {
+  border: 2px dashed #e0463c;
+  background: rgb(224 70 60 / 8%);
+}
+
+.unsupported-body,
+[data-element="unsupported"] {
+  box-sizing: border-box;
+  padding: 8px;
+  overflow: hidden;
+  color: #e0463c;
+  font: 500 20px/1.3 ui-monospace, monospace;
+}
+
+/* @authoring-lists begin
+ *
+ * Everything from here to the matching end marker is how a list draws, and
+ * the HTML authoring page applies the very same rules to the bare lists an
+ * author writes (`authoringListCss` in shared/htmlSlides.ts rescopes them):
+ * a list the compile measured without them was baked a dozen pixels short
+ * per item, and drew past its box in the player. Keep list rules inside.
+ */
+
+/* Bulleted lists inside text elements. theme.css can restyle the markers. */
+/* No text-align of its own: a list follows the element's alignment like any
+   other block, so centring a bulleted text element actually centres it. */
+.text-body :is(ul, ol) {
+  margin: 0;
+  /* Markers sit flush with the text box: no inset on the list itself. */
+  padding-left: 0;
+}
+
+/*
+ * The marker is laid out inside the item and the item hangs its wrapped
+ * lines: the bullet (or number) starts at the box edge with no whitespace
+ * before it, while continuation lines line up under the first line's text.
+ *
+ * The item paints that marker itself, because the hanging indent has to be
+ * the marker's width and nothing else, and a native marker's width is not a
+ * number CSS can ask for. It was an em-relative guess — 1.4em, against
+ * Chromium's real 1.32em for a disc in Helvetica Neue, 1.29em in a monospace,
+ * and 0.61em for the nested dash — so every line after the first, wrapped or
+ * after a hard break, started a few pixels right of the line above it, and
+ * half an em right of it under a dash. An inline-block of a width we choose
+ * closes that gap by construction: the marker box *is* the indent.
+ */
+.text-body li {
+  margin: 0.15em 0;
+  list-style-position: inside;
+  list-style-type: none;
+  padding-left: 1.4em;
+}
+
+/* Suppressed, not removed. `list-style-type` stays the way an author or an
+   import asks for one of the browser's own markers (see below), and engines
+   without `::marker` content still honour the `list-style-type: none` above. */
+.text-body li::marker {
+  content: '';
+}
+
+/*
+ * The marker box. Its width is the item's hanging indent — keep the two in
+ * step — and the item's own hanging indent must not shift what it draws.
+ *
+ * The indent is hung by the marker rather than by a negative `text-indent` on
+ * the item. The marker is laid out at the start of the line, painted one
+ * indent to the left of where it sits, and gives that indent back as advance,
+ * so the text after it still lands at the content edge. Relative offsets and
+ * negative margins move what is painted and what follows, never the line box
+ * itself, so all of this comes out where a hanging indent put it.
+ *
+ * The reason to hang it this way is the caret. An item holding nothing but the
+ * placeholder `<br>` has no text node to anchor a caret in, so the only caret
+ * position it has is the item's own start — and with the line box itself
+ * shifted a marker-width left, that start was *before* the marker while
+ * anything typed there landed after it. The caret was drawn on the wrong side
+ * of the bullet and jumped across it on the first keystroke. Leaving the line
+ * box where the text is puts the caret there too, for every shape of empty
+ * item, with no rule that has to guess which items are empty.
+ */
+.text-body li::before {
+  content: '';
+  display: inline-block;
+  /* min-width, not width: a marker wider than the indent (a two-digit
+     number) then pushes its own line along rather than painting over it —
+     the negative margin gives back one indent, not the marker's full width. */
+  min-width: 1.4em;
+  position: relative;
+  left: -1.4em;
+  margin-right: -1.4em;
+  text-indent: 0;
+}
+
+/* Chromium's disc, reproduced: a filled circle 0.3125em across, sitting
+   0.16em above the baseline. That is what the native marker paints, to within
+   a device pixel at every size — and unlike the U+2022 glyph it does not
+   change size with the theme's typeface. */
+.text-body ul > li::before {
+  height: 0.3125em;
+  vertical-align: 0.16em;
+  background:
+    radial-gradient(circle closest-side, currentColor 100%, transparent 100%)
+    left top / 0.3125em 0.3125em no-repeat;
+}
+
+/* Indented bullets (tab while editing a list) switch to a dash marker. */
+.text-body ul ul > li::before {
+  content: '-';
+  /* Not the drawn disc: a glyph, laid out like the numbers are. */
+  height: auto;
+  vertical-align: baseline;
+  background: none;
+}
+
+/* Numbered items count themselves. `list-item` is the counter Chromium's own
+   marker reads, so `<ol start>` and `<li value>` keep working. */
+.text-body ol > li::before {
+  content: counter(list-item) '.';
+}
+
+/* An authored `list-style-type` is a request for one of the browser's markers
+   — square, lower-roman, a string. Those items keep the native marker, and
+   with it the approximate hanging indent it has always had. The item's own
+   `list-style-type: none` above outranks anything it merely inherits, so a
+   type set on the list itself has to be handed back explicitly. */
+.text-body li[style*="list-style-type"],
+.text-body [style*="list-style-type"] li {
+  list-style-type: inherit;
+}
+.text-body li[style*="list-style-type"]::marker,
+.text-body [style*="list-style-type"] li::marker {
+  content: normal;
+}
+.text-body li[style*="list-style-type"]::before,
+.text-body [style*="list-style-type"] li::before {
+  content: none;
+}
+/* With no `::before` to hang the indent, those items hang it the old way. */
+.text-body li[style*="list-style-type"],
+.text-body [style*="list-style-type"] li {
+  text-indent: -1.4em;
+}
+
+/* An item that only holds an indented list -- the first item of a list,
+   indented, hangs in one -- is not a line of the text: no marker, so no line
+   of its own, and no number, so the item after it is still 1. After the
+   rules above, which an authored list-style-type on the list would reach. */
+.text-body li[data-list-holder] {
+  counter-increment: list-item 0;
+  list-style-type: none;
+}
+.text-body li[data-list-holder]::before,
+.text-body li[data-list-holder]::marker {
+  content: none;
+}
+
+/* Blocks nested in an item (a wrapped paragraph, a sub-list) are not the
+   marker line and must not inherit its hanging indent. */
+.text-body li > :is(p, div, ul, ol, table) {
+  text-indent: 0;
+}
+
+/* Every level below the first indents by one step relative to the level
+   above. Inside an item the item's own padding already supplies that step;
+   Chromium's indent command writes the sub-list as a *sibling* of its item
+   (see canvas.ts), so that shape needs the step spelled out. */
+.text-body :is(ul, ol) > :is(ul, ol) {
+  padding-left: 1.4em;
+}
+
+/* An indented paragraph outside a list (`data-indent`, the Indent buttons)
+   steps in by the same 1.4em per level. Items indent by nesting instead, so
+   the attribute is ignored on one. */
+.text-body [data-indent="1"]:not(li) { margin-left: 1.4em; }
+.text-body [data-indent="2"]:not(li) { margin-left: 2.8em; }
+.text-body [data-indent="3"]:not(li) { margin-left: 4.2em; }
+.text-body [data-indent="4"]:not(li) { margin-left: 5.6em; }
+.text-body [data-indent="5"]:not(li) { margin-left: 7em; }
+.text-body [data-indent="6"]:not(li) { margin-left: 8.4em; }
+.text-body [data-indent="7"]:not(li) { margin-left: 9.8em; }
+.text-body [data-indent="8"]:not(li) { margin-left: 11.2em; }
+
+/* An authored marker colour is independent of character-level text runs.
+   Without this opt-in, markers keep following the list item's colour and
+   theme.css can continue to style them normally. The drawn disc takes its
+   fill from `currentColor`, so colouring the box colours the marker. */
+.text-body li[data-list-marker-color]::before,
+.text-body li[data-list-marker-color]::marker {
+  color: var(--list-marker-color) !important;
+}
+/* @authoring-lists end */
+
+/* Tables pasted from spreadsheets and web pages remain ordinary editable
+   HTML. These restrained defaults make unstyled tables readable while inline
+   cell colours from the source (or the Props panel) continue to win. */
+.text-body table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.text-body :is(th, td) {
+  min-width: 1.5em;
+  padding: 0.2em 0.35em;
+  border: 1px solid currentColor;
+  vertical-align: top;
+}
+
+.text-body th { font-weight: 700; }
+
+/* A paragraph is a block, and the only gap between two of them is the deck's
+   own paragraph spacing — never the browser's 1em default, which would make
+   text jump the moment the editor turned imported `<br>` breaks into blocks. */
+.text-body :is(p, h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+}
+
+/* Explicit paragraph spacing: one number governs the gap between paragraphs
+   and between bullets. The element carries data-paragraph-spacing and the
+   --paragraph-spacing variable; unset elements keep the defaults above. */
+/* :where keeps this reset at the same specificity as the spacing rule below,
+   so the later rule wins on the elements both match. */
+[data-paragraph-spacing] .text-body :where(p, ul, ol, li) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+[data-paragraph-spacing] .text-content > * + *,
+[data-paragraph-spacing] .text-body li + li:not(:is(ul, ol) :is(ul, ol) li) {
+  margin-top: var(--paragraph-spacing, 0);
+}
+
+/* Indented bullets are a group under their parent item, not paragraphs of
+   their own: no paragraph spacing between them, and none before the first of
+   them. The :not() above leaves every nested item — in the saved
+   `li > ul > li` shape and in the `ul > ul > li` shape Chromium's indent
+   writes while editing — to the reset, which zeroes it. */
+</style>
+<style data-authoring-lists>@layer deckwerk-authoring-lists {
+@scope (body) to ([data-element="html"], .text-body) {
+
+/* Bulleted lists inside text elements. theme.css can restyle the markers. */
+/* No text-align of its own: a list follows the element's alignment like any
+   other block, so centring a bulleted text element actually centres it. */
+:is(ul, ol) {
+  margin: 0;
+  /* Markers sit flush with the text box: no inset on the list itself. */
+  padding-left: 0;
+}
+
+/*
+ * The marker is laid out inside the item and the item hangs its wrapped
+ * lines: the bullet (or number) starts at the box edge with no whitespace
+ * before it, while continuation lines line up under the first line's text.
+ *
+ * The item paints that marker itself, because the hanging indent has to be
+ * the marker's width and nothing else, and a native marker's width is not a
+ * number CSS can ask for. It was an em-relative guess — 1.4em, against
+ * Chromium's real 1.32em for a disc in Helvetica Neue, 1.29em in a monospace,
+ * and 0.61em for the nested dash — so every line after the first, wrapped or
+ * after a hard break, started a few pixels right of the line above it, and
+ * half an em right of it under a dash. An inline-block of a width we choose
+ * closes that gap by construction: the marker box *is* the indent.
+ */
+li {
+  margin: 0.15em 0;
+  list-style-position: inside;
+  list-style-type: none;
+  padding-left: 1.4em;
+}
+
+/* Suppressed, not removed. `list-style-type` stays the way an author or an
+   import asks for one of the browser's own markers (see below), and engines
+   without `::marker` content still honour the `list-style-type: none` above. */
+li::marker {
+  content: '';
+}
+
+/*
+ * The marker box. Its width is the item's hanging indent — keep the two in
+ * step — and the item's own hanging indent must not shift what it draws.
+ *
+ * The indent is hung by the marker rather than by a negative `text-indent` on
+ * the item. The marker is laid out at the start of the line, painted one
+ * indent to the left of where it sits, and gives that indent back as advance,
+ * so the text after it still lands at the content edge. Relative offsets and
+ * negative margins move what is painted and what follows, never the line box
+ * itself, so all of this comes out where a hanging indent put it.
+ *
+ * The reason to hang it this way is the caret. An item holding nothing but the
+ * placeholder `<br>` has no text node to anchor a caret in, so the only caret
+ * position it has is the item's own start — and with the line box itself
+ * shifted a marker-width left, that start was *before* the marker while
+ * anything typed there landed after it. The caret was drawn on the wrong side
+ * of the bullet and jumped across it on the first keystroke. Leaving the line
+ * box where the text is puts the caret there too, for every shape of empty
+ * item, with no rule that has to guess which items are empty.
+ */
+li::before {
+  content: '';
+  display: inline-block;
+  /* min-width, not width: a marker wider than the indent (a two-digit
+     number) then pushes its own line along rather than painting over it —
+     the negative margin gives back one indent, not the marker's full width. */
+  min-width: 1.4em;
+  position: relative;
+  left: -1.4em;
+  margin-right: -1.4em;
+  text-indent: 0;
+}
+
+/* Chromium's disc, reproduced: a filled circle 0.3125em across, sitting
+   0.16em above the baseline. That is what the native marker paints, to within
+   a device pixel at every size — and unlike the U+2022 glyph it does not
+   change size with the theme's typeface. */
+ul > li::before {
+  height: 0.3125em;
+  vertical-align: 0.16em;
+  background:
+    radial-gradient(circle closest-side, currentColor 100%, transparent 100%)
+    left top / 0.3125em 0.3125em no-repeat;
+}
+
+/* Indented bullets (tab while editing a list) switch to a dash marker. */
+ul ul > li::before {
+  content: '-';
+  /* Not the drawn disc: a glyph, laid out like the numbers are. */
+  height: auto;
+  vertical-align: baseline;
+  background: none;
+}
+
+/* Numbered items count themselves. `list-item` is the counter Chromium's own
+   marker reads, so `<ol start>` and `<li value>` keep working. */
+ol > li::before {
+  content: counter(list-item) '.';
+}
+
+/* An authored `list-style-type` is a request for one of the browser's markers
+   — square, lower-roman, a string. Those items keep the native marker, and
+   with it the approximate hanging indent it has always had. The item's own
+   `list-style-type: none` above outranks anything it merely inherits, so a
+   type set on the list itself has to be handed back explicitly. */
+li[style*="list-style-type"],
+[style*="list-style-type"] li {
+  list-style-type: inherit;
+}
+li[style*="list-style-type"]::marker,
+[style*="list-style-type"] li::marker {
+  content: normal;
+}
+li[style*="list-style-type"]::before,
+[style*="list-style-type"] li::before {
+  content: none;
+}
+/* With no `::before` to hang the indent, those items hang it the old way. */
+li[style*="list-style-type"],
+[style*="list-style-type"] li {
+  text-indent: -1.4em;
+}
+
+/* An item that only holds an indented list -- the first item of a list,
+   indented, hangs in one -- is not a line of the text: no marker, so no line
+   of its own, and no number, so the item after it is still 1. After the
+   rules above, which an authored list-style-type on the list would reach. */
+li[data-list-holder] {
+  counter-increment: list-item 0;
+  list-style-type: none;
+}
+li[data-list-holder]::before,
+li[data-list-holder]::marker {
+  content: none;
+}
+
+/* Blocks nested in an item (a wrapped paragraph, a sub-list) are not the
+   marker line and must not inherit its hanging indent. */
+li > :is(p, div, ul, ol, table) {
+  text-indent: 0;
+}
+
+/* Every level below the first indents by one step relative to the level
+   above. Inside an item the item's own padding already supplies that step;
+   Chromium's indent command writes the sub-list as a *sibling* of its item
+   (see canvas.ts), so that shape needs the step spelled out. */
+:is(ul, ol) > :is(ul, ol) {
+  padding-left: 1.4em;
+}
+
+/* An indented paragraph outside a list (`data-indent`, the Indent buttons)
+   steps in by the same 1.4em per level. Items indent by nesting instead, so
+   the attribute is ignored on one. */
+[data-indent="1"]:not(li) { margin-left: 1.4em; }
+[data-indent="2"]:not(li) { margin-left: 2.8em; }
+[data-indent="3"]:not(li) { margin-left: 4.2em; }
+[data-indent="4"]:not(li) { margin-left: 5.6em; }
+[data-indent="5"]:not(li) { margin-left: 7em; }
+[data-indent="6"]:not(li) { margin-left: 8.4em; }
+[data-indent="7"]:not(li) { margin-left: 9.8em; }
+[data-indent="8"]:not(li) { margin-left: 11.2em; }
+
+/* An authored marker colour is independent of character-level text runs.
+   Without this opt-in, markers keep following the list item's colour and
+   theme.css can continue to style them normally. The drawn disc takes its
+   fill from `currentColor`, so colouring the box colours the marker. */
+li[data-list-marker-color]::before,
+li[data-list-marker-color]::marker {
+  color: var(--list-marker-color) !important;
+}
+
+:is(ul, ol):not(li *, :is(ul, ol) *) { display: flow-root; }
+}
+}</style>
+<link rel="stylesheet" href="theme.css">
+<style>
+  body { background: #1b1b1f; padding: 32px 0; }
+  section.slide { box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5); }
+  section.slide + section.slide { margin-top: 32px; }
+</style>
+
+<script>
+function fitAutoTextElement(node, minimum = 6) {
+  const body = node.querySelector(":scope > .text-body");
+  const content = body?.querySelector(":scope > .text-content");
+  if (!body || !content || body.clientWidth <= 0 || body.clientHeight <= 0) return null;
+  content.style.removeProperty("font-size");
+  content.style.removeProperty("transform");
+  content.style.removeProperty("transform-origin");
+  delete content.dataset.fittedScaleX;
+  const ceiling = Number.parseFloat(getComputedStyle(node).fontSize);
+  if (!Number.isFinite(ceiling) || ceiling <= 0) return null;
+  if (node.dataset.fitMode === "condense") {
+    const room = Math.max(0, body.clientWidth - Math.max(1, body.clientWidth * 0.01));
+    const width = content.scrollWidth;
+    if (width > room && width > 0) {
+      const scale = room / width;
+      const align = getComputedStyle(body).textAlign;
+      const slack = body.clientWidth - width * scale;
+      const shift = align === "right" || align === "end" ? slack : align === "center" ? slack / 2 : 0;
+      content.style.transform = `${shift > 0 ? `translateX(${Math.round(shift * 10) / 10}px) ` : ""}scaleX(${scale})`;
+      content.style.transformOrigin = "0 50%";
+      content.dataset.fittedScaleX = String(Math.round(scale * 1e3) / 1e3);
+    }
+    content.dataset.fittedFontSize = String(ceiling);
+    return ceiling;
+  }
+  const narrowed = Math.max(0, body.clientWidth - Math.max(1, body.clientWidth * 0.01));
+  const priorWidth = content.style.getPropertyValue("width");
+  const priorPriority = content.style.getPropertyPriority("width");
+  content.style.setProperty("width", `${narrowed}px`);
+  const restoreWidth = () => {
+    if (priorWidth) content.style.setProperty("width", priorWidth, priorPriority);
+    else content.style.removeProperty("width");
+  };
+  const fits = (size) => {
+    content.style.fontSize = `${size}px`;
+    return content.scrollWidth <= narrowed + 0.5 && content.scrollHeight <= body.clientHeight + 0.5;
+  };
+  if (fits(ceiling)) {
+    restoreWidth();
+    content.dataset.fittedFontSize = String(ceiling);
+    return ceiling;
+  }
+  let low = Math.min(minimum, ceiling);
+  let high = ceiling;
+  for (let i = 0; i < 10; i++) {
+    const middle = (low + high) / 2;
+    if (fits(middle)) low = middle;
+    else high = middle;
+  }
+  restoreWidth();
+  const fitted = Math.round(low * 10) / 10;
+  content.style.fontSize = `${fitted}px`;
+  content.dataset.fittedFontSize = String(fitted);
+  return fitted;
+}
+(() => {
+  const fit = () => {
+    for (const node of document.querySelectorAll('[data-autofit="true"], [data-nowrap="true"]')) {
+      fitAutoTextElement(node);
+    }
+  };
+  const run = () => requestAnimationFrame(fit);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+  else run();
+  // Web fonts replace fallback metrics after the first layout, exactly as they
+  // do in the player, and a fit measured against the wrong metrics is wrong.
+  if (document.fonts) document.fonts.ready.then(run);
+})();
+</script>
+</head>
+<body>
+<section class="slide" data-slide-id="slide-8qx4ipie" data-canvas="1920x1080" data-base="15kq0v7hjgr.9bnkskkl25.wvjl67o803-0-1mjsfpb3rfi" data-base-ids="[&quot;video-clpo0ob0&quot;,&quot;video-tail-length-demo&quot;,&quot;video-length-slider&quot;,&quot;shape-vmwxpeau&quot;,&quot;shape-h9nvlj5o&quot;,&quot;image-opsa9m9m&quot;,&quot;code-ak54f92l&quot;,&quot;shape-ylumowfi&quot;,&quot;text-6j3jkclr&quot;,&quot;text-kh5sdx31&quot;]" data-layout="standard">
+  <video data-element-id="video-clpo0ob0" data-base="et8uc0075d@0,281,727,455,0" src="assets/trex_light_sweep.780d848d.webm" data-trim="0," loop muted autoplay style="position:absolute; left:0px; top:281px; width:727px; height:455px; object-fit:contain;"></video>
+  <video data-element-id="video-tail-length-demo" data-base="s6eefaebhr@796,109,975,610,0" src="assets/trex_tail_length.43dd3f44.webm" data-trim="0," data-sync-group="tail-length-demo" data-sync-length="shortest" loop muted autoplay data-border-width="0" data-border-color="#d3caca" style="position:absolute; left:796px; top:109px; width:975px; height:610px; object-fit:contain;"></video>
+  <video data-element-id="video-length-slider" data-base="qmfrnzwagr@1579,441,300,44,0" src="assets/length_slider_roboto.4321aac4.webm" data-trim="0," data-sync-group="tail-length-demo" data-sync-length="shortest" loop muted autoplay style="position:absolute; left:1579px; top:441px; width:300px; height:44px; object-fit:contain;"></video>
+  <div data-element-id="shape-vmwxpeau" data-base="24d7k10aq1k@496,283,258,99,0" data-element="shape" data-shape="path" data-stroke="#faf9f5" data-stroke-width="1" data-radius="0" data-path="M 0 99 C 74 23 131 0 258 0" data-path-size="258,99" style="position:absolute; left:496px; top:283px; width:258px; height:99px;"><svg data-element="none" width="100%" height="100%" viewBox="0 0 258 99" preserveAspectRatio="none" style="display:block; overflow:visible"><path d="M 0 99 C 74 23 131 0 258 0" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#faf9f5" stroke-width="1"/></svg></div>
+  <div data-element-id="shape-h9nvlj5o" data-base="vtr8es7udz@753,32,1150,967,0" data-element="shape" data-shape="rect" data-stroke="#faf9f5" data-stroke-width="1" data-radius="20" style="position:absolute; left:753px; top:32px; width:1150px; height:967px; border-radius:20px;"><svg data-element="none" width="100%" height="100%" viewBox="0 0 1150 967" preserveAspectRatio="none" style="display:block; overflow:visible"><rect x="0.5" y="0.5" width="1149" height="966" rx="20" fill="none" stroke="#faf9f5" stroke-width="1"/></svg></div>
+  <img data-element-id="image-opsa9m9m" data-base="6su993h7ou@766,48,61,61,0" src="assets/ChatGPT-Logo.svg.ce4b6f00.webp" alt="ChatGPT-Logo.svg.webp" style="position:absolute; left:766px; top:48px; width:61px; height:61px; object-fit:contain;">
+  <pre data-element-id="code-ak54f92l" data-base="1xoe62gfe2p@840,37,315,84,0" data-element="code" data-language="bash" data-scheme="github-dark" data-font-size="28" style="font-family: &quot;Roboto Mono&quot;, monospace; position:absolute; left:840px; top:37px; width:315px; height:84px;  border-radius:12px; font-size:28px; background:#24292e; color:#e1e4e8;"><code class="language-bash">&gt;_ coding agent</code></pre>
+  <div data-element-id="shape-ylumowfi" data-base="tja55m1mcy@766,772,1113,2,0" data-element="shape" data-shape="line" data-stroke="#faf9f5" data-stroke-width="0.5" data-radius="0" data-stroke-style="brush" style="position:absolute; left:766px; top:772px; width:1113px; height:2px;"><svg data-element="none" width="100%" height="100%" viewBox="0 0 1113 2" preserveAspectRatio="none" style="display:block; overflow:visible"><defs><filter id="brush-shape-ylumowfi" filterUnits="userSpaceOnUse" x="-9" y="-9" width="1131" height="20"><feGaussianBlur stdDeviation="0.32"/></filter></defs><path class="shape-stroke brush-stroke" d="M 0 1.02 L 0.02 1.02 L 0.08 1.02 L 0.19 1.02 L 0.33 1.03 L 0.52 1.04 L 0.74 1.05 L 1.01 1.07 L 1.32 1.11 L 1.67 1.14 L 2.05 1.18 L 2.48 1.21 L 2.94 1.23 L 3.45 1.23 L 3.99 1.23 L 4.58 1.23 L 5.2 1.23 L 5.86 1.23 L 6.56 1.23 L 7.3 1.23 L 8.07 1.23 L 8.88 1.23 L 9.73 1.23 L 10.62 1.23 L 11.54 1.23 L 12.5 1.23 L 13.5 1.23 L 14.53 1.23 L 15.6 1.23 L 16.7 1.23 L 17.84 1.23 L 19.02 1.23 L 20.23 1.23 L 21.48 1.23 L 22.76 1.23 L 24.07 1.23 L 25.42 1.23 L 26.81 1.23 L 28.23 1.23 L 29.68 1.23 L 31.16 1.23 L 32.68 1.23 L 34.24 1.23 L 35.82 1.23 L 37.44 1.23 L 39.09 1.23 L 40.77 1.23 L 42.49 1.23 L 44.24 1.23 L 46.01 1.23 L 47.82 1.23 L 49.67 1.23 L 51.54 1.23 L 53.44 1.23 L 55.38 1.23 L 57.34 1.23 L 59.34 1.23 L 61.36 1.23 L 63.42 1.23 L 65.5 1.23 L 67.61 1.23 L 69.76 1.23 L 71.93 1.23 L 74.13 1.23 L 76.36 1.23 L 78.62 1.23 L 80.9 1.23 L 83.22 1.23 L 85.56 1.23 L 87.93 1.23 L 90.33 1.24 L 92.75 1.24 L 95.2 1.24 L 97.68 1.24 L 100.18 1.24 L 102.71 1.24 L 105.27 1.24 L 107.85 1.24 L 110.46 1.24 L 113.09 1.24 L 115.75 1.24 L 118.44 1.24 L 121.14 1.24 L 123.88 1.24 L 126.63 1.24 L 129.42 1.24 L 132.22 1.24 L 135.05 1.24 L 137.91 1.24 L 140.78 1.24 L 143.68 1.24 L 146.6 1.24 L 149.55 1.24 L 152.52 1.24 L 155.51 1.24 L 158.52 1.24 L 161.55 1.24 L 164.61 1.24 L 167.69 1.24 L 170.79 1.24 L 173.91 1.24 L 177.05 1.24 L 180.21 1.24 L 183.39 1.24 L 186.59 1.24 L 189.81 1.24 L 193.06 1.24 L 196.32 1.24 L 199.6 1.24 L 202.9 1.24 L 206.22 1.24 L 209.56 1.24 L 212.91 1.24 L 216.29 1.24 L 219.68 1.24 L 223.09 1.24 L 226.52 1.24 L 229.97 1.24 L 233.43 1.24 L 236.91 1.24 L 240.41 1.24 L 243.92 1.24 L 247.45 1.24 L 251 1.24 L 254.56 1.24 L 258.14 1.24 L 261.74 1.24 L 265.35 1.24 L 268.97 1.24 L 272.61 1.24 L 276.27 1.24 L 279.94 1.24 L 283.62 1.24 L 287.32 1.24 L 291.03 1.24 L 294.76 1.24 L 298.5 1.24 L 302.25 1.25 L 306.02 1.25 L 309.8 1.25 L 313.59 1.25 L 317.39 1.25 L 321.21 1.25 L 325.04 1.25 L 328.88 1.25 L 332.73 1.25 L 336.59 1.25 L 340.47 1.25 L 344.36 1.25 L 348.25 1.25 L 352.16 1.25 L 356.08 1.25 L 360.01 1.25 L 363.94 1.25 L 367.89 1.25 L 371.85 1.25 L 375.82 1.25 L 379.79 1.25 L 383.78 1.25 L 387.77 1.25 L 391.78 1.25 L 395.79 1.25 L 399.81 1.25 L 403.83 1.25 L 407.87 1.25 L 411.91 1.25 L 415.96 1.25 L 420.02 1.25 L 424.08 1.25 L 428.15 1.25 L 432.23 1.25 L 436.31 1.25 L 440.4 1.25 L 444.49 1.25 L 448.59 1.25 L 452.7 1.25 L 456.81 1.25 L 460.93 1.25 L 465.05 1.25 L 469.17 1.25 L 473.3 1.25 L 477.44 1.25 L 481.58 1.25 L 485.72 1.25 L 489.86 1.25 L 494.01 1.25 L 498.16 1.25 L 502.32 1.25 L 506.48 1.25 L 510.64 1.25 L 514.8 1.25 L 518.96 1.25 L 523.13 1.25 L 527.3 1.25 L 531.47 1.25 L 535.64 1.25 L 539.81 1.25 L 543.98 1.25 L 548.15 1.25 L 552.33 1.25 L 556.5 1.25 L 560.67 1.25 L 564.85 1.25 L 569.02 1.25 L 573.19 1.25 L 577.36 1.25 L 581.53 1.25 L 585.7 1.25 L 589.87 1.25 L 594.04 1.25 L 598.2 1.25 L 602.36 1.25 L 606.52 1.25 L 610.68 1.25 L 614.84 1.25 L 618.99 1.25 L 623.14 1.25 L 627.28 1.25 L 631.42 1.25 L 635.56 1.25 L 639.7 1.25 L 643.83 1.25 L 647.95 1.25 L 652.07 1.25 L 656.19 1.25 L 660.3 1.25 L 664.41 1.25 L 668.51 1.25 L 672.6 1.25 L 676.69 1.25 L 680.77 1.25 L 684.85 1.25 L 688.92 1.25 L 692.98 1.25 L 697.04 1.25 L 701.09 1.25 L 705.13 1.25 L 709.17 1.25 L 713.19 1.25 L 717.21 1.25 L 721.22 1.25 L 725.23 1.25 L 729.22 1.25 L 733.21 1.25 L 737.18 1.25 L 741.15 1.25 L 745.11 1.25 L 749.06 1.25 L 752.99 1.25 L 756.92 1.25 L 760.84 1.25 L 764.75 1.25 L 768.64 1.25 L 772.53 1.25 L 776.41 1.25 L 780.27 1.25 L 784.12 1.25 L 787.96 1.25 L 791.79 1.25 L 795.61 1.25 L 799.41 1.25 L 803.2 1.25 L 806.98 1.25 L 810.75 1.25 L 814.5 1.24 L 818.24 1.24 L 821.97 1.24 L 825.68 1.24 L 829.38 1.24 L 833.06 1.24 L 836.73 1.24 L 840.39 1.24 L 844.03 1.24 L 847.65 1.24 L 851.26 1.24 L 854.86 1.24 L 858.44 1.24 L 862 1.24 L 865.55 1.24 L 869.08 1.24 L 872.59 1.24 L 876.09 1.24 L 879.57 1.24 L 883.03 1.24 L 886.48 1.24 L 889.91 1.24 L 893.32 1.24 L 896.71 1.24 L 900.09 1.24 L 903.44 1.24 L 906.78 1.24 L 910.1 1.24 L 913.4 1.24 L 916.68 1.24 L 919.94 1.24 L 923.19 1.24 L 926.41 1.24 L 929.61 1.24 L 932.79 1.24 L 935.95 1.24 L 939.09 1.24 L 942.21 1.24 L 945.31 1.24 L 948.39 1.24 L 951.45 1.24 L 954.48 1.24 L 957.49 1.24 L 960.48 1.24 L 963.45 1.24 L 966.4 1.24 L 969.32 1.24 L 972.22 1.24 L 975.09 1.24 L 977.95 1.24 L 980.78 1.24 L 983.58 1.24 L 986.37 1.24 L 989.12 1.24 L 991.86 1.24 L 994.56 1.24 L 997.25 1.24 L 999.91 1.24 L 1002.54 1.24 L 1005.15 1.24 L 1007.73 1.24 L 1010.29 1.24 L 1012.82 1.24 L 1015.32 1.24 L 1017.8 1.24 L 1020.25 1.24 L 1022.67 1.24 L 1025.07 1.23 L 1027.44 1.23 L 1029.78 1.23 L 1032.1 1.23 L 1034.38 1.23 L 1036.64 1.23 L 1038.87 1.23 L 1041.07 1.23 L 1043.24 1.23 L 1045.39 1.23 L 1047.5 1.23 L 1049.58 1.23 L 1051.64 1.23 L 1053.66 1.23 L 1055.66 1.23 L 1057.62 1.23 L 1059.56 1.23 L 1061.46 1.23 L 1063.33 1.23 L 1065.18 1.23 L 1066.99 1.23 L 1068.76 1.23 L 1070.51 1.23 L 1072.23 1.23 L 1073.91 1.23 L 1075.56 1.23 L 1077.18 1.23 L 1078.76 1.23 L 1080.32 1.23 L 1081.84 1.23 L 1083.32 1.23 L 1084.77 1.23 L 1086.19 1.23 L 1087.58 1.23 L 1088.93 1.23 L 1090.24 1.23 L 1091.52 1.23 L 1092.77 1.23 L 1093.98 1.23 L 1095.16 1.23 L 1096.3 1.23 L 1097.4 1.23 L 1098.47 1.23 L 1099.5 1.23 L 1100.5 1.23 L 1101.46 1.23 L 1102.38 1.23 L 1103.27 1.23 L 1104.12 1.23 L 1104.93 1.23 L 1105.7 1.23 L 1106.44 1.23 L 1107.14 1.23 L 1107.8 1.23 L 1108.42 1.23 L 1109.01 1.23 L 1109.55 1.23 L 1110.06 1.23 L 1110.52 1.21 L 1110.95 1.18 L 1111.33 1.14 L 1111.68 1.11 L 1111.99 1.07 L 1112.26 1.05 L 1112.48 1.04 L 1112.67 1.03 L 1112.81 1.02 L 1112.92 1.02 L 1112.98 1.02 L 1113 1.02 L 1113 0.98 L 1112.98 0.98 L 1112.92 0.98 L 1112.81 0.98 L 1112.67 0.97 L 1112.48 0.96 L 1112.26 0.95 L 1111.99 0.93 L 1111.68 0.89 L 1111.33 0.86 L 1110.95 0.82 L 1110.52 0.79 L 1110.06 0.77 L 1109.55 0.77 L 1109.01 0.77 L 1108.42 0.77 L 1107.8 0.77 L 1107.14 0.77 L 1106.44 0.77 L 1105.7 0.77 L 1104.93 0.77 L 1104.12 0.77 L 1103.27 0.77 L 1102.38 0.77 L 1101.46 0.77 L 1100.5 0.77 L 1099.5 0.77 L 1098.47 0.77 L 1097.4 0.77 L 1096.3 0.77 L 1095.16 0.77 L 1093.98 0.77 L 1092.77 0.77 L 1091.52 0.77 L 1090.24 0.77 L 1088.93 0.77 L 1087.58 0.77 L 1086.19 0.77 L 1084.77 0.77 L 1083.32 0.77 L 1081.84 0.77 L 1080.32 0.77 L 1078.76 0.77 L 1077.18 0.77 L 1075.56 0.77 L 1073.91 0.77 L 1072.23 0.77 L 1070.51 0.77 L 1068.76 0.77 L 1066.99 0.77 L 1065.18 0.77 L 1063.33 0.77 L 1061.46 0.77 L 1059.56 0.77 L 1057.62 0.77 L 1055.66 0.77 L 1053.66 0.77 L 1051.64 0.77 L 1049.58 0.77 L 1047.5 0.77 L 1045.39 0.77 L 1043.24 0.77 L 1041.07 0.77 L 1038.87 0.77 L 1036.64 0.77 L 1034.38 0.77 L 1032.1 0.77 L 1029.78 0.77 L 1027.44 0.77 L 1025.07 0.77 L 1022.67 0.76 L 1020.25 0.76 L 1017.8 0.76 L 1015.32 0.76 L 1012.82 0.76 L 1010.29 0.76 L 1007.73 0.76 L 1005.15 0.76 L 1002.54 0.76 L 999.91 0.76 L 997.25 0.76 L 994.56 0.76 L 991.86 0.76 L 989.12 0.76 L 986.37 0.76 L 983.58 0.76 L 980.78 0.76 L 977.95 0.76 L 975.09 0.76 L 972.22 0.76 L 969.32 0.76 L 966.4 0.76 L 963.45 0.76 L 960.48 0.76 L 957.49 0.76 L 954.48 0.76 L 951.45 0.76 L 948.39 0.76 L 945.31 0.76 L 942.21 0.76 L 939.09 0.76 L 935.95 0.76 L 932.79 0.76 L 929.61 0.76 L 926.41 0.76 L 923.19 0.76 L 919.94 0.76 L 916.68 0.76 L 913.4 0.76 L 910.1 0.76 L 906.78 0.76 L 903.44 0.76 L 900.09 0.76 L 896.71 0.76 L 893.32 0.76 L 889.91 0.76 L 886.48 0.76 L 883.03 0.76 L 879.57 0.76 L 876.09 0.76 L 872.59 0.76 L 869.08 0.76 L 865.55 0.76 L 862 0.76 L 858.44 0.76 L 854.86 0.76 L 851.26 0.76 L 847.65 0.76 L 844.03 0.76 L 840.39 0.76 L 836.73 0.76 L 833.06 0.76 L 829.38 0.76 L 825.68 0.76 L 821.97 0.76 L 818.24 0.76 L 814.5 0.76 L 810.75 0.75 L 806.98 0.75 L 803.2 0.75 L 799.41 0.75 L 795.61 0.75 L 791.79 0.75 L 787.96 0.75 L 784.12 0.75 L 780.27 0.75 L 776.41 0.75 L 772.53 0.75 L 768.64 0.75 L 764.75 0.75 L 760.84 0.75 L 756.92 0.75 L 752.99 0.75 L 749.06 0.75 L 745.11 0.75 L 741.15 0.75 L 737.18 0.75 L 733.21 0.75 L 729.22 0.75 L 725.23 0.75 L 721.22 0.75 L 717.21 0.75 L 713.19 0.75 L 709.17 0.75 L 705.13 0.75 L 701.09 0.75 L 697.04 0.75 L 692.98 0.75 L 688.92 0.75 L 684.85 0.75 L 680.77 0.75 L 676.69 0.75 L 672.6 0.75 L 668.51 0.75 L 664.41 0.75 L 660.3 0.75 L 656.19 0.75 L 652.07 0.75 L 647.95 0.75 L 643.83 0.75 L 639.7 0.75 L 635.56 0.75 L 631.42 0.75 L 627.28 0.75 L 623.14 0.75 L 618.99 0.75 L 614.84 0.75 L 610.68 0.75 L 606.52 0.75 L 602.36 0.75 L 598.2 0.75 L 594.04 0.75 L 589.87 0.75 L 585.7 0.75 L 581.53 0.75 L 577.36 0.75 L 573.19 0.75 L 569.02 0.75 L 564.85 0.75 L 560.67 0.75 L 556.5 0.75 L 552.33 0.75 L 548.15 0.75 L 543.98 0.75 L 539.81 0.75 L 535.64 0.75 L 531.47 0.75 L 527.3 0.75 L 523.13 0.75 L 518.96 0.75 L 514.8 0.75 L 510.64 0.75 L 506.48 0.75 L 502.32 0.75 L 498.16 0.75 L 494.01 0.75 L 489.86 0.75 L 485.72 0.75 L 481.58 0.75 L 477.44 0.75 L 473.3 0.75 L 469.17 0.75 L 465.05 0.75 L 460.93 0.75 L 456.81 0.75 L 452.7 0.75 L 448.59 0.75 L 444.49 0.75 L 440.4 0.75 L 436.31 0.75 L 432.23 0.75 L 428.15 0.75 L 424.08 0.75 L 420.02 0.75 L 415.96 0.75 L 411.91 0.75 L 407.87 0.75 L 403.83 0.75 L 399.81 0.75 L 395.79 0.75 L 391.78 0.75 L 387.77 0.75 L 383.78 0.75 L 379.79 0.75 L 375.82 0.75 L 371.85 0.75 L 367.89 0.75 L 363.94 0.75 L 360.01 0.75 L 356.08 0.75 L 352.16 0.75 L 348.25 0.75 L 344.36 0.75 L 340.47 0.75 L 336.59 0.75 L 332.73 0.75 L 328.88 0.75 L 325.04 0.75 L 321.21 0.75 L 317.39 0.75 L 313.59 0.75 L 309.8 0.75 L 306.02 0.75 L 302.25 0.75 L 298.5 0.76 L 294.76 0.76 L 291.03 0.76 L 287.32 0.76 L 283.62 0.76 L 279.94 0.76 L 276.27 0.76 L 272.61 0.76 L 268.97 0.76 L 265.35 0.76 L 261.74 0.76 L 258.14 0.76 L 254.56 0.76 L 251 0.76 L 247.45 0.76 L 243.92 0.76 L 240.41 0.76 L 236.91 0.76 L 233.43 0.76 L 229.97 0.76 L 226.52 0.76 L 223.09 0.76 L 219.68 0.76 L 216.29 0.76 L 212.91 0.76 L 209.56 0.76 L 206.22 0.76 L 202.9 0.76 L 199.6 0.76 L 196.32 0.76 L 193.06 0.76 L 189.81 0.76 L 186.59 0.76 L 183.39 0.76 L 180.21 0.76 L 177.05 0.76 L 173.91 0.76 L 170.79 0.76 L 167.69 0.76 L 164.61 0.76 L 161.55 0.76 L 158.52 0.76 L 155.51 0.76 L 152.52 0.76 L 149.55 0.76 L 146.6 0.76 L 143.68 0.76 L 140.78 0.76 L 137.91 0.76 L 135.05 0.76 L 132.22 0.76 L 129.42 0.76 L 126.63 0.76 L 123.88 0.76 L 121.14 0.76 L 118.44 0.76 L 115.75 0.76 L 113.09 0.76 L 110.46 0.76 L 107.85 0.76 L 105.27 0.76 L 102.71 0.76 L 100.18 0.76 L 97.68 0.76 L 95.2 0.76 L 92.75 0.76 L 90.33 0.76 L 87.93 0.77 L 85.56 0.77 L 83.22 0.77 L 80.9 0.77 L 78.62 0.77 L 76.36 0.77 L 74.13 0.77 L 71.93 0.77 L 69.76 0.77 L 67.61 0.77 L 65.5 0.77 L 63.42 0.77 L 61.36 0.77 L 59.34 0.77 L 57.34 0.77 L 55.38 0.77 L 53.44 0.77 L 51.54 0.77 L 49.67 0.77 L 47.82 0.77 L 46.01 0.77 L 44.24 0.77 L 42.49 0.77 L 40.77 0.77 L 39.09 0.77 L 37.44 0.77 L 35.82 0.77 L 34.24 0.77 L 32.68 0.77 L 31.16 0.77 L 29.68 0.77 L 28.23 0.77 L 26.81 0.77 L 25.42 0.77 L 24.07 0.77 L 22.76 0.77 L 21.48 0.77 L 20.23 0.77 L 19.02 0.77 L 17.84 0.77 L 16.7 0.77 L 15.6 0.77 L 14.53 0.77 L 13.5 0.77 L 12.5 0.77 L 11.54 0.77 L 10.62 0.77 L 9.73 0.77 L 8.88 0.77 L 8.07 0.77 L 7.3 0.77 L 6.56 0.77 L 5.86 0.77 L 5.2 0.77 L 4.58 0.77 L 3.99 0.77 L 3.45 0.77 L 2.94 0.77 L 2.48 0.79 L 2.05 0.82 L 1.67 0.86 L 1.32 0.89 L 1.01 0.93 L 0.74 0.95 L 0.52 0.96 L 0.33 0.97 L 0.19 0.98 L 0.08 0.98 L 0.02 0.98 L 0 0.98 Z" fill="#faf9f5" stroke="none" filter="url(#brush-shape-ylumowfi)"/></svg></div>
+  <div data-element-id="text-6j3jkclr" data-base="18gypievk4d@477.5,208,228,62,0" class="element element-text" data-valign="top" data-auto-size="true" style="font-family: &quot;Roboto Mono&quot;, monospace; position:absolute; left:477.5px; top:208px; width:228px; height:62px; text-align:center;"><div class="text-body" data-element="none" style="display:flex; flex-direction:column; justify-content:flex-start; width:100%; height:100%;"><div class="text-content" data-text-content style="width:100%;"><span style="color: rgb(250, 249, 245); font-size: 35px; font-style: italic;">"edit tail"</span></div></div></div>
+  <div data-element-id="text-kh5sdx31" data-base="23dckipgsnk@880,866,885,62,0" class="element element-text" data-valign="top" data-auto-size="true" style="font-family: &quot;Roboto Mono&quot;, monospace; position:absolute; left:880.0px; top:866px; width:885px; height:62px; text-align:center;"><div class="text-body" data-element="none" style="display:flex; flex-direction:column; justify-content:flex-start; width:100%; height:100%;"><div class="text-content" data-text-content style="width:100%;"><span style="color: rgb(250, 249, 245); font-size: 30px;">&lt;add details about parametric shape proxies here&gt;</span></div></div></div>
+</section>
+</body>
+</html>

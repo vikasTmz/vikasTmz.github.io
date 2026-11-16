@@ -1,0 +1,10 @@
+{
+  "name": "shape-editing-notes",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "export:slide": "node scripts/export-slide.cjs",
+    "watch": "node scripts/watch.cjs",
+    "preview": "python3 -m http.server 8000 --bind 127.0.0.1"
+  }
+}
