@@ -2,7 +2,28 @@
   "sections": [
     {
       "title": "",
-      "slide": 4
+      "slide": 2,
+      "navLabel": "Goal",
+      "summary": "1. Goal: Generative model for watertight B-reps",
+      "notes": "The goal of this project is to build a generative model for B-Reps. B-Reps (boundary representations) encode parametric surfaces together with precise topological structure.At inference time -- either unconditionally or conditioned on a text-prompt or a point cloud or an image -- the goal is to sample shapes represented as B-Reps that are compatible with various design, animation, and engineering software.",
+      "key": "goal"
+    },
+    {
+      "title": "",
+      "slides": [
+        {
+          "slide": 3,
+          "duration": 9
+        },
+        {
+          "slide": 10,
+          "duration": 12
+        }
+      ],
+      "navLabel": "Pre-trained 3D models",
+      "summary": "2. Leveraging pre-trained 3D generative models",
+      "notes": "We witnessed huge process in the last two years in generative models for 3D shapes. These models, conditioned on images or text-prompts, can sample high quality 3D shapes represented as implicit fields or meshes or some custom 3D data structure.",
+      "key": "3d-generative-models"
     }
   ]
 }

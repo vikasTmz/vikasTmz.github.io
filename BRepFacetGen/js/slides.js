@@ -1,31 +1,46 @@
-(async () => {
-  const container = document.getElementById('slide-sections');
-  if (!container) return;
+import { describeSections, renderNavigation, renderSlides } from './section-content.js';
+import { initSectionNavigation } from './section-navigation.js';
+import { initSectionPlayers } from './section-player.js';
+const content = document.getElementById('article-content');
+const container = document.getElementById('slide-sections');
+let destroy = initSectionNavigation(document.querySelector('.pnav'), content);
+let destroyPlayers = initSectionPlayers(container);
+
+// Keep JSON edits visible on refresh without a media export. The build also
+// writes the same markup to index.html for native links and no-JS readers.
+async function refreshSections() {
+  if (!container || !content) return;
   try {
     const response = await fetch('slide-sections.json', { cache: 'no-cache' });
     if (!response.ok) throw Error(`Slide configuration: HTTP ${response.status}`);
     const config = await response.json();
-    if (!Array.isArray(config.sections) || config.sections.some(section =>
-      !Number.isInteger(section.slide) || section.slide < 1 || typeof section.title !== 'string')) {
-      throw Error('Invalid slide section configuration.');
+    if (container.dataset.config === JSON.stringify(config)) return;
+    const staticSections = [...content.querySelectorAll('[data-section-nav]')].map(s => ({
+      id: s.id, label: s.dataset.navLabel || s.querySelector('h1,h2,h3,h4,h5,h6')?.textContent.trim() || s.id,
+      static: true
+    }));
+    const sections = describeSections(config, staticSections);
+    destroy();
+    destroyPlayers();
+    document.querySelector('.pnav')?.remove();
+    content.insertAdjacentHTML('beforebegin', renderNavigation(sections));
+    container.innerHTML = renderSlides(sections);
+    container.dataset.config = JSON.stringify(config);
+    destroy = initSectionNavigation(document.querySelector('.pnav'), content);
+    destroyPlayers = initSectionPlayers(container);
+    if (location.hash) {
+      try { document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView(); } catch { /* Invalid URL fragment. */ }
     }
-    const sections = config.sections.map(({ title, slide }, index) => {
-      const section = document.createElement('section');
-      section.className = 'slide-section';
-      const heading = document.createElement('h2');
-      heading.id = `slide-heading-${index + 1}`;
-      heading.textContent = title;
-      section.setAttribute('aria-labelledby', heading.id);
-      const frame = document.createElement('iframe');
-      frame.src = `slides/slide-${slide}.html`;
-      frame.title = title || `DeckWerk slide ${slide}`;
-      frame.loading = 'lazy';
-      frame.allow = 'autoplay';
-      section.append(heading, frame);
-      return section;
-    });
-    container.replaceChildren(...sections);
-  } catch (error) {
-    console.error('Unable to load slide sections:', error);
+  } catch (error) { console.error('Unable to refresh slide sections:', error); }
+}
+refreshSections();
+addEventListener('pagehide', () => { destroy(); destroyPlayers(); });
+addEventListener('pageshow', event => {
+  if (event.persisted) {
+    destroy();
+    destroyPlayers();
+    destroy = initSectionNavigation(document.querySelector('.pnav'), content);
+    destroyPlayers = initSectionPlayers(container);
+    refreshSections();
   }
-})();
+});

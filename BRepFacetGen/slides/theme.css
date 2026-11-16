@@ -94,3 +94,106 @@
 @font-face {font-family:"Palatino Linotype (embedded)";src:url("assets/moka-palatino-linotype-bold.ttf") format("truetype");font-weight:700;font-style:normal;}
 @font-face {font-family:"Palatino Linotype (embedded)";src:url("assets/moka-palatino-linotype-italic.ttf") format("truetype");font-weight:400;font-style:italic;}
 @font-face {font-family:"Palatino Linotype (embedded)";src:url("assets/moka-palatino-linotype-bold-italic.ttf") format("truetype");font-weight:700;font-style:italic;}
+
+/* >>> slide-editor theme (generated) */
+/* theme: BRepFacetGen · Slide 2 template · Modified */
+/* --- font set: BRepFacetGen · Slide 2 template · Modified --- */
+/*  */
+
+.slide {
+  font-family: Aptos, sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #262626;
+}
+
+.role-title {
+  font-family: "Palatino Linotype (embedded)", "Palatino Linotype", serif;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #262626;
+}
+
+.role-heading {
+  font-family: Aptos, sans-serif;
+  font-size: 58px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #262626;
+}
+
+.role-body {
+  font-family: Aptos, sans-serif;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #262626;
+}
+
+.role-caption {
+  font-family: "Palatino Linotype (embedded)", "Palatino Linotype", serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #262626;
+}
+
+.slide {
+  background: #ffffff;
+  color: #262626;
+}
+
+.role-caption { color: #262626; }
+/* <<< end theme */
+
+/* Shared project footer. Outside the generated theme block so theme changes
+   preserve it. The Freeform and Standard layout masters carry the same bar. */
+:root {
+  --deck-footer-height: 39px;
+  --deck-footer-inset: 74px;
+  --deck-footer-text-height: 32px;
+  --deck-footer-bottom: 2px;
+  --deck-footer-font-size: 24px;
+  --deck-footer-background: #f1f0f0;
+  --deck-footer-color: #262626;
+}
+.slide .deck-footer-background {
+  left: 0 !important;
+  top: auto !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: var(--deck-footer-height) !important;
+  background: var(--deck-footer-background) !important;
+}
+.slide .deck-footer-background svg rect { fill: var(--deck-footer-background) !important; }
+.slide .deck-footer-text {
+  left: var(--deck-footer-inset) !important;
+  top: auto !important;
+  bottom: var(--deck-footer-bottom) !important;
+  width: calc(100% - 2 * var(--deck-footer-inset)) !important;
+  height: var(--deck-footer-text-height) !important;
+  font-family: "Palatino Linotype (embedded)", "Palatino Linotype", serif !important;
+  font-size: var(--deck-footer-font-size) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 1.2 !important;
+  color: var(--deck-footer-color) !important;
+  text-align: left !important;
+  padding: 0 !important;
+}
+.slide .deck-footer-text .text-content,
+.slide .deck-footer-text .text-content * {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+}
+.slide .deck-footer-text a { text-decoration: underline; }

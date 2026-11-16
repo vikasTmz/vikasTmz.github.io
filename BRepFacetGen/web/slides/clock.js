@@ -1,6 +1,7 @@
 /* Pausable clock scoped to this exported iframe. DeckWerk's renderer is unmodified.
    Freeze pending JS delays, CSS/Web Animations and media together; resume remaining delays. */
 (() => {
+  if (!new URLSearchParams(location.search).has('controlled')) return;
   const realNow = performance.now.bind(performance);
   const native = { timeout: window.setTimeout.bind(window), clear: window.clearTimeout.bind(window), raf: window.requestAnimationFrame.bind(window), caf: window.cancelAnimationFrame.bind(window), play: HTMLMediaElement.prototype.play, pause: HTMLMediaElement.prototype.pause };
   let paused = true, time = realNow(), epoch = realNow(), serial = 0;
@@ -39,6 +40,12 @@
     for (const a of document.getAnimations()) if (a.playState === 'running' || a.pending) { a.pause(); animations.add(a); }
   }
   new MutationObserver(freezeAnimations).observe(document.documentElement, { subtree: true, attributes: true, childList: true });
+  const nativeAnimate = Element.prototype.animate;
+  Element.prototype.animate = function (...args) {
+    const animation = nativeAnimate.apply(this, args);
+    if (paused) { animation.pause(); animations.add(animation); }
+    return animation;
+  };
   document.addEventListener('animationstart', freezeAnimations, true);
   function pause() {
     if (paused) return;

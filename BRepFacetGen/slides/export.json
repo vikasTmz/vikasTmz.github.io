@@ -1,11 +1,19 @@
 {
   "source": "BRepFacetedGen_Slides",
+  "canvas": {
+    "w": 1920,
+    "h": 930
+  },
   "slideNumbers": [
-    4
+    2,
+    3,
+    10
   ],
   "slideIds": [
-    "slide-285u8oic"
+    "slide-285u8oic",
+    "slide-24",
+    "slide-4583iopc"
   ],
-  "exportedAt": "2026-11-15T22:52:43.228Z",
-  "assets": 39
+  "exportedAt": "2026-11-16T21:01:44.344Z",
+  "assets": 53
 }

@@ -9,14 +9,16 @@
       content="BRepFacetGen: Reverse Engineering B-Reps By Generative Face Segmentation. ECCV 2026. University of Massachusetts, Amherst and Autodesk Research.">
     <title>BRepFacetGen — ECCV 2026</title>
     <link rel="stylesheet" href="css/main.css">
-    <script src="js/slides.js" defer></script>
+    <link rel="stylesheet" href="slides/canvas.css">
+    <link rel="stylesheet" href="css/section-navigation.css">
+    <script src="js/slides.js" type="module"></script>
   </head>
 
   <body>
     <!-- Adapted from ../VecFusion, based on the Brown Visual Computing template:
        https://visual.cs.brown.edu/projects/shapefromtracing-webpage/
        Title, author order, affiliations, and institutional logos follow DeckWerk slide 1. -->
-    <main class="project-page">
+    <div class="project-page">
       <header class="project-header">
         <h1><strong>BRepFacetGen</strong>: Reverse Engineering
           B-Reps<br class="title-break"> By Generative Face
@@ -44,39 +46,143 @@
           href="https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/5489.pdf"
           role="link" aria-label="Read the paper (PDF)">
           <span class="resource-image"><img src="logos/paper.svg"
-              width="72" height="72" alt=""></span>
+              width="62" height="62" alt=""></span>
           <span>Paper</span>
         </a>
         <a class="resource-link venue" href="https://eccv.ecva.net/"
           aria-label="ECCV 2026 conference">
           <!-- Official logo: https://eccv.ecva.net/static/core/img/eccv-navbar-logo.svg -->
           <span class="resource-image"><img src="logos/eccv-2026.svg"
-              width="170" height="92"
+              width="150" height="72"
               alt="ECCV 2026 conference logo"></span>
           <span>ECCV 2026</span>
         </a>
         <a class="resource-link" aria-disabled="true" role="link"
           aria-label="Code (link not yet available)">
           <span class="resource-image"><img
-              src="logos/github-mark.svg" width="60" height="60"
+              src="logos/github-mark.svg" width="50" height="50"
               alt=""></span>
           <span>Code</span>
         </a>
-        <a class="resource-link" aria-disabled="true" role="link"
+        <!-- <a class="resource-link" aria-disabled="true" role="link"
           aria-label="">
           <span class="resource-image"><img src="" width="60"
               height="60" alt=""></span>
           <span>GPT6 Astra's Performance</span>
-        </a>
+        </a> -->
       </nav>
 
-      <div id="slide-sections"></div>
+      <!-- section-navigation:start -->
+      <nav class="pnav" aria-label="Sections">
+        <span class="pnav-track" aria-hidden="true"><span
+            class="pnav-fill"></span></span>
+        <a href="#goal" aria-label="Goal" title="Goal"><span
+            class="pnav-dot" aria-hidden="true"></span><span
+            class="pnav-label">Goal</span></a>
+        <a href="#3d-generative-models"
+          aria-label="Pre-trained 3D models"
+          title="Pre-trained 3D models"><span class="pnav-dot"
+            aria-hidden="true"></span><span
+            class="pnav-label">Pre-trained 3D models</span></a>
+        <a href="#bibtex" aria-label="BibTeX" title="BibTeX"><span
+            class="pnav-dot" aria-hidden="true"></span><span
+            class="pnav-label">BibTeX</span></a>
+      </nav>
+      <!-- section-navigation:end -->
+      <main id="article-content">
+        <!-- slide-sections:start -->
+        <div id="slide-sections"
+          data-config="{&quot;sections&quot;:[{&quot;title&quot;:&quot;&quot;,&quot;slide&quot;:2,&quot;navLabel&quot;:&quot;Goal&quot;,&quot;summary&quot;:&quot;1. Goal: Generative model for watertight B-reps&quot;,&quot;notes&quot;:&quot;The goal of this project is to build a generative model for B-Reps. B-Reps (boundary representations) encode parametric surfaces together with precise topological structure.At inference time -- either unconditionally or conditioned on a text-prompt or a point cloud or an image -- the goal is to sample shapes represented as B-Reps that are compatible with various design, animation, and engineering software.&quot;,&quot;key&quot;:&quot;goal&quot;},{&quot;title&quot;:&quot;&quot;,&quot;slides&quot;:[{&quot;slide&quot;:3,&quot;duration&quot;:9},{&quot;slide&quot;:10,&quot;duration&quot;:12}],&quot;navLabel&quot;:&quot;Pre-trained 3D models&quot;,&quot;summary&quot;:&quot;2. Leveraging pre-trained 3D generative models&quot;,&quot;notes&quot;:&quot;We witnessed huge process in the last two years in generative models for 3D shapes. These models, conditioned on images or text-prompts, can sample high quality 3D shapes represented as implicit fields or meshes or some custom 3D data structure.&quot;,&quot;key&quot;:&quot;3d-generative-models&quot;}]}">
+          <section class="slide-section pnav-section" id="goal"
+            aria-label="Goal" tabindex="-1">
+            <details class="slide-explanation">
+              <summary><span class="explanation-summary">1. Goal:
+                  Generative model for watertight B-reps</span>
+              </summary>
+              <div class="explanation-notes">The goal of this project
+                is to build a generative model for B-Reps. B-Reps
+                (boundary representations) encode parametric surfaces
+                together with precise topological structure.At
+                inference time -- either unconditionally or
+                conditioned on a text-prompt or a point cloud or an
+                image -- the goal is to sample shapes represented as
+                B-Reps that are compatible with various design,
+                animation, and engineering software.</div>
+            </details>
+            <iframe src="slides/slide-2.html" title="DeckWerk slide 2"
+              loading="lazy" allow="autoplay"></iframe>
+          </section>
+          <section class="slide-section pnav-section"
+            id="3d-generative-models"
+            aria-label="Pre-trained 3D models" tabindex="-1">
+            <details class="slide-explanation">
+              <summary><span class="explanation-summary">2. Leveraging
+                  pre-trained 3D generative models</span></summary>
+              <div class="explanation-notes">We witnessed huge process
+                in the last two years in generative models for 3D
+                shapes. These models, conditioned on images or
+                text-prompts, can sample high quality 3D shapes
+                represented as implicit fields or meshes or some
+                custom 3D data structure.</div>
+            </details>
+            <div class="slide-sequence"
+              data-slides="[{&quot;slide&quot;:3,&quot;duration&quot;:9},{&quot;slide&quot;:10,&quot;duration&quot;:12}]"
+              aria-label="Pre-trained 3D models">
+              <div class="sequence-stage"><iframe
+                  src="slides/slide-3.html?controlled=1"
+                  title="DeckWerk slide 3" loading="lazy"
+                  allow="autoplay"></iframe></div>
+              <div class="sequence-controls" role="group"
+                aria-label="Section playback" hidden>
+                <button class="sequence-toggle" type="button"
+                  aria-label="Pause section"
+                  title="Pause section"><svg
+                    class="sequence-pause-icon" viewBox="0 0 20 20"
+                    aria-hidden="true">
+                    <path d="M6 4v12M14 4v12" />
+                  </svg><svg class="sequence-play-icon"
+                    viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="m6 3 11 7-11 7Z" />
+                  </svg></button>
+                <div class="sequence-segments" role="group"
+                  aria-label="Slides"><button type="button"
+                    class="sequence-segment" data-index="0"
+                    aria-label="Show slide 3 (1 of 2)"
+                    title="Slide 3 · 9s" aria-current="true"><span
+                      class="segment-track" aria-hidden="true"><span
+                        class="segment-fill"></span></span></button><button
+                    type="button" class="sequence-segment"
+                    data-index="1" aria-label="Show slide 10 (2 of 2)"
+                    title="Slide 10 · 12s"><span class="segment-track"
+                      aria-hidden="true"><span
+                        class="segment-fill"></span></span></button>
+                </div>
+                <span class="sequence-position" aria-live="polite"
+                  aria-atomic="true">1 / 2</span>
+                <button class="sequence-restart" type="button"
+                  aria-label="Restart section"
+                  title="Restart section"><svg viewBox="0 0 20 20"
+                    aria-hidden="true">
+                    <path d="M4 7a7 7 0 1 1-1 7M4 2v5h5" />
+                  </svg></button>
+              </div>
+              <p class="sequence-error" role="status" hidden></p>
+              <noscript>
+                <p><a href="slides/slide-3.html">Slide 3</a> · <a
+                    href="slides/slide-10.html">Slide 10</a></p>
+              </noscript>
+            </div>
+          </section>
+        </div>
+        <!-- slide-sections:end -->
 
-      <section class="citation" aria-labelledby="bibtex-heading">
-        <h2 id="bibtex-heading">BibTeX</h2>
-        <!-- Verified against Springer's chapter record and BibTeX export:
+        <section class="citation pnav-section" id="bibtex"
+          data-section-nav aria-labelledby="bibtex-heading"
+          tabindex="-1">
+          <h2 id="bibtex-heading">BibTeX</h2>
+          <!-- Verified against Springer's chapter record and BibTeX export:
              https://link.springer.com/chapter/10.1007/978-3-032-37258-1_35 -->
-        <pre tabindex="0" aria-label="BibTeX citation"><code>@inproceedings{hui2026brepfacetgen,
+          <pre tabindex="0" aria-label="BibTeX citation"><code>@inproceedings{hui2026brepfacetgen,
   title     = {{BRepFacetGen}: Reverse Engineering {B-Reps} By Generative Face Segmentation},
   author    = {Hui, Ka-Hei and Thamizharasan, Vikas and Jayaraman, Pradeep Kumar and Xu, Xiang},
   editor    = {Favaro, Paolo and Kukelova, Zuzana and Maki, Atsuto and Rohrbach, Anna and Schindler, Konrad and Tombari, Federico},
@@ -91,7 +197,9 @@
   url       = {https://doi.org/10.1007/978-3-032-37258-1_35},
   isbn      = {978-3-032-37258-1}
 }</code></pre>
-      </section>
+        </section>
+
+      </main>
 
       <div class="affiliation-logos"
         aria-label="Affiliated institutions">
@@ -109,7 +217,7 @@
             href="https://visual.cs.brown.edu/projects/shapefromtracing-webpage/">visual.cs.brown.edu</a>
         </p>
       </footer>
-    </main>
+    </div>
   </body>
 
 </html>
