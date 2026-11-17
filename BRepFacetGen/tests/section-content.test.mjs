@@ -52,8 +52,10 @@ test('invalid or ambiguous sequences cannot reach the exporter or player', () =>
   }
   assert.throws(() => describeSections({ sections: [{ ...a, slides: [{ slide: 3, duration: 12 }] }] }));
 });
-test('legacy single slides keep their unwrapped native embeds', () => {
+test('single slides share visibility control without a timer or playback bar', () => {
   const markup = renderSlides(describeSections({ sections: [a] }));
-  assert.match(markup, /src="slides\/slide-3.html"/);
-  assert.doesNotMatch(markup, /sequence-controls|controlled=1/);
+  assert.match(markup, /class="slide-single"/);
+  assert.match(markup, /src="slides\/slide-3.html\?controlled=1"/);
+  assert.doesNotMatch(markup, /sequence-controls/);
+  assert.match(markup, /<noscript>.*href="slides\/slide-3.html"/);
 });

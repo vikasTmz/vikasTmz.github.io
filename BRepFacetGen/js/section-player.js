@@ -1,12 +1,15 @@
 // Website pacing is separate from the native DeckWerk timeline.
+import { coordinateVisibility } from './section-visibility.js';
 const CHANNEL = 'brepfacet-section-player';
 export function initSectionPlayers(container) {
-  const cleanups = [...(container?.querySelectorAll('.slide-sequence') || [])].map(initPlayer);
-  return () => cleanups.forEach(cleanup => cleanup());
+  const players = [...(container?.querySelectorAll('.slide-sequence, .slide-single') || [])].map(initPlayer);
+  const destroyVisibility = coordinateVisibility(players, container);
+  return () => { destroyVisibility(); players.forEach(player => player.destroy()); };
 }
 function initPlayer(root) {
+  const sequence = root.classList.contains('slide-sequence');
   const slides = JSON.parse(root.dataset.slides);
-  const stage = root.querySelector('.sequence-stage');
+  const stage = root.querySelector('.sequence-stage') || root;
   const controls = root.querySelector('.sequence-controls');
   const toggle = root.querySelector('.sequence-toggle');
   const restart = root.querySelector('.sequence-restart');
@@ -21,8 +24,10 @@ function initPlayer(root) {
     root.dataset.slideIndex = String(index);
     root.dataset.elapsed = String(elapsed);
     root.dataset.userPlaying = String(userPlaying);
-    root.dataset.state = ended ? 'ended' : !ready ? 'loading' : userPlaying ? 'playing' : 'paused';
+    root.dataset.state = ended ? 'ended' : !ready ? 'loading' : !userPlaying ? 'paused' : running ? 'playing' : 'suspended';
     root.dataset.paused = String(!userPlaying);
+    root.dataset.running = String(running);
+    if (!sequence) return;
     const toggleLabel = ended ? 'Replay section' : userPlaying ? 'Pause section' : 'Resume section';
     if (toggle.getAttribute('aria-label') !== toggleLabel) { toggle.setAttribute('aria-label', toggleLabel); toggle.title = toggleLabel; }
     const positionLabel = `${index + 1} / ${slides.length}`;
@@ -58,14 +63,16 @@ function initPlayer(root) {
       loadTimeout = setTimeout(() => {
         loadTimeout = 0;
         if (ready || disposed || !visible) return;
-        error.textContent = 'This slide could not load. Use Restart to try again.';
-        error.hidden = false;
+        if (error) {
+          error.textContent = 'This slide could not load. Use Restart to try again.';
+          error.hidden = false;
+        }
       }, 15000);
     }
     const shouldRun = ready && visible && !document.hidden && userPlaying && !ended && !disposed;
     if (shouldRun && !running) {
       running = true; last = performance.now(); send('resume');
-      animationFrame = requestAnimationFrame(tick);
+      if (sequence) animationFrame = requestAnimationFrame(tick);
     } else if (!shouldRun) stop();
     paint();
   }
@@ -80,7 +87,7 @@ function initPlayer(root) {
     if (next < 0 || next >= slides.length) return;
     stop();
     index = next; elapsed = 0; ready = false; ended = false;
-    error.hidden = true;
+    if (error) error.hidden = true;
     frame.removeEventListener('load', onLoad);
     const replacement = frame.cloneNode(false);
     replacement.src = `slides/slide-${slides[index].slide}.html?controlled=1`;
@@ -96,11 +103,11 @@ function initPlayer(root) {
   function restartSection() { userPlaying = true; select(0); }
   function onMessage(event) {
     if (event.source !== frame.contentWindow || event.origin !== location.origin || event.data?.channel !== CHANNEL) return;
-    if (event.data.type === 'ready') { ready = true; clearTimeout(loadTimeout); loadTimeout = 0; error.hidden = true; reconcile(); }
+    if (event.data.type === 'ready') { ready = true; clearTimeout(loadTimeout); loadTimeout = 0; if (error) error.hidden = true; reconcile(); }
     if (event.data.type === 'request') {
       if (event.data.action === 'toggle') togglePlayback();
-      if (event.data.action === 'next') select(Math.min(slides.length - 1, index + 1));
-      if (event.data.action === 'previous') select(Math.max(0, index - 1));
+      if (sequence && event.data.action === 'next') select(Math.min(slides.length - 1, index + 1));
+      if (sequence && event.data.action === 'previous') select(Math.max(0, index - 1));
       if (event.data.action === 'restart') restartSection();
     }
   }
@@ -114,27 +121,23 @@ function initPlayer(root) {
     if (next === undefined) return;
     event.preventDefault(); select(next); segments[next].focus();
   }
-  const observer = new IntersectionObserver(entries => {
-    visible = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.2;
-    reconcile();
-  }, { threshold: [0, 0.2] });
-  observer.observe(stage);
-  controls.hidden = false;
-  toggle.addEventListener('click', togglePlayback);
-  restart.addEventListener('click', restartSection);
-  controls.addEventListener('click', onClick);
-  controls.addEventListener('keydown', onKey);
+  if (controls) controls.hidden = false;
+  toggle?.addEventListener('click', togglePlayback);
+  restart?.addEventListener('click', restartSection);
+  controls?.addEventListener('click', onClick);
+  controls?.addEventListener('keydown', onKey);
   window.addEventListener('message', onMessage);
-  document.addEventListener('visibilitychange', reconcile);
   waitForFrame(); paint();
-  return () => {
-    disposed = true; stop(); clearTimeout(loadTimeout); observer.disconnect();
+  return { stage, setActive(active) {
+    if (visible === active) return;
+    visible = active; root.dataset.active = String(active); reconcile();
+  }, destroy() {
+    disposed = true; stop(); paint(); clearTimeout(loadTimeout);
     frame.removeEventListener('load', onLoad);
-    toggle.removeEventListener('click', togglePlayback);
-    restart.removeEventListener('click', restartSection);
-    controls.removeEventListener('click', onClick);
-    controls.removeEventListener('keydown', onKey);
+    toggle?.removeEventListener('click', togglePlayback);
+    restart?.removeEventListener('click', restartSection);
+    controls?.removeEventListener('click', onClick);
+    controls?.removeEventListener('keydown', onKey);
     window.removeEventListener('message', onMessage);
-    document.removeEventListener('visibilitychange', reconcile);
-  };
+  } };
 }

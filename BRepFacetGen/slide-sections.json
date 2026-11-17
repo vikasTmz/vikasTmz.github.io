@@ -16,14 +16,93 @@
           "duration": 9
         },
         {
-          "slide": 10,
+          "slide": 8,
           "duration": 12
         }
       ],
       "navLabel": "Pre-trained 3D models",
       "summary": "2. Leveraging pre-trained 3D generative models",
-      "notes": "We witnessed huge process in the last two years in generative models for 3D shapes. These models, conditioned on images or text-prompts, can sample high quality 3D shapes represented as implicit fields or meshes or some custom 3D data structure.",
+      "notes": "The last two years has seen significant progress in generative models for 3D shapes. These image-conditioned 3D generative models can produce detailed geometry across a wide range of shapes (organic and mechanical). The SOTA methods represent geometry as either implicit fields or meshes or some custom 3D data structure. Their output, however, lacks explicit structure, semantic/part segments, and topology. Extending their training recipe naively is difficult because these models are trained on large datasets, typically several orders of magnitude larger than CAD/Brep datasets.\n\nOur insight is to separate geometry synthesis from structural reasoning. We reuse the pretrained geometry prior and learn B-rep structure using the smaller B-rep dataset. We inherit the machinery already built for these systems, this includes their auto-encoding schemes, their generative models, and their ability to solve various inverse problems, like image-conditioned 3D shape generation.",
       "key": "3d-generative-models"
+    },
+    {
+      "title": "",
+      "slides": [
+        {
+          "slide": 9,
+          "duration": 15
+        },
+        {
+          "slide": 11,
+          "duration": 6
+        }
+      ],
+      "navLabel": "Proxy Problem",
+      "summary": "3. Choice of foundation model and proxy problem",
+      "notes": "TripoSG provides the pretrained geometry prior. We extend the model to generate signed-distance values together with auxiliary surface signals. The SDF describes geometry; the auxiliary signals let us partition the extracted surface into face-like patches. Rather than deterministically predicting a single segmentation on discrete point clouds, we model CAD-style face decomposition as a latent variable conditioned on geometry. The generated representation is converted to a B-rep through surface partitioning, fitting and assembly. Continuous geometry permits surface sampling at different resolutions, including near sharp transitions and patch boundaries, improving the performance and stabilizes subsequent surface fitting and topology recovery.\n\nPlacement of parametric patches on the surface can be formulated as a fine-trained segmentation problem. Some shapes in our dataset can be over-parameterized i.e. over-segmented, some under-segmented. Essentially, we are trying to identify the discontinuities in our SDF. These discontinuities are usually related to the change of nearest primitive.",
+      "key": "proxy-problem"
+    },
+    {
+      "title": "",
+      "slides": [
+        {
+          "slide": 13,
+          "duration": 10
+        },
+        {
+          "slide": 15,
+          "duration": 9
+        },
+        {
+          "slide": 17,
+          "duration": 9
+        },
+        {
+          "slide": 18,
+          "duration": 9
+        },
+        {
+          "slide": 20,
+          "duration": 9
+        }
+      ],
+      "navLabel": "Architecture",
+      "summary": "4. BRepFacetGen: Architecture",
+      "notes": "TripoSG has two stages. The VAE encodes surface points and normals into geometry latent tokens and decodes a continuous SDF. Marching Cubes extracts a mesh. The flow model then learns to generate those geometry latents from noise, conditioned on image features. TripoSG’s geometry VAE compresses a surface point cloud into geometry latent tokens. Embed point positions and normals. Farthest-point sampling selects queries for cross-attention, followed by self-attention. Decode at spatial query points to predict a continuous signed distance field; extract a mesh from its zero level set. Train with SDF reconstruction, surface-normal and Eikonal losses.\n\nTo predict segmentation, there are a few challenges: There is permutation ambiguity. Segmentation labels are discrete one-hot vectors and the same partition admits many equivalent label permutations. There is non-uniqueness. A given shape can admit multiple valid decompositions into CAD faces.\n\nStage 1 of our model learns a geometry-conditioned label VAE while the pretrained geometry encoder and decoder remain frozen. Embed point positions together with one-hot face labels. Label tokens query geometry tokens through cross-attention: queries come from labels, keys and values from geometry. Sample label latents from the resulting posterior. The label decoder predicts face-label probabilities at surface points, supervised with cross-entropy. The geometry branch reconstructs the shape; the label branch partitions its surface into patches.",
+      "key": "architecture"
+    },
+    {
+      "title": "",
+      "slides": [
+        {
+          "slide": 23,
+          "duration": 4
+        },
+        {
+          "slide": 24,
+          "duration": 4
+        },
+        {
+          "slide": 26,
+          "duration": 4
+        },
+        {
+          "slide": 27,
+          "duration": 4
+        },
+        {
+          "slide": 29,
+          "duration": 4
+        },
+        {
+          "slide": 30,
+          "duration": 4
+        }
+      ],
+      "navLabel": "Results",
+      "summary": "4. Results",
+      "notes": "Finally, here are the qualitative results of our model on the task of (i) pointcloud segmentation, (ii) pointcloud to B-Rep, and (iii) image to B-Rep. Please refer to the paper for quantitative evaluation and ablation studies.",
+      "key": "results"
     }
   ]
 }

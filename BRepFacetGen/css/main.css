@@ -103,8 +103,8 @@ code { font: inherit; }
 .slide-explanation[open] summary::before { transform: rotate(45deg); }
 .slide-explanation summary:focus-visible { outline: 2px solid #900020; outline-offset: 4px; }
 .slide-explanation summary:hover .explanation-summary { text-decoration: underline; }
-.explanation-summary { color: #900020; font-weight: 400; min-width: 0; overflow-wrap: anywhere; }
-.explanation-notes { padding: 2px 0 16px 17px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+.explanation-summary { color: #900020; font-weight: 400; min-width: 0; overflow-wrap: anywhere; font-size: 20px;}
+.explanation-notes { color: #6c5c5f; padding: 2px 0 16px 17px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
 .slide-takeaway { margin: 0 0 14px; color: #555; overflow-wrap: anywhere; }
 @media (max-width: 600px) {
   .slide-explanation summary { display: grid; grid-template-columns: 7px minmax(0, 1fr); column-gap: 10px; row-gap: 4px; }

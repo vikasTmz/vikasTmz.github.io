@@ -45,9 +45,9 @@ export function renderSlides(sections) {
     const accessible = heading ? `aria-labelledby="${escapeHtml(headingId)}"` : `aria-label="${escapeHtml(label)}"`;
     let explanation = '';
     if (notes.trim()) {
-      explanation = `<details class="slide-explanation"><summary${summary.trim() ? '' : ' aria-label="Toggle slide notes"'}>${summary.trim() ? `<span class="explanation-summary">${escapeHtml(summary)}</span>` : ''}</summary><div class="explanation-notes">${escapeHtml(notes)}</div></details>`;
+      explanation = `<details class="slide-explanation" open><summary${summary.trim() ? '' : ' aria-label="Toggle slide notes"'}>${summary.trim() ? `<span class="explanation-summary">${escapeHtml(summary)}</span>` : ''}</summary><div class="explanation-notes">${escapeHtml(notes)}</div></details>`;
     } else if (summary.trim()) explanation = `<p class="slide-takeaway">${escapeHtml(summary)}</p>`;
-    const frame = `<iframe src="slides/slide-${slide}.html${sequence ? '?controlled=1' : ''}" title="${escapeHtml(title || `DeckWerk slide ${slide}`)}" loading="lazy" allow="autoplay"></iframe>`;
+    const frame = `<iframe src="slides/slide-${slide}.html?controlled=1" title="${escapeHtml(title || `DeckWerk slide ${slide}`)}" loading="lazy" allow="autoplay"></iframe>`;
     const player = sequence ? `<div class="slide-sequence" data-slides="${escapeHtml(JSON.stringify(slides))}" aria-label="${escapeHtml(label)}">
 <div class="sequence-stage">${frame}</div>
 <div class="sequence-controls" role="group" aria-label="Section playback" hidden>
@@ -57,7 +57,7 @@ export function renderSlides(sections) {
 <button class="sequence-restart" type="button" aria-label="Restart section" title="Restart section"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7a7 7 0 1 1-1 7M4 2v5h5"/></svg></button>
 </div><p class="sequence-error" role="status" hidden></p>
 <noscript><p>${slides.map(item => `<a href="slides/slide-${item.slide}.html">Slide ${item.slide}</a>`).join(' · ')}</p></noscript>
-</div>` : frame;
+</div>` : `<div class="slide-single" data-slides="${escapeHtml(JSON.stringify(slides))}">${frame}</div><noscript><p><a href="slides/slide-${slide}.html">Slide ${slide}</a></p></noscript>`;
     return `<section class="slide-section pnav-section" id="${escapeHtml(id)}" ${accessible} tabindex="-1">
 ${heading}${explanation}
 ${player}

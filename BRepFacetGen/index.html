@@ -25,18 +25,18 @@
           Segmentation</h1>
         <ul class="authors" aria-label="Authors">
           <li><a href="https://edward1997104.github.io/khhui/">Ka-Hei
-              Hui</a><sup>2</sup></li>
+              Hui</a><sup>1</sup></li>
           <li><a href="https://vikastmz.github.io/">Vikas
               Thamizharasan</a><sup>2</sup></li>
           <li><a
               href="https://www.research.autodesk.com/people/pradeep-kumar-jayaraman/">Pradeep
-              Kumar Jayaraman</a><sup>2</sup></li>
+              Kumar Jayaraman</a><sup>1</sup></li>
           <li><a href="https://samxuxiang.github.io/">Xiang
-              Xu</a><sup>2</sup></li>
+              Xu</a><sup>1</sup></li>
         </ul>
         <ul class=" affiliations" aria-label="Affiliations">
-          <li><sup>1</sup>University of Massachusetts, Amherst</li>
-          <li><sup>2</sup>Autodesk Research</li>
+          <li><sup>1</sup>Autodesk Research</li>
+          <li><sup>2</sup>University of Massachusetts, Amherst</li>
         </ul>
       </header>
 
@@ -73,108 +73,85 @@
       </nav>
 
       <!-- section-navigation:start -->
-      <nav class="pnav" aria-label="Sections">
-        <span class="pnav-track" aria-hidden="true"><span
-            class="pnav-fill"></span></span>
-        <a href="#goal" aria-label="Goal" title="Goal"><span
-            class="pnav-dot" aria-hidden="true"></span><span
-            class="pnav-label">Goal</span></a>
-        <a href="#3d-generative-models"
-          aria-label="Pre-trained 3D models"
-          title="Pre-trained 3D models"><span class="pnav-dot"
-            aria-hidden="true"></span><span
-            class="pnav-label">Pre-trained 3D models</span></a>
-        <a href="#bibtex" aria-label="BibTeX" title="BibTeX"><span
-            class="pnav-dot" aria-hidden="true"></span><span
-            class="pnav-label">BibTeX</span></a>
-      </nav>
-      <!-- section-navigation:end -->
+<nav class="pnav" aria-label="Sections">
+<span class="pnav-track" aria-hidden="true"><span class="pnav-fill"></span></span>
+<a href="#goal" aria-label="Goal" title="Goal"><span class="pnav-dot" aria-hidden="true"></span><span class="pnav-label">Goal</span></a>
+<a href="#3d-generative-models" aria-label="Pre-trained 3D models" title="Pre-trained 3D models"><span class="pnav-dot" aria-hidden="true"></span><span class="pnav-label">Pre-trained 3D models</span></a>
+<a href="#proxy-problem" aria-label="Proxy Problem" title="Proxy Problem"><span class="pnav-dot" aria-hidden="true"></span><span class="pnav-label">Proxy Problem</span></a>
+<a href="#architecture" aria-label="Architecture" title="Architecture"><span class="pnav-dot" aria-hidden="true"></span><span class="pnav-label">Architecture</span></a>
+<a href="#results" aria-label="Results" title="Results"><span class="pnav-dot" aria-hidden="true"></span><span class="pnav-label">Results</span></a>
+<a href="#bibtex" aria-label="BibTeX" title="BibTeX"><span class="pnav-dot" aria-hidden="true"></span><span class="pnav-label">BibTeX</span></a>
+</nav>
+<!-- section-navigation:end -->
       <main id="article-content">
         <!-- slide-sections:start -->
-        <div id="slide-sections"
-          data-config="{&quot;sections&quot;:[{&quot;title&quot;:&quot;&quot;,&quot;slide&quot;:2,&quot;navLabel&quot;:&quot;Goal&quot;,&quot;summary&quot;:&quot;1. Goal: Generative model for watertight B-reps&quot;,&quot;notes&quot;:&quot;The goal of this project is to build a generative model for B-Reps. B-Reps (boundary representations) encode parametric surfaces together with precise topological structure.At inference time -- either unconditionally or conditioned on a text-prompt or a point cloud or an image -- the goal is to sample shapes represented as B-Reps that are compatible with various design, animation, and engineering software.&quot;,&quot;key&quot;:&quot;goal&quot;},{&quot;title&quot;:&quot;&quot;,&quot;slides&quot;:[{&quot;slide&quot;:3,&quot;duration&quot;:9},{&quot;slide&quot;:10,&quot;duration&quot;:12}],&quot;navLabel&quot;:&quot;Pre-trained 3D models&quot;,&quot;summary&quot;:&quot;2. Leveraging pre-trained 3D generative models&quot;,&quot;notes&quot;:&quot;We witnessed huge process in the last two years in generative models for 3D shapes. These models, conditioned on images or text-prompts, can sample high quality 3D shapes represented as implicit fields or meshes or some custom 3D data structure.&quot;,&quot;key&quot;:&quot;3d-generative-models&quot;}]}">
-          <section class="slide-section pnav-section" id="goal"
-            aria-label="Goal" tabindex="-1">
-            <details class="slide-explanation">
-              <summary><span class="explanation-summary">1. Goal:
-                  Generative model for watertight B-reps</span>
-              </summary>
-              <div class="explanation-notes">The goal of this project
-                is to build a generative model for B-Reps. B-Reps
-                (boundary representations) encode parametric surfaces
-                together with precise topological structure.At
-                inference time -- either unconditionally or
-                conditioned on a text-prompt or a point cloud or an
-                image -- the goal is to sample shapes represented as
-                B-Reps that are compatible with various design,
-                animation, and engineering software.</div>
-            </details>
-            <iframe src="slides/slide-2.html" title="DeckWerk slide 2"
-              loading="lazy" allow="autoplay"></iframe>
-          </section>
-          <section class="slide-section pnav-section"
-            id="3d-generative-models"
-            aria-label="Pre-trained 3D models" tabindex="-1">
-            <details class="slide-explanation">
-              <summary><span class="explanation-summary">2. Leveraging
-                  pre-trained 3D generative models</span></summary>
-              <div class="explanation-notes">We witnessed huge process
-                in the last two years in generative models for 3D
-                shapes. These models, conditioned on images or
-                text-prompts, can sample high quality 3D shapes
-                represented as implicit fields or meshes or some
-                custom 3D data structure.</div>
-            </details>
-            <div class="slide-sequence"
-              data-slides="[{&quot;slide&quot;:3,&quot;duration&quot;:9},{&quot;slide&quot;:10,&quot;duration&quot;:12}]"
-              aria-label="Pre-trained 3D models">
-              <div class="sequence-stage"><iframe
-                  src="slides/slide-3.html?controlled=1"
-                  title="DeckWerk slide 3" loading="lazy"
-                  allow="autoplay"></iframe></div>
-              <div class="sequence-controls" role="group"
-                aria-label="Section playback" hidden>
-                <button class="sequence-toggle" type="button"
-                  aria-label="Pause section"
-                  title="Pause section"><svg
-                    class="sequence-pause-icon" viewBox="0 0 20 20"
-                    aria-hidden="true">
-                    <path d="M6 4v12M14 4v12" />
-                  </svg><svg class="sequence-play-icon"
-                    viewBox="0 0 20 20" aria-hidden="true">
-                    <path d="m6 3 11 7-11 7Z" />
-                  </svg></button>
-                <div class="sequence-segments" role="group"
-                  aria-label="Slides"><button type="button"
-                    class="sequence-segment" data-index="0"
-                    aria-label="Show slide 3 (1 of 2)"
-                    title="Slide 3 · 9s" aria-current="true"><span
-                      class="segment-track" aria-hidden="true"><span
-                        class="segment-fill"></span></span></button><button
-                    type="button" class="sequence-segment"
-                    data-index="1" aria-label="Show slide 10 (2 of 2)"
-                    title="Slide 10 · 12s"><span class="segment-track"
-                      aria-hidden="true"><span
-                        class="segment-fill"></span></span></button>
-                </div>
-                <span class="sequence-position" aria-live="polite"
-                  aria-atomic="true">1 / 2</span>
-                <button class="sequence-restart" type="button"
-                  aria-label="Restart section"
-                  title="Restart section"><svg viewBox="0 0 20 20"
-                    aria-hidden="true">
-                    <path d="M4 7a7 7 0 1 1-1 7M4 2v5h5" />
-                  </svg></button>
-              </div>
-              <p class="sequence-error" role="status" hidden></p>
-              <noscript>
-                <p><a href="slides/slide-3.html">Slide 3</a> · <a
-                    href="slides/slide-10.html">Slide 10</a></p>
-              </noscript>
-            </div>
-          </section>
-        </div>
-        <!-- slide-sections:end -->
+<div id="slide-sections" data-config="{&quot;sections&quot;:[{&quot;title&quot;:&quot;&quot;,&quot;slide&quot;:2,&quot;navLabel&quot;:&quot;Goal&quot;,&quot;summary&quot;:&quot;1. Goal: Generative model for watertight B-reps&quot;,&quot;notes&quot;:&quot;The goal of this project is to build a generative model for B-Reps. B-Reps (boundary representations) encode parametric surfaces together with precise topological structure.At inference time -- either unconditionally or conditioned on a text-prompt or a point cloud or an image -- the goal is to sample shapes represented as B-Reps that are compatible with various design, animation, and engineering software.&quot;,&quot;key&quot;:&quot;goal&quot;},{&quot;title&quot;:&quot;&quot;,&quot;slides&quot;:[{&quot;slide&quot;:3,&quot;duration&quot;:9},{&quot;slide&quot;:8,&quot;duration&quot;:12}],&quot;navLabel&quot;:&quot;Pre-trained 3D models&quot;,&quot;summary&quot;:&quot;2. Leveraging pre-trained 3D generative models&quot;,&quot;notes&quot;:&quot;The last two years has seen significant progress in generative models for 3D shapes. These image-conditioned 3D generative models can produce detailed geometry across a wide range of shapes (organic and mechanical). The SOTA methods represent geometry as either implicit fields or meshes or some custom 3D data structure. Their output, however, lacks explicit structure, semantic/part segments, and topology. Extending their training recipe naively is difficult because these models are trained on large datasets, typically several orders of magnitude larger than CAD/Brep datasets.\n\nOur insight is to separate geometry synthesis from structural reasoning. We reuse the pretrained geometry prior and learn B-rep structure using the smaller B-rep dataset. We inherit the machinery already built for these systems, this includes their auto-encoding schemes, their generative models, and their ability to solve various inverse problems, like image-conditioned 3D shape generation.&quot;,&quot;key&quot;:&quot;3d-generative-models&quot;},{&quot;title&quot;:&quot;&quot;,&quot;slides&quot;:[{&quot;slide&quot;:9,&quot;duration&quot;:15},{&quot;slide&quot;:11,&quot;duration&quot;:6}],&quot;navLabel&quot;:&quot;Proxy Problem&quot;,&quot;summary&quot;:&quot;3. Choice of foundation model and proxy problem&quot;,&quot;notes&quot;:&quot;TripoSG provides the pretrained geometry prior. We extend the model to generate signed-distance values together with auxiliary surface signals. The SDF describes geometry; the auxiliary signals let us partition the extracted surface into face-like patches. Rather than deterministically predicting a single segmentation on discrete point clouds, we model CAD-style face decomposition as a latent variable conditioned on geometry. The generated representation is converted to a B-rep through surface partitioning, fitting and assembly. Continuous geometry permits surface sampling at different resolutions, including near sharp transitions and patch boundaries, improving the performance and stabilizes subsequent surface fitting and topology recovery.\n\nPlacement of parametric patches on the surface can be formulated as a fine-trained segmentation problem. Some shapes in our dataset can be over-parameterized i.e. over-segmented, some under-segmented. Essentially, we are trying to identify the discontinuities in our SDF. These discontinuities are usually related to the change of nearest primitive.&quot;,&quot;key&quot;:&quot;proxy-problem&quot;},{&quot;title&quot;:&quot;&quot;,&quot;slides&quot;:[{&quot;slide&quot;:13,&quot;duration&quot;:10},{&quot;slide&quot;:15,&quot;duration&quot;:9},{&quot;slide&quot;:17,&quot;duration&quot;:9},{&quot;slide&quot;:18,&quot;duration&quot;:9},{&quot;slide&quot;:20,&quot;duration&quot;:9}],&quot;navLabel&quot;:&quot;Architecture&quot;,&quot;summary&quot;:&quot;4. BRepFacetGen: Architecture&quot;,&quot;notes&quot;:&quot;TripoSG has two stages. The VAE encodes surface points and normals into geometry latent tokens and decodes a continuous SDF. Marching Cubes extracts a mesh. The flow model then learns to generate those geometry latents from noise, conditioned on image features. TripoSG’s geometry VAE compresses a surface point cloud into geometry latent tokens. Embed point positions and normals. Farthest-point sampling selects queries for cross-attention, followed by self-attention. Decode at spatial query points to predict a continuous signed distance field; extract a mesh from its zero level set. Train with SDF reconstruction, surface-normal and Eikonal losses.\n\nTo predict segmentation, there are a few challenges: There is permutation ambiguity. Segmentation labels are discrete one-hot vectors and the same partition admits many equivalent label permutations. There is non-uniqueness. A given shape can admit multiple valid decompositions into CAD faces.\n\nStage 1 of our model learns a geometry-conditioned label VAE while the pretrained geometry encoder and decoder remain frozen. Embed point positions together with one-hot face labels. Label tokens query geometry tokens through cross-attention: queries come from labels, keys and values from geometry. Sample label latents from the resulting posterior. The label decoder predicts face-label probabilities at surface points, supervised with cross-entropy. The geometry branch reconstructs the shape; the label branch partitions its surface into patches.&quot;,&quot;key&quot;:&quot;architecture&quot;},{&quot;title&quot;:&quot;&quot;,&quot;slides&quot;:[{&quot;slide&quot;:23,&quot;duration&quot;:5},{&quot;slide&quot;:24,&quot;duration&quot;:5},{&quot;slide&quot;:26,&quot;duration&quot;:5},{&quot;slide&quot;:27,&quot;duration&quot;:5},{&quot;slide&quot;:29,&quot;duration&quot;:5},{&quot;slide&quot;:30,&quot;duration&quot;:5}],&quot;navLabel&quot;:&quot;Results&quot;,&quot;summary&quot;:&quot;4. Results&quot;,&quot;notes&quot;:&quot;TBD&quot;,&quot;key&quot;:&quot;results&quot;}]}">
+<section class="slide-section pnav-section" id="goal" aria-label="Goal" tabindex="-1">
+<details class="slide-explanation" open><summary><span class="explanation-summary">1. Goal: Generative model for watertight B-reps</span></summary><div class="explanation-notes">The goal of this project is to build a generative model for B-Reps. B-Reps (boundary representations) encode parametric surfaces together with precise topological structure.At inference time -- either unconditionally or conditioned on a text-prompt or a point cloud or an image -- the goal is to sample shapes represented as B-Reps that are compatible with various design, animation, and engineering software.</div></details>
+<div class="slide-single" data-slides="[{&quot;slide&quot;:2,&quot;duration&quot;:12}]"><iframe src="slides/slide-2.html?controlled=1" title="DeckWerk slide 2" loading="lazy" allow="autoplay"></iframe></div><noscript><p><a href="slides/slide-2.html">Slide 2</a></p></noscript>
+</section>
+<section class="slide-section pnav-section" id="3d-generative-models" aria-label="Pre-trained 3D models" tabindex="-1">
+<details class="slide-explanation" open><summary><span class="explanation-summary">2. Leveraging pre-trained 3D generative models</span></summary><div class="explanation-notes">The last two years has seen significant progress in generative models for 3D shapes. These image-conditioned 3D generative models can produce detailed geometry across a wide range of shapes (organic and mechanical). The SOTA methods represent geometry as either implicit fields or meshes or some custom 3D data structure. Their output, however, lacks explicit structure, semantic/part segments, and topology. Extending their training recipe naively is difficult because these models are trained on large datasets, typically several orders of magnitude larger than CAD/Brep datasets.
+
+Our insight is to separate geometry synthesis from structural reasoning. We reuse the pretrained geometry prior and learn B-rep structure using the smaller B-rep dataset. We inherit the machinery already built for these systems, this includes their auto-encoding schemes, their generative models, and their ability to solve various inverse problems, like image-conditioned 3D shape generation.</div></details>
+<div class="slide-sequence" data-slides="[{&quot;slide&quot;:3,&quot;duration&quot;:9},{&quot;slide&quot;:8,&quot;duration&quot;:12}]" aria-label="Pre-trained 3D models">
+<div class="sequence-stage"><iframe src="slides/slide-3.html?controlled=1" title="DeckWerk slide 3" loading="lazy" allow="autoplay"></iframe></div>
+<div class="sequence-controls" role="group" aria-label="Section playback" hidden>
+<button class="sequence-toggle" type="button" aria-label="Pause section" title="Pause section"><svg class="sequence-pause-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12M14 4v12"/></svg><svg class="sequence-play-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 11 7-11 7Z"/></svg></button>
+<div class="sequence-segments" role="group" aria-label="Slides"><button type="button" class="sequence-segment" data-index="0" aria-label="Show slide 3 (1 of 2)" title="Slide 3 · 9s" aria-current="true"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button><button type="button" class="sequence-segment" data-index="1" aria-label="Show slide 8 (2 of 2)" title="Slide 8 · 12s"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button></div>
+<span class="sequence-position" aria-live="polite" aria-atomic="true">1 / 2</span>
+<button class="sequence-restart" type="button" aria-label="Restart section" title="Restart section"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7a7 7 0 1 1-1 7M4 2v5h5"/></svg></button>
+</div><p class="sequence-error" role="status" hidden></p>
+<noscript><p><a href="slides/slide-3.html">Slide 3</a> · <a href="slides/slide-8.html">Slide 8</a></p></noscript>
+</div>
+</section>
+<section class="slide-section pnav-section" id="proxy-problem" aria-label="Proxy Problem" tabindex="-1">
+<details class="slide-explanation" open><summary><span class="explanation-summary">3. Choice of foundation model and proxy problem</span></summary><div class="explanation-notes">TripoSG provides the pretrained geometry prior. We extend the model to generate signed-distance values together with auxiliary surface signals. The SDF describes geometry; the auxiliary signals let us partition the extracted surface into face-like patches. Rather than deterministically predicting a single segmentation on discrete point clouds, we model CAD-style face decomposition as a latent variable conditioned on geometry. The generated representation is converted to a B-rep through surface partitioning, fitting and assembly. Continuous geometry permits surface sampling at different resolutions, including near sharp transitions and patch boundaries, improving the performance and stabilizes subsequent surface fitting and topology recovery.
+
+Placement of parametric patches on the surface can be formulated as a fine-trained segmentation problem. Some shapes in our dataset can be over-parameterized i.e. over-segmented, some under-segmented. Essentially, we are trying to identify the discontinuities in our SDF. These discontinuities are usually related to the change of nearest primitive.</div></details>
+<div class="slide-sequence" data-slides="[{&quot;slide&quot;:9,&quot;duration&quot;:15},{&quot;slide&quot;:11,&quot;duration&quot;:6}]" aria-label="Proxy Problem">
+<div class="sequence-stage"><iframe src="slides/slide-9.html?controlled=1" title="DeckWerk slide 9" loading="lazy" allow="autoplay"></iframe></div>
+<div class="sequence-controls" role="group" aria-label="Section playback" hidden>
+<button class="sequence-toggle" type="button" aria-label="Pause section" title="Pause section"><svg class="sequence-pause-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12M14 4v12"/></svg><svg class="sequence-play-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 11 7-11 7Z"/></svg></button>
+<div class="sequence-segments" role="group" aria-label="Slides"><button type="button" class="sequence-segment" data-index="0" aria-label="Show slide 9 (1 of 2)" title="Slide 9 · 15s" aria-current="true"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button><button type="button" class="sequence-segment" data-index="1" aria-label="Show slide 11 (2 of 2)" title="Slide 11 · 6s"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button></div>
+<span class="sequence-position" aria-live="polite" aria-atomic="true">1 / 2</span>
+<button class="sequence-restart" type="button" aria-label="Restart section" title="Restart section"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7a7 7 0 1 1-1 7M4 2v5h5"/></svg></button>
+</div><p class="sequence-error" role="status" hidden></p>
+<noscript><p><a href="slides/slide-9.html">Slide 9</a> · <a href="slides/slide-11.html">Slide 11</a></p></noscript>
+</div>
+</section>
+<section class="slide-section pnav-section" id="architecture" aria-label="Architecture" tabindex="-1">
+<details class="slide-explanation" open><summary><span class="explanation-summary">4. BRepFacetGen: Architecture</span></summary><div class="explanation-notes">TripoSG has two stages. The VAE encodes surface points and normals into geometry latent tokens and decodes a continuous SDF. Marching Cubes extracts a mesh. The flow model then learns to generate those geometry latents from noise, conditioned on image features. TripoSG’s geometry VAE compresses a surface point cloud into geometry latent tokens. Embed point positions and normals. Farthest-point sampling selects queries for cross-attention, followed by self-attention. Decode at spatial query points to predict a continuous signed distance field; extract a mesh from its zero level set. Train with SDF reconstruction, surface-normal and Eikonal losses.
+
+To predict segmentation, there are a few challenges: There is permutation ambiguity. Segmentation labels are discrete one-hot vectors and the same partition admits many equivalent label permutations. There is non-uniqueness. A given shape can admit multiple valid decompositions into CAD faces.
+
+Stage 1 of our model learns a geometry-conditioned label VAE while the pretrained geometry encoder and decoder remain frozen. Embed point positions together with one-hot face labels. Label tokens query geometry tokens through cross-attention: queries come from labels, keys and values from geometry. Sample label latents from the resulting posterior. The label decoder predicts face-label probabilities at surface points, supervised with cross-entropy. The geometry branch reconstructs the shape; the label branch partitions its surface into patches.</div></details>
+<div class="slide-sequence" data-slides="[{&quot;slide&quot;:13,&quot;duration&quot;:10},{&quot;slide&quot;:15,&quot;duration&quot;:9},{&quot;slide&quot;:17,&quot;duration&quot;:9},{&quot;slide&quot;:18,&quot;duration&quot;:9},{&quot;slide&quot;:20,&quot;duration&quot;:9}]" aria-label="Architecture">
+<div class="sequence-stage"><iframe src="slides/slide-13.html?controlled=1" title="DeckWerk slide 13" loading="lazy" allow="autoplay"></iframe></div>
+<div class="sequence-controls" role="group" aria-label="Section playback" hidden>
+<button class="sequence-toggle" type="button" aria-label="Pause section" title="Pause section"><svg class="sequence-pause-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12M14 4v12"/></svg><svg class="sequence-play-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 11 7-11 7Z"/></svg></button>
+<div class="sequence-segments" role="group" aria-label="Slides"><button type="button" class="sequence-segment" data-index="0" aria-label="Show slide 13 (1 of 5)" title="Slide 13 · 10s" aria-current="true"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button><button type="button" class="sequence-segment" data-index="1" aria-label="Show slide 15 (2 of 5)" title="Slide 15 · 9s"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button><button type="button" class="sequence-segment" data-index="2" aria-label="Show slide 17 (3 of 5)" title="Slide 17 · 9s"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button><button type="button" class="sequence-segment" data-index="3" aria-label="Show slide 18 (4 of 5)" title="Slide 18 · 9s"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button><button type="button" class="sequence-segment" data-index="4" aria-label="Show slide 20 (5 of 5)" title="Slide 20 · 9s"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button></div>
+<span class="sequence-position" aria-live="polite" aria-atomic="true">1 / 5</span>
+<button class="sequence-restart" type="button" aria-label="Restart section" title="Restart section"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7a7 7 0 1 1-1 7M4 2v5h5"/></svg></button>
+</div><p class="sequence-error" role="status" hidden></p>
+<noscript><p><a href="slides/slide-13.html">Slide 13</a> · <a href="slides/slide-15.html">Slide 15</a> · <a href="slides/slide-17.html">Slide 17</a> · <a href="slides/slide-18.html">Slide 18</a> · <a href="slides/slide-20.html">Slide 20</a></p></noscript>
+</div>
+</section>
+<section class="slide-section pnav-section" id="results" aria-label="Results" tabindex="-1">
+<details class="slide-explanation" open><summary><span class="explanation-summary">4. Results</span></summary><div class="explanation-notes">TBD</div></details>
+<div class="slide-sequence" data-slides="[{&quot;slide&quot;:23,&quot;duration&quot;:5},{&quot;slide&quot;:24,&quot;duration&quot;:5},{&quot;slide&quot;:26,&quot;duration&quot;:5},{&quot;slide&quot;:27,&quot;duration&quot;:5},{&quot;slide&quot;:29,&quot;duration&quot;:5},{&quot;slide&quot;:30,&quot;duration&quot;:5}]" aria-label="Results">
+<div class="sequence-stage"><iframe src="slides/slide-23.html?controlled=1" title="DeckWerk slide 23" loading="lazy" allow="autoplay"></iframe></div>
+<div class="sequence-controls" role="group" aria-label="Section playback" hidden>
+<button class="sequence-toggle" type="button" aria-label="Pause section" title="Pause section"><svg class="sequence-pause-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12M14 4v12"/></svg><svg class="sequence-play-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 11 7-11 7Z"/></svg></button>
+<div class="sequence-segments" role="group" aria-label="Slides"><button type="button" class="sequence-segment" data-index="0" aria-label="Show slide 23 (1 of 6)" title="Slide 23 · 5s" aria-current="true"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button><button type="button" class="sequence-segment" data-index="1" aria-label="Show slide 24 (2 of 6)" title="Slide 24 · 5s"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button><button type="button" class="sequence-segment" data-index="2" aria-label="Show slide 26 (3 of 6)" title="Slide 26 · 5s"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button><button type="button" class="sequence-segment" data-index="3" aria-label="Show slide 27 (4 of 6)" title="Slide 27 · 5s"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button><button type="button" class="sequence-segment" data-index="4" aria-label="Show slide 29 (5 of 6)" title="Slide 29 · 5s"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button><button type="button" class="sequence-segment" data-index="5" aria-label="Show slide 30 (6 of 6)" title="Slide 30 · 5s"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button></div>
+<span class="sequence-position" aria-live="polite" aria-atomic="true">1 / 6</span>
+<button class="sequence-restart" type="button" aria-label="Restart section" title="Restart section"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7a7 7 0 1 1-1 7M4 2v5h5"/></svg></button>
+</div><p class="sequence-error" role="status" hidden></p>
+<noscript><p><a href="slides/slide-23.html">Slide 23</a> · <a href="slides/slide-24.html">Slide 24</a> · <a href="slides/slide-26.html">Slide 26</a> · <a href="slides/slide-27.html">Slide 27</a> · <a href="slides/slide-29.html">Slide 29</a> · <a href="slides/slide-30.html">Slide 30</a></p></noscript>
+</div>
+</section>
+</div>
+<!-- slide-sections:end -->
 
         <section class="citation pnav-section" id="bibtex"
           data-section-nav aria-labelledby="bibtex-heading"
@@ -185,17 +162,9 @@
           <pre tabindex="0" aria-label="BibTeX citation"><code>@inproceedings{hui2026brepfacetgen,
   title     = {{BRepFacetGen}: Reverse Engineering {B-Reps} By Generative Face Segmentation},
   author    = {Hui, Ka-Hei and Thamizharasan, Vikas and Jayaraman, Pradeep Kumar and Xu, Xiang},
-  editor    = {Favaro, Paolo and Kukelova, Zuzana and Maki, Atsuto and Rohrbach, Anna and Schindler, Konrad and Tombari, Federico},
   booktitle = {Computer Vision -- ECCV 2026},
   year      = {2026},
-  publisher = {Springer Nature Switzerland},
-  address   = {Cham},
-  series    = {Lecture Notes in Computer Science},
-  volume    = {17054},
-  pages     = {630--649},
-  doi       = {10.1007/978-3-032-37258-1_35},
   url       = {https://doi.org/10.1007/978-3-032-37258-1_35},
-  isbn      = {978-3-032-37258-1}
 }</code></pre>
         </section>
 
