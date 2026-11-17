@@ -7,12 +7,12 @@ import { dirname, extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const port = Number(process.env.PORT || 8765);
-const types = { '.html':'text/html', '.css':'text/css', '.js':'text/javascript', '.json':'application/json', '.svg':'image/svg+xml', '.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.mp4':'video/mp4', '.webm':'video/webm', '.woff2':'font/woff2', '.ttf':'font/ttf' };
+const types = { '.html':'text/html', '.css':'text/css', '.js':'text/javascript', '.json':'application/json', '.ico':'image/x-icon', '.svg':'image/svg+xml', '.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.mp4':'video/mp4', '.webm':'video/webm', '.woff2':'font/woff2', '.ttf':'font/ttf' };
 createServer(async (req, res) => {
   try {
     let path = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
     if (path.endsWith('/')) path += 'index.html';
-    if (path !== '/index.html' && path !== '/slide-sections.json' && !/^\/(css|logos|js|slides)\//.test(path)) { res.writeHead(404).end(); return; }
+    if (!['/index.html', '/slide-sections.json', '/favicon.ico', '/favicon.svg'].includes(path) && !/^\/(css|logos|js|slides)\//.test(path)) { res.writeHead(404).end(); return; }
     const file = resolve(root, '.' + path);
     if (!file.startsWith(root + '/')) { res.writeHead(403).end(); return; }
     const info = await stat(file); if (!info.isFile()) throw Error('Not a file');

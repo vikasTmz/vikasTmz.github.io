@@ -59,3 +59,10 @@ test('single slides share visibility control without a timer or playback bar', (
   assert.doesNotMatch(markup, /sequence-controls/);
   assert.match(markup, /<noscript>.*href="slides\/slide-3.html"/);
 });
+test('notes encode only JSON line breaks as markup, with text still escaped', () => {
+  const markup = renderSlides(describeSections({ sections: [{ ...a,
+    notes: 'First line.\nSecond line.\n\nNext paragraph.\r\n<script>text</script>'
+  }] }));
+  assert.match(markup, /First line\.<br>Second line\.<br><br>Next paragraph\.<br>&lt;script&gt;text&lt;\/script&gt;/);
+  assert.match(markup, /<details class="slide-explanation" open>/);
+});

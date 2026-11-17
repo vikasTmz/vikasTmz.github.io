@@ -45,7 +45,9 @@ export function renderSlides(sections) {
     const accessible = heading ? `aria-labelledby="${escapeHtml(headingId)}"` : `aria-label="${escapeHtml(label)}"`;
     let explanation = '';
     if (notes.trim()) {
-      explanation = `<details class="slide-explanation" open><summary${summary.trim() ? '' : ' aria-label="Toggle slide notes"'}>${summary.trim() ? `<span class="explanation-summary">${escapeHtml(summary)}</span>` : ''}</summary><div class="explanation-notes">${escapeHtml(notes)}</div></details>`;
+      // Explicit breaks survive HTML formatting; source indentation is not content.
+      const noteMarkup = escapeHtml(notes).replace(/\r\n?|\n/g, '<br>');
+      explanation = `<details class="slide-explanation" open><summary${summary.trim() ? '' : ' aria-label="Toggle slide notes"'}>${summary.trim() ? `<span class="explanation-summary">${escapeHtml(summary)}</span>` : ''}</summary><div class="explanation-notes">${noteMarkup}</div></details>`;
     } else if (summary.trim()) explanation = `<p class="slide-takeaway">${escapeHtml(summary)}</p>`;
     const frame = `<iframe src="slides/slide-${slide}.html?controlled=1" title="${escapeHtml(title || `DeckWerk slide ${slide}`)}" loading="lazy" allow="autoplay"></iframe>`;
     const player = sequence ? `<div class="slide-sequence" data-slides="${escapeHtml(JSON.stringify(slides))}" aria-label="${escapeHtml(label)}">
