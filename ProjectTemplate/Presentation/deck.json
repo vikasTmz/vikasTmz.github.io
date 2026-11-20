@@ -1,0 +1,303 @@
+{
+  "version": 1,
+  "title": "Example project presentation",
+  "canvas": {
+    "w": 1920,
+    "h": 1080
+  },
+  "theme": "theme.css",
+  "themePreset": null,
+  "themeStyle": null,
+  "themeSelection": null,
+  "themeHistory": [],
+  "customThemes": [],
+  "layoutMasters": null,
+  "morphEasing": "ease-in-out",
+  "slides": [
+    {
+      "id": "slide-1",
+      "name": "Overview",
+      "background": {
+        "color": null,
+        "image": null
+      },
+      "notes": "Introduce the problem and the main contribution. Replace this example with the project's central visual.",
+      "elements": [
+        {
+          "id": "slide-1-h1-1",
+          "x": 100,
+          "y": 65,
+          "w": 1720,
+          "h": 180,
+          "rot": 0,
+          "z": 1,
+          "opacity": 1,
+          "class": [],
+          "style": {},
+          "type": "text",
+          "html": "Project Name",
+          "align": "left",
+          "valign": "top"
+        },
+        {
+          "id": "slide-1-p-2",
+          "x": 100,
+          "y": 310,
+          "w": 1650,
+          "h": 220,
+          "rot": 0,
+          "z": 2,
+          "opacity": 1,
+          "class": [],
+          "style": {},
+          "type": "text",
+          "html": "Introduce the central idea with a clear visual or example.",
+          "align": "left",
+          "valign": "top"
+        },
+        {
+          "id": "slide-1-p-3",
+          "x": 100,
+          "y": 610,
+          "w": 1650,
+          "h": 220,
+          "rot": 0,
+          "z": 3,
+          "opacity": 1,
+          "class": [],
+          "style": {
+            "color": "#900020"
+          },
+          "type": "text",
+          "html": "This line demonstrates a native automatic reveal.",
+          "align": "left",
+          "valign": "top"
+        },
+        {
+          "id": "slide-1-div-4",
+          "x": 100,
+          "y": 970,
+          "w": 1720,
+          "h": 80,
+          "rot": 0,
+          "z": 4,
+          "opacity": 1,
+          "class": [
+            "footer"
+          ],
+          "style": {},
+          "type": "text",
+          "html": "Overview · Editable DeckWerk example",
+          "align": "left",
+          "valign": "top"
+        }
+      ],
+      "timeline": [
+        {
+          "id": "slide-1-p-3-build-1",
+          "trigger": {
+            "on": "afterPrev",
+            "ref": null,
+            "delay": 2000
+          },
+          "action": {
+            "type": "appear",
+            "target": "slide-1-p-3",
+            "value": "dissolve",
+            "duration": 400
+          }
+        }
+      ]
+    },
+    {
+      "id": "slide-6",
+      "name": "Method: representation",
+      "background": {
+        "color": null,
+        "image": null
+      },
+      "notes": "Explain what the model receives and what representation it learns. The equation is an editable example, not a claim about a particular method.",
+      "elements": [
+        {
+          "id": "slide-6-h1-1",
+          "x": 100,
+          "y": 65,
+          "w": 1720,
+          "h": 180,
+          "rot": 0,
+          "z": 1,
+          "opacity": 1,
+          "class": [],
+          "style": {},
+          "type": "text",
+          "html": "Method: representation",
+          "align": "left",
+          "valign": "top"
+        },
+        {
+          "id": "slide-6-p-2",
+          "x": 100,
+          "y": 310,
+          "w": 1650,
+          "h": 220,
+          "rot": 0,
+          "z": 2,
+          "opacity": 1,
+          "class": [],
+          "style": {},
+          "type": "text",
+          "html": "Use this slide for the input, representation, or first stage.",
+          "align": "left",
+          "valign": "top"
+        },
+        {
+          "id": "slide-6-p-3",
+          "x": 100,
+          "y": 600,
+          "w": 1650,
+          "h": 220,
+          "rot": 0,
+          "z": 3,
+          "opacity": 1,
+          "class": [],
+          "style": {
+            "color": "#900020"
+          },
+          "type": "text",
+          "html": "$y=f_\\theta(x)$",
+          "align": "left",
+          "valign": "top"
+        },
+        {
+          "id": "slide-6-div-4",
+          "x": 100,
+          "y": 970,
+          "w": 1720,
+          "h": 80,
+          "rot": 0,
+          "z": 4,
+          "opacity": 1,
+          "class": [
+            "footer"
+          ],
+          "style": {},
+          "type": "text",
+          "html": "Method · Slide 1 of 2",
+          "align": "left",
+          "valign": "top"
+        }
+      ],
+      "timeline": [
+        {
+          "id": "slide-6-p-3-build-1",
+          "trigger": {
+            "on": "afterPrev",
+            "ref": null,
+            "delay": 2000
+          },
+          "action": {
+            "type": "appear",
+            "target": "slide-6-p-3",
+            "value": "dissolve",
+            "duration": 400
+          }
+        }
+      ]
+    },
+    {
+      "id": "slide-12",
+      "name": "Method: output",
+      "background": {
+        "color": null,
+        "image": null
+      },
+      "notes": "Explain how the output answers the question introduced in the overview. Add project-specific evidence here.",
+      "elements": [
+        {
+          "id": "slide-12-h1-1",
+          "x": 100,
+          "y": 65,
+          "w": 1720,
+          "h": 180,
+          "rot": 0,
+          "z": 1,
+          "opacity": 1,
+          "class": [],
+          "style": {},
+          "type": "text",
+          "html": "Method: output",
+          "align": "left",
+          "valign": "top"
+        },
+        {
+          "id": "slide-12-p-2",
+          "x": 100,
+          "y": 310,
+          "w": 1650,
+          "h": 220,
+          "rot": 0,
+          "z": 2,
+          "opacity": 1,
+          "class": [],
+          "style": {},
+          "type": "text",
+          "html": "Use this slide for the next stage, output, or result.",
+          "align": "left",
+          "valign": "top"
+        },
+        {
+          "id": "slide-12-p-3",
+          "x": 100,
+          "y": 600,
+          "w": 1650,
+          "h": 220,
+          "rot": 0,
+          "z": 3,
+          "opacity": 1,
+          "class": [],
+          "style": {
+            "color": "#900020"
+          },
+          "type": "text",
+          "html": "Add an image or video directly in DeckWerk.",
+          "align": "left",
+          "valign": "top"
+        },
+        {
+          "id": "slide-12-div-4",
+          "x": 100,
+          "y": 970,
+          "w": 1720,
+          "h": 80,
+          "rot": 0,
+          "z": 4,
+          "opacity": 1,
+          "class": [
+            "footer"
+          ],
+          "style": {},
+          "type": "text",
+          "html": "Method · Slide 2 of 2",
+          "align": "left",
+          "valign": "top"
+        }
+      ],
+      "timeline": [
+        {
+          "id": "slide-12-p-3-build-1",
+          "trigger": {
+            "on": "afterPrev",
+            "ref": null,
+            "delay": 2000
+          },
+          "action": {
+            "type": "appear",
+            "target": "slide-12-p-3",
+            "value": "dissolve",
+            "duration": 400
+          }
+        }
+      ]
+    }
+  ]
+}

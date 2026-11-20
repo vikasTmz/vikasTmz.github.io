@@ -1,0 +1,30 @@
+{
+  "deck": "Presentation",
+  "sections": [
+    {
+      "key": "overview",
+      "title": "",
+      "slide": 1,
+      "navLabel": "Overview",
+      "summary": "1. Overview: the central idea",
+      "notes": "Explain the problem and the main contribution here.\n\nUse the next paragraph for context the reader needs before viewing the slide."
+    },
+    {
+      "key": "method",
+      "title": "",
+      "slides": [
+        {
+          "slide": 2,
+          "duration": 12
+        },
+        {
+          "slide": 3,
+          "duration": 12
+        }
+      ],
+      "navLabel": "Method",
+      "summary": "2. Method: how it works",
+      "notes": "Use a sequence when several slides belong to one topic. Each slide has its own duration in seconds.\nThe player pauses when the reader scrolls away."
+    }
+  ]
+}

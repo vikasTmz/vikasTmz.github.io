@@ -1,258 +1,197 @@
----
-redirect_from: MSD/
----
+<!doctype html>
+<html lang="en">
 
-<!DOCTYPE html
-	PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1">
+    <meta name="description"
+      content="Mean-Shift Distillation for Diffusion Mode Seeking — WACV 2026. Paper, code, authors, and citation.">
+    <title>Mean-Shift Distillation for Diffusion Mode Seeking — WACV
+      2026</title>
+    <link rel="icon" href="favicon.ico"
+      sizes="16x16 32x32 48x48 64x64 128x128 256x256">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml"
+      sizes="any">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/katex/katex.min.css">
+    <link rel="stylesheet" href="slides/canvas.css">
+    <link rel="stylesheet" href="css/section-navigation.css">
+    <script src="js/slides.js" type="module"></script>
+  </head>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
-	<head>
-		<meta http-equiv="Content-Type"
-			content="text/html; charset=utf-8" />
-
-		<title>MeanShiftDistillation</title>
-
-		<link rel="stylesheet" href="css/fonts.css" type="text/css"
-			charset="utf-8">
-		<link rel="stylesheet" href="css/normalize.css"
-			type="text/css" charset="utf-8">
-		<link rel="stylesheet" href="css/main.css" type="text/css"
-			charset="utf-8">
-		<link rel="stylesheet" href="css/jht.css" type="text/css"
-			charset="utf-8">
-		<link rel="stylesheet" href="static/index.css">
-
-		<script type="text/javascript">
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', 'UA-23628422-1']);
-			_gaq.push(['_trackPageview']);
-
-			(function () {
-				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
-		</script>
-	</head>
-
-	<body style="max-width: none;">
-		<script type="text/javascript" async
-			src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-			</script>
-
-		<div class="right-column"
-			style="max-width: 45em; margin: auto;; margin-top: 3em">
-
-			<h1 style="text-align: center;"><b>Mean-Shift
-					Distillation</b> for Diffusion Mode Seeking</h1>
-			<table class="authors">
-				<tr>
-					<td><a href="https://vikastmz.github.io/">Vikas
-							Thamizharasan</a><sup>1,2</sup></td>
-					<td><a
-							href="https://www.linkedin.com/in/nikitas-chatzis-795561274">Nikitas
-							Chatzis</a><sup>3</sup></td>
-					<td><a href="https://iliyan.com/">Iliyan
-							Georgiev</a><sup>2</sup></td>
-					<td><a href="https://techmatt.github.io/">Matthew
-							Fisher</a><sup>2</sup></td>
-				</tr>
-				<tr>
-					<td><a href="https://difanliu.github.io/">Difan
-							Liu</a><sup>2</sup></td>
-					<td><a href="http://nxzhao.com/">Nanxuan
-							Zhao</a><sup>2</sup></td>
-					<td><a href="https://kalo-ai.github.io/">Evangelos
-							Kalogerakis</a><sup>1,4</sup> </td>
-					<td><a
-							href="https://research.adobe.com/person/michal-lukac/">Michal
-							Lukáč</a><sup>2</sup></td>
-
-				</tr>
-			</table>
-			<!-- <p class="phototext" style="max-width: 45em;"> -->
-			<!-- </p> -->
-			<table class="affiliations">
-				<tr>
-					<td>
-						<sup>1</sup> University of Massachusetts
-						Amherst
-					</td>
-					<td>
-						<sup>2</sup> Adobe Research
-					</td>
-					<!-- </tr>
-			<tr> -->
-					<td>
-						<sup>3</sup> NTUA
-					</td>
-					<td>
-						<sup>4</sup> TU Crete
-					</td>
-				</tr>
-			</table>
-
-			<table
-				style="min-width: 625px;	margin-top: 3em; text-align: center;">
-				<tbody>
-					<tr>
-						<td>
-							<a
-								href="https://arxiv.org/abs/2502.15989"><img
-									class="teaser_small"
-									src="logos/arxiv-logo.svg"
-									width="80px"> <br> Paper</a>
-						</td>
-						<td>
-							<a
-								href="https://github.com/vikasTmz/MSD_WACV26"><img
-									class="teaser_small"
-									src="logos/github-mark.svg"
-									width="60px"> <br>
-								Code</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
-			<h2>Illustrating the shortcomings of SDS and how we fix
-				it.</h2>
-
-			<p>
-				Score distillation sampling (SDS) (Poole et al., 2022;
-				Wang et al., 2022) has emerged as
-				a useful technique for leveraging the priors learned
-				by large-scale image models beyond 2D raster images.
-				SDS provides an
-				optimization procedure to estimate the parameters of a
-				differentiable image generator, such that the
-				rendered image is pushed towards a higher-probability
-				region of a pre-trained prompt-conditioned image
-				diffusion model. </br> </br>
-
-				<video src="data/sds.mp4" width="720px" controls muted
-					playsinline preload="metadata"></video>
-
-			</p>
-			<p>
-				SDS suffers from significant bias as well as variance,
-				yielding inaccurate gradients. This manifests as
-				over-smoothened results when optimizing with
-				text-to-image diffusion models. </br> </br>
-
-				To illustrate the pitfalls of SDS, we simulate it in
-				2D using a small denoising diffusion network.</br>
-
-				<a href="data/2d_toydataset_overview.mp4">[Watch blog
-					as video - 3 mins (MP4)]</a>
-			</p>
-
-			<img src="data/fractal2d_1.gif" alt="GIF" width="720px">
-
-			<!-- <hr style="border: 1px dashed gray;"> -->
-			<p> We begin my training a simple score model:
-				\(\epsilon_{\theta} \approx -\sigma_t \nabla_{z_t}
-				\log p(z_t|c)
-				\). Then, at inference time, we draw samples via DDIM
-				(Song et al., 2021a), a popular first-order sampling
-				algorithm, without and with guidance (CFG; Ho &
-				Salimans, 2021).
-			</p>
-
-			<img src="data/fractal2d_2.png" alt="GIF" width="720px">
-
-			<img src="data/fractal2d_3.gif" alt="GIF" width="720px">
-
-			<h3>What does this look like with SDS?</h3>
-
-			<img src="data/fractal2d_4.gif" alt="GIF" width="720px">
-
-			<p> Let's simulate this with multiple points densely
-				initialized along a grid, across the canvas. After
-				several
-				optimization steps, we observe, samples optimized with
-				SDS fail to fit the distribution.
-				<img src="data/sds_optimization.gif" alt="GIF"
-					width="350px"
-					style="display: block; margin: auto;">
-			</p>
-
-			<!-- <img src="data/sds_optimization.gif" alt="GIF" width="420px"> -->
-
-			<img src="data/fractal2d_6.png" alt="GIF" width="720px">
-
-			<h3>Our fix.</h3>
-
-			<p>We propose mean-shift distillation, a
-				distribution-gradient proxy based on a well-known
-				mode-seeking
-				technique.
-				<img src="data/msd_optimization.gif" alt="GIF"
-					width="350px"
-					style="display: block; margin: auto;">
-			</p>
+  <body>
+    <div class="project-page">
+      <header class="project-header">
+        <!-- Project identity is authored here; section content is authored in JSON. -->
+        <h1><strong>Mean-Shift Distillation</strong> for Diffusion
+          Mode Seeking</h1>
+        <ul class="authors">
+          <li><a href="https://vikastmz.github.io/">Vikas
+              Thamizharasan</a><sup>1,2</sup></li>
+          <li><a
+              href="https://www.linkedin.com/in/nikitas-chatzis-795561274">Nikitas
+              Chatzis</a><sup>3</sup></li>
+          <li><a href="https://iliyan.com/">Iliyan
+              Georgiev</a><sup>2</sup></li>
+          <li><a href="https://techmatt.github.io/">Matthew
+              Fisher</a><sup>2</sup></li>
+          <li><a href="https://kalo-ai.github.io/">Evangelos
+              Kalogerakis</a><sup>1,4</sup></li>
+          <li><a href="https://difanliu.github.io/">Difan
+              Liu</a><sup>2</sup></li>
+          <li><a href="http://nxzhao.com/">Nanxuan
+              Zhao</a><sup>2</sup></li>
+          <li><a
+              href="https://research.adobe.com/person/michal-lukac/">Michal
+              Lukáč</a><sup>2</sup></li>
+        </ul>
+        <ul class="affiliations">
+          <li><sup>1</sup>University of Massachusetts Amherst</li>
+          <li><sup>2</sup>Adobe Research</li>
+          <li><sup>3</sup>NTUA</li>
+          <li><sup>4</sup>TU Crete</li>
+        </ul>
+        <div class="project-resources">
+          <a class="resource-link"
+            href="https://arxiv.org/abs/2502.15989">
+            <span class="resource-image"><img
+                src="logos/arxiv-logo.svg" alt="arXiv"
+                width="100"></span>
+            <span>Paper</span>
+          </a>
+          <a class="resource-link"
+            href="https://wacv.thecvf.com/Conferences/2026">
+            <span class="resource-image"><img
+                src="logos/wacv-2026.png" alt="WACV 2026"
+                width="150"></span>
+            <span>WACV 2026</span>
+          </a>
+          <a class="resource-link"
+            href="https://github.com/vikasTmz/MSD_WACV26">
+            <span class="resource-image"><img
+                src="logos/github-mark.svg" alt="" width="50"></span>
+            <span>Code</span>
+          </a>
+        </div>
+      </header>
+      <!-- section-navigation:start -->
+<nav class="pnav" aria-label="Sections">
+<span class="pnav-track" aria-hidden="true"><span class="pnav-fill"></span></span>
+<a href="#intro" aria-label="Introduction" title="Introduction"><span class="pnav-dot" aria-hidden="true"></span><span class="pnav-label">Introduction</span></a>
+<a href="#sds" aria-label="SDS" title="SDS"><span class="pnav-dot" aria-hidden="true"></span><span class="pnav-label">SDS</span></a>
+<a href="#sds_limitations" aria-label="SDS Limitations" title="SDS Limitations"><span class="pnav-dot" aria-hidden="true"></span><span class="pnav-label">SDS Limitations</span></a>
+<a href="#bibtex" aria-label="BibTeX" title="BibTeX"><span class="pnav-dot" aria-hidden="true"></span><span class="pnav-label">BibTeX</span></a>
+</nav>
+<!-- section-navigation:end -->
+      <main id="article-content">
+        <!-- slide-sections:start -->
+<div id="slide-sections" data-config="{&quot;deck&quot;:&quot;MSD_SlidesNew_DeckWerk&quot;,&quot;sections&quot;:[{&quot;title&quot;:&quot;&quot;,&quot;slides&quot;:[{&quot;slide&quot;:2,&quot;duration&quot;:15}],&quot;navLabel&quot;:&quot;Introduction&quot;,&quot;summary&quot;:&quot;1. Training-Free Methods for Generating Shapes&quot;,&quot;notes&quot;:&quot;Let&#39;s assume learning a dedicated shape prior is impractical, either because training data is scarce or because the appropriate model architecture remains unclear. We begin with randomly initialized shape parameters. One way to estimate them is by optimizing image-based losses. Recent advancements in differentiable graphics pipelines and in gradient-based optimizers, make it practical to compute loss directly in image-space and back-propagate the error all the way from the rendered image to the underlying shape parameters. This optimization-based view underlies major breakthroughs such as NeRFs and 3D Gaussian splatting.\n\nThese methods however suffer from shortcomings because of two implicit assumptions: (1), finding target images to compute losses over is non-trivial, even with access to an image-generative model. And (2), our shape parameters may not have the right capacity or be expressive enough to represent these target images. These shape representation typically require pre-defining hyper-parameters.&quot;,&quot;key&quot;:&quot;intro&quot;},{&quot;title&quot;:&quot;&quot;,&quot;slides&quot;:[{&quot;slide&quot;:3,&quot;duration&quot;:16},{&quot;slide&quot;:5,&quot;duration&quot;:8}],&quot;navLabel&quot;:&quot;SDS&quot;,&quot;summary&quot;:&quot;2. Score Distillation, DreamFusion&quot;,&quot;notes&quot;:&quot;A recent breakthrough to deal with this incompatibility is to perform parameter estimation via optimization based on score distillation. Formally, diffusion models provide a mechanism to sample images from some learned distribution. Given our randomly initialized parameter vector, we seek to optimize it such that at some iteration k, the rendered image has higher probability. We expect this to yield an image of higher quality, under the metric the diffusion model is trained for. We could imagine optimizing our parameter vector by determining the gradient and ascending along it. However we don&#39;t have access to the exact probabilities and determining its gradient is even less practical.\n\nScore distillation sampling (SDS) attempts to address this problem by offering proxies for the density gradient that are easier to estimate. DreamFusion optimizes randomly initialized neural radiance fields for the application of text-to-3D generation. Running this optimization for a few thousand iterations, yields us a multi-view consistent 3D shape Intuitively, the pre-trained image diffusion model that is conditioned on an input prompt, provides update directions such that the rendered images from this target moves towards a higher probability density region.&quot;,&quot;key&quot;:&quot;sds&quot;},{&quot;title&quot;:&quot;&quot;,&quot;navLabel&quot;:&quot;SDS Limitations&quot;,&quot;key&quot;:&quot;sds_limitations&quot;,&quot;markdown&quot;:&quot;content/sds-limitations.md&quot;}]}">
+<section class="slide-section pnav-section" id="intro" aria-label="Introduction" tabindex="-1">
+<details class="slide-explanation" open><summary><span class="explanation-summary">1. Training-Free Methods for Generating Shapes</span></summary><div class="explanation-notes">Let&#39;s assume learning a dedicated shape prior is impractical, either because training data is scarce or because the appropriate model architecture remains unclear. We begin with randomly initialized shape parameters. One way to estimate them is by optimizing image-based losses. Recent advancements in differentiable graphics pipelines and in gradient-based optimizers, make it practical to compute loss directly in image-space and back-propagate the error all the way from the rendered image to the underlying shape parameters. This optimization-based view underlies major breakthroughs such as NeRFs and 3D Gaussian splatting.<br><br>These methods however suffer from shortcomings because of two implicit assumptions: (1), finding target images to compute losses over is non-trivial, even with access to an image-generative model. And (2), our shape parameters may not have the right capacity or be expressive enough to represent these target images. These shape representation typically require pre-defining hyper-parameters.</div></details>
+<div class="slide-sequence" data-slides="[{&quot;slide&quot;:2,&quot;duration&quot;:15}]" aria-label="Introduction">
+<div class="sequence-stage"><iframe src="slides/slide-2.html?controlled=1" title="DeckWerk slide 2" loading="lazy" allow="autoplay"></iframe></div>
+<div class="sequence-controls" role="group" aria-label="Section playback" hidden>
+<button class="sequence-toggle" type="button" aria-label="Pause section" title="Pause section"><svg class="sequence-pause-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12M14 4v12"/></svg><svg class="sequence-play-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 11 7-11 7Z"/></svg></button>
+<div class="sequence-segments" role="group" aria-label="Slides"><button type="button" class="sequence-segment" data-index="0" aria-label="Show slide 2 (1 of 1)" title="Slide 2 · 15s" aria-current="true"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button></div>
+<span class="sequence-position" aria-live="polite" aria-atomic="true">1 / 1</span>
+<button class="sequence-restart" type="button" aria-label="Restart section" title="Restart section"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7a7 7 0 1 1-1 7M4 2v5h5"/></svg></button>
+</div><p class="sequence-error" role="status" hidden></p>
+<noscript><p><a href="slides/slide-2.html">Slide 2</a></p></noscript>
+</div>
+</section>
+<section class="slide-section pnav-section" id="sds" aria-label="SDS" tabindex="-1">
+<details class="slide-explanation" open><summary><span class="explanation-summary">2. Score Distillation, DreamFusion</span></summary><div class="explanation-notes">A recent breakthrough to deal with this incompatibility is to perform parameter estimation via optimization based on score distillation. Formally, diffusion models provide a mechanism to sample images from some learned distribution. Given our randomly initialized parameter vector, we seek to optimize it such that at some iteration k, the rendered image has higher probability. We expect this to yield an image of higher quality, under the metric the diffusion model is trained for. We could imagine optimizing our parameter vector by determining the gradient and ascending along it. However we don&#39;t have access to the exact probabilities and determining its gradient is even less practical.<br><br>Score distillation sampling (SDS) attempts to address this problem by offering proxies for the density gradient that are easier to estimate. DreamFusion optimizes randomly initialized neural radiance fields for the application of text-to-3D generation. Running this optimization for a few thousand iterations, yields us a multi-view consistent 3D shape Intuitively, the pre-trained image diffusion model that is conditioned on an input prompt, provides update directions such that the rendered images from this target moves towards a higher probability density region.</div></details>
+<div class="slide-sequence" data-slides="[{&quot;slide&quot;:3,&quot;duration&quot;:16},{&quot;slide&quot;:5,&quot;duration&quot;:8}]" aria-label="SDS">
+<div class="sequence-stage"><iframe src="slides/slide-3.html?controlled=1" title="DeckWerk slide 3" loading="lazy" allow="autoplay"></iframe></div>
+<div class="sequence-controls" role="group" aria-label="Section playback" hidden>
+<button class="sequence-toggle" type="button" aria-label="Pause section" title="Pause section"><svg class="sequence-pause-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12M14 4v12"/></svg><svg class="sequence-play-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 11 7-11 7Z"/></svg></button>
+<div class="sequence-segments" role="group" aria-label="Slides"><button type="button" class="sequence-segment" data-index="0" aria-label="Show slide 3 (1 of 2)" title="Slide 3 · 16s" aria-current="true"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button><button type="button" class="sequence-segment" data-index="1" aria-label="Show slide 5 (2 of 2)" title="Slide 5 · 8s"><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button></div>
+<span class="sequence-position" aria-live="polite" aria-atomic="true">1 / 2</span>
+<button class="sequence-restart" type="button" aria-label="Restart section" title="Restart section"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7a7 7 0 1 1-1 7M4 2v5h5"/></svg></button>
+</div><p class="sequence-error" role="status" hidden></p>
+<noscript><p><a href="slides/slide-3.html">Slide 3</a> · <a href="slides/slide-5.html">Slide 5</a></p></noscript>
+</div>
+</section>
+<section class="slide-section pnav-section" id="sds_limitations" aria-label="SDS Limitations" tabindex="-1">
+<div class="markdown-content" data-markdown="content/sds-limitations.md"><h2>3. Investigating the Flaws in SDS</h2>
+<p>The SDS loss penalizes the KL-divergence between a <strong>unimodal Gaussian distribution</strong> centered around the rendered image <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>ϑ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x = g(\vartheta)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mopen">(</span><span class="mord mathnormal">ϑ</span><span class="mclose">)</span></span></span></span> and the <strong>learned image distribution</strong> parameterized by a pre-trained diffusion model <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ϵ</mi><mi>ϕ</mi></msub></mrow><annotation encoding="application/x-tex">\epsilon_\phi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">ϵ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϕ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span>.</p>
+<div class="markdown-equation" tabindex="0" role="region" aria-label="Equation"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi mathvariant="script">L</mi><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">S</mi></mrow></msub><mo stretchy="false">(</mo><mi>ϑ</mi><mo separator="true">,</mo><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>t</mi><mo separator="true">,</mo><msub><mi>z</mi><mi>t</mi></msub><mo>∣</mo><mi>x</mi></mrow></msub><mtext> ⁣</mtext><mrow><mo fence="true">[</mo><mi>ω</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mtext> </mtext><mrow><mi mathvariant="normal">K</mi><mi mathvariant="normal">L</mi></mrow><mtext> ⁣</mtext><mrow><mo fence="true">(</mo><mi>q</mi><mo stretchy="false">(</mo><msub><mi>z</mi><mi>t</mi></msub><mo>∣</mo><mi>x</mi><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>ϑ</mi><mo stretchy="false">)</mo><mo separator="true">;</mo><mi>y</mi><mo separator="true">,</mo><mi>t</mi><mo stretchy="false">)</mo><mtext>  </mtext><mi mathvariant="normal">∥</mi><mtext>  </mtext><msub><mi>p</mi><mi>ϕ</mi></msub><mo stretchy="false">(</mo><msub><mi>z</mi><mi>t</mi></msub><mo separator="true">;</mo><mi>y</mi><mo separator="true">,</mo><mi>t</mi><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow><mo fence="true">]</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\mathcal{L}_{\mathrm{SDS}}(\vartheta,c)
+= \mathbb{E}_{t,z_t\mid x}\!\left[
+\omega(t)\,\mathrm{KL}\!\left(
+q(z_t\mid x=g(\vartheta);y,t)
+\;\|\; p_\phi(z_t;y,t)
+\right)\right].</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathcal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">SDS</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">ϑ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">c</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.1052em;vertical-align:-0.3552em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mpunct mtight">,</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2963em;"><span style="top:-2.357em;margin-left:-0.044em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="katex-sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mrel mtight">∣</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord mathnormal" style="margin-right:0.0359em;">ω</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathrm">KL</span></span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mopen">(</span><span class="mord mathnormal">ϑ</span><span class="mclose">)</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">∥</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϕ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mclose delimcenter" style="top:0em;">]</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">.</span></span></span></span></span></div>
+<p>Differentiating with respect to the shape parameters gives</p>
+<div class="markdown-equation" tabindex="0" role="region" aria-label="Equation"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi mathvariant="normal">∇</mi><mi>ϑ</mi></msub><msub><mi mathvariant="script">L</mi><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>t</mi><mo separator="true">,</mo><msub><mi>z</mi><mi>t</mi></msub><mo>∣</mo><mi>x</mi></mrow></msub><mtext> ⁣</mtext><mrow><mo fence="true">[</mo><mi>ω</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mtext> </mtext><msub><mi mathvariant="normal">∇</mi><mi>ϑ</mi></msub><mrow><mi mathvariant="normal">K</mi><mi mathvariant="normal">L</mi></mrow><mtext> ⁣</mtext><mrow><mo fence="true">(</mo><mi>q</mi><mo stretchy="false">(</mo><msub><mi>z</mi><mi>t</mi></msub><mo>∣</mo><mi>x</mi><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>ϑ</mi><mo stretchy="false">)</mo><mo separator="true">;</mo><mi>y</mi><mo separator="true">,</mo><mi>t</mi><mo stretchy="false">)</mo><mtext>  </mtext><mi mathvariant="normal">∥</mi><mtext>  </mtext><msub><mi>p</mi><mi>ϕ</mi></msub><mo stretchy="false">(</mo><msub><mi>z</mi><mi>t</mi></msub><mo separator="true">;</mo><mi>y</mi><mo separator="true">,</mo><mi>t</mi><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow><mo fence="true">]</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\nabla_\vartheta\mathcal{L}_{\mathrm{SDS}}
+= \mathbb{E}_{t,z_t\mid x}\!\left[
+\omega(t)\,\nabla_\vartheta\mathrm{KL}\!\left(
+q(z_t\mid x=g(\vartheta);y,t)
+\;\|\;p_\phi(z_t;y,t)
+\right)\right].</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϑ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathcal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">SDS</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.1052em;vertical-align:-0.3552em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mpunct mtight">,</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2963em;"><span style="top:-2.357em;margin-left:-0.044em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="katex-sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mrel mtight">∣</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord mathnormal" style="margin-right:0.0359em;">ω</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϑ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathrm">KL</span></span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mopen">(</span><span class="mord mathnormal">ϑ</span><span class="mclose">)</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">∥</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϕ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mclose delimcenter" style="top:0em;">]</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">.</span></span></span></span></span></div>
+<p>The derivation separates two log-density gradients:</p>
+<div class="markdown-equation" tabindex="0" role="region" aria-label="Equation"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mi mathvariant="normal">∇</mi><mi>ϑ</mi></msub><msub><mi mathvariant="script">L</mi><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>t</mi><mo separator="true">,</mo><msub><mi>z</mi><mi>t</mi></msub><mo>∣</mo><mi>x</mi></mrow></msub><mo fence="true" stretchy="true" minsize="1.8em" maxsize="1.8em">[</mo><mi>ω</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mtext> </mtext><msub><mi mathvariant="double-struck">E</mi><mi>ϵ</mi></msub><mo fence="true" stretchy="true" minsize="1.2em" maxsize="1.2em">[</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><msub><mi mathvariant="normal">∇</mi><mi>ϑ</mi></msub><mi>log</mi><mo>⁡</mo><mi>q</mi><mo stretchy="false">(</mo><msub><mi>z</mi><mi>t</mi></msub><mo>∣</mo><mi>x</mi><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>ϑ</mi><mo stretchy="false">)</mo><mo separator="true">;</mo><mi>y</mi><mo separator="true">,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>−</mo><msub><mi mathvariant="normal">∇</mi><mi>ϑ</mi></msub><mi>log</mi><mo>⁡</mo><msub><mi>p</mi><mi>ϕ</mi></msub><mo stretchy="false">(</mo><msub><mi>z</mi><mi>t</mi></msub><mo separator="true">;</mo><mi>y</mi><mo separator="true">,</mo><mi>t</mi><mo stretchy="false">)</mo><mo fence="true" stretchy="true" minsize="1.2em" maxsize="1.2em">]</mo><mo fence="true" stretchy="true" minsize="1.8em" maxsize="1.8em">]</mo><mi mathvariant="normal">.</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+\nabla_\vartheta\mathcal{L}_{\mathrm{SDS}}
+= \mathbb{E}_{t,z_t\mid x}\Bigl[\omega(t)\,\mathbb{E}_\epsilon\bigl[
+&amp;\nabla_\vartheta\log q(z_t\mid x=g(\vartheta);y,t)\\
+&amp;-\nabla_\vartheta\log p_\phi(z_t;y,t)
+\bigr]\Bigr].
+\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:3.9em;vertical-align:-1.7em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.2em;"><span style="top:-4.2em;"><span class="pstrut" style="height:3.15em;"></span><span class="mord"><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϑ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathcal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">SDS</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mpunct mtight">,</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2963em;"><span style="top:-2.357em;margin-left:-0.044em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="katex-sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mrel mtight">∣</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span><span class="mopen"><span class="delimsizing size2">[</span></span><span class="mord mathnormal" style="margin-right:0.0359em;">ω</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϵ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen"><span class="delimsizing size1">[</span></span></span></span><span style="top:-2.1em;"><span class="pstrut" style="height:3.15em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.7em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.2em;"><span style="top:-4.2em;"><span class="pstrut" style="height:3.15em;"></span><span class="mord"><span class="mord"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϑ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.0139em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mopen">(</span><span class="mord mathnormal">ϑ</span><span class="mclose">)</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span><span style="top:-2.1em;"><span class="pstrut" style="height:3.15em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϑ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.0139em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϕ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mclose"><span class="delimsizing size1">]</span></span><span class="mclose"><span class="delimsizing size2">]</span></span><span class="mord">.</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.7em;"><span></span></span></span></span></span></span></span></span></span></span></span></div>
+<blockquote>
+<p><strong>Generator assumption:</strong> the generator&#39;s output is treated as a Dirac delta. In this derivation, the generator-side term is set to zero:</p>
+<div class="markdown-equation" tabindex="0" role="region" aria-label="Equation"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi mathvariant="normal">∇</mi><mi>ϑ</mi></msub><mi>log</mi><mo>⁡</mo><mi>q</mi><mo stretchy="false">(</mo><msub><mi>z</mi><mi>t</mi></msub><mo>∣</mo><mi>x</mi><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>ϑ</mi><mo stretchy="false">)</mo><mo separator="true">;</mo><mi>y</mi><mo separator="true">,</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">\nabla_\vartheta\log q(z_t\mid x=g(\vartheta);y,t)=0.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϑ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.0139em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mopen">(</span><span class="mord mathnormal">ϑ</span><span class="mclose">)</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.</span></span></span></span></span></div>
+</blockquote>
+<p>This leads to the SDS update expression:</p>
+<div class="markdown-equation" tabindex="0" role="region" aria-label="Equation"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi mathvariant="normal">∇</mi><mi>ϑ</mi></msub><msub><mi mathvariant="script">L</mi><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>t</mi><mo separator="true">,</mo><mi>ϵ</mi></mrow></msub><mtext> ⁣</mtext><mrow><mo fence="true">[</mo><msub><mi>α</mi><mi>t</mi></msub><mo fence="true" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><msub><mi>ϵ</mi><mi>ϕ</mi></msub><mo stretchy="false">(</mo><msub><mi>α</mi><mi>t</mi></msub><mi>x</mi><mo>+</mo><mi>ϵ</mi><mo separator="true">;</mo><mi>t</mi><mo stretchy="false">)</mo><mo>−</mo><mi>ϵ</mi><mo fence="true" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo><mo fence="true">]</mo></mrow><mfrac><mrow><mi mathvariant="normal">∂</mi><mi>x</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>ϑ</mi></mrow></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\nabla_\vartheta\mathcal{L}_{\mathrm{SDS}}
+=\mathbb{E}_{t,\epsilon}\!\left[
+\alpha_t\bigl(\epsilon_\phi(\alpha_t x+\epsilon;t)-\epsilon\bigr)
+\right]\frac{\partial x}{\partial\vartheta},</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϑ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathcal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">SDS</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.0574em;vertical-align:-0.686em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">ϵ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">[</span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen"><span class="delimsizing size1">(</span></span><span class="mord"><span class="mord mathnormal">ϵ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">ϕ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">ϵ</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">ϵ</span><span class="mclose"><span class="delimsizing size1">)</span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">]</span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.0556em;">∂</span><span class="mord mathnormal">ϑ</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.0556em;">∂</span><span class="mord mathnormal">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span></span></span></span></span></div>
+<div class="markdown-equation" tabindex="0" role="region" aria-label="Equation"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>t</mi><mo>∼</mo><mi mathvariant="script">U</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>T</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>ϵ</mi><mo>∼</mo><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><msub><mi>σ</mi><mi>t</mi></msub><mi>I</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">t\sim\mathcal{U}(0,T),\qquad
+\epsilon\sim\mathcal{N}(0,\sigma_t I).</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.0993em;">U</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">ϵ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.1474em;">N</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></div>
 
 
-			<img src="data/fractal2d_7.png" alt="GIF" width="720px">
+<p>Despite its impressive results, SDS has two limitations:</p>
+<ul>
+<li><strong>Instability during optimization.</strong></li>
+<li><strong>Over-smoothed results and high-saturation artifacts.</strong></li>
+</ul>
+</div>
 
-			</br>
-			<p>Putting it all together...</p>
+</section>
+</div>
+<!-- slide-sections:end -->
+        <section class="citation pnav-section" id="bibtex"
+          data-section-nav aria-labelledby="bibtex-title"
+          tabindex="-1">
+          <h2 id="bibtex-title">BibTeX</h2>
+          <pre tabindex="0"><code>@InProceedings{Thamizharasan_2026_WACV,
+  author    = {Thamizharasan, Vikas and Chatzis, Nikitas and Georgiev, Iliyan and Fisher, Matthew and Kalogerakis, Evangelos and Liu, Difan and Zhao, Nanxuan and Luk\'a\v{c}, Michal},
+  title     = {Mean-Shift Distillation for Diffusion Mode Seeking},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  month     = {March},
+  year      = {2026},
+  pages     = {6537-6546}
+}</code></pre>
+        </section>
+      </main>
+      <div class="affiliation-logos" aria-label="Affiliation logos">
+        <img src="logos/UMass_Seal_Medium_PMS_202.png"
+          alt="University of Massachusetts Amherst" height="72">
+        <img src="logos/Adobe_Corporate_logo.svg" alt="Adobe Research"
+          height="72">
+        <img src="logos/NTUA.png"
+          alt="National Technical University of Athens" height="72">
+        <img src="logos/TUC_logo_color1.png"
+          alt="Technical University of Crete" height="72">
+      </div>
+      <footer class="site-footer">
+        <!-- Add an unofficial-project-page note here only when appropriate. -->
+        <p>The code of this website is heavily based on the template
+          from <a
+            href="https://visual.cs.brown.edu">visual.cs.brown.edu</a>.
+        </p>
+      </footer>
+    </div>
+  </body>
 
-			<img src="data/fractal2d_8.png" alt="GIF" width="720px">
-
-			<!-- <video class="teaser-image" width="720px" controls poster="data/video_thumbnail.png">
-			<source src="data/2d_toydataset_overview.mp4" type="video/mp4">
-		</video> -->
-
-
-			<h2>Results with Stable Diffusion</h2>
-
-			<p>Coming soon...</p>
-
-			<h2>Bibtex</h2>
-			<pre style="max-width: 700px; margin: auto;"> @misc{thamizharasan2025meanshiftdistillationdiffusionmode,<br> title={Mean-Shift Distillation for Diffusion Mode Seeking},<br> author={Vikas Thamizharasan and Nikitas Chatzis and Iliyan Georgiev and Matthew Fisher and Difan Liu and Nanxuan Zhao and Evangelos Kalogerakis and Michal Lukac},<br> year={2025},<br> eprint={2502.15989},<br> archivePrefix={arXiv},<br> primaryClass={cs.LG},<br> url={https://arxiv.org/abs/2502.15989},<br>}
-		</pre>
-			</br>
-			<table
-				style="min-width: 625px; margin: auto; text-align: center;">
-				<tbody>
-					<tr>
-						<td>
-							<img src="logos/UMass_Seal_Medium_PMS_202.png"
-								width=70px>
-						</td>
-						<td>
-							<img src="logos/Adobe_Corporate_logo.svg"
-								width=100px>
-						</td>
-						<td>
-							<img src="logos/NTUA.png" width=100px>
-						</td>
-						<td>
-							<img src="logos/TUC_logo_color1.png"
-								width=70px>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
-			<!-- Little bit of space -->
-			<h2></h2>
-			<p>The code of this website is heavily based on the
-				template from <a
-					href="https://visual.cs.brown.edu/projects/shapefromtracing-webpage/">visual.cs.brown.edu</a>.
-			</p>
-
-			<!-- <script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-		ga('create', 'UA-36966695-10', 'auto');
-		ga('send', 'pageview');
-
-		</script> -->
-		</div>
-	</body>
+</html>

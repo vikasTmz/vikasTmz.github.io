@@ -1,0 +1,41 @@
+{
+  "deck": "MSD_SlidesNew_DeckWerk",
+  "sections": [
+    {
+      "title": "",
+      "slides": [
+        {
+          "slide": 2,
+          "duration": 15
+        }
+      ],
+      "navLabel": "Introduction",
+      "summary": "1. Training-Free Methods for Generating Shapes",
+      "notes": "Let's assume learning a dedicated shape prior is impractical, either because training data is scarce or because the appropriate model architecture remains unclear. We begin with randomly initialized shape parameters. One way to estimate them is by optimizing image-based losses. Recent advancements in differentiable graphics pipelines and in gradient-based optimizers, make it practical to compute loss directly in image-space and back-propagate the error all the way from the rendered image to the underlying shape parameters. This optimization-based view underlies major breakthroughs such as NeRFs and 3D Gaussian splatting.\n\nThese methods however suffer from shortcomings because of two implicit assumptions: (1), finding target images to compute losses over is non-trivial, even with access to an image-generative model. And (2), our shape parameters may not have the right capacity or be expressive enough to represent these target images. These shape representation typically require pre-defining hyper-parameters.",
+      "key": "intro"
+    },
+    {
+      "title": "",
+      "slides": [
+        {
+          "slide": 3,
+          "duration": 16
+        },
+        {
+          "slide": 5,
+          "duration": 8
+        }
+      ],
+      "navLabel": "SDS",
+      "summary": "2. Score Distillation, DreamFusion",
+      "notes": "A recent breakthrough to deal with this incompatibility is to perform parameter estimation via optimization based on score distillation. Formally, diffusion models provide a mechanism to sample images from some learned distribution. Given our randomly initialized parameter vector, we seek to optimize it such that at some iteration k, the rendered image has higher probability. We expect this to yield an image of higher quality, under the metric the diffusion model is trained for. We could imagine optimizing our parameter vector by determining the gradient and ascending along it. However we don't have access to the exact probabilities and determining its gradient is even less practical.\n\nScore distillation sampling (SDS) attempts to address this problem by offering proxies for the density gradient that are easier to estimate. DreamFusion optimizes randomly initialized neural radiance fields for the application of text-to-3D generation. Running this optimization for a few thousand iterations, yields us a multi-view consistent 3D shape Intuitively, the pre-trained image diffusion model that is conditioned on an input prompt, provides update directions such that the rendered images from this target moves towards a higher probability density region.",
+      "key": "sds"
+    },
+    {
+      "title": "",
+      "navLabel": "SDS Limitations",
+      "key": "sds_limitations",
+      "markdown": "content/sds-limitations.md"
+    }
+  ]
+}

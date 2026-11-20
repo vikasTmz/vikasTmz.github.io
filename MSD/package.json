@@ -1,0 +1,16 @@
+{
+  "name": "msd-project-website",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "render": "node scripts/render-sections.mjs",
+    "serve": "node scripts/serve.mjs",
+    "sync": "node scripts/sync-slides.mjs",
+    "watch": "node scripts/sync-slides.mjs --watch",
+    "test": "node --test tests/*.test.mjs",
+    "build": "node scripts/build.mjs"
+  }
+}

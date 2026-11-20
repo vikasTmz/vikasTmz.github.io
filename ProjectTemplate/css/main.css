@@ -1,0 +1,140 @@
+/* Research project template: EB Garamond, ivory background, burgundy links. */
+@font-face {
+  font-family: "EB Garamond";
+  src: url("ebgaramond12-regular-webfont.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  color-scheme: light;
+  font-family: "EB Garamond", Constantia, Georgia, serif;
+  color: #343434;
+  background: #fefefa;
+  font-synthesis: weight;
+}
+* { box-sizing: border-box; }
+body { margin: 0; line-height: 1.4; }
+.project-page {
+  width: min(100% - 40px, 900px);
+  margin: 32px auto 48px;
+}
+h1 {
+  margin: 0 0 20px;
+  font-size: clamp(1.8rem, 3.5vw, 2.25rem);
+  line-height: 1.2;
+  font-weight: 400;
+  text-align: center;
+  text-wrap: balance;
+}
+h1 strong { font-weight: 700; }
+.authors, .affiliations {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+.authors { gap: 12px 30px; margin: 0 0 10px; font-size: 1.18rem; }
+.authors li { white-space: nowrap; }
+sup { font-size: 0.68em; vertical-align: super; line-height: 0; margin-left: 2px; }
+.affiliations { gap: 8px 36px; margin: 0; font-size: 1.05rem; }
+.affiliations sup { margin: 0 4px 0 0; }
+a { color: #900020; text-decoration: none; }
+a[href]:hover { text-decoration: underline; }
+a:focus-visible, pre:focus-visible { outline: 2px solid #900020; outline-offset: 6px; }
+.project-resources {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  align-items: end;
+  max-width: 620px;
+  margin: 20px auto;
+  gap: 12px;
+  text-align: center;
+}
+.resource-link { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 1.2rem; }
+.resource-image { height: 76px; display: flex; align-items: center; justify-content: center; width: 100%; }
+.resource-link:has(img[src=""]) { grid-column: 1 / -1; font-size: 1rem; }
+.resource-image:has(img[src=""]) { display: none; }
+.resource-image img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.resource-link[aria-disabled="true"] { color: #686868; cursor: default; }
+.resource-link[aria-disabled="true"] img { opacity: 0.6; }
+.affiliation-logos { display: flex; align-items: center; justify-content: center; gap: 80px; margin: 36px 0 44px; }
+.affiliation-logos img { object-fit: contain; max-width: 100%; height: auto; }
+.citation h2 { border-top: 2px solid #ddd; margin: 0 0 14px; padding-top: 8px; font-size: 1.5rem; }
+pre {
+  margin: 0;
+  padding: 20px;
+  background: #f3f3ef;
+  font: 0.82rem/1.7 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+code { font: inherit; }
+@media (max-width: 600px) {
+  .project-page { width: calc(100% - 32px); margin-top: 24px; }
+  .title-break { display: none; }
+  .authors { gap: 10px 20px; }
+  .affiliations { flex-direction: column; gap: 6px; }
+  .project-resources { margin: 16px auto; gap: 8px; }
+  .resource-image { height: 72px; }
+  .resource-image img { max-width: 90%; }
+  .affiliation-logos { gap: 36px; margin: 30px 0 36px; }
+  pre { padding: 14px; font-size: 0.75rem; }
+}
+@media print {
+  .project-page { width: 100%; margin: 0; }
+  pre { background: none; }
+}
+
+/* Sections are populated from slide-sections.json. */
+#slide-sections { border-top: 2px solid #ddd; }
+.slide-section { margin: 20px 0 28px; }
+.slide-section h2 { font-size: 1.5rem; margin: 0 0 12px; }
+.slide-section iframe { display: block; width: 100%; aspect-ratio: var(--slide-aspect-ratio, 16 / 9); border: 0; background: #fff; }
+.slide-explanation { margin: 0 0 8px; font-size: 1.08rem; }
+.slide-explanation summary { display: flex; align-items: baseline; gap: 10px; padding: 12px 0; min-height: 44px; cursor: pointer; list-style: none; }
+.slide-explanation summary::-webkit-details-marker { display: none; }
+.slide-explanation summary::before { content: ""; flex: 0 0 7px; width: 7px; height: 7px; border-right: 1.5px solid #900020; border-bottom: 1.5px solid #900020; transform: rotate(-45deg); align-self: center; }
+.slide-explanation[open] summary::before { transform: rotate(45deg); }
+.slide-explanation summary:focus-visible { outline: 2px solid #900020; outline-offset: 4px; }
+.slide-explanation summary:hover .explanation-summary { text-decoration: underline; }
+.explanation-summary { color: #900020; font-weight: 400; min-width: 0; overflow-wrap: anywhere; font-size: 20px;}
+.explanation-notes { color: #6c5c5f; padding: 2px 0 16px 17px; white-space: normal; overflow-wrap: anywhere; line-height: 1.55; }
+.slide-takeaway { margin: 0 0 14px; color: #555; overflow-wrap: anywhere; }
+@media (max-width: 600px) {
+  .slide-explanation summary { display: grid; grid-template-columns: 7px minmax(0, 1fr); column-gap: 10px; row-gap: 4px; }
+  .slide-explanation summary::before { grid-column: 1; grid-row: 1; }
+  .explanation-summary { grid-column: 2; grid-row: 1; }
+}
+
+/* A chapter bar: one segment per slide, never an in-slide seek control. */
+.sequence-controls { display: flex; align-items: center; gap: 10px; min-height: 40px; margin-top: 4px; color: #777; font: 12px/1.4 system-ui, sans-serif; }
+.sequence-controls[hidden], .sequence-error[hidden] { display: none; }
+.sequence-controls button { appearance: none; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 36px; height: 36px; padding: 8px; border: 0; border-radius: 5px; background: transparent; color: inherit; cursor: pointer; }
+.sequence-controls button:hover { color: #900020; background: rgb(144 0 32 / 5%); }
+.sequence-controls button:focus-visible { outline: 2px solid #900020; outline-offset: 2px; }
+.sequence-controls svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.sequence-controls .sequence-play-icon { fill: currentColor; stroke: none; display: none; }
+.slide-sequence[data-paused="true"] .sequence-pause-icon { display: none; }
+.slide-sequence[data-paused="true"] .sequence-play-icon { display: block; }
+.sequence-segments { display: flex; flex: 1; gap: 6px; min-width: 0; }
+.sequence-controls .sequence-segment { flex: 1 1 0; min-width: 0; padding: 12px 0; background: transparent; }
+.segment-track { display: block; width: 100%; height: 3px; border-radius: 4px; background: #dedbd8; overflow: hidden; }
+.segment-fill { display: block; width: 100%; height: 100%; background: #900020; transform-origin: left; transform: scaleX(var(--segment-progress, 0)); }
+.sequence-segment[aria-current="true"] .segment-track { background: #c9b2b8; }
+.sequence-segment:hover .segment-track { height: 5px; }
+.sequence-position { min-width: 30px; text-align: center; font-variant-numeric: tabular-nums; }
+.sequence-error { margin: 0; color: #900020; font-size: .9rem; }
+@media (max-width: 600px) {
+  .sequence-controls { gap: 6px; }
+  .sequence-controls button { height: 44px; flex-basis: 40px; }
+}
+@media print { .sequence-controls { display: none; } }
+
+.affiliation-logos img { max-height: 72px; width: auto; }
+.site-footer { color: #686868; font-size: .9rem; text-align: center; }
+/* Placeholder and future institutional marks may have very different widths. */
+.resource-link { min-width: 0; }
+.affiliation-logos { flex-wrap: wrap; }

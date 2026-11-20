@@ -1,0 +1,19 @@
+{
+  "source": "Presentation",
+  "canvas": {
+    "w": 1920,
+    "h": 1080
+  },
+  "slideNumbers": [
+    1,
+    2,
+    3
+  ],
+  "slideIds": [
+    "slide-1",
+    "slide-6",
+    "slide-12"
+  ],
+  "exportedAt": "2026-11-17T21:04:26.408Z",
+  "assets": 0
+}

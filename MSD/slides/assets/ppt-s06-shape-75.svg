@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="107.52691650390625" height="3.0" viewBox="320.576904296875 469.46990966796875 107.52691650390625 3.0">
+<defs>
+<clipPath id="clip_1">
+<path transform="matrix(1,0,0,-1,0,540)" d="M0 .00001206994H959.76V540H0Z" />
+</clipPath>
+</defs>
+<g clip-path="url(#clip_1)">
+</g>
+<path transform="matrix(.00007874016,0,0,.00007874016,322.0769,470.9699)" stroke-width="12700" stroke-linecap="butt" stroke-linejoin="round" fill="none" stroke="#0d0d0d" d="M1327492 0H0" />
+</svg>

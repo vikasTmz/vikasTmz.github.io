@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Example project presentation</title>
+    <link rel="stylesheet" href="./player.css" />
+    <link rel="stylesheet" href="./theme.css" />
+    <style>
+      html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+      #root { width: 100vw; height: 100vh; }
+      body:fullscreen #root { cursor: none; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>window.__DECK__ = {"version":1,"title":"Example project presentation","canvas":{"w":1920,"h":1080},"theme":"theme.css","themePreset":null,"themeStyle":null,"themeSelection":null,"themeHistory":[],"customThemes":[],"layoutMasters":null,"morphEasing":"ease-in-out","slides":[{"id":"slide-1","name":"Overview","background":{"color":null,"image":null},"notes":"","elements":[{"id":"slide-1-h1-1","x":100,"y":65,"w":1720,"h":180,"rot":0,"z":1,"opacity":1,"class":[],"style":{},"type":"text","html":"Project Name","align":"left","valign":"top"},{"id":"slide-1-p-2","x":100,"y":310,"w":1650,"h":220,"rot":0,"z":2,"opacity":1,"class":[],"style":{},"type":"text","html":"Introduce the central idea with a clear visual or example.","align":"left","valign":"top"},{"id":"slide-1-p-3","x":100,"y":610,"w":1650,"h":220,"rot":0,"z":3,"opacity":1,"class":[],"style":{"color":"#900020"},"type":"text","html":"This line demonstrates a native automatic reveal.","align":"left","valign":"top"},{"id":"slide-1-div-4","x":100,"y":970,"w":1720,"h":80,"rot":0,"z":4,"opacity":1,"class":["footer"],"style":{},"type":"text","html":"Overview · Editable DeckWerk example","align":"left","valign":"top"}],"timeline":[{"id":"slide-1-p-3-build-1","trigger":{"on":"afterPrev","ref":null,"delay":2000},"action":{"type":"appear","target":"slide-1-p-3","value":"dissolve","duration":400}}],"comments":[]}]};</script>
+    <script src="./clock.js"></script>
+    <script src="./player.js"></script>
+    <script src="./embed.js"></script>
+  </body>
+</html>

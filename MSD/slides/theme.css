@@ -1,0 +1,95 @@
+/*
+ * Imported from PowerPoint. Layout-critical text face, size and paint are kept
+ * as inline values; remove them from an element to style it entirely from here.
+ *
+ * Imported text carries the class .pp-text and an inline font-size matching
+ * the point size it had in PowerPoint. Delete those inline sizes once you have
+ * styled .pp-text the way you want. Objects that came from the slide master or
+ * layout carry .pp-layout as well.
+ */
+
+.slide {
+  background: #ffffff;
+  color: #111111;
+  font-family: Calibri, "Carlito", "Helvetica Neue", Inter, system-ui, sans-serif;
+}
+
+.pp-text {
+  line-height: 1.2;
+}
+
+/* Semantic defaults for text boxes created after import. Imported PowerPoint
+ * text keeps its own inline size, so these do not disturb the source slides. */
+.role-title {
+  font-size: 92px;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.role-heading {
+  font-size: 58px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.role-body {
+  font-size: 44px;
+  line-height: 1.3;
+}
+
+.role-caption {
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+/* Reconstructed PowerPoint effects. */
+.slide .ppt-effect {mask-size:100% 100%;mask-repeat:no-repeat;}
+@keyframes ppt-dissolve{0%{mask-image:url("assets/ppt-dissolve-00.svg")}5%{mask-image:url("assets/ppt-dissolve-01.svg")}10%{mask-image:url("assets/ppt-dissolve-02.svg")}15%{mask-image:url("assets/ppt-dissolve-03.svg")}20%{mask-image:url("assets/ppt-dissolve-04.svg")}25%{mask-image:url("assets/ppt-dissolve-05.svg")}30%{mask-image:url("assets/ppt-dissolve-06.svg")}35%{mask-image:url("assets/ppt-dissolve-07.svg")}40%{mask-image:url("assets/ppt-dissolve-08.svg")}45%{mask-image:url("assets/ppt-dissolve-09.svg")}50%{mask-image:url("assets/ppt-dissolve-10.svg")}55%{mask-image:url("assets/ppt-dissolve-11.svg")}60%{mask-image:url("assets/ppt-dissolve-12.svg")}65%{mask-image:url("assets/ppt-dissolve-13.svg")}70%{mask-image:url("assets/ppt-dissolve-14.svg")}75%{mask-image:url("assets/ppt-dissolve-15.svg")}80%{mask-image:url("assets/ppt-dissolve-16.svg")}85%{mask-image:url("assets/ppt-dissolve-17.svg")}90%{mask-image:url("assets/ppt-dissolve-18.svg")}95%{mask-image:url("assets/ppt-dissolve-19.svg")}100%{mask-image:url("assets/ppt-dissolve-20.svg")}}
+@keyframes ppt-bars{0%{mask-image:url("assets/ppt-bars-00.svg")}5%{mask-image:url("assets/ppt-bars-01.svg")}10%{mask-image:url("assets/ppt-bars-02.svg")}15%{mask-image:url("assets/ppt-bars-03.svg")}20%{mask-image:url("assets/ppt-bars-04.svg")}25%{mask-image:url("assets/ppt-bars-05.svg")}30%{mask-image:url("assets/ppt-bars-06.svg")}35%{mask-image:url("assets/ppt-bars-07.svg")}40%{mask-image:url("assets/ppt-bars-08.svg")}45%{mask-image:url("assets/ppt-bars-09.svg")}50%{mask-image:url("assets/ppt-bars-10.svg")}55%{mask-image:url("assets/ppt-bars-11.svg")}60%{mask-image:url("assets/ppt-bars-12.svg")}65%{mask-image:url("assets/ppt-bars-13.svg")}70%{mask-image:url("assets/ppt-bars-14.svg")}75%{mask-image:url("assets/ppt-bars-15.svg")}80%{mask-image:url("assets/ppt-bars-16.svg")}85%{mask-image:url("assets/ppt-bars-17.svg")}90%{mask-image:url("assets/ppt-bars-18.svg")}95%{mask-image:url("assets/ppt-bars-19.svg")}100%{mask-image:url("assets/ppt-bars-20.svg")}}
+@keyframes ppt-fade{from{opacity:0}to{opacity:1}}
+@keyframes ppt-wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@keyframes ppt-peek{from{translate:-100% 0;clip-path:inset(0 0 0 100%)}to{translate:0 0;clip-path:inset(0)}}
+@keyframes ppt-grow{from{scale:0;opacity:0}to{scale:1;opacity:1}}
+@keyframes ppt-float{from{translate:0 108px;opacity:0}to{translate:0 0;opacity:1}}
+@keyframes ppt-pulse{0%,100%{scale:1;opacity:1}20%,80%{opacity:.5}50%{scale:1.05}}
+@keyframes ppt-split{from{clip-path:inset(50% 0)}to{clip-path:inset(0)}}
+@keyframes ppt-motion{from{translate:6.0096px 11.0052px}to{translate:-293.4912px 414.2556px}}
+.slide .ppt-dissolve-500-entr{animation:ppt-dissolve 500ms steps(1,end) 1 normal both;mask-size:100% 100%;mask-repeat:no-repeat;}
+.slide .ppt-wipe-500-entr{animation:ppt-wipe 500ms linear 1 normal both;mask-size:100% 100%;mask-repeat:no-repeat;}
+.slide .ppt-dissolve-500-exit{animation:ppt-dissolve 500ms steps(1,end) 1 reverse both;mask-size:100% 100%;mask-repeat:no-repeat;}
+.slide .ppt-pulse-1000-emph{animation:ppt-pulse 1000ms ease-in-out infinite normal both;mask-size:100% 100%;mask-repeat:no-repeat;}
+.slide .ppt-split-500-entr{animation:ppt-split 500ms linear 1 normal both;mask-size:100% 100%;mask-repeat:no-repeat;}
+.slide .ppt-float-1000-entr{animation:ppt-float 1000ms linear 1 normal both;mask-size:100% 100%;mask-repeat:no-repeat;}
+.slide .ppt-fade-500-entr{animation:ppt-fade 500ms linear 1 normal both;mask-size:100% 100%;mask-repeat:no-repeat;}
+.slide .ppt-grow-500-exit{animation:ppt-grow 500ms linear 1 reverse both;mask-size:100% 100%;mask-repeat:no-repeat;}
+.slide .ppt-motion-2000-path{animation:ppt-motion 2000ms ease-in-out 1 normal both;mask-size:100% 100%;mask-repeat:no-repeat;}
+.slide .ppt-bars-500-entr{animation:ppt-bars 500ms steps(1,end) 1 normal both;mask-size:100% 100%;mask-repeat:no-repeat;}
+.slide .ppt-grow-500-entr{animation:ppt-grow 500ms linear 1 normal both;mask-size:100% 100%;mask-repeat:no-repeat;}
+/* Source Peek In moves upward from below the object. */
+@keyframes ppt-peek-up{from{translate:0 112.5%;clip-path:inset(100% 0 0 0)}to{translate:0 0;clip-path:inset(0)}}
+.slide [data-element-id="shape-119"].ppt-wipe-500-entr{animation-name:ppt-peek-up;}
+.slide [data-element-id="shape-119"].ppt-wipe-500-entr{animation-name:ppt-peek-up;}
+.slide [data-element-id="shape-121"].ppt-wipe-500-entr{animation-name:ppt-peek-up;}
+.slide [data-element-id="shape-121"].ppt-wipe-500-entr{animation-name:ppt-peek-up;}
+@keyframes ppt-split-in{0%{mask-image:url("assets/ppt-split-00.svg")}5%{mask-image:url("assets/ppt-split-01.svg")}10%{mask-image:url("assets/ppt-split-02.svg")}15%{mask-image:url("assets/ppt-split-03.svg")}20%{mask-image:url("assets/ppt-split-04.svg")}25%{mask-image:url("assets/ppt-split-05.svg")}30%{mask-image:url("assets/ppt-split-06.svg")}35%{mask-image:url("assets/ppt-split-07.svg")}40%{mask-image:url("assets/ppt-split-08.svg")}45%{mask-image:url("assets/ppt-split-09.svg")}50%{mask-image:url("assets/ppt-split-10.svg")}55%{mask-image:url("assets/ppt-split-11.svg")}60%{mask-image:url("assets/ppt-split-12.svg")}65%{mask-image:url("assets/ppt-split-13.svg")}70%{mask-image:url("assets/ppt-split-14.svg")}75%{mask-image:url("assets/ppt-split-15.svg")}80%{mask-image:url("assets/ppt-split-16.svg")}85%{mask-image:url("assets/ppt-split-17.svg")}90%{mask-image:url("assets/ppt-split-18.svg")}95%{mask-image:url("assets/ppt-split-19.svg")}100%{mask-image:url("assets/ppt-split-20.svg")}}
+.slide .ppt-split-500-entr{animation-name:ppt-split-in;animation-timing-function:steps(1,end);}
+
+/* Original typefaces, also available for future text edits. */
+@font-face{font-family:"Palatino Linotype";src:url("assets/fonts/palatino-linotype-regular.ttf");font-weight:400;font-style:normal;}
+@font-face{font-family:"Palatino Linotype";src:url("assets/fonts/palatino-linotype-bold.ttf");font-weight:700;font-style:normal;}
+@font-face{font-family:"Palatino Linotype";src:url("assets/fonts/palatino-linotype-italic.ttf");font-weight:400;font-style:italic;}
+@font-face{font-family:"Palatino Linotype";src:url("assets/fonts/palatino-linotype-bold-italic.ttf");font-weight:700;font-style:italic;}
+@font-face{font-family:"Aptos";src:url("assets/fonts/Aptos.ttf");}
+@font-face{font-family:"Times New Roman";src:url("assets/fonts/times.ttf");}
+@font-face{font-family:"Arial";src:url("assets/fonts/Arial.ttf");}
+@font-face{font-family:"Cambria Math";src:url("assets/fonts/cambria-math.ttf");}
+
+/* Match slide 2’s original equation sizes while keeping native KaTeX editable. */
+.msd-slide2-math .katex { font-size: 1em; white-space: nowrap; }
+
+/* Smooth slide 2 reveals, preserving the original 500 ms duration. */
+.slide .msd-slide2-fade-500-entr { animation: ppt-fade 500ms ease-in-out 1 normal both; }
+
+/* Match smooth exits to the 500 ms eased reveals. */
+.slide .msd-smooth-fade-500-exit { animation: ppt-fade 500ms ease-in-out 1 reverse both; }
