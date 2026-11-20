@@ -25,7 +25,9 @@ export function coordinateVisibility(players, container) {
   function update() {
     frame = 0;
     const next = document.hidden ? -1 : chooseVisiblePlayer(
-      players.map(p => p.stage.getBoundingClientRect()),
+      players.map(p => p.stage.closest('details:not([open])')
+        ? { top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0 }
+        : p.stage.getBoundingClientRect()),
       { width: window.innerWidth, height: window.innerHeight }, active
     );
     // Pause the old section before resuming another, including fast jumps.
@@ -41,6 +43,7 @@ export function coordinateVisibility(players, container) {
   window.addEventListener('scroll', refresh, { passive: true });
   window.addEventListener('resize', refresh, { passive: true });
   document.addEventListener('visibilitychange', visibilityChanged);
+  container?.addEventListener('toggle', refresh, true);
   const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(refresh) : null;
   if (container) observer?.observe(container);
   if (document.body) observer?.observe(document.body);
@@ -52,6 +55,7 @@ export function coordinateVisibility(players, container) {
     window.removeEventListener('scroll', refresh);
     window.removeEventListener('resize', refresh);
     document.removeEventListener('visibilitychange', visibilityChanged);
+    container?.removeEventListener('toggle', refresh, true);
     players.forEach(p => p.setActive(false));
   };
 }

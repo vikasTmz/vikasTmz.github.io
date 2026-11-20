@@ -33,11 +33,17 @@ async function refreshSections() {
       expected.innerHTML = s.markdownHtml;
       return blocks.find(el => el.dataset.markdown === s.markdown)?.innerHTML === expected.innerHTML;
     })) return;
+    const disclosureStates = new Map([...container.querySelectorAll('.slide-explanation')]
+      .map(details => [details.closest('section').id, details.open]));
     destroy();
     destroyPlayers();
     document.querySelector('.pnav')?.remove();
     content.insertAdjacentHTML('beforebegin', renderNavigation(sections));
     container.innerHTML = renderSlides(sections);
+    container.querySelectorAll('.slide-explanation').forEach(details => {
+      const id = details.closest('section').id;
+      if (disclosureStates.has(id)) details.open = disclosureStates.get(id);
+    });
     container.dataset.config = JSON.stringify(config);
     destroy = initSectionNavigation(document.querySelector('.pnav'), content);
     destroyPlayers = initSectionPlayers(container);

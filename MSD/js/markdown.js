@@ -52,7 +52,17 @@ function contentUrl(value, source, image = false) {
 
 export function renderMarkdown(source, path) {
   validateMarkdownPath(path);
-  const parser = new Marked({ gfm: true, extensions, renderer: {
+  return parseMarkdown(source, path);
+}
+
+// JSON notes live beside index.html, so their relative links use the site root.
+// Preserve explicit single newlines as line breaks, as plain-text notes did.
+export function renderNotes(source) {
+  return parseMarkdown(source, 'slide-sections.json', true);
+}
+
+function parseMarkdown(source, path, breaks = false) {
+  const parser = new Marked({ gfm: true, breaks, extensions, renderer: {
     // Marked recognizes comments before parsing their contents, so Markdown,
     // tables and LaTeX inside a comment stay inactive. Code tokens stay literal.
     html({ text }) { return escape(text.replace(/<!--[\s\S]*?-->/g, '')); },

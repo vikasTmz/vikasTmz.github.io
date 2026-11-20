@@ -10,7 +10,7 @@
         }
       ],
       "navLabel": "Introduction",
-      "summary": "1. Training-Free Methods for Generating Shapes",
+      "summary": "1. Training-free methods for generating shapes",
       "notes": "Let's assume learning a dedicated shape prior is impractical, either because training data is scarce or because the appropriate model architecture remains unclear. We begin with randomly initialized shape parameters. One way to estimate them is by optimizing image-based losses. Recent advancements in differentiable graphics pipelines and in gradient-based optimizers, make it practical to compute loss directly in image-space and back-propagate the error all the way from the rendered image to the underlying shape parameters. This optimization-based view underlies major breakthroughs such as NeRFs and 3D Gaussian splatting.\n\nThese methods however suffer from shortcomings because of two implicit assumptions: (1), finding target images to compute losses over is non-trivial, even with access to an image-generative model. And (2), our shape parameters may not have the right capacity or be expressive enough to represent these target images. These shape representation typically require pre-defining hyper-parameters.",
       "key": "intro"
     },
@@ -27,15 +27,111 @@
         }
       ],
       "navLabel": "SDS",
-      "summary": "2. Score Distillation, DreamFusion",
+      "summary": "2. Score distillation, DreamFusion",
       "notes": "A recent breakthrough to deal with this incompatibility is to perform parameter estimation via optimization based on score distillation. Formally, diffusion models provide a mechanism to sample images from some learned distribution. Given our randomly initialized parameter vector, we seek to optimize it such that at some iteration k, the rendered image has higher probability. We expect this to yield an image of higher quality, under the metric the diffusion model is trained for. We could imagine optimizing our parameter vector by determining the gradient and ascending along it. However we don't have access to the exact probabilities and determining its gradient is even less practical.\n\nScore distillation sampling (SDS) attempts to address this problem by offering proxies for the density gradient that are easier to estimate. DreamFusion optimizes randomly initialized neural radiance fields for the application of text-to-3D generation. Running this optimization for a few thousand iterations, yields us a multi-view consistent 3D shape Intuitively, the pre-trained image diffusion model that is conditioned on an input prompt, provides update directions such that the rendered images from this target moves towards a higher probability density region.",
       "key": "sds"
     },
     {
       "title": "",
-      "navLabel": "SDS Limitations",
-      "key": "sds_limitations",
-      "markdown": "content/sds-limitations.md"
+      "navLabel": "SDS Formulation",
+      "summary": "3. SDS formulation",
+      "key": "sds_formulation",
+      "markdown": "content/sds-limitations.md",
+      "notes": ""
+    },
+    {
+      "title": "",
+      "navLabel": "Toy Simulation, Dataset",
+      "summary": "4. Toy 2D simulation",
+      "notes": "To illustrate the pitfalls of SDS, we simulate it in 2D using a small denoising diffusion network. We construct a fractal-like dataset with two classes. This data distribution is a mixture of highly anisotropic Gaussians, giving us the analytic ground-truth probability density and score. Most of the probability mass resides in narrow regions.\n\nWe begin by training a simple score model. Next, we run DDIM a popular first-order sampling algorithm, that is widely used in sampling images from image generative models.",
+      "key": "toysimulation",
+      "slides": [
+        {
+          "slide": 7,
+          "duration": 13
+        }
+      ]
+    },
+    {
+      "title": "",
+      "navLabel": "Toy Simulation, DDIM",
+      "summary": "4.1 DDIM baseline",
+      "notes": "This is how DDIM compares to the training data points. We use this as our baseline. *How do we interpret these results?* We want our generated samples to lie on the data manifold. A lot of effort has been invested in samplers and numerical solvers to ensure we have as few as possible outliers. In the higher-dimensional settings like images, we see that outlier samples have very poor quality, while in-distribution samples reflect the quality of the training dataset and respect the conditioning signal.",
+      "key": "toysimulation_ddim",
+      "slides": [
+        {
+          "slide": 8,
+          "duration": 13
+        }
+      ]
+    },
+    {
+      "title": "",
+      "slides": [
+        {
+          "slide": 9,
+          "duration": 20
+        },
+        {
+          "slide": 10,
+          "duration": 7
+        },
+        {
+          "slide": 11,
+          "duration": 8
+        }
+      ],
+      "navLabel": "Toy Simulation, SDS Flaws",
+      "summary": "4.2 Flaws of SDS visualized",
+      "notes": "*What does this look like with SDS?* Taking a random point on our 2D canvas, we update it's position by stepping along the SDS gradient.\n\nIf we do this for points densely initialized along a grid, across the canvas, after several optimization steps, samples optimized with SDS fail to fit the distribution. We reconstruct and visualize the loss function using Finite Differences.\n\nSDS not just has high variance but is biased away from the modes.We hypothesize that this is why SDS produces blurry, low-fidelity images in the more complex high-dimensional setting of optimizing nerfs, or vector graphics.",
+      "key": "sdsflaws"
+    },
+    {
+      "title": "",
+      "slides": [
+        {
+          "slide": 12,
+          "duration": 10
+        },
+        {
+          "slide": 13,
+          "duration": 8
+        }
+      ],
+      "navLabel": "Toy Simulation, MSD",
+      "summary": "4.2 Our method, MSD",
+      "notes": "We propose Mean-Shift Distillation (MSD), a distribution-gradient proxy based on a well-known mode-seeking technique. Similar to the previous experiment, if we run our algorithm for points densely initialized along a grid, across the canvas, we observe that the points capture the data distribution well. This proxy evaluates with less variance than SDS with improved mode alignment. MSD has superior behavior, converging to modes of the trained distribution with a clear termination criterion. It can be implemented easily, with minimal changes to the diffusion sampling procedure.",
+      "key": "ourmethod"
+    },
+    {
+      "title": "",
+      "slides": [
+        {
+          "slide": 14,
+          "duration": 3
+        }
+      ],
+      "navLabel": "Mode Seeking",
+      "summary": "5. Why do we want mode-seeking behavior?",
+      "notes": "The desirability of mode seeking varies between applications. When sampling images from the trained model, we wish to sample from the full variety of the distribution instead of getting only the mode. However, when optimizing an image (or using the image as a proxy to optimize), any gradient-based optimization will converge to a set of sparse points - local extrema - where the gradients are zero (if it converges at all).\n\nIn our setting, it is not possible in general to have the optimization process converge to a distribution of points. Given that, the best we can guarantee is that the converged points are aligned with the distribution. Mode-seeking is our proposed way of achieving that.",
+      "key": "modeseeking"
+    },
+    {
+      "title": "",
+      "slides": [
+        {
+          "slide": 16,
+          "duration": 6
+        },
+        {
+          "slide": 19,
+          "duration": 6
+        }
+      ],
+      "navLabel": "Results",
+      "summary": "6. Results",
+      "notes": "First, we juxtapose diffusion sampling vs diffusion distillation in low-dimensional and high-dimensional setting.\n\nNext, we show results on 3D shape generation, specifially, optimizing neural radiance fields. ProlificDreamer (VSD) Z. Wang et al. and SDI, A. Lukoianov et al.",
+      "key": "results"
     }
   ]
 }

@@ -2,10 +2,20 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { describeSections, renderSlides, renderNavigation } from '../js/section-content.js';
-import { renderMarkdown, loadMarkdownSections } from '../js/markdown.js';
+import { renderMarkdown, renderNotes, loadMarkdownSections } from '../js/markdown.js';
 
 const path = 'content/example.md';
 const section = { title: '', key: 'article', navLabel: 'An article', markdown: path };
+
+test('notes use the shared safe renderer with site-relative links and LaTeX', () => {
+  const html = renderNotes('**Bold** and *italic* with $x^2$.\n\n<script>alert(1)</script>\n\n[unsafe](javascript:alert%281%29) [article](content/example.md)\n\n`**literal**`');
+  assert.match(html, /<strong>Bold<\/strong> and <em>italic<\/em>/);
+  assert.match(html, /class="katex"/);
+  assert.match(html, /href="content\/example.md"/);
+  assert.match(html, /<code>\*\*literal\*\*<\/code>/);
+  assert.match(html, /&lt;script&gt;/);
+  assert.doesNotMatch(html, /<script|href="javascript:/);
+});
 
 test('Markdown-only sections share navigation and have no frame or playback UI', async () => {
   const sections = await loadMarkdownSections(describeSections({ sections: [section] }), async () => '# Hello\n\nText.');

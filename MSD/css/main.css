@@ -142,27 +142,28 @@ code { font: inherit; }
 /* No divider is needed until slide sections are added. */
 #slide-sections:not(:has(.slide-section)) { border-top: 0; }
 
-/* File-authored article sections use the same width and typography as slides. */
+/* File-authored articles and JSON notes share Markdown formatting. */
 .markdown-content { font-size: 1.08rem; line-height: 1.6; overflow-wrap: anywhere; }
-.markdown-content > :first-child { margin-top: 0; }
-.markdown-content h2 { color: #900020; font-size: 1.3rem; font-weight: 400; line-height: 1.35; }
-.markdown-content h3, .markdown-content h4 { margin: 1.5em 0 .5em; line-height: 1.35; }
-.markdown-content p, .markdown-content ul, .markdown-content ol { margin: .8em 0; }
-.markdown-content img { max-width: 100%; height: auto; }
-.markdown-content blockquote { margin: 1.2em 0; padding: .2em 1em; border-left: 3px solid #c9b2b8; background: #f6f3f1; }
-.markdown-content code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .85em; }
-.markdown-content :not(pre) > code { background: #f3f3ef; padding: .1em .3em; border-radius: 3px; }
-.markdown-content pre { white-space: pre; overflow-x: auto; overflow-wrap: normal; }
-.markdown-content pre code { font-size: 1em; }
+:is(.markdown-content, .explanation-notes) > :first-child { margin-top: 0; }
+:is(.markdown-content, .explanation-notes) h2 { color: #900020; font-size: 1.3rem; font-weight: 400; line-height: 1.35; }
+:is(.markdown-content, .explanation-notes) h3, :is(.markdown-content, .explanation-notes) h4 { margin: 1.5em 0 .5em; line-height: 1.35; }
+:is(.markdown-content, .explanation-notes) p, :is(.markdown-content, .explanation-notes) ul, :is(.markdown-content, .explanation-notes) ol { margin: .8em 0; }
+:is(.markdown-content, .explanation-notes) img { max-width: 100%; height: auto; }
+:is(.markdown-content, .explanation-notes) blockquote { margin: 1.2em 0; padding: .2em 1em; border-left: 3px solid #c9b2b8; background: #f6f3f1; }
+:is(.markdown-content, .explanation-notes) code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .85em; }
+:is(.markdown-content, .explanation-notes) :not(pre) > code { background: #f3f3ef; padding: .1em .3em; border-radius: 3px; }
+:is(.markdown-content, .explanation-notes) pre { white-space: pre; overflow-x: auto; overflow-wrap: normal; }
+:is(.markdown-content, .explanation-notes) pre code { font-size: 1em; }
+.explanation-notes > :last-child { margin-bottom: 0; }
 .markdown-table, .markdown-equation { max-width: 100%; overflow-x: auto; margin: 1em 0; }
 .markdown-table:focus-visible, .markdown-equation:focus-visible { outline: 2px solid #900020; outline-offset: 2px; }
-.markdown-content table { width: 100%; border-collapse: collapse; text-align: left; overflow-wrap: normal; }
-.markdown-content th, .markdown-content td { padding: .6em .8em; border-bottom: 1px solid #dedbd8; vertical-align: top; }
-.markdown-content th { background: #f3f3ef; font-weight: 700; }
-.markdown-content .katex { font-size: 1.05em; }
+:is(.markdown-content, .explanation-notes) table { width: 100%; border-collapse: collapse; text-align: left; overflow-wrap: normal; }
+:is(.markdown-content, .explanation-notes) th, :is(.markdown-content, .explanation-notes) td { padding: .6em .8em; border-bottom: 1px solid #dedbd8; vertical-align: top; }
+:is(.markdown-content, .explanation-notes) th { background: #f3f3ef; font-weight: 700; }
+:is(.markdown-content, .explanation-notes) .katex { font-size: 1.05em; }
 .markdown-equation .katex-display { margin: .5em 0; text-align: left; }
 .markdown-equation .katex-display > .katex { text-align: left; }
 @media print {
   .markdown-table, .markdown-equation { overflow: visible; }
-  .markdown-content table, .markdown-content blockquote { break-inside: avoid; }
+  :is(.markdown-content, .explanation-notes) table, :is(.markdown-content, .explanation-notes) blockquote { break-inside: avoid; }
 }

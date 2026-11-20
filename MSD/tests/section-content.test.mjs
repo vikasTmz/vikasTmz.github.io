@@ -59,10 +59,40 @@ test('single slides share visibility control without a timer or playback bar', (
   assert.doesNotMatch(markup, /sequence-controls/);
   assert.match(markup, /<noscript>.*href="slides\/slide-3.html"/);
 });
-test('notes encode only JSON line breaks as markup, with text still escaped', () => {
+test('notes preserve JSON line breaks and paragraphs, with raw HTML escaped', () => {
   const markup = renderSlides(describeSections({ sections: [{ ...a,
     notes: 'First line.\nSecond line.\n\nNext paragraph.\r\n<script>text</script>'
   }] }));
-  assert.match(markup, /First line\.<br>Second line\.<br><br>Next paragraph\.<br>&lt;script&gt;text&lt;\/script&gt;/);
+  assert.match(markup, /<p>First line\.<br>Second line\.<\/p>\s*<p>Next paragraph\.<\/p>\s*&lt;script&gt;text&lt;\/script&gt;/);
   assert.match(markup, /<details class="slide-explanation" open>/);
+});
+
+test('JSON notes render Markdown inside the same collapsible section', () => {
+  const markup = renderSlides(describeSections({ sections: [{ ...a,
+    notes: '**Bold**, *italic*, and `code`.\n\n- First\n- Second\n\n[Paper](paper.pdf) and [section](#method).'
+  }] }));
+  assert.match(markup, /<strong>Bold<\/strong>, <em>italic<\/em>, and <code>code<\/code>/);
+  assert.match(markup, /<ul>\s*<li>First<\/li>\s*<li>Second<\/li>/);
+  assert.match(markup, /href="paper.pdf"/);
+  assert.match(markup, /href="#method"/);
+  assert.ok(markup.indexOf('<strong>') > markup.indexOf('</summary>'));
+  assert.ok(markup.indexOf('<strong>') < markup.indexOf('</details>'));
+});
+
+test('summaries collapse slide content with omitted, empty or whitespace-only notes', () => {
+  for (const notes of [undefined, '', ' \n ']) {
+    const markup = renderSlides(describeSections({ sections: [{ ...a, notes }] }));
+    assert.match(markup, /<details class="slide-explanation" open><summary>/);
+    assert.ok(markup.indexOf('<iframe') < markup.indexOf('</details>'));
+    assert.doesNotMatch(markup, /explanation-notes|slide-takeaway/);
+  }
+});
+
+test('Markdown and slides share the summary disclosure without requiring notes', () => {
+  const markup = renderSlides(describeSections({ sections: [{ ...a,
+    markdown: 'content/example.md', markdownHtml: '<p>Article content</p>'
+  }] }));
+  const end = markup.indexOf('</details>');
+  assert.ok(markup.indexOf('<p>Article content</p>') < end);
+  assert.ok(markup.indexOf('<iframe') < end);
 });

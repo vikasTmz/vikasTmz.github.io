@@ -1,5 +1,5 @@
 // Shared by the static build and browser refresh: one ordered section list.
-import { validateMarkdownPath } from './markdown.js';
+import { validateMarkdownPath, renderNotes } from './markdown.js';
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, char =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 const slug = value => String(value).normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
@@ -47,12 +47,8 @@ export function renderSlides(sections) {
     const headingId = s.headingId || `${id}-title`;
     const heading = title.trim() ? `<h2 id="${escapeHtml(headingId)}">${escapeHtml(title)}</h2>` : '';
     const accessible = heading ? `aria-labelledby="${escapeHtml(headingId)}"` : `aria-label="${escapeHtml(label)}"`;
-    let explanation = '';
-    if (notes.trim()) {
-      // Explicit breaks survive HTML formatting; source indentation is not content.
-      const noteMarkup = escapeHtml(notes).replace(/\r\n?|\n/g, '<br>');
-      explanation = `<details class="slide-explanation" open><summary${summary.trim() ? '' : ' aria-label="Toggle slide notes"'}>${summary.trim() ? `<span class="explanation-summary">${escapeHtml(summary)}</span>` : ''}</summary><div class="explanation-notes">${noteMarkup}</div></details>`;
-    } else if (summary.trim()) explanation = `<p class="slide-takeaway">${escapeHtml(summary)}</p>`;
+    // Notes are optional content, not the switch that enables disclosure.
+    const noteMarkup = notes.trim() ? `<div class="explanation-notes">${renderNotes(notes)}</div>` : '';
     const frame = `<iframe src="slides/slide-${slide}.html?controlled=1" title="${escapeHtml(title || `DeckWerk slide ${slide}`)}" loading="lazy" allow="autoplay"></iframe>`;
     if (s.markdown && typeof s.markdownHtml !== 'string') throw Error(`Load Markdown before rendering: ${s.markdown}`);
     const markdown = s.markdown ? `<div class="markdown-content" data-markdown="${escapeHtml(s.markdown)}">${s.markdownHtml}</div>` : '';
@@ -66,9 +62,12 @@ export function renderSlides(sections) {
 </div><p class="sequence-error" role="status" hidden></p>
 <noscript><p>${slides.map(item => `<a href="slides/slide-${item.slide}.html">Slide ${item.slide}</a>`).join(' · ')}</p></noscript>
 </div>` : `<div class="slide-single" data-slides="${escapeHtml(JSON.stringify(slides))}">${frame}</div><noscript><p><a href="slides/slide-${slide}.html">Slide ${slide}</a></p></noscript>`;
+    const body = `${noteMarkup}${markdown}\n${player}`;
+    const explanation = summary.trim() || notes.trim()
+      ? `<details class="slide-explanation" open><summary><span class="explanation-summary">${escapeHtml(summary.trim() ? summary : label)}</span></summary>${body}</details>`
+      : body;
     return `<section class="slide-section pnav-section" id="${escapeHtml(id)}" ${accessible} tabindex="-1">
-${heading}${explanation}${markdown}
-${player}
+${heading}${explanation}
 </section>`;
   }).join('\n');
 }

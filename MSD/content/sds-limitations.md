@@ -1,4 +1,3 @@
-# 3. Investigating the Flaws in SDS
 
 The SDS loss penalizes the KL-divergence between a **unimodal Gaussian distribution** centered around the rendered image $x = g(\vartheta)$ and the **learned image distribution** parameterized by a pre-trained diffusion model $\epsilon_\phi$.
 

@@ -7,13 +7,33 @@
   "slideNumbers": [
     2,
     3,
-    5
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    16,
+    19
   ],
   "slideIds": [
     "slide-2",
     "slide-3",
-    "slide-6"
+    "slide-6",
+    "slide-8",
+    "slide-10",
+    "slide-14",
+    "slide-15",
+    "slide-16",
+    "slide-17",
+    "slide-18",
+    "slide-19",
+    "slide-21",
+    "slide-24"
   ],
-  "exportedAt": "2026-11-20T00:51:30.995Z",
-  "assets": 103
+  "exportedAt": "2026-11-20T04:23:34.739Z",
+  "assets": 166
 }
