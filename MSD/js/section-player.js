@@ -9,24 +9,36 @@ export function initSectionPlayers(container) {
 function initPlayer(root) {
   const sequence = root.classList.contains('slide-sequence');
   const slides = JSON.parse(root.dataset.slides);
-  const stage = root.querySelector('.sequence-stage') || root;
+  const stage = root.querySelector('.slide-stage');
   const controls = root.querySelector('.sequence-controls');
   const toggle = root.querySelector('.sequence-toggle');
   const restart = root.querySelector('.sequence-restart');
   const segments = [...root.querySelectorAll('.sequence-segment')];
   const position = root.querySelector('.sequence-position');
-  const error = root.querySelector('.sequence-error');
+  const status = root.querySelector('[data-slide-status]');
+  const statusText = root.querySelector('[data-slide-status-text]');
+  const retry = root.querySelector('[data-slide-retry]');
   let frame = stage.querySelector('iframe'), index = Number(root.dataset.slideIndex) || 0, elapsed = Number(root.dataset.elapsed) || 0, last = 0;
   let ready = false, running = false, userPlaying = root.dataset.userPlaying !== 'false', ended = root.dataset.state === 'ended', visible = false;
   let animationFrame = 0, loadTimeout = 0, disposed = false;
-  const send = action => frame.contentWindow?.postMessage({ channel: CHANNEL, action }, location.origin);
+  // Reconnect to a retained frame on bfcache restore instead of navigating it again.
+  let started = frame.hasAttribute('src'), failed = false, slow = false;
+  const send = action => { if (started) frame.contentWindow?.postMessage({ channel: CHANNEL, action }, location.origin); };
   function paint() {
     root.dataset.slideIndex = String(index);
     root.dataset.elapsed = String(elapsed);
     root.dataset.userPlaying = String(userPlaying);
-    root.dataset.state = ended ? 'ended' : !ready ? 'loading' : !userPlaying ? 'paused' : running ? 'playing' : 'suspended';
+    root.dataset.state = ended ? 'ended' : failed ? 'error' : !started ? 'idle' : !ready ? 'loading' : !userPlaying ? 'paused' : running ? 'playing' : 'suspended';
     root.dataset.paused = String(!userPlaying);
     root.dataset.running = String(running);
+    stage.dataset.ready = String(ready);
+    stage.setAttribute('aria-busy', String(started && !ready && !failed));
+    frame.tabIndex = ready ? 0 : -1;
+    status.hidden = !started || ready;
+    status.dataset.failed = String(failed);
+    const message = failed ? 'This slide could not load.' : slow ? 'Still loading this slide…' : 'Loading slide…';
+    if (statusText.textContent !== message) statusText.textContent = message;
+    retry.hidden = !failed && !slow;
     if (!sequence) return;
     const toggleLabel = ended ? 'Replay section' : userPlaying ? 'Pause section' : 'Resume section';
     if (toggle.getAttribute('aria-label') !== toggleLabel) { toggle.setAttribute('aria-label', toggleLabel); toggle.title = toggleLabel; }
@@ -59,15 +71,18 @@ function initPlayer(root) {
     animationFrame = requestAnimationFrame(tick);
   }
   function reconcile() {
-    if (!ready && visible && !loadTimeout && !disposed) {
+    if (!started && visible && !document.hidden && !disposed) {
+      started = true;
+      // Application visibility controls loading; avoid a second browser lazy-load gate.
+      frame.loading = 'eager';
+      frame.src = frame.dataset.src;
+    }
+    if (started && !ready && !failed && !slow && !loadTimeout && !disposed) {
       loadTimeout = setTimeout(() => {
         loadTimeout = 0;
-        if (ready || disposed || !visible) return;
-        if (error) {
-          error.textContent = 'This slide could not load. Use Restart to try again.';
-          error.hidden = false;
-        }
-      }, 15000);
+        if (ready || disposed || failed) return;
+        slow = true; paint();
+      }, 20000);
     }
     const shouldRun = ready && visible && !document.hidden && userPlaying && !ended && !disposed;
     if (shouldRun && !running) {
@@ -87,10 +102,11 @@ function initPlayer(root) {
     if (next < 0 || next >= slides.length) return;
     stop();
     index = next; elapsed = 0; ready = false; ended = false;
-    if (error) error.hidden = true;
+    started = false; failed = false; slow = false;
     frame.removeEventListener('load', onLoad);
     const replacement = frame.cloneNode(false);
-    replacement.src = `slides/slide-${slides[index].slide}.html?controlled=1`;
+    replacement.removeAttribute('src');
+    replacement.dataset.src = `slides/slide-${slides[index].slide}.html?controlled=1`;
     replacement.title = `DeckWerk slide ${slides[index].slide}`;
     replacement.loading = 'eager';
     frame.replaceWith(replacement); frame = replacement;
@@ -101,9 +117,12 @@ function initPlayer(root) {
     else { userPlaying = !userPlaying; reconcile(); }
   }
   function restartSection() { userPlaying = true; select(0); }
+  function retrySlide() { select(index); }
   function onMessage(event) {
     if (event.source !== frame.contentWindow || event.origin !== location.origin || event.data?.channel !== CHANNEL) return;
-    if (event.data.type === 'ready') { ready = true; clearTimeout(loadTimeout); loadTimeout = 0; if (error) error.hidden = true; reconcile(); }
+    if (!started) return;
+    if (event.data.type === 'ready') { ready = true; failed = false; slow = false; clearTimeout(loadTimeout); loadTimeout = 0; reconcile(); }
+    if (event.data.type === 'error') { failed = true; clearTimeout(loadTimeout); loadTimeout = 0; stop(); paint(); }
     if (event.data.type === 'request') {
       if (event.data.action === 'toggle') togglePlayback();
       if (sequence && event.data.action === 'next') select(Math.min(slides.length - 1, index + 1));
@@ -124,6 +143,7 @@ function initPlayer(root) {
   if (controls) controls.hidden = false;
   toggle?.addEventListener('click', togglePlayback);
   restart?.addEventListener('click', restartSection);
+  retry.addEventListener('click', retrySlide);
   controls?.addEventListener('click', onClick);
   controls?.addEventListener('keydown', onKey);
   window.addEventListener('message', onMessage);
@@ -136,6 +156,7 @@ function initPlayer(root) {
     frame.removeEventListener('load', onLoad);
     toggle?.removeEventListener('click', togglePlayback);
     restart?.removeEventListener('click', restartSection);
+    retry.removeEventListener('click', retrySlide);
     controls?.removeEventListener('click', onClick);
     controls?.removeEventListener('keydown', onKey);
     window.removeEventListener('message', onMessage);

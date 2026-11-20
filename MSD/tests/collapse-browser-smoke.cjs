@@ -68,6 +68,10 @@ app.whenReady().then(async () => {
   const {root}=await n.webContents.debugger.sendCommand('DOM.getDocument');
   const {nodeIds}=await n.webContents.debugger.sendCommand('DOM.querySelectorAll',{nodeId:root.nodeId,selector:'#slide-sections > section > details[open]'});
   assert.equal(nodeIds.length,await js(`document.querySelectorAll('#slide-sections > section').length`));
+  const frames=await n.webContents.debugger.sendCommand('DOM.querySelectorAll',{nodeId:root.nodeId,selector:'#slide-sections iframe[src]'});
+  assert.equal(frames.nodeIds.length,0,'No-JavaScript mode does not fetch unplayable frames');
+  const links=await n.webContents.debugger.sendCommand('DOM.querySelectorAll',{nodeId:root.nodeId,selector:'#slide-sections noscript a[href]'});
+  assert.ok(links.nodeIds.length>0,'No-JavaScript mode retains direct slide links');
   n.webContents.debugger.detach();n.destroy();w.destroy();
   console.log('PASS: desktop/mobile disclosures, empty notes, Markdown, keyboard, no-JS output, paused clocks, resume and manual pause.');app.exit(0);
 }).catch(error=>{console.error(error);app.exit(1)});

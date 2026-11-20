@@ -49,19 +49,20 @@ export function renderSlides(sections) {
     const accessible = heading ? `aria-labelledby="${escapeHtml(headingId)}"` : `aria-label="${escapeHtml(label)}"`;
     // Notes are optional content, not the switch that enables disclosure.
     const noteMarkup = notes.trim() ? `<div class="explanation-notes">${renderNotes(notes)}</div>` : '';
-    const frame = `<iframe src="slides/slide-${slide}.html?controlled=1" title="${escapeHtml(title || `DeckWerk slide ${slide}`)}" loading="lazy" allow="autoplay"></iframe>`;
+    const frame = `<iframe data-src="slides/slide-${slide}.html?controlled=1" title="${escapeHtml(title || `DeckWerk slide ${slide}`)}" tabindex="-1" allow="autoplay"></iframe>`;
+    const stage = `<div class="slide-stage${sequence ? ' sequence-stage' : ''}">${frame}<div class="slide-load-status" data-slide-status role="status" hidden><span class="slide-spinner" aria-hidden="true"></span><span data-slide-status-text>Loading slide…</span><button type="button" data-slide-retry hidden>Retry</button></div></div>`;
     if (s.markdown && typeof s.markdownHtml !== 'string') throw Error(`Load Markdown before rendering: ${s.markdown}`);
     const markdown = s.markdown ? `<div class="markdown-content" data-markdown="${escapeHtml(s.markdown)}">${s.markdownHtml}</div>` : '';
     const player = !slides.length ? '' : sequence ? `<div class="slide-sequence" data-slides="${escapeHtml(JSON.stringify(slides))}" aria-label="${escapeHtml(label)}">
-<div class="sequence-stage">${frame}</div>
+${stage}
 <div class="sequence-controls" role="group" aria-label="Section playback" hidden>
 <button class="sequence-toggle" type="button" aria-label="Pause section" title="Pause section"><svg class="sequence-pause-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12M14 4v12"/></svg><svg class="sequence-play-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 11 7-11 7Z"/></svg></button>
 <div class="sequence-segments" role="group" aria-label="Slides">${slides.map((item, i) => `<button type="button" class="sequence-segment" data-index="${i}" aria-label="Show slide ${item.slide} (${i + 1} of ${slides.length})" title="Slide ${item.slide} · ${item.duration}s"${i === 0 ? ' aria-current="true"' : ''}><span class="segment-track" aria-hidden="true"><span class="segment-fill"></span></span></button>`).join('')}</div>
 <span class="sequence-position" aria-live="polite" aria-atomic="true">1 / ${slides.length}</span>
 <button class="sequence-restart" type="button" aria-label="Restart section" title="Restart section"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7a7 7 0 1 1-1 7M4 2v5h5"/></svg></button>
-</div><p class="sequence-error" role="status" hidden></p>
+</div>
 <noscript><p>${slides.map(item => `<a href="slides/slide-${item.slide}.html">Slide ${item.slide}</a>`).join(' · ')}</p></noscript>
-</div>` : `<div class="slide-single" data-slides="${escapeHtml(JSON.stringify(slides))}">${frame}</div><noscript><p><a href="slides/slide-${slide}.html">Slide ${slide}</a></p></noscript>`;
+</div>` : `<div class="slide-single" data-slides="${escapeHtml(JSON.stringify(slides))}">${stage}</div><noscript><p><a href="slides/slide-${slide}.html">Slide ${slide}</a></p></noscript>`;
     const body = `${noteMarkup}${markdown}\n${player}`;
     const explanation = summary.trim() || notes.trim()
       ? `<details class="slide-explanation" open><summary><span class="explanation-summary">${escapeHtml(summary.trim() ? summary : label)}</span></summary>${body}</details>`

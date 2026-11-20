@@ -7,7 +7,7 @@ import { dirname, extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', process.env.SITE_ROOT || '.');
 const port = Number(process.env.PORT || 8765);
-const types = { '.md':'text/markdown; charset=utf-8', '.html':'text/html', '.css':'text/css', '.js':'text/javascript', '.json':'application/json', '.ico':'image/x-icon', '.svg':'image/svg+xml', '.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.mp4':'video/mp4', '.webm':'video/webm', '.woff2':'font/woff2', '.ttf':'font/ttf' };
+const types = { '.md':'text/markdown; charset=utf-8', '.html':'text/html', '.css':'text/css', '.js':'text/javascript', '.json':'application/json', '.ico':'image/x-icon', '.svg':'image/svg+xml', '.png':'image/png', '.webp':'image/webp', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.mp4':'video/mp4', '.webm':'video/webm', '.woff2':'font/woff2', '.ttf':'font/ttf' };
 createServer(async (req, res) => {
   try {
     let path = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);

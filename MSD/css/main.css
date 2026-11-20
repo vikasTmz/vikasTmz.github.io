@@ -6,6 +6,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "EB Garamond";
+  src: url("ebgaramond12-italic-webfont.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
 :root {
   color-scheme: light;
   font-family: "EB Garamond", Constantia, Georgia, serif;
@@ -93,6 +100,18 @@ code { font: inherit; }
 .slide-section { margin: 20px 0 28px; }
 .slide-section h2 { font-size: 1.5rem; margin: 0 0 12px; }
 .slide-section iframe { display: block; width: 100%; aspect-ratio: var(--slide-aspect-ratio, 16 / 9); border: 0; background: #fff; }
+.slide-stage { position: relative; aspect-ratio: var(--slide-aspect-ratio, 16 / 9); background: #fff; }
+.slide-stage iframe { visibility: hidden; }
+.slide-stage[data-ready="true"] iframe { visibility: visible; }
+.slide-load-status { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: #6c5c5f; font: 14px/1.4 system-ui, sans-serif; }
+.slide-load-status[hidden], .slide-load-status button[hidden] { display: none; }
+.slide-spinner { width: 26px; height: 26px; border: 2px solid #e5dbdd; border-top-color: #900020; border-radius: 50%; animation: slide-loading 900ms linear infinite; }
+.slide-load-status[data-failed="true"] .slide-spinner { display: none; }
+.slide-load-status button { border: 1px solid #900020; border-radius: 4px; padding: 8px 16px; background: #fff; color: #900020; cursor: pointer; }
+.slide-load-status button:focus-visible { outline: 2px solid #900020; outline-offset: 3px; }
+@keyframes slide-loading { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .slide-spinner { animation: none; } }
+@media print { .slide-load-status { display: none; } }
 .slide-explanation { margin: 0 0 8px; font-size: 1.08rem; }
 .slide-explanation summary { display: flex; align-items: baseline; gap: 10px; padding: 12px 0; min-height: 44px; cursor: pointer; list-style: none; }
 .slide-explanation summary::-webkit-details-marker { display: none; }

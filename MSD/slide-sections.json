@@ -100,7 +100,7 @@
       ],
       "navLabel": "Toy Simulation, MSD",
       "summary": "4.2 Our method, MSD",
-      "notes": "We propose Mean-Shift Distillation (MSD), a distribution-gradient proxy based on a well-known mode-seeking technique. Similar to the previous experiment, if we run our algorithm for points densely initialized along a grid, across the canvas, we observe that the points capture the data distribution well. This proxy evaluates with less variance than SDS with improved mode alignment. MSD has superior behavior, converging to modes of the trained distribution with a clear termination criterion. It can be implemented easily, with minimal changes to the diffusion sampling procedure.",
+      "notes": "We propose **Mean-Shift Distillation** (MSD), a distribution-gradient proxy based on a well-known mode-seeking technique. Similar to the previous experiment, if we run our algorithm for points densely initialized along a grid, across the canvas, we observe that the points capture the data distribution well. This proxy evaluates with less variance than SDS with improved mode alignment. MSD has superior behavior, converging to modes of the trained distribution with a clear termination criterion. It can be implemented easily, with minimal changes to the diffusion sampling procedure.",
       "key": "ourmethod"
     },
     {
@@ -130,7 +130,7 @@
       ],
       "navLabel": "Results",
       "summary": "6. Results",
-      "notes": "First, we juxtapose diffusion sampling vs diffusion distillation in low-dimensional and high-dimensional setting.\n\nNext, we show results on 3D shape generation, specifially, optimizing neural radiance fields. ProlificDreamer (VSD) Z. Wang et al. and SDI, A. Lukoianov et al.",
+      "notes": "First, we juxtapose diffusion sampling vs diffusion distillation in low-dimensional and high-dimensional setting.\n\nNext, we show results on 3D shape generation, specifially, optimizing neural radiance fields. *ProlificDreamer (VSD) Z. Wang et al.* and *SDI, A. Lukoianov et al.*",
       "key": "results"
     }
   ]

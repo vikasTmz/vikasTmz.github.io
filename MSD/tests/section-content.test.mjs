@@ -59,6 +59,18 @@ test('single slides share visibility control without a timer or playback bar', (
   assert.doesNotMatch(markup, /sequence-controls/);
   assert.match(markup, /<noscript>.*href="slides\/slide-3.html"/);
 });
+
+test('frames reserve space without starting network loads, and retain no-JS links', () => {
+  for (const selection of [{ slide: 3 }, { slides: [{ slide: 3, duration: 12 }] }]) {
+    const markup = renderSlides(describeSections({ sections: [{ key: 'deferred', title: '', ...selection }] }));
+    assert.match(markup, /<iframe data-src="slides\/slide-3.html\?controlled=1"/);
+    assert.doesNotMatch(markup, /<iframe[^>]*\ssrc=/);
+    assert.match(markup, /class="slide-stage/);
+    assert.match(markup, /data-slide-status role="status" hidden/);
+    assert.match(markup, /data-slide-retry hidden/);
+    assert.match(markup, /<noscript>.*href="slides\/slide-3.html"/);
+  }
+});
 test('notes preserve JSON line breaks and paragraphs, with raw HTML escaped', () => {
   const markup = renderSlides(describeSections({ sections: [{ ...a,
     notes: 'First line.\nSecond line.\n\nNext paragraph.\r\n<script>text</script>'
