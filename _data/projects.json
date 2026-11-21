@@ -1,5 +1,21 @@
 [
 	{
+		"id": "liftingsvg",
+		"title": "[WIP]Lifting SVGs to 3D",
+		"authors": [
+			"Vikas Thamizharasan"
+		],
+		"venue": "",
+		"date": "2026-10-01",
+		"links": [
+			{
+				"type": "link",
+				"name": "Website",
+				"target": "https: //vikastmz.github.io/LiftingSVG/"
+			}
+		]
+	},
+	{
 		"id": "brepfacet",
 		"title": "BRepFacetGen: Reverse Engineering B-Reps By Generative Face Segmentation",
 		"authors": [
