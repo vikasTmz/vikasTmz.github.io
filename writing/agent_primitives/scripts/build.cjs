@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Marked } = require('../assets/vendor/marked.cjs');
 const katex = require('../assets/vendor/katex/katex.cjs');
+const { slideMenus, renderMenu } = require('./slide-menus.cjs');
 const root = path.resolve(__dirname, '..');
 const escape = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const local = (file) => {
@@ -14,6 +15,7 @@ const local = (file) => {
 };
 try {
   const layout = JSON.parse(fs.readFileSync(path.join(root, 'layout.json'), 'utf8'));
+  const menus = new Map(slideMenus(layout, root).map(menu => [menu.key, menu]));
   for (const key of ['title', 'author', 'date']) if (typeof layout[key] !== 'string' || !layout[key].trim()) throw Error(`layout.json needs a ${key}.`);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(layout.date) || !Number.isFinite(Date.parse(layout.date)) || new Date(layout.date).toISOString().slice(0, 10) !== layout.date) throw Error('Use a valid YYYY-MM-DD date.');
   if (!['system', 'light', 'dark'].includes(layout.theme)) throw Error('theme must be system, light, or dark.');
@@ -49,11 +51,16 @@ try {
     renderer(token) {
       const embed = layout.embeds?.[token.key];
       if (!embed) throw Error(`Unknown embed: ${token.key}`);
-      local(embed.src);
+      if (embed.type !== 'slide-menu') local(embed.src);
       if (!embed.title) throw Error(`Embed ${token.key} needs an accessible title.`);
       const caption = embed.caption ? `<figcaption>${escape(embed.caption)}</figcaption>` : '';
       let content;
-      if (embed.type === 'slide') {
+      if (embed.type === 'slide-menu') {
+        let frameId = `slide-frame-${token.key}`, suffix = 2;
+        while (ids.has(frameId)) frameId = `slide-frame-${token.key}-${suffix++}`;
+        ids.add(frameId);
+        content = renderMenu(menus.get(token.key), root, escape, frameId);
+      } else if (embed.type === 'slide') {
         if (!(embed.width > 0 && embed.height > 0)) throw Error(`Embed ${token.key} needs width and height.`);
         content = `<iframe class="slide-frame" src="${escape(embed.src)}" title="${escape(embed.title)}" style="--ratio:${Number(embed.width)}/${Number(embed.height)}" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
       } else if (embed.type === 'image') content = `<img src="${escape(embed.src)}" alt="${escape(embed.title)}" loading="lazy">`;
@@ -99,9 +106,11 @@ try {
 <title>${escape(layout.title)}</title>
 <script src="assets/theme.js"></script>
 <script defer src="assets/navigation.js"></script>
+<script defer src="assets/slide-menu.js"></script>
 <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="assets/navigation.css">
+<link rel="stylesheet" href="assets/slide-menu.css">
 </head>
 <body>
 <a class="skip-link" href="#content">Skip to content</a>

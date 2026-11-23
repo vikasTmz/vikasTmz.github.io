@@ -7,7 +7,7 @@ const { spawnSync } = require('node:child_process');
 const root = path.resolve(__dirname, '..');
 
 function snapshot() {
-  const files = new Set(['layout.json', 'scripts/build.cjs', 'scripts/references.cjs']);
+  const files = new Set(['layout.json', 'scripts/build.cjs', 'scripts/references.cjs', 'scripts/slide-menus.cjs']);
   function collect(directory) {
     try {
       for (const entry of fs.readdirSync(path.join(root, directory), { withFileTypes: true })) {

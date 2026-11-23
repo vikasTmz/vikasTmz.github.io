@@ -1,0 +1,45 @@
+{
+  "title": "[WIP] Modeling shapes and motions with coding agents",
+  "description": "Work-in-progress notes on proxy geometry and shape editing.",
+  "author": "Vikas Thamizharasan",
+  "date": "2026-11-01",
+  "theme": "system",
+  "maxWidth": 1120,
+  "references": {
+    "title": "References",
+    "bibliography": "references.bib"
+  },
+  "sections": [
+    {
+      "file": "sections/00-abstract.md",
+      "id": "abstract",
+      "navLabel": "Abstract"
+    },
+    {
+      "file": "sections/01-introduction.md",
+      "id": "introduction"
+    }
+  ],
+  "embeds": {
+    "geometry-slide": {
+      "type": "slide-menu",
+      "title": "Shape editing examples",
+      "deck": "gpt_proxy_geom",
+      "slides": [
+        {
+          "label": "T-Rex",
+          "slide": 1
+        },
+        {
+          "label": "Lion",
+          "slide": 3
+        },
+        {
+          "label": "Hatchback",
+          "slide": 4,
+          "syncVideos": true
+        }
+      ]
+    }
+  }
+}

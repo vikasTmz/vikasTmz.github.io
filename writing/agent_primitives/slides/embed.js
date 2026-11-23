@@ -13,9 +13,15 @@
   const videos = [...document.querySelectorAll('video')];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const groups = new Map();
+  const groupStates = new Map();
+  const syncAll = slide.dataset.syncVideos === 'true';
   videos.forEach(video => {
     video.playsInline = true;
     video.muted = true;
+    // Cropped DeckWerk videos carry their sync metadata on the outer box.
+    const box = video.closest('[data-element="video"]');
+    if (!video.dataset.syncGroup && box?.dataset.syncGroup) video.dataset.syncGroup = box.dataset.syncGroup;
+    if (syncAll) video.dataset.syncGroup = 'whole-slide';
     if (video.dataset.syncGroup) {
       const group = groups.get(video.dataset.syncGroup) || [];
       group.push(video);
@@ -25,25 +31,70 @@
   const play = video => { video.play().catch(() => { video.controls = true; }); };
   const applyMotion = () => videos.forEach(video => {
     video.controls = reduced.matches;
-    if (reduced.matches || document.hidden) video.pause();
+    const group = groupStates.get(video);
+    if (reduced.matches || document.hidden || (group && !group.ready)) video.pause();
     else play(video);
   });
+  const waitForVideo = video => new Promise((resolve, reject) => {
+    const cleanup = () => ['canplay', 'seeked', 'error'].forEach(event => video.removeEventListener(event, check));
+    const check = () => {
+      if (video.error) { cleanup(); reject(new Error('A synchronized video could not load.')); }
+      else if (video.readyState >= 3 && !video.seeking) { cleanup(); resolve(); }
+    };
+    ['canplay', 'seeked', 'error'].forEach(event => video.addEventListener(event, check));
+    check();
+  });
   for (const group of groups.values()) {
+    const state = { ready: false, initializing: false, failed: false };
+    group.forEach(video => groupStates.set(video, state));
     group.forEach(video => { video.loop = false; video.autoplay = false; video.pause(); });
-    Promise.all(group.map(video => video.readyState >= 3 ? Promise.resolve() : new Promise(resolve => video.addEventListener('canplay', resolve, { once: true })))).then(() => {
-      group.forEach(video => { video.currentTime = 0; });
-      if (!reduced.matches && !document.hidden) group.forEach(play);
+    const restart = async () => {
+      if (state.initializing || state.failed) return;
+      state.initializing = true;
+      state.ready = false;
+      group.forEach(video => video.pause());
+      try {
+        // Ended media may not become playable again until it is rewound.
+        group.forEach(video => { if (video.readyState >= 1 && video.currentTime !== 0) video.currentTime = 0; });
+        await Promise.all(group.map(waitForVideo));
+        if (syncAll) {
+          const cycle = Math.max(...group.map(video => video.duration));
+          if (!Number.isFinite(cycle) || cycle <= 0 || group.some(video => !Number.isFinite(video.duration) || video.duration <= 0)) throw new Error('Synchronized videos need finite durations.');
+          group.forEach(video => { video.playbackRate = video.duration / cycle; });
+        }
+        group.forEach(video => { if (video.currentTime !== 0) video.currentTime = 0; });
+        await Promise.all(group.map(waitForVideo));
+        state.ready = true;
+        applyMotion();
+      } catch (error) {
+        state.failed = true;
+        console.error(error.message);
+        group.forEach(video => { video.pause(); video.controls = true; });
+      } finally { state.initializing = false; }
+    };
+    group.forEach(video => {
+      video.addEventListener('ended', restart);
+      video.addEventListener('waiting', () => {
+        if (state.initializing || state.failed) return;
+        state.ready = false;
+        group.forEach(item => item.pause());
+      });
+      const resumeWhenReady = () => {
+        if (state.initializing || state.failed || !group.every(item => item.readyState >= 3 && !item.seeking)) return;
+        state.ready = true;
+        applyMotion();
+      };
+      video.addEventListener('canplay', resumeWhenReady);
+      video.addEventListener('seeked', resumeWhenReady);
     });
-    group.forEach(video => video.addEventListener('ended', () => {
-      group.forEach(item => { item.currentTime = 0; });
-      if (!reduced.matches && !document.hidden) group.forEach(play);
-    }));
     group[0].addEventListener('timeupdate', () => {
-      if (group[0].paused) return;
+      if (group[0].paused || !state.ready) return;
       group.slice(1).forEach(video => {
-        if (Math.abs(video.currentTime - group[0].currentTime) > 0.15) video.currentTime = group[0].currentTime;
+        const target = group[0].currentTime * video.playbackRate / group[0].playbackRate;
+        if (!video.seeking && Math.abs(video.currentTime - target) > 0.05) video.currentTime = target;
       });
     });
+    restart();
   }
   applyMotion();
   reduced.addEventListener('change', applyMotion);
