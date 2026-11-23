@@ -11,11 +11,6 @@
   },
   "sections": [
     {
-      "file": "sections/00-abstract.md",
-      "id": "abstract",
-      "navLabel": "Abstract"
-    },
-    {
       "file": "sections/01-introduction.md",
       "id": "introduction"
     }
