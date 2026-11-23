@@ -455,6 +455,30 @@
             "w": 779,
             "h": 487
           }
+        },
+        {
+          "id": "text-ljtpk7ev",
+          "x": 0,
+          "y": 1026,
+          "w": 172,
+          "h": 50,
+          "rot": 0,
+          "z": 12,
+          "opacity": 1,
+          "class": [],
+          "style": {
+            "font-family": "Roboto Mono,monospace",
+            "font-size": "25px",
+            "font-weight": "400",
+            "line-height": "1.35",
+            "color": "#faf9f5"
+          },
+          "morphId": null,
+          "lineageId": "text-sg97r9nv",
+          "type": "text",
+          "html": "<i><span style=\"color: rgb(190, 178, 255); font-size: 23px; font-style: normal; font-weight: 700; text-decoration-line: none;\">[<a href=\"https://skfb.ly/6Tp9G\">Source</a>]</span></i>",
+          "align": "center",
+          "valign": "top"
         }
       ],
       "timeline": []
@@ -1363,6 +1387,30 @@
           "fit": "contain",
           "alt": "Actual Blender proxy: skeleton",
           "sourceBox": null
+        },
+        {
+          "id": "text-khmncqo5",
+          "x": 0,
+          "y": 1026,
+          "w": 172,
+          "h": 50,
+          "rot": 0,
+          "z": 22,
+          "opacity": 1,
+          "class": [],
+          "style": {
+            "font-family": "Roboto Mono,monospace",
+            "font-size": "25px",
+            "font-weight": "400",
+            "line-height": "1.35",
+            "color": "#faf9f5"
+          },
+          "morphId": null,
+          "lineageId": "text-sg97r9nv",
+          "type": "text",
+          "html": "<i><span style=\"color: rgb(190, 178, 255); font-size: 23px; font-style: normal; font-weight: 700; text-decoration-line: none;\">[<a href=\"https://skfb.ly/on7IY\">Source</a>]</span></i>",
+          "align": "center",
+          "valign": "top"
         }
       ],
       "timeline": []
@@ -1670,6 +1718,30 @@
             "w": 1201,
             "h": 746
           }
+        },
+        {
+          "id": "text-lu54pcul",
+          "x": 0,
+          "y": 1026,
+          "w": 172,
+          "h": 50,
+          "rot": 0,
+          "z": 17,
+          "opacity": 1,
+          "class": [],
+          "style": {
+            "font-family": "Roboto Mono,monospace",
+            "font-size": "25px",
+            "font-weight": "400",
+            "line-height": "1.35",
+            "color": "#faf9f5"
+          },
+          "morphId": null,
+          "lineageId": "text-sg97r9nv",
+          "type": "text",
+          "html": "<i><span style=\"color: rgb(190, 178, 255); font-size: 23px; font-style: normal; font-weight: 700; text-decoration-line: none;\">[<a href=\"https://skfb.ly/6RVXu\">Source</a>]</span></i>",
+          "align": "center",
+          "valign": "top"
         }
       ],
       "timeline": []
